@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIAQ | Sign Up</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+  <header class="site-header simple-header">
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt="SIAQ logo"></a>
+    <p>Already have an account? <a href="login.html">Log In</a></p>
+  </header>
+
+  <main class="auth-main">
+    <section class="auth-intro">
+      <div>
+        <p class="eyebrow">PEOPLE · CULTURE · RESPONSIBLE AI</p>
+        <h1>Join SIAQ and evaluate AI <span>in context.</span></h1>
+        <p>Create an account to compare model responses, record your evaluations, and revisit your results.</p>
+      </div>
+    </section>
+
+    <section class="auth-card" aria-labelledby="signup-title">
+      <div class="auth-card-heading">
+        <p class="step-label">GET STARTED</p>
+        <h2 id="signup-title">Create your account</h2>
+        <p>Enter your details below to sign up.</p>
+      </div>
+
+      <form id="signup-form" class="auth-form" novalidate>
+        <div class="two-fields">
+          <div class="field-group">
+            <label for="first-name">First name</label>
+            <input id="first-name" name="firstName" type="text" autocomplete="given-name" placeholder="First name" required>
+            <span class="error-message"></span>
+          </div>
+          <div class="field-group">
+            <label for="last-name">Last name</label>
+            <input id="last-name" name="lastName" type="text" autocomplete="family-name" placeholder="Last name" required>
+            <span class="error-message"></span>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="signup-email">Email address</label>
+          <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+          <span class="error-message"></span>
+        </div>
+
+        <div class="field-group">
+          <label for="signup-password">Password</label>
+          <div class="password-wrap">
+            <input id="signup-password" name="password" type="password" minlength="8" autocomplete="new-password" placeholder="At least 8 characters" required>
+            <button class="password-toggle" type="button" aria-label="Show password">Show</button>
+          </div>
+          <span class="error-message"></span>
+        </div>
+
+        <label class="checkbox-row">
+          <input id="terms" name="terms" type="checkbox" required>
+          <span>I agree to the Terms of Use and Privacy Policy.</span>
+        </label>
+        <span class="error-message" id="terms-error"></span>
+
+        <button class="primary-button full-button" type="submit">Create Account <span>→</span></button>
+        <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
+      </form>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

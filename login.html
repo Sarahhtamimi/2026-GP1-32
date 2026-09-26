@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIAQ | Log In</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page">
+  <header class="site-header simple-header">
+    <a class="brand" href="index.html"><img src="assets/logo.png" alt="SIAQ logo"></a>
+    <p>New to SIAQ? <a href="signup.html">Sign Up</a></p>
+  </header>
+
+  <main class="auth-main">
+    <section class="auth-intro login-intro">
+      <div>
+        <p class="eyebrow">LANGUAGE IN CONTEXT</p>
+        <h1>Welcome back to <span>SIAQ.</span></h1>
+        <p>Continue comparing language model responses through a structured and human-centered evaluation process.</p>
+      </div>
+    </section>
+
+    <section class="auth-card" aria-labelledby="login-title">
+      <div class="auth-card-heading">
+        <p class="step-label">WELCOME BACK</p>
+        <h2 id="login-title">Log in to your account</h2>
+        <p>Enter your email and password to continue.</p>
+      </div>
+
+      <form id="login-form" class="auth-form" novalidate>
+        <div class="field-group">
+          <label for="login-email">Email address</label>
+          <input id="login-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+          <span class="error-message"></span>
+        </div>
+
+        <div class="field-group">
+          <div class="label-row"><label for="login-password">Password</label><a href="#" data-placeholder-link>Forgot password?</a></div>
+          <div class="password-wrap">
+            <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+            <button class="password-toggle" type="button" aria-label="Show password">Show</button>
+          </div>
+          <span class="error-message"></span>
+        </div>
+
+        <label class="checkbox-row">
+          <input name="remember" type="checkbox">
+          <span>Remember me</span>
+        </label>
+
+        <button class="primary-button full-button" type="submit">Log In <span>→</span></button>
+        <p class="auth-switch">Don’t have an account? <a href="signup.html">Create one</a></p>
+      </form>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
