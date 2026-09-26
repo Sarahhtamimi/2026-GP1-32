@@ -140,3 +140,5 @@ Interactive API documentation is available at [http://127.0.0.1:8000/docs](http:
 SIAQ is currently under development as a graduation project at **King Saud University**.
 
 The current version provides user authentication, database integration, and the initial evaluation interface. LLM integration and the complete response evaluation workflow are still under development.
+
+*Note: this readme file is written with the assistance of ChatGPT*
