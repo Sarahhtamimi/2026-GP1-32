@@ -1,78 +1,942 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIAQ | Sign Up</title>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Sign up — SIAQ</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- Theme -->
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("siaq-theme") === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="styles.css">
+
+
+  <!-- ==========================================
+       SIGN UP PAGE STYLES
+  =========================================== -->
+
+  <style>
+
+    /* Field Error Message */
+    .field-error {
+      display: none;
+      margin-top: 6px;
+      padding-left: 3px;
+
+      color: #b42318;
+
+      font-size: 8px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+
+
+    /* Show Field Error */
+    .auth-form label.invalid .field-error {
+      display: block;
+    }
+
+
+    /* Invalid Input */
+    .auth-form label.invalid input {
+      border-color: #d92d20 !important;
+
+      background: rgba(217, 45, 32, 0.025);
+
+      box-shadow:
+        0 0 0 3px rgba(217, 45, 32, 0.07);
+    }
+
+
+    /* General Message Box */
+    .auth-message {
+      display: none;
+
+      padding: 12px 14px;
+
+      border-radius: 11px;
+
+      font-size: 8px;
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+
+    /* Show General Message */
+    .auth-message.show {
+      display: block;
+    }
+
+
+    /* Error Message */
+    .auth-message.error {
+      color: #b42318;
+
+      background: rgba(217, 45, 32, 0.07);
+
+      border:
+        1px solid rgba(217, 45, 32, 0.16);
+    }
+
+
+    /* Success Message */
+    .auth-message.success {
+      color: var(--teal);
+
+      background: rgba(42, 140, 130, 0.09);
+
+      border:
+        1px solid rgba(42, 140, 130, 0.18);
+    }
+
+
+    /* Dark Mode - Field Error */
+    :root.dark .field-error {
+      color: #ffaaa3;
+    }
+
+
+    /* Dark Mode - Invalid Input */
+    :root.dark .auth-form label.invalid input {
+      border-color:
+        rgba(255, 125, 115, 0.75) !important;
+
+      background:
+        rgba(217, 45, 32, 0.07);
+    }
+
+
+    /* Dark Mode - Error Message */
+    :root.dark .auth-message.error {
+      color: #ffb4ad;
+
+      background:
+        rgba(217, 45, 32, 0.10);
+
+      border-color:
+        rgba(255, 180, 173, 0.18);
+    }
+
+    /* ==========================================
+   SIGN UP READABILITY IMPROVEMENTS
+=========================================== */
+
+/* Main heading */
+.auth-copy h2 {
+  font-size: 34px;
+  line-height: 1.15;
+}
+
+/* GET STARTED */
+.auth-copy small {
+  font-size: 11px;
+  letter-spacing: 1.4px;
+}
+
+/* Description under heading */
+.auth-copy p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Field labels */
+.auth-form > label {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Input text + placeholder */
+.auth-form input {
+  font-size: 14px;
+}
+
+.auth-form input::placeholder {
+  font-size: 14px;
+}
+
+/* Error messages */
+.field-error {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Terms */
+.auth-form .checkline {
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* SHOW / HIDE password */
+.password-toggle {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* General error / success message */
+.auth-message {
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+/* Create account button */
+.auth-submit {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* Already have an account */
+.auth-switch {
+  font-size: 12px;
+}
+
+/* Log in link */
+.auth-switch .text-link {
+  font-size: 12px;
+}
+  /* Dark Mode - Error Message */
+  :root.dark .auth-message.error {
+    color: #ffb4ad;
+    background: rgba(217, 45, 32, 0.10);
+    border-color: rgba(255, 180, 173, 0.18);
+  }
+
+
+  /* ==========================================
+     SIGN UP READABILITY IMPROVEMENTS
+  =========================================== */
+
+  .auth-copy h2 {
+    font-size: 34px;
+    line-height: 1.15;
+  }
+
+  .auth-copy small {
+    font-size: 11px;
+    letter-spacing: 1.4px;
+  }
+
+  .auth-copy p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .auth-form > label {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .auth-form input {
+    font-size: 14px;
+  }
+
+  .auth-form input::placeholder {
+    font-size: 14px;
+  }
+
+  .field-error {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .auth-form .checkline {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .password-toggle {
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .auth-message {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .auth-submit {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .auth-switch {
+    font-size: 12px;
+  }
+
+  .auth-switch .text-link {
+    font-size: 12px;
+  }
+
+
+  /* ==========================================
+     PASSWORD FIELDS FIX
+  =========================================== */
+
+  .auth-form .password-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  .auth-form .password-wrap input {
+    width: 100% !important;
+    box-sizing: border-box;
+    padding-right: 70px !important;
+  }
+
+  .auth-form .password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    margin: 0;
+    padding: 5px;
+
+    border: none;
+    background: transparent;
+
+    color: var(--teal);
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+  }
+
+
+
+  </style>
+
 </head>
-<body class="auth-page">
-  <header class="site-header simple-header">
-    <a class="brand" href="index.html"><img src="assets/logo.png" alt="SIAQ logo"></a>
-    <p>Already have an account? <a href="login.html">Log In</a></p>
+
+
+<body>
+
+
+  <!-- ==========================================
+       BACKGROUND DESIGN
+  =========================================== -->
+
+  <div
+    class="siaq-architecture"
+    aria-hidden="true"
+  >
+
+    <div class="arch-grid"></div>
+
+    <div class="arch-orb orb-teal"></div>
+    <div class="arch-orb orb-sage"></div>
+    <div class="arch-orb orb-sky"></div>
+    <div class="arch-orb orb-cream"></div>
+
+    <div class="arch-square sq-a"></div>
+    <div class="arch-square sq-b"></div>
+    <div class="arch-square sq-c"></div>
+    <div class="arch-square sq-d"></div>
+    <div class="arch-square sq-e"></div>
+    <div class="arch-square sq-f"></div>
+
+    <div class="arch-ring ring-a"></div>
+    <div class="arch-ring ring-b"></div>
+    <div class="arch-ring ring-c"></div>
+
+    <div class="arch-beam beam-a"></div>
+    <div class="arch-beam beam-b"></div>
+
+  </div>
+
+
+  <!-- Scrollbar -->
+  <div
+    class="scrollbar"
+    id="scrollbar"
+  ></div>
+
+
+
+  <!-- ==========================================
+       NAVIGATION BAR
+  =========================================== -->
+
+  <header
+    class="signature-nav"
+    id="signatureNav"
+  >
+
+
+    <!-- Logo -->
+    <a
+      class="signature-brand"
+      href="index.html"
+      aria-label="SIAQ home"
+    >
+
+      <span class="signature-mark">
+        <i></i>
+        <i></i>
+        <i></i>
+      </span>
+
+      <span class="signature-name">
+
+        <b>SIAQ</b>
+
+        <small>
+          Social Intelligence Alignment Quotient
+        </small>
+
+      </span>
+
+    </a>
+
+
+
+    <!-- Navigation Links -->
+    <nav
+      class="signature-links"
+      aria-label="Primary navigation"
+    >
+
+      <a href="index.html">
+        <span>Home</span>
+      </a>
+
+      <a href="evaluation.html">
+        <span>Evaluation</span>
+      </a>
+
+      <a href="about.html">
+        <span>About</span>
+      </a>
+
+    </nav>
+
+
+
+    <!-- Authentication Navigation -->
+    <div class="nav-auth">
+
+
+      <!-- Theme Toggle -->
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="Switch theme"
+        aria-pressed="false"
+      >
+
+        <span class="sun">☼</span>
+        <span class="moon">☾</span>
+
+      </button>
+
+
+      <!-- Profile -->
+      <a
+        class="nav-auth-profile"
+        href="profile.html"
+      >
+        Profile
+      </a>
+
+
+      <!-- Login -->
+      <a
+        class="login-link"
+        href="login.html"
+      >
+        Log in
+      </a>
+
+
+      <!-- Sign Up -->
+      <a
+        class="signup-button"
+        href="signup.html"
+      >
+
+        <span>Sign up</span>
+        <b>↗</b>
+
+      </a>
+
+    </div>
+
   </header>
 
-  <main class="auth-main">
-    <section class="auth-intro">
-      <div>
-        <p class="eyebrow">PEOPLE · CULTURE · RESPONSIBLE AI</p>
-        <h1>Join SIAQ and evaluate AI <span>in context.</span></h1>
-        <p>Create an account to compare model responses, record your evaluations, and revisit your results.</p>
+
+
+  <!-- ==========================================
+       SIGN UP PAGE
+  =========================================== -->
+
+  <main class="auth-page">
+
+    <div class="auth-shell">
+
+
+      <!-- ======================================
+           LEFT BRAND PANEL
+      ======================================= -->
+
+      <div class="auth-brand-panel">
+
+        <div>
+
+          <span class="signature-mark auth-mark">
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+
+          <b>SIAQ</b>
+
+          <small>
+            Social Intelligence Alignment Quotient
+          </small>
+
+        </div>
+
+
+        <p>
+          Evaluate conversational AI with context,
+          human judgment, and cultural awareness.
+        </p>
+
+
+        <div class="auth-art">
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+
       </div>
-    </section>
 
-    <section class="auth-card" aria-labelledby="signup-title">
-      <div class="auth-card-heading">
-        <p class="step-label">GET STARTED</p>
-        <h2 id="signup-title">Create your account</h2>
-        <p>Enter your details below to sign up.</p>
+
+
+      <!-- ======================================
+           SIGN UP FORM PANEL
+      ======================================= -->
+
+      <div class="auth-form-panel">
+
+
+        <!-- Heading -->
+        <div class="auth-copy">
+
+          <small>GET STARTED</small>
+
+          <h2>
+            Create your SIAQ account
+          </h2>
+
+          <p>
+            Save evaluations and manage your
+            alignment results.
+          </p>
+
+        </div>
+
+
+
+        <!-- ==================================
+             SIGN UP FORM
+        =================================== -->
+
+        <form
+          class="auth-form"
+          id="signupForm"
+          novalidate
+        >
+
+
+          <!-- ================================
+               FIRST NAME
+          ================================= -->
+
+          <label>
+
+            First name
+
+            <input
+              id="firstName"
+              type="text"
+              placeholder="Your first name"
+              autocomplete="given-name"
+            >
+
+            <span class="field-error">
+              Please enter your first name.
+            </span>
+
+          </label>
+
+
+
+          <!-- ================================
+               LAST NAME
+          ================================= -->
+
+          <label>
+
+            Last name
+
+            <input
+              id="lastName"
+              type="text"
+              placeholder="Your last name"
+              autocomplete="family-name"
+            >
+
+            <span class="field-error">
+              Please enter your last name.
+            </span>
+
+          </label>
+
+
+
+          <!-- ================================
+               EMAIL
+          ================================= -->
+
+          <label>
+
+            Email address
+
+            <input
+              id="signupEmail"
+              type="email"
+              placeholder="name@example.com"
+              autocomplete="email"
+            >
+
+            <span class="field-error">
+              Please enter a valid email address.
+            </span>
+
+          </label>
+
+
+
+          <!-- ================================
+               PASSWORD
+          ================================= -->
+
+          <label>
+
+            Password
+
+            <div class="password-wrap">
+
+              <input
+                id="signupPassword"
+                type="password"
+                placeholder="••••••••"
+                autocomplete="new-password"
+              >
+
+
+              <button
+                class="password-toggle"
+                type="button"
+                data-password="signupPassword"
+              >
+                SHOW
+              </button>
+
+            </div>
+
+
+            <span class="field-error">
+              Password must be at least 8 characters
+              and contain at least one letter and
+              one number.
+            </span>
+
+          </label>
+
+
+
+          <!-- ================================
+               CONFIRM PASSWORD
+          ================================= -->
+
+          <label>
+
+            Confirm password
+
+            <div class="password-wrap">
+
+              <input
+                id="signupConfirm"
+                type="password"
+                placeholder="••••••••"
+                autocomplete="new-password"
+              >
+
+
+              <button
+                class="password-toggle"
+                type="button"
+                data-password="signupConfirm"
+              >
+                SHOW
+              </button>
+
+            </div>
+
+
+            <span class="field-error">
+              Passwords do not match.
+            </span>
+
+          </label>
+
+
+
+          <!-- ================================
+               TERMS AND CONDITIONS
+          ================================= -->
+
+          <label class="checkline">
+
+            <input
+              id="terms"
+              type="checkbox"
+            >
+
+            I agree to the terms and conditions.
+
+          </label>
+
+
+
+          <!-- ================================
+               GENERAL MESSAGE
+          ================================= -->
+
+          <div
+            class="auth-message"
+            id="signupMessage"
+            role="alert"
+            aria-live="polite"
+          ></div>
+
+
+
+          <!-- ================================
+               CREATE ACCOUNT BUTTON
+          ================================= -->
+
+          <button
+            class="auth-submit"
+            type="submit"
+          >
+
+            Create account
+
+            <span>→</span>
+
+          </button>
+
+
+
+          <!-- ================================
+               LOGIN LINK
+          ================================= -->
+
+          <div class="auth-switch">
+
+            Already have an account?
+
+            <a
+              class="text-link"
+              href="login.html"
+            >
+              Log in
+            </a>
+
+          </div>
+
+
+        </form>
+
       </div>
 
-      <form id="signup-form" class="auth-form" novalidate>
-        <div class="two-fields">
-          <div class="field-group">
-            <label for="first-name">First name</label>
-            <input id="first-name" name="firstName" type="text" autocomplete="given-name" placeholder="First name" required>
-            <span class="error-message"></span>
-          </div>
-          <div class="field-group">
-            <label for="last-name">Last name</label>
-            <input id="last-name" name="lastName" type="text" autocomplete="family-name" placeholder="Last name" required>
-            <span class="error-message"></span>
-          </div>
-        </div>
+    </div>
 
-        <div class="field-group">
-          <label for="signup-email">Email address</label>
-          <input id="signup-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
-          <span class="error-message"></span>
-        </div>
-
-        <div class="field-group">
-          <label for="signup-password">Password</label>
-          <div class="password-wrap">
-            <input id="signup-password" name="password" type="password" minlength="8" autocomplete="new-password" placeholder="At least 8 characters" required>
-            <button class="password-toggle" type="button" aria-label="Show password">Show</button>
-          </div>
-          <span class="error-message"></span>
-        </div>
-
-        <label class="checkbox-row">
-          <input id="terms" name="terms" type="checkbox" required>
-          <span>I agree to the Terms of Use and Privacy Policy.</span>
-        </label>
-        <span class="error-message" id="terms-error"></span>
-
-        <button class="primary-button full-button" type="submit">Create Account <span>→</span></button>
-        <p class="auth-switch">Already have an account? <a href="login.html">Log in</a></p>
-      </form>
-    </section>
   </main>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+  <!-- ==========================================
+       FOOTER
+  =========================================== -->
+
+  <footer
+    class="signature-footer"
+    id="footer"
+  >
+
+
+    <!-- Footer Decoration -->
+    <div
+      class="footer-art"
+      aria-hidden="true"
+    >
+
+      <span
+        class="footer-disc disc-a"
+      ></span>
+
+      <span
+        class="footer-disc disc-b"
+      ></span>
+
+      <span
+        class="footer-orbit orbit-a"
+      ></span>
+
+      <span
+        class="footer-orbit orbit-b"
+      ></span>
+
+    </div>
+
+
+
+    <!-- Footer Main -->
+    <div class="footer-main">
+
+
+      <!-- Footer Identity -->
+      <div class="footer-identity">
+
+        <a
+          class="footer-logo"
+          href="index.html"
+        >
+
+          <span
+            class="signature-mark footer-mark"
+          >
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+
+
+          <span>
+
+            <b>SIAQ</b>
+
+            <small>
+              Social Intelligence Alignment Quotient
+            </small>
+
+          </span>
+
+        </a>
+
+
+        <p>
+          Human-grounded evaluation for more
+          context-aware, supportive, and culturally
+          aligned conversational AI.
+        </p>
+
+      </div>
+
+
+
+      <!-- Footer Wordmark -->
+      <div
+        class="footer-wordmark"
+        aria-hidden="true"
+      >
+        SIAQ
+      </div>
+
+
+
+      <!-- Back to Top -->
+      <a
+        class="footer-up"
+        href="index.html"
+      >
+
+        <span>↑</span>
+
+        <small>TOP</small>
+
+      </a>
+
+    </div>
+
+
+
+    <!-- Footer Divider -->
+    <div class="footer-rule"></div>
+
+
+
+    <!-- Footer Copyright -->
+    <div
+      class="footer-meta footer-meta-centered"
+    >
+
+      <span>
+        © 2026 SIAQ
+      </span>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- ==========================================
+       JAVASCRIPT
+  =========================================== -->
+
+
+  <!-- Main Website JavaScript -->
   <script src="script.js"></script>
+
+
+  <!-- Firebase Authentication -->
+  <script
+    type="module"
+    src="js/auth.js"
+  ></script>
+
+
 </body>
+
 </html>

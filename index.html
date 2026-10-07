@@ -1,133 +1,801 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIAQ | Evaluate LLM Responses</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIAQ — Alignment Intelligence</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+(function(){
+  try{
+    if(localStorage.getItem("siaq-theme")==="dark")
+      document.documentElement.classList.add("dark")
+  }catch(e){}
+})();
+</script>
+
+<link rel="stylesheet" href="styles.css">
 </head>
-<body class="home-page">
-  <header class="site-header">
-    <a class="brand" href="index.html" aria-label="SIAQ home">
-      <img src="assets/logo.png" alt="SIAQ logo">
+
+<body class="">
+
+<div class="siaq-architecture" aria-hidden="true">
+
+  <div class="arch-grid"></div>
+
+  <div class="arch-orb orb-teal"></div>
+  <div class="arch-orb orb-sage"></div>
+  <div class="arch-orb orb-sky"></div>
+  <div class="arch-orb orb-cream"></div>
+
+  <div class="arch-square sq-a"></div>
+  <div class="arch-square sq-b"></div>
+  <div class="arch-square sq-c"></div>
+  <div class="arch-square sq-d"></div>
+  <div class="arch-square sq-e"></div>
+  <div class="arch-square sq-f"></div>
+
+  <div class="arch-ring ring-a"></div>
+  <div class="arch-ring ring-b"></div>
+  <div class="arch-ring ring-c"></div>
+
+  <div class="arch-beam beam-a"></div>
+  <div class="arch-beam beam-b"></div>
+
+</div>
+
+
+<div class="scrollbar" id="scrollbar"></div>
+
+
+<header class="signature-nav" id="signatureNav">
+
+  <a class="signature-brand" href="index.html" aria-label="SIAQ home">
+
+    <span class="signature-mark">
+      <i></i>
+      <i></i>
+      <i></i>
+    </span>
+
+    <span class="signature-name">
+      <b>SIAQ</b>
+      <small>Social Intelligence Alignment Quotient</small>
+    </span>
+
+  </a>
+
+
+  <nav class="signature-links" aria-label="Primary navigation">
+
+    <a class="active" href="index.html">
+      <span>Home</span>
     </a>
 
-    <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
+    <a class="" href="evaluation.html">
+      <span>Evaluation</span>
+    </a>
+
+    <a class="" href="about.html">
+      <span>About</span>
+    </a>
+
+  </nav>
+
+
+  <div class="nav-auth">
+
+    <button
+      class="theme-toggle"
+      id="themeToggle"
+      type="button"
+      aria-label="Switch theme"
+      aria-pressed="false"
+    >
+      <span class="sun">☼</span>
+      <span class="moon">☾</span>
     </button>
 
-    <nav class="main-nav" aria-label="Main navigation">
-      <a class="active" href="index.html">Home</a>
-      <a href="#evaluation">Arena</a>
-      <a href="#" data-placeholder-link>Leaderboard</a>
-      <a href="#" data-placeholder-link>Results History</a>
-      <a href="#about">About</a>
-    </nav>
 
-    <a class="login-link" href="login.html">
-      <i data-lucide="user-round" aria-hidden="true"></i>
-      <span>Log In</span>
+    <a
+      class="nav-auth-profile"
+      id="navProfile"
+      href="profile.html"
+      style="display:none;"
+    >
+      Profile
     </a>
-  </header>
 
-  <main>
-    <section class="hero" id="about">
-      <div class="shape shape-left"></div>
-      <div class="shape shape-center"></div>
-      <div class="shape shape-right"></div>
 
-      <div class="hero-copy">
-        <h1>Evaluate LLM Responses<br><span>in Context</span></h1>
-        <p>SIAQ (سياق) is a human-centered evaluation platform for comparing large language model responses. Enter a prompt or scenario, review the model responses, and evaluate them across three key alignment dimensions in a guided step-by-step process.</p>
-        <div class="short-line"></div>
-        <p class="tagline">Different Perspectives. A More Aligned Tomorrow.</p>
+    <button
+      class="login-link"
+      id="logoutBtn"
+      type="button"
+      style="display:none; background:none; border:none; cursor:pointer;"
+    >
+      Log out
+    </button>
+
+
+    <a
+      class="login-link"
+      id="navLogin"
+      href="login.html"
+    >
+      Log in
+    </a>
+
+
+    <a
+      class="signup-button"
+      id="navSignup"
+      href="signup.html"
+    >
+      <span>Sign up</span>
+      <b>↗</b>
+    </a>
+
+  </div>
+
+</header>
+
+
+<main>
+
+
+<section class="hero" id="home">
+
+  <div class="heroCopy">
+
+    <div class="eyebrow">
+      <i></i> HUMAN-GROUNDED AI ALIGNMENT
+    </div>
+
+    <h1>
+      Evaluate AI<br>
+      <span>beyond the output.</span>
+    </h1>
+
+    <p>
+      A structured way to understand how conversational AI aligns with context,
+      supportive communication, and socio-cultural values.
+    </p>
+
+    <div class="heroActions">
+
+      <button class="primary" data-page="evaluation.html">
+        Start evaluating <span>↗</span>
+      </button>
+
+      <button class="secondary" data-go="#framework">
+        Explore framework <span>↓</span>
+      </button>
+
+    </div>
+
+    <div class="heroMeta">
+
+      <span><b>03</b> dimensions</span>
+
+      <i></i>
+
+      <span><b>AR / EN</b> languages</span>
+
+      <i></i>
+
+      <span><b>2×</b> comparison</span>
+
+    </div>
+
+  </div>
+
+
+  <div class="productHero" id="productHero">
+
+    <div class="halo"></div>
+
+    <div class="dashboard" id="dashboard">
+
+      <div class="dashTop">
+
+        <span class="windowDots">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+
+        <b>
+          <span class="miniMark">///</span>
+          SIAQ / Evaluation
+        </b>
+
+        <span class="live">
+          <i></i> Session active
+        </span>
+
       </div>
 
-      <aside class="hero-message" aria-label="SIAQ mission">
-        <p>Language<br>in Context<br>for a Better<br>Tomorrow</p>
-        <span class="message-line"></span>
-        <span class="arabic">سياق</span>
-        <small>PEOPLE<br>CULTURE<br>RESPONSIBLE AI</small>
-      </aside>
-    </section>
 
-    <section class="evaluation-panel" id="evaluation">
-      <div class="dimensions">
-        <div class="section-heading">
-          <h2>SIAQ Evaluates Three Alignment Dimensions</h2>
+      <div class="dashBody">
+
+        <aside class="side">
+
+          <div class="sideLogo">S</div>
+
+          <button class="on">⌁</button>
+
+          <button>◫</button>
+
+          <button>◎</button>
+
+          <span></span>
+
+          <button>···</button>
+
+        </aside>
+
+
+        <div class="dashMain">
+
+          <div class="dashTitle">
+
+            <div>
+              <small>NEW COMPARISON</small>
+              <h3>Evaluate two model responses</h3>
+            </div>
+
+            <span>AR / EN</span>
+
+          </div>
+
+
+          <div class="models">
+
+            <div>
+              <i class="mdot navy"></i>
+              <p>
+                <small>MODEL A</small>
+                <b>Mistral</b>
+              </p>
+              <em>Baseline</em>
+            </div>
+
+            <span>VS</span>
+
+            <div>
+              <i class="mdot teal"></i>
+              <p>
+                <small>MODEL B</small>
+                <b>Aya</b>
+              </p>
+              <em>Adapted</em>
+            </div>
+
+          </div>
+
+
+          <div class="prompt">
+
+            <small>PROMPT</small>
+
+            <p>
+              I feel overwhelmed with everything I need to finish this week...
+            </p>
+
+            <button>Compare →</button>
+
+          </div>
+
+
+          <div class="dimTabs">
+
+            <div class="on">
+              <b>01</b>
+              <span>Appropriateness</span>
+              <i></i>
+            </div>
+
+            <div>
+              <b>02</b>
+              <span>Positivity</span>
+              <i></i>
+            </div>
+
+            <div>
+              <b>03</b>
+              <span>Socio-Cultural</span>
+              <i></i>
+            </div>
+
+          </div>
+
         </div>
-        <div class="dimension-grid">
-          <article class="dimension-card">
-            <span class="dimension-icon blue">✓</span>
-            <div><h3>Appropriateness</h3><p>Does the response appropriately fit the user's situation and needs?</p></div>
-          </article>
-          <article class="dimension-card">
-            <span class="dimension-icon green">♧</span>
-            <div><h3>Positivity Alignment</h3><p>Does the level of positivity in the response fit the situation?</p></div>
-          </article>
-          <article class="dimension-card">
-            <span class="dimension-icon teal">◎</span>
-            <div><h3>Socio-Cultural Values Alignment</h3><p>Does the response respect relevant socio-cultural values and norms?</p></div>
-          </article>
-        </div>
+
       </div>
 
-      <form id="evaluation-form" novalidate>
-        <div class="field-group prompt-group">
-          <label for="prompt">Enter your prompt or message</label>
-          <textarea id="prompt" name="prompt" maxlength="1000" placeholder="Type your message or question here..." required></textarea>
-          <div class="field-footer"><span class="error-message" id="prompt-error"></span><span id="character-count">0 / 1000</span></div>
+    </div>
+
+
+    <div class="floatTag tag1">
+
+      <i>✓</i>
+
+      <span>
+        <small>Evaluation</small>
+        <b>3 dimensions</b>
+      </span>
+
+    </div>
+
+
+    <div class="floatTag tag2">
+
+      <i>↔</i>
+
+      <span>
+        <small>Comparison</small>
+        <b>Side by side</b>
+      </span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="statement">
+
+  <span>STRUCTURED</span>
+
+  <i></i>
+
+  <span>EXPLAINABLE</span>
+
+  <i></i>
+
+  <span>HUMAN-GROUNDED</span>
+
+  <i></i>
+
+  <span>CULTURALLY AWARE</span>
+
+</section>
+
+
+<section class="framework section" id="framework">
+
+  <div class="sectionHead">
+
+    <div>
+      <small>THE FRAMEWORK</small>
+
+      <h2>
+        Three dimensions.<br>
+        <span>One clearer picture.</span>
+      </h2>
+    </div>
+
+    <p>
+      Three focused lenses create a more meaningful view of conversational alignment.
+    </p>
+
+  </div>
+
+
+  <div class="featureGrid">
+
+
+    <article class="feature navyCard reveal">
+
+      <header>
+
+        <div class="ficon">
+
+          <svg viewBox="0 0 24 24">
+            <path d="M5 7h10M5 12h14M5 17h8"/>
+            <circle cx="18" cy="7" r="2"/>
+          </svg>
+
         </div>
 
-        <div class="models-heading">
-          <h2>Choose Models to Compare</h2>
-  
+        <span>01</span>
+
+      </header>
+
+      <h3>Appropriateness</h3>
+
+      <p>
+        Understand whether a response fits its conversational context and situation.
+      </p>
+
+      <div class="demo contextDemo">
+
+        <div class="line lshort"></div>
+
+        <div class="line"></div>
+
+        <div class="scanner">
+          <i></i>
+          <span>Context fit</span>
+          <b>Aligned</b>
         </div>
 
-        <div class="comparison-grid">
-          <div class="model-column">
-            <h3>Model / Response A</h3>
-            <p>Choose the first model configuration.</p>
-            <div class="custom-select" data-select="modelA">
-              <button class="select-trigger" type="button" aria-expanded="false">Select a model configuration <span>⌄</span></button>
-              <div class="select-menu" role="listbox"></div>
-              <input type="hidden" id="modelA" name="modelA" required>
-            </div>
-            <span class="error-message" id="modelA-error"></span>
+        <div class="line lmid"></div>
+
+        <div class="line lshort"></div>
+
+      </div>
+
+    </article>
+
+
+    <article class="feature lightCard reveal">
+
+      <header>
+
+        <div class="ficon">
+
+          <svg viewBox="0 0 24 24">
+            <path d="M5 15c2-5 4-7 7-7s5 2 7 7M7 18h10"/>
+            <circle cx="12" cy="5" r="2"/>
+          </svg>
+
+        </div>
+
+        <span>02</span>
+
+      </header>
+
+      <h3>Positivity Alignment</h3>
+
+      <p>
+        See whether positive framing is genuinely supportive rather than minimizing
+        or dismissive.
+      </p>
+
+      <div class="demo toneDemo">
+
+        <div class="waves">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+
+        <div class="toneLabels">
+          <span>Dismissive</span>
+          <b>Supportive</b>
+        </div>
+
+        <em></em>
+
+      </div>
+
+    </article>
+
+
+    <article class="feature tealCard reveal">
+
+      <header>
+
+        <div class="ficon">
+
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="8"/>
+            <path d="M4 12h16M12 4c3 3 3 13 0 16M12 4c-3 3-3 13 0 16"/>
+          </svg>
+
+        </div>
+
+        <span>03</span>
+
+      </header>
+
+      <h3>Socio-Cultural Values</h3>
+
+      <p>
+        Consider whether a response respects relevant social and cultural expectations.
+      </p>
+
+      <div class="demo cultureDemo">
+
+        <div class="lang">AR</div>
+
+        <div class="axis">
+          <i></i>
+          <b></b>
+          <span></span>
+        </div>
+
+        <div class="lang">EN</div>
+
+        <div class="cultureStatus">
+          ✓ &nbsp; Culturally appropriate
+        </div>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</section>
+
+
+<section class="process section" id="process">
+
+  <div class="processIntro">
+
+    <small>HOW IT WORKS</small>
+
+    <h2>
+      A clear path from<br>
+      <span>prompt to insight.</span>
+    </h2>
+
+    <p>
+      Scroll through the workflow. Each stage comes into focus as you move.
+    </p>
+
+  </div>
+
+
+  <div class="story" id="story">
+
+    <div class="sticky">
+
+      <div class="road">
+
+        <div class="roadBase"></div>
+
+        <div class="roadFill" id="roadFill"></div>
+
+        <i class="node n1">1</i>
+        <i class="node n2">2</i>
+        <i class="node n3">3</i>
+        <i class="node n4">4</i>
+
+      </div>
+
+
+      <div class="steps">
+
+
+        <article class="step active left" data-step="0">
+
+          <div class="stepIcon">
+
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="8" height="14" rx="2"/>
+              <rect x="13" y="5" width="8" height="14" rx="2"/>
+            </svg>
+
           </div>
 
-          <div class="versus" aria-hidden="true"><span>VS</span></div>
+          <small>STEP 01</small>
 
-          <div class="model-column">
-            <h3>Model / Response B</h3>
-            <p>Choose the second model configuration.</p>
-            <div class="custom-select" data-select="modelB">
-              <button class="select-trigger" type="button" aria-expanded="false">Select a model configuration <span>⌄</span></button>
-              <div class="select-menu" role="listbox"></div>
-              <input type="hidden" id="modelB" name="modelB" required>
-            </div>
-            <span class="error-message" id="modelB-error"></span>
+          <h3>Select two models</h3>
+
+          <p>
+            Choose two supported model configurations for one consistent comparison.
+          </p>
+
+          <div class="stepUI">
+
+            <span>
+              <i class="mdot navy"></i>
+              Mistral
+            </span>
+
+            <em>VS</em>
+
+            <span>
+              <i class="mdot teal"></i>
+              Aya
+            </span>
+
           </div>
-        </div>
 
-        <div class="form-actions">
-          <button class="primary-button" type="submit">Start Evaluation <span>→</span></button>
-          <p>You will evaluate both responses across three alignment dimensions in a step-by-step process.</p>
-        </div>
-      </form>
-    </section>
-  </main>
+        </article>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <script>
-    lucide.createIcons();
-  </script>
-  <script src="script.js"></script>
+        <article class="step right" data-step="1">
+
+          <div class="stepIcon">
+
+            <svg viewBox="0 0 24 24">
+              <path d="M4 6h16v10H8l-4 4V6zM8 10h8M8 13h5"/>
+            </svg>
+
+          </div>
+
+          <small>STEP 02</small>
+
+          <h3>Enter one prompt</h3>
+
+          <p>
+            Use the same Arabic or English prompt for both selected models.
+          </p>
+
+          <div class="stepUI promptUI">
+
+            <b>AR</b>
+
+            <b>EN</b>
+
+            <i></i>
+
+          </div>
+
+        </article>
+
+
+        <article class="step left" data-step="2">
+
+          <div class="stepIcon">
+
+            <svg viewBox="0 0 24 24">
+              <path d="M5 4v16M5 7h10l3 3-3 3H5M9 17h10"/>
+            </svg>
+
+          </div>
+
+          <small>STEP 03</small>
+
+          <h3>Evaluate both responses</h3>
+
+          <p>
+            Review both outputs sequentially across all three alignment dimensions.
+          </p>
+
+          <div class="stepUI dimUI">
+
+            <i></i>
+            <i></i>
+            <i></i>
+
+            <span>3 dimensions</span>
+
+          </div>
+
+        </article>
+
+
+        <article class="step right" data-step="3">
+
+          <div class="stepIcon">
+
+            <svg viewBox="0 0 24 24">
+              <path d="M5 18V9M10 18V5M15 18v-7M20 18V7M3 18h19"/>
+            </svg>
+
+          </div>
+
+          <small>STEP 04</small>
+
+          <h3>Understand the results</h3>
+
+          <p>
+            Review dimension-level outcomes and the overall alignment result.
+          </p>
+
+          <div class="stepUI resultUI">
+
+            <span>Results ready</span>
+
+            <b>↗</b>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+
+      <div class="counter">
+
+        <b id="counter">01</b>
+
+        <span>/ 04</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+</main>
+
+
+<footer class="signature-footer" id="footer">
+
+  <div class="footer-art" aria-hidden="true">
+
+    <span class="footer-disc disc-a"></span>
+
+    <span class="footer-disc disc-b"></span>
+
+    <span class="footer-orbit orbit-a"></span>
+
+    <span class="footer-orbit orbit-b"></span>
+
+  </div>
+
+
+  <div class="footer-main">
+
+    <div class="footer-identity">
+
+      <a class="footer-logo" href="index.html">
+
+        <span class="signature-mark footer-mark">
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+
+        <span>
+          <b>SIAQ</b>
+          <small>Social Intelligence Alignment Quotient</small>
+        </span>
+
+      </a>
+
+      <p>
+        Human-grounded evaluation for more context-aware, supportive,
+        and culturally aligned conversational AI.
+      </p>
+
+    </div>
+
+
+    <div class="footer-wordmark" aria-hidden="true">
+      SIAQ
+    </div>
+
+
+    <a class="footer-up" href="index.html">
+
+      <span>↑</span>
+
+      <small>TOP</small>
+
+    </a>
+
+  </div>
+
+
+  <div class="footer-rule"></div>
+
+
+  <div class="footer-meta footer-meta-centered">
+
+    <span>© 2026 SIAQ</span>
+
+  </div>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+<script
+  type="module"
+  src="js/auth.js">
+</script>
+
 </body>
 </html>

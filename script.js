@@ -1,364 +1,422 @@
-"use strict";
+const $ = (s, c = document) => c.querySelector(s);
+const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
-const modelGroups = [
-  {
-    label: "MISTRAL",
-    mark: "M",
-    options: [
-      ["mistral-baseline", "Mistral (Baseline)"],
-      ["mistral-appropriateness", "Mistral — Fine-tuned for Appropriateness"],
-      ["mistral-positivity", "Mistral — Fine-tuned for Positivity Alignment"],
-      ["mistral-cultural", "Mistral — Fine-tuned for Socio-Cultural Values Alignment"]
-    ]
-  },
-  {
-    label: "AYA",
-    mark: "A",
-    options: [
-      ["aya-baseline", "Aya (Baseline)"],
-      ["aya-appropriateness", "Aya — Fine-tuned for Appropriateness"],
-      ["aya-positivity", "Aya — Fine-tuned for Positivity Alignment"],
-      ["aya-cultural", "Aya — Fine-tuned for Socio-Cultural Values Alignment"]
-    ]
-  }
-];
 
-function showToast(message) {
-  const toast = document.querySelector("#toast");
-  if (!toast) return;
+// ==========================================
+// PAGE NAVIGATION
+// ==========================================
 
-  toast.textContent = message;
-  toast.classList.add("show");
+$$('[data-go]').forEach(
+  b => b.onclick = () =>
+    $(b.dataset.go)?.scrollIntoView({
+      behavior: 'smooth'
+    })
+);
 
-  window.clearTimeout(showToast.timer);
-  showToast.timer = window.setTimeout(() => {
-    toast.classList.remove("show");
-  }, 3500);
-}
+$$('[data-page]').forEach(
+  b => b.onclick = () =>
+    location.href = b.dataset.page
+);
 
-function setupNavigation() {
-  const toggle = document.querySelector(".menu-toggle");
-  const navigation = document.querySelector(".main-nav");
 
-  if (!toggle || !navigation) return;
+// ==========================================
+// REVEAL ANIMATIONS
+// ==========================================
 
-  toggle.addEventListener("click", () => {
-    const isOpen = navigation.classList.toggle("open");
-    toggle.setAttribute("aria-expanded", String(isOpen));
-  });
+const reveals = $$('.reveal');
 
-  navigation.addEventListener("click", () => {
-    navigation.classList.remove("open");
-    toggle.setAttribute("aria-expanded", "false");
-  });
-}
+if (reveals.length) {
 
-function setupCustomSelects() {
-  document.querySelectorAll(".custom-select").forEach((select) => {
-    const trigger = select.querySelector(".select-trigger");
-    const menu = select.querySelector(".select-menu");
-    const input = select.querySelector("input[type='hidden']");
+  const ro = new IntersectionObserver(
+    es => es.forEach(e => {
 
-    modelGroups.forEach((group) => {
-      const heading = document.createElement("div");
-      heading.className = "option-group";
-      heading.textContent = group.label;
-      menu.appendChild(heading);
-
-      group.options.forEach(([value, label]) => {
-        const option = document.createElement("button");
-        option.type = "button";
-        option.className = "select-option";
-        option.dataset.value = value;
-        option.innerHTML = `<span class="model-mark">${group.mark}</span>${label}`;
-
-        option.addEventListener("click", () => {
-          input.value = value;
-          trigger.innerHTML = `${label}<span>⌄</span>`;
-          trigger.style.color = "var(--text)";
-          select.classList.remove("open");
-          trigger.setAttribute("aria-expanded", "false");
-          trigger.classList.remove("invalid");
-
-          const error = document.querySelector(`#${input.id}-error`);
-          if (error) error.textContent = "";
-        });
-
-        menu.appendChild(option);
-      });
-    });
-
-    trigger.addEventListener("click", () => {
-      document.querySelectorAll(".custom-select.open").forEach((other) => {
-        if (other !== select) other.classList.remove("open");
-      });
-
-      const isOpen = select.classList.toggle("open");
-      trigger.setAttribute("aria-expanded", String(isOpen));
-    });
-  });
-
-  document.addEventListener("click", (event) => {
-    if (!event.target.closest(".custom-select")) {
-      document.querySelectorAll(".custom-select.open").forEach((select) => {
-        select.classList.remove("open");
-      });
-    }
-  });
-}
-
-function setupEvaluationForm() {
-  const form = document.querySelector("#evaluation-form");
-  if (!form) return;
-
-  const prompt = document.querySelector("#prompt");
-  const counter = document.querySelector("#character-count");
-
-  prompt.addEventListener("input", () => {
-    counter.textContent = `${prompt.value.length} / 1000`;
-    prompt.classList.remove("invalid");
-    document.querySelector("#prompt-error").textContent = "";
-  });
-
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-
-    let valid = true;
-    const modelA = document.querySelector("#modelA");
-    const modelB = document.querySelector("#modelB");
-
-    if (!prompt.value.trim()) {
-      prompt.classList.add("invalid");
-      document.querySelector("#prompt-error").textContent =
-        "Please enter a prompt or scenario.";
-      valid = false;
-    }
-
-    [modelA, modelB].forEach((model) => {
-      if (!model.value) {
-        document
-          .querySelector(`[data-select='${model.id}'] .select-trigger`)
-          .classList.add("invalid");
-
-        document.querySelector(`#${model.id}-error`).textContent =
-          "Please select a model.";
-
-        valid = false;
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
       }
-    });
 
-    if (modelA.value && modelA.value === modelB.value) {
-      document.querySelector("#modelB-error").textContent =
-        "Choose a different configuration for comparison.";
-
-      document
-        .querySelector("[data-select='modelB'] .select-trigger")
-        .classList.add("invalid");
-
-      valid = false;
+    }),
+    {
+      threshold: .16
     }
+  );
 
-    if (valid) {
-      showToast(
-        "This feature is not yet implemented. The evaluation will be available in a later stage."
-      );
-    }
-  });
+  reveals.forEach(
+    x => ro.observe(x)
+  );
+
 }
 
-function validateAuthField(input) {
-  const error = input.closest(".field-group")?.querySelector(".error-message");
-  let message = "";
 
-  if (!input.value.trim()) {
-    message = "This field is required.";
-  } else if (
-    input.type === "email" &&
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value)
-  ) {
-    message = "Enter a valid email address.";
-  } else if (
-    input.name === "password" &&
-    input.closest("#signup-form") &&
-    (
-      input.value.length < 8 ||
-      !/[a-zA-Z]/.test(input.value) ||
-      !/[0-9]/.test(input.value)
-    )
-  ) {
-    message =
-      "Password must be at least 8 characters and contain at least one letter and one number.";
-  } else if (
-    (input.name === "firstName" || input.name === "lastName") &&
-    input.value.trim().length > 50
-  ) {
-    message = "Name must not exceed 50 characters.";
+// ==========================================
+// HERO DASHBOARD EFFECT
+// ==========================================
+
+const hero = $('#productHero');
+const dash = $('#dashboard');
+
+if (hero && dash) {
+
+  hero.addEventListener(
+    'pointermove',
+    e => {
+
+      if (innerWidth < 900) return;
+
+      const r =
+        hero.getBoundingClientRect();
+
+      const x =
+        (e.clientX - r.left) /
+        r.width - .5;
+
+      const y =
+        (e.clientY - r.top) /
+        r.height - .5;
+
+      dash.style.transform =
+        `rotateY(${x * 7 - 3}deg)
+         rotateX(${-y * 5 + 1}deg)
+         translate3d(${x * 7}px, ${y * 6}px, 0)`;
+
+    }
+  );
+
+
+  hero.addEventListener(
+    'pointerleave',
+    () => {
+
+      dash.style.transform =
+        'rotateY(-5deg) rotateX(2deg)';
+
+    }
+  );
+
+}
+
+
+// ==========================================
+// STORY / SCROLL PROGRESS
+// ==========================================
+
+const story = $('#story');
+const steps = $$('.step');
+const nodes = $$('.node');
+const fill = $('#roadFill');
+const counter = $('#counter');
+
+
+function storyUpdate() {
+
+  const max =
+    document.documentElement.scrollHeight -
+    innerHeight;
+
+
+  const sb =
+    $('#scrollbar');
+
+
+  if (sb) {
+
+    sb.style.width =
+      (max > 0
+        ? scrollY / max * 100
+        : 0) + '%';
+
   }
 
-  input.classList.toggle("invalid", Boolean(message));
 
-  if (error) error.textContent = message;
+  if (!story) return;
 
-  return !message;
-}
 
-async function sendAuthRequest(url, data) {
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    credentials: "same-origin",
-    body: JSON.stringify(data)
-  });
+  const r =
+    story.getBoundingClientRect();
 
-  const result = await response.json();
 
-  if (!response.ok) {
-    throw new Error(
-      typeof result.detail === "string"
-        ? result.detail
-        : "Something went wrong. Please try again."
+  const travel =
+    story.offsetHeight -
+    innerHeight;
+
+
+  const p =
+    Math.max(
+      0,
+      Math.min(
+        1,
+        -r.top /
+        Math.max(1, travel)
+      )
     );
+
+
+  const idx =
+    Math.min(
+      3,
+      Math.floor(p * 4)
+    );
+
+
+  if (fill) {
+
+    fill.style.height =
+      (p * 100) + '%';
+
   }
 
-  return result;
-}
 
-function setupAuthForms() {
-  document.querySelectorAll(".password-toggle").forEach((button) => {
-    button.addEventListener("click", () => {
-      const input = button.previousElementSibling;
-      const showing = input.type === "text";
+  if (counter) {
 
-      input.type = showing ? "password" : "text";
-      button.textContent = showing ? "Show" : "Hide";
-      button.setAttribute(
-        "aria-label",
-        showing ? "Show password" : "Hide password"
+    counter.textContent =
+      String(idx + 1)
+        .padStart(2, '0');
+
+  }
+
+
+  steps.forEach(
+    (s, i) => {
+
+      s.classList.toggle(
+        'active',
+        i === idx
       );
-    });
-  });
 
-  document.querySelectorAll(".auth-form").forEach((form) => {
-    form
-      .querySelectorAll("input[required]:not([type='checkbox'])")
-      .forEach((input) => {
-        input.addEventListener("blur", () => validateAuthField(input));
+      s.classList.toggle(
+        'past',
+        i < idx
+      );
 
-        input.addEventListener("input", () => {
-          if (input.classList.contains("invalid")) {
-            validateAuthField(input);
-          }
-        });
-      });
+    }
+  );
 
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
 
-      let valid = true;
+  nodes.forEach(
+    (n, i) =>
+      n.classList.toggle(
+        'on',
+        i <= idx
+      )
+  );
 
-      form
-        .querySelectorAll("input[required]:not([type='checkbox'])")
-        .forEach((input) => {
-          valid = validateAuthField(input) && valid;
-        });
-
-      const terms = form.querySelector("#terms");
-
-      if (terms && !terms.checked) {
-        document.querySelector("#terms-error").textContent =
-          "You must agree before creating an account.";
-        valid = false;
-      } else if (terms) {
-        document.querySelector("#terms-error").textContent = "";
-      }
-
-      if (!valid) return;
-
-      const submitButton = form.querySelector('button[type="submit"]');
-      submitButton.disabled = true;
-
-      try {
-        if (form.id === "signup-form") {
-          await sendAuthRequest("/api/signup", {
-            first_name: form.elements.firstName.value.trim(),
-            last_name: form.elements.lastName.value.trim(),
-            email: form.elements.email.value.trim(),
-            password: form.elements.password.value
-          });
-
-          window.location.href = "index.html";
-        } else if (form.id === "login-form") {
-          await sendAuthRequest("/api/login", {
-            email: form.elements.email.value.trim(),
-            password: form.elements.password.value
-          });
-
-          window.location.href = "index.html";
-        }
-      } catch (error) {
-        showToast(error.message);
-      } finally {
-        submitButton.disabled = false;
-      }
-    });
-  });
 }
 
-async function setupHomeAccount() {
-  const loginLink = document.querySelector(".login-link");
-  if (!loginLink) return;
+
+addEventListener(
+  'scroll',
+  storyUpdate,
+  {
+    passive: true
+  }
+);
+
+storyUpdate();
+
+
+// ==========================================
+// NAVBAR COMPACT MODE
+// ==========================================
+
+const sigNav =
+  $('#signatureNav');
+
+
+function navCompact() {
+
+  sigNav?.classList.toggle(
+    'is-compact',
+    scrollY > 45
+  );
+
+}
+
+
+addEventListener(
+  'scroll',
+  navCompact,
+  {
+    passive: true
+  }
+);
+
+navCompact();
+
+
+// ==========================================
+// THEME
+// ==========================================
+
+const themeRoot =
+  document.documentElement;
+
+const themeButton =
+  $('#themeToggle');
+
+
+function applyTheme(theme) {
+
+  const dark =
+    theme === 'dark';
+
+
+  themeRoot.classList.toggle(
+    'dark',
+    dark
+  );
+
+
+  if (themeButton) {
+
+    themeButton.setAttribute(
+      'aria-pressed',
+      String(dark)
+    );
+
+
+    themeButton.setAttribute(
+      'aria-label',
+      dark
+        ? 'Switch to light mode'
+        : 'Switch to dark mode'
+    );
+
+  }
+
 
   try {
-    const response = await fetch("/api/me", {
-      credentials: "same-origin"
-    });
 
-    if (!response.ok) return;
+    localStorage.setItem(
+      'siaq-theme',
+      dark
+        ? 'dark'
+        : 'light'
+    );
 
-    // Logged-in users see a Log Out button instead of their name.
-    loginLink.textContent = "Log Out";
-    loginLink.classList.add("logout-button");
-    loginLink.href = "#";
+  } catch (e) {}
 
-    loginLink.addEventListener("click", async (event) => {
-      event.preventDefault();
 
-      try {
-        const response = await fetch("/api/logout", {
-          method: "POST",
-          credentials: "same-origin"
-        });
+  const pt =
+    $('#profileTheme');
 
-        if (!response.ok) {
-          throw new Error("Could not log out. Please try again.");
+
+  if (pt) {
+
+    pt.textContent =
+      dark
+        ? 'Dark'
+        : 'Light';
+
+  }
+
+}
+
+
+themeButton?.addEventListener(
+  'click',
+  () =>
+    applyTheme(
+      themeRoot.classList.contains('dark')
+        ? 'light'
+        : 'dark'
+    )
+);
+
+
+applyTheme(
+  themeRoot.classList.contains('dark')
+    ? 'dark'
+    : 'light'
+);
+
+
+// ==========================================
+// PASSWORD SHOW / HIDE
+// ==========================================
+
+$$('[data-password]').forEach(
+  btn =>
+    btn.addEventListener(
+      'click',
+      () => {
+
+        const input =
+          document.getElementById(
+            btn.dataset.password
+          );
+
+
+        if (!input) return;
+
+
+        const show =
+          input.type === 'password';
+
+
+        input.type =
+          show
+            ? 'text'
+            : 'password';
+
+
+        btn.textContent =
+          show
+            ? 'HIDE'
+            : 'SHOW';
+
+      }
+    )
+);
+
+
+// ==========================================
+// WORKSPACE DEMO
+// ==========================================
+
+const run =
+  $('.workspaceBody aside .run');
+
+
+run?.addEventListener(
+  'click',
+  () => {
+
+    run.textContent =
+      'Generating…';
+
+
+    setTimeout(
+      () => {
+
+        run.textContent =
+          'Generate comparison →';
+
+
+        const ps =
+          $$('.responses p');
+
+
+        if (ps[0]) {
+
+          ps[0].textContent =
+            'It sounds like you have a lot to manage this week. Breaking the work into smaller priorities may make it feel more manageable.';
+
         }
 
-        window.location.href = "index.html";
-      } catch (error) {
-        showToast(error.message);
-      }
-    });
-  } catch (error) {
-    console.error("Could not check login status:", error);
+
+        if (ps[1]) {
+
+          ps[1].textContent =
+            'That sounds overwhelming. We can organize what needs attention first, while keeping the plan realistic for the time you have.';
+
+        }
+
+
+        $('#resultPanel')
+          ?.classList.add('show');
+
+      },
+      650
+    );
+
   }
-}
-
-function setupPlaceholderLinks() {
-  document.querySelectorAll("[data-placeholder-link]").forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      showToast("This page will be implemented in a later stage.");
-    });
-  });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  setupNavigation();
-  setupCustomSelects();
-  setupEvaluationForm();
-  setupAuthForms();
-  setupHomeAccount();
-  setupPlaceholderLinks();
-});
+);

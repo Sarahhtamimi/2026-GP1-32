@@ -1,64 +1,1012 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIAQ | Log In</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>Log in — SIAQ</title>
+
+
+  <!-- ==========================================
+       GOOGLE FONTS
+  =========================================== -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <!-- ==========================================
+       THEME
+  =========================================== -->
+
+  <script>
+
+    (function () {
+
+      try {
+
+        if (
+          localStorage.getItem("siaq-theme") === "dark"
+        ) {
+
+          document.documentElement.classList.add("dark");
+
+        }
+
+      } catch (e) {}
+
+    })();
+
+  </script>
+
+
+  <!-- ==========================================
+       MAIN CSS
+  =========================================== -->
+
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+
+  <!-- ==========================================
+       LOGIN PAGE STYLES
+  =========================================== -->
+
+  <style>
+
+
+    /* ==========================================
+       LOGIN READABILITY
+    =========================================== */
+
+
+    /* Main Heading */
+
+    .auth-copy h2 {
+
+      font-size: 34px;
+      line-height: 1.15;
+
+    }
+
+
+    /* WELCOME BACK */
+
+    .auth-copy small {
+
+      font-size: 11px;
+      letter-spacing: 1.4px;
+
+    }
+
+
+    /* Description */
+
+    .auth-copy p {
+
+      font-size: 14px;
+      line-height: 1.6;
+
+    }
+
+
+    /* Field Labels */
+
+    .auth-form > label {
+
+      font-size: 13px;
+      font-weight: 700;
+
+    }
+
+
+    /* Input Text */
+
+    .auth-form input {
+
+      font-size: 14px;
+
+    }
+
+
+    /* Input Placeholder */
+
+    .auth-form input::placeholder {
+
+      font-size: 14px;
+
+    }
+
+
+    /* Login Button */
+
+    .auth-submit {
+
+      font-size: 13px;
+      font-weight: 700;
+
+    }
+
+
+    /* Create Account Text */
+
+    .auth-switch {
+
+      font-size: 12px;
+
+    }
+
+
+    .auth-switch .text-link {
+
+      font-size: 12px;
+
+    }
+
+
+
+    /* ==========================================
+       FIELD ERROR MESSAGES
+    =========================================== */
+
+
+    .field-error {
+
+      display: none;
+
+      margin-top: 6px;
+      padding-left: 3px;
+
+      color: #b42318;
+
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.5;
+
+    }
+
+
+    /* Show Field Error */
+
+    .auth-form label.invalid .field-error {
+
+      display: block;
+
+    }
+
+
+    /* Invalid Input */
+
+    .auth-form label.invalid input {
+
+      border-color: #d92d20 !important;
+
+      background:
+        rgba(217, 45, 32, 0.025);
+
+      box-shadow:
+        0 0 0 3px rgba(217, 45, 32, 0.07);
+
+    }
+
+
+
+    /* ==========================================
+       PASSWORD FIELD
+    =========================================== */
+
+
+    .auth-form .password-wrap {
+
+      position: relative;
+
+      width: 100%;
+
+    }
+
+
+    .auth-form .password-wrap input {
+
+      width: 100% !important;
+
+      box-sizing: border-box;
+
+      padding-right: 70px !important;
+
+    }
+
+
+    /* SHOW / HIDE Button */
+
+    .auth-form .password-toggle {
+
+      position: absolute;
+
+      right: 16px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      margin: 0;
+      padding: 5px;
+
+      border: none;
+
+      background: transparent;
+
+      color: var(--teal);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+    }
+
+
+
+    /* ==========================================
+       GENERAL LOGIN MESSAGE
+    =========================================== */
+
+
+    .auth-message {
+
+      display: none;
+
+      padding: 12px 14px;
+
+      border-radius: 11px;
+
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.55;
+
+    }
+
+
+    .auth-message.show {
+
+      display: block;
+
+    }
+
+
+    /* Error */
+
+    .auth-message.error {
+
+      color: #b42318;
+
+      background:
+        rgba(217, 45, 32, 0.07);
+
+      border:
+        1px solid rgba(217, 45, 32, 0.16);
+
+    }
+
+
+    /* Success */
+
+    .auth-message.success {
+
+      color: var(--teal);
+
+      background:
+        rgba(42, 140, 130, 0.09);
+
+      border:
+        1px solid rgba(42, 140, 130, 0.18);
+
+    }
+
+
+
+    /* ==========================================
+       DARK MODE
+    =========================================== */
+
+
+    :root.dark .field-error {
+
+      color: #ffaaa3;
+
+    }
+
+
+    :root.dark
+    .auth-form
+    label.invalid
+    input {
+
+      border-color:
+        rgba(255, 125, 115, 0.75) !important;
+
+      background:
+        rgba(217, 45, 32, 0.07);
+
+    }
+
+
+    :root.dark
+    .auth-message.error {
+
+      color: #ffb4ad;
+
+      background:
+        rgba(217, 45, 32, 0.10);
+
+      border-color:
+        rgba(255, 180, 173, 0.18);
+
+    }
+
+
+  </style>
+
 </head>
-<body class="auth-page">
-  <header class="site-header simple-header">
-    <a class="brand" href="index.html"><img src="assets/logo.png" alt="SIAQ logo"></a>
-    <p>New to SIAQ? <a href="signup.html">Sign Up</a></p>
+
+
+
+<body>
+
+
+  <!-- ==========================================
+       BACKGROUND DESIGN
+  =========================================== -->
+
+  <div
+    class="siaq-architecture"
+    aria-hidden="true"
+  >
+
+    <div class="arch-grid"></div>
+
+
+    <div class="arch-orb orb-teal"></div>
+
+    <div class="arch-orb orb-sage"></div>
+
+    <div class="arch-orb orb-sky"></div>
+
+    <div class="arch-orb orb-cream"></div>
+
+
+    <div class="arch-square sq-a"></div>
+
+    <div class="arch-square sq-b"></div>
+
+    <div class="arch-square sq-c"></div>
+
+    <div class="arch-square sq-d"></div>
+
+    <div class="arch-square sq-e"></div>
+
+    <div class="arch-square sq-f"></div>
+
+
+    <div class="arch-ring ring-a"></div>
+
+    <div class="arch-ring ring-b"></div>
+
+    <div class="arch-ring ring-c"></div>
+
+
+    <div class="arch-beam beam-a"></div>
+
+    <div class="arch-beam beam-b"></div>
+
+  </div>
+
+
+
+  <!-- ==========================================
+       SCROLLBAR
+  =========================================== -->
+
+  <div
+    class="scrollbar"
+    id="scrollbar"
+  ></div>
+
+
+
+  <!-- ==========================================
+       NAVIGATION BAR
+  =========================================== -->
+
+  <header
+    class="signature-nav"
+    id="signatureNav"
+  >
+
+
+    <!-- Logo -->
+
+    <a
+      class="signature-brand"
+      href="index.html"
+      aria-label="SIAQ home"
+    >
+
+      <span class="signature-mark">
+
+        <i></i>
+        <i></i>
+        <i></i>
+
+      </span>
+
+
+      <span class="signature-name">
+
+        <b>SIAQ</b>
+
+        <small>
+          Social Intelligence Alignment Quotient
+        </small>
+
+      </span>
+
+    </a>
+
+
+
+    <!-- Navigation Links -->
+
+    <nav
+      class="signature-links"
+      aria-label="Primary navigation"
+    >
+
+      <a href="index.html">
+
+        <span>Home</span>
+
+      </a>
+
+
+      <a href="evaluation.html">
+
+        <span>Evaluation</span>
+
+      </a>
+
+
+      <a href="about.html">
+
+        <span>About</span>
+
+      </a>
+
+    </nav>
+
+
+
+    <!-- Authentication Navigation -->
+
+    <div class="nav-auth">
+
+
+      <!-- Theme Toggle -->
+
+      <button
+        class="theme-toggle"
+        id="themeToggle"
+        type="button"
+        aria-label="Switch theme"
+        aria-pressed="false"
+      >
+
+        <span class="sun">☼</span>
+
+        <span class="moon">☾</span>
+
+      </button>
+
+
+
+      <!-- Profile -->
+
+      <a
+        class="nav-auth-profile"
+        href="profile.html"
+      >
+
+        Profile
+
+      </a>
+
+
+
+      <!-- Login -->
+
+      <a
+        class="login-link"
+        href="login.html"
+      >
+
+        Log in
+
+      </a>
+
+
+
+      <!-- Sign Up -->
+
+      <a
+        class="signup-button"
+        href="signup.html"
+      >
+
+        <span>Sign up</span>
+
+        <b>↗</b>
+
+      </a>
+
+
+    </div>
+
   </header>
 
-  <main class="auth-main">
-    <section class="auth-intro login-intro">
-      <div>
-        <p class="eyebrow">LANGUAGE IN CONTEXT</p>
-        <h1>Welcome back to <span>SIAQ.</span></h1>
-        <p>Continue comparing language model responses through a structured and human-centered evaluation process.</p>
-      </div>
-    </section>
 
-    <section class="auth-card" aria-labelledby="login-title">
-      <div class="auth-card-heading">
-        <p class="step-label">WELCOME BACK</p>
-        <h2 id="login-title">Log in to your account</h2>
-        <p>Enter your email and password to continue.</p>
-      </div>
 
-      <form id="login-form" class="auth-form" novalidate>
-        <div class="field-group">
-          <label for="login-email">Email address</label>
-          <input id="login-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
-          <span class="error-message"></span>
+  <!-- ==========================================
+       LOGIN PAGE
+  =========================================== -->
+
+  <main class="auth-page">
+
+
+    <div class="auth-shell">
+
+
+
+      <!-- ======================================
+           LEFT BRAND PANEL
+      ======================================= -->
+
+      <div class="auth-brand-panel">
+
+
+        <div>
+
+
+          <span class="signature-mark auth-mark">
+
+            <i></i>
+            <i></i>
+            <i></i>
+
+          </span>
+
+
+          <b>SIAQ</b>
+
+
+          <small>
+            Social Intelligence Alignment Quotient
+          </small>
+
+
         </div>
 
-        <div class="field-group">
-          <div class="label-row"><label for="login-password">Password</label><a href="#" data-placeholder-link>Forgot password?</a></div>
-          <div class="password-wrap">
-            <input id="login-password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
-            <button class="password-toggle" type="button" aria-label="Show password">Show</button>
+
+
+        <p>
+
+          Evaluate conversational AI with context,
+          human judgment, and cultural awareness.
+
+        </p>
+
+
+
+        <div class="auth-art">
+
+          <i></i>
+          <i></i>
+          <i></i>
+
+        </div>
+
+
+      </div>
+
+
+
+      <!-- ======================================
+           LOGIN FORM PANEL
+      ======================================= -->
+
+      <div class="auth-form-panel">
+
+
+
+        <!-- Heading -->
+
+        <div class="auth-copy">
+
+
+          <small>
+            WELCOME BACK
+          </small>
+
+
+          <h2>
+            Log in to SIAQ
+          </h2>
+
+
+          <p>
+            Continue to your evaluation workspace.
+          </p>
+
+
+        </div>
+
+
+
+        <!-- ==================================
+             LOGIN FORM
+        =================================== -->
+
+        <form
+          class="auth-form"
+          id="loginForm"
+          novalidate
+        >
+
+
+
+          <!-- ================================
+               EMAIL
+          ================================= -->
+
+          <label>
+
+
+            Email address
+
+
+            <input
+              id="loginEmail"
+              type="email"
+              placeholder="name@example.com"
+              autocomplete="email"
+            >
+
+
+            <span class="field-error">
+
+              Please enter a valid email address.
+
+            </span>
+
+
+          </label>
+
+
+
+          <!-- ================================
+               PASSWORD
+          ================================= -->
+
+          <label>
+
+
+            Password
+
+
+            <div class="password-wrap">
+
+
+              <input
+                id="loginPassword"
+                type="password"
+                placeholder="••••••••"
+                autocomplete="current-password"
+              >
+
+
+              <button
+                class="password-toggle"
+                type="button"
+                data-password="loginPassword"
+              >
+
+                SHOW
+
+              </button>
+
+
+            </div>
+
+
+            <span class="field-error">
+
+              Please enter your password.
+
+            </span>
+
+
+          </label>
+
+
+
+          <!-- ================================
+               GENERAL LOGIN MESSAGE
+          ================================= -->
+
+          <div
+            class="auth-message"
+            id="loginMessage"
+            role="alert"
+            aria-live="polite"
+          ></div>
+
+
+
+          <!-- ================================
+               LOGIN BUTTON
+          ================================= -->
+
+          <button
+            class="auth-submit"
+            type="submit"
+          >
+
+            Log in
+
+            <span>→</span>
+
+          </button>
+
+
+
+          <!-- ================================
+               SIGN UP LINK
+          ================================= -->
+
+          <div class="auth-switch">
+
+
+            New to SIAQ?
+
+
+            <a
+              class="text-link"
+              href="signup.html"
+            >
+
+              Create an account
+
+            </a>
+
+
           </div>
-          <span class="error-message"></span>
-        </div>
 
-        <label class="checkbox-row">
-          <input name="remember" type="checkbox">
-          <span>Remember me</span>
-        </label>
 
-        <button class="primary-button full-button" type="submit">Log In <span>→</span></button>
-        <p class="auth-switch">Don’t have an account? <a href="signup.html">Create one</a></p>
-      </form>
-    </section>
+        </form>
+
+
+      </div>
+
+
+    </div>
+
+
   </main>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+
+  <!-- ==========================================
+       FOOTER
+  =========================================== -->
+
+  <footer
+    class="signature-footer"
+    id="footer"
+  >
+
+
+    <!-- Footer Decoration -->
+
+    <div
+      class="footer-art"
+      aria-hidden="true"
+    >
+
+
+      <span
+        class="footer-disc disc-a"
+      ></span>
+
+
+      <span
+        class="footer-disc disc-b"
+      ></span>
+
+
+      <span
+        class="footer-orbit orbit-a"
+      ></span>
+
+
+      <span
+        class="footer-orbit orbit-b"
+      ></span>
+
+
+    </div>
+
+
+
+    <!-- Footer Main -->
+
+    <div class="footer-main">
+
+
+
+      <!-- Footer Identity -->
+
+      <div class="footer-identity">
+
+
+        <a
+          class="footer-logo"
+          href="index.html"
+        >
+
+
+          <span
+            class="signature-mark footer-mark"
+          >
+
+            <i></i>
+            <i></i>
+            <i></i>
+
+          </span>
+
+
+
+          <span>
+
+
+            <b>SIAQ</b>
+
+
+            <small>
+
+              Social Intelligence Alignment Quotient
+
+            </small>
+
+
+          </span>
+
+
+        </a>
+
+
+
+        <p>
+
+          Human-grounded evaluation for more
+          context-aware, supportive, and culturally
+          aligned conversational AI.
+
+        </p>
+
+
+      </div>
+
+
+
+      <!-- Footer Wordmark -->
+
+      <div
+        class="footer-wordmark"
+        aria-hidden="true"
+      >
+
+        SIAQ
+
+      </div>
+
+
+
+      <!-- Back to Top -->
+
+      <a
+        class="footer-up"
+        href="index.html"
+      >
+
+
+        <span>
+          ↑
+        </span>
+
+
+        <small>
+          TOP
+        </small>
+
+
+      </a>
+
+
+    </div>
+
+
+
+    <!-- Footer Divider -->
+
+    <div class="footer-rule"></div>
+
+
+
+    <!-- Copyright -->
+
+    <div
+      class="footer-meta footer-meta-centered"
+    >
+
+      <span>
+        © 2026 SIAQ
+      </span>
+
+    </div>
+
+
+  </footer>
+
+
+
+  <!-- ==========================================
+       JAVASCRIPT
+  =========================================== -->
+
+
+  <!-- Main Website Functionality -->
+
   <script src="script.js"></script>
+
+
+  <!-- Firebase Authentication -->
+
+  <script
+    type="module"
+    src="js/auth.js"
+  ></script>
+
+
 </body>
+
 </html>
