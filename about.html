@@ -407,7 +407,7 @@
       color: #a83e3e
     }
 
-    
+
 
     [hidden] {
       display: none !important
@@ -832,27 +832,27 @@
       background: var(--mist)
     }
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
 
-    
+
+
+
+
+
+
+
+
+
+
+
 
     :root.dark {
       --paper: #01142B;
@@ -934,7 +934,7 @@
       color: #FFC4C4
     }
 
-    
+
 
     @media(max-width:1000px) {
       .signature-nav {
@@ -954,7 +954,7 @@
         padding: 10px 8px
       }
 
-      
+
     }
 
     @media(max-width:650px) {
@@ -995,146 +995,644 @@
         gap: 4px
       }
 
-      
 
-      
 
-      
 
-      
+
+
+
+
 
       .hero {
         min-height: 210px
       }
     }
   </style>
-<style>
-/* Index navbar parity overrides — scoped to navigation, no Firebase changes */
-.signature-nav{
-  position:fixed;z-index:90;top:18px;left:50%;
-  transform:translateX(-50%);
-  width:min(1180px,calc(100% - 34px));
-  height:74px;
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  padding:8px 9px 8px 20px;
-  border:1px solid rgba(49,93,125,.14);
-  border-radius:22px;
-  background:rgba(246,249,250,.82);
-  backdrop-filter:blur(26px);
-  -webkit-backdrop-filter:blur(26px);
-  box-shadow:0 18px 55px rgba(22,50,79,.10),inset 0 1px 0 rgba(246,249,250,.95);
-  transition:height .3s,top .3s,background .3s,box-shadow .3s,border-radius .3s;
-}
-.signature-nav.is-compact{
-  top:10px;height:64px;border-radius:18px;
-  background:rgba(246,249,250,.94);
-  box-shadow:0 20px 62px rgba(22,50,79,.15);
-}
-.signature-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy);width:max-content}
-.signature-name{display:flex;flex-direction:column}
-.signature-name b{font:800 17px Manrope;letter-spacing:-.04em;line-height:1}
-.signature-name small{margin-top:4px;color:var(--blue);font-size:6px;letter-spacing:.035em}
-.signature-links{
-  height:48px;padding:5px;
-  display:flex;align-items:center;gap:2px;
-  border-radius:15px;
-  background:rgba(228,236,239,.62);
-  box-shadow:inset 0 0 0 1px rgba(49,93,125,.07);
-}
-.signature-links a{
-  position:relative;padding:12px 17px;border-radius:11px;
-  color:var(--blue);text-decoration:none;
-  font-size:8px;font-weight:700;letter-spacing:.01em;
-  transition:color .25s,background .25s,box-shadow .25s,transform .25s;
-}
-.signature-links a:before{
-  content:"";position:absolute;left:50%;bottom:6px;
-  width:4px;height:4px;border-radius:50%;background:var(--teal);
-  transform:translateX(-50%) scale(0);transition:.25s;
-}
-.signature-links a:hover{color:var(--navy);transform:translateY(-1px)}
-.signature-links a.active{
-  color:var(--navy);background:var(--paper);
-  box-shadow:0 7px 20px rgba(22,50,79,.09);
-}
-.signature-links a.active:before{transform:translateX(-50%) scale(1)}
-@media (max-width:900px){.signature-nav{grid-template-columns:1fr auto;width:calc(100% - 22px);padding-left:15px}.signature-links{display:none}.signature-name small{display:none}}
-@media (max-width:560px){.signature-nav{height:62px;top:10px}.signature-name b{font-size:15px}}
-.nav-auth{justify-self:end;display:flex;align-items:center;gap:6px}
-@media (max-width:900px){.nav-auth{margin-left:auto}}
-@media (max-width:650px){.signature-name small{display:none}}
-.theme-toggle{width:40px;height:40px;flex:0 0 40px;padding:0;position:relative;border:1px solid var(--line);border-radius:12px;background:rgba(246,249,250,.74);color:var(--navy);cursor:pointer;overflow:hidden;transition:background .26s,border-color .26s,color .26s,box-shadow .26s}
-.theme-toggle span{position:absolute;inset:0;display:grid;place-items:center;font-size:15px;transition:opacity .26s,transform .26s}
-.theme-toggle .sun{opacity:0;transform:rotate(70deg) scale(.65)}
-.theme-toggle .moon{opacity:1;transform:none}
-:root.dark .signature-nav{background:rgba(1,20,43,.82);border-color:rgba(117,201,190,.16);box-shadow:0 18px 55px rgba(0,8,22,.34),inset 0 1px 0 rgba(117,201,190,.07)}
-:root.dark .signature-nav.is-compact{background:rgba(1,20,43,.94);box-shadow:0 20px 62px rgba(0,8,22,.42)}
-:root.dark .signature-links{background:rgba(14,48,60,.62);box-shadow:inset 0 0 0 1px rgba(117,201,190,.08)}
-:root.dark .signature-links a{color:#E8F5F1}
-:root.dark .signature-links a:hover{color:#F7FCFB}
-:root.dark .signature-links a.active{color:#F7FCFB;background:rgba(117,201,190,.13);box-shadow:none}
-:root.dark .signature-brand{color:#F7FCFB}
-:root.dark .signature-name small{color:#B9DAD4}
-:root.dark .theme-toggle{background:rgba(14,48,60,.70);border-color:rgba(117,201,190,.22);color:#75C9BE}
-:root.dark .theme-toggle .sun{opacity:1;transform:none}
-:root.dark .theme-toggle .moon{opacity:0;transform:rotate(-70deg) scale(.65)}
-@media (prefers-reduced-motion:reduce){.theme-toggle,.theme-toggle span{transition:none!important}}
-.nav-auth-profile{display:none;text-decoration:none;color:var(--navy);font-size:8px;font-weight:700;padding:9px 11px;border-radius:10px;background:rgba(117,201,190,.13)}
-body.demo-logged-in .nav-auth-profile{display:block}
-.signature-nav{position:fixed}
-.nav-logo-picture{display:flex;align-items:center;width:38px;height:34px;flex:0 0 38px;overflow:hidden}
-.nav-real-logo{display:block;width:38px;height:auto;max-height:31px;object-fit:contain;object-position:left center}
-:root.dark .signature-links a{color:var(--dark-text-secondary)!important}
-:root.dark .signature-links a:hover,:root.dark .signature-links a.active{color:#fff!important}
-.signature-nav{grid-template-columns:minmax(225px,1fr) auto minmax(225px,1fr)}
-.signature-links{gap:2px}
-.signature-links a{padding-left:10px;padding-right:10px}
-.profile-menu{position:relative;display:none}
-body.demo-logged-in .profile-menu{display:block}
-.profile-avatar-btn{width:38px;height:38px;padding:0;border:1px solid rgba(42,140,130,.24);border-radius:12px;background:transparent;cursor:pointer;display:grid;place-items:center}
-.profile-avatar-btn:hover,.profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.16)}
-.profile-dropdown{position:absolute;right:0;top:48px;width:235px;padding:9px;border:1px solid var(--line);border-radius:16px;background:rgba(246,249,250,.97);box-shadow:0 24px 70px rgba(22,50,79,.18);backdrop-filter:blur(20px);opacity:0;visibility:hidden;transform:translateY(-7px);transition:.2s;z-index:100}
-.profile-menu.open .profile-dropdown{opacity:1;visibility:visible;transform:none}
-.profile-dropdown-head{display:flex;align-items:center;gap:11px;padding:10px 9px 13px;border-bottom:1px solid var(--line);margin-bottom:5px}
-.profile-dropdown-head b{display:block;font:800 10px Manrope}
-.profile-dropdown-head small{display:block;font-size:7px;color:var(--blue);margin-top:3px}
-.profile-dropdown>a,.profile-dropdown>button{width:100%;box-sizing:border-box;border:0;background:transparent;text-decoration:none;color:var(--navy);font:700 8px Manrope;padding:10px 9px;border-radius:9px;display:flex;justify-content:space-between;cursor:pointer}
-.profile-dropdown>a:hover,.profile-dropdown>button:hover{background:var(--mist)}
-.profile-dropdown>button{color:#9a3d3d}
-:root.dark .profile-dropdown{background:rgba(6,40,58,.97);border-color:rgba(117,201,190,.20)}
-:root.dark .profile-dropdown-head b,:root.dark .profile-dropdown>a{color:#F7FCFB!important}
-:root.dark .profile-dropdown-head small{color:#B9DAD4!important}
-@media (max-width:1100px){.signature-name small{display:none}.signature-nav{grid-template-columns:auto 1fr auto}.signature-links a{padding-left:7px;padding-right:7px}}
-@media (max-width:850px){.signature-links a[href="history.html"],.signature-links a[href="leaderboard.html"]{display:none}}
-.profile-menu{display:block!important;position:relative}
-.profile-avatar-btn{display:grid!important;place-items:center;width:38px;height:38px;border-radius:11px;border:1px solid rgba(42,140,130,.28);background:rgba(246,249,250,.55);color:var(--navy);cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
-.profile-avatar-btn:hover,.profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.18);border-color:rgba(42,140,130,.52);transform:translateY(-1px)}
-.profile-user-icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.profile-dropdown-head{padding:10px 9px 12px}
-.profile-dropdown-head b{font-size:9px}
-.profile-dropdown-head small{font-size:7px}
-:root.dark .profile-avatar-btn{background:rgba(117,201,190,.08);border-color:rgba(117,201,190,.28);color:#F7FCFB}
-:root.dark .profile-avatar-btn:hover,:root.dark .profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.16);border-color:rgba(117,201,190,.55)}
-.signature-nav{z-index:9999!important;pointer-events:auto!important}
-.signature-nav *{pointer-events:auto!important}
-.signature-links{position:relative!important;z-index:2!important}
-.signature-links a{pointer-events:auto!important;cursor:pointer!important}
-.nav-auth{position:relative!important;z-index:3!important}
-.theme-toggle,.profile-avatar-btn{pointer-events:auto!important;cursor:pointer!important}
-@media (max-width:900px){.signature-nav{grid-template-columns:auto minmax(0,1fr) auto!important;gap:8px!important}.signature-links{display:flex!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap!important;scrollbar-width:none;justify-self:stretch}.signature-links::-webkit-scrollbar{display:none}.signature-links a{flex:0 0 auto;padding:10px 9px!important}}
-@media (max-width:650px){.signature-name{display:none!important}.nav-logo-picture{width:30px!important;flex-basis:30px!important}.nav-real-logo{width:30px!important}.signature-nav{padding-left:10px!important;padding-right:8px!important}.signature-links a{font-size:7px!important;padding:9px 7px!important}.theme-toggle{width:34px!important;height:34px!important;flex-basis:34px!important}.profile-avatar-btn{width:34px!important;height:34px!important}}
-html.dark .signature-nav,html[data-theme="dark"] .signature-nav{
-  background:rgba(1,20,43,.90)!important;border-color:rgba(117,201,190,.20)!important
-}
-body{font-family:"DM Sans",sans-serif;}
-.signature-nav,.signature-nav *{font-family:"DM Sans",sans-serif;}
-.signature-name b{font-family:"Manrope",sans-serif;}
-:root.dark .signature-nav{--navy:#F7FCFB;--blue:#E8F5F1;--teal:#75C9BE;--mint:#58B7AA;--paper:#01142B;--mist:#0E303C;--line:rgba(117,201,190,.18);}
+  <style>
+    /* Index navbar parity overrides — scoped to navigation, no Firebase changes */
+    .signature-nav {
+      position: fixed;
+      z-index: 90;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - 34px));
+      height: 74px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 8px 9px 8px 20px;
+      border: 1px solid rgba(49, 93, 125, .14);
+      border-radius: 22px;
+      background: rgba(246, 249, 250, .82);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
+      box-shadow: 0 18px 55px rgba(22, 50, 79, .10), inset 0 1px 0 rgba(246, 249, 250, .95);
+      transition: height .3s, top .3s, background .3s, box-shadow .3s, border-radius .3s;
+    }
 
-</style>
-<style>
-/* Footer only — extracted from SIAQ index reference */
-.signature-footer {
+    .signature-nav.is-compact {
+      top: 10px;
+      height: 64px;
+      border-radius: 18px;
+      background: rgba(246, 249, 250, .94);
+      box-shadow: 0 20px 62px rgba(22, 50, 79, .15);
+    }
+
+    .signature-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--navy);
+      width: max-content
+    }
+
+    .signature-name {
+      display: flex;
+      flex-direction: column
+    }
+
+    .signature-name b {
+      font: 800 17px Manrope;
+      letter-spacing: -.04em;
+      line-height: 1
+    }
+
+    .signature-name small {
+      margin-top: 4px;
+      color: var(--blue);
+      font-size: 6px;
+      letter-spacing: .035em
+    }
+
+    .signature-links {
+      height: 48px;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      border-radius: 15px;
+      background: rgba(228, 236, 239, .62);
+      box-shadow: inset 0 0 0 1px rgba(49, 93, 125, .07);
+    }
+
+    .signature-links a {
+      position: relative;
+      padding: 12px 17px;
+      border-radius: 11px;
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      transition: color .25s, background .25s, box-shadow .25s, transform .25s;
+    }
+
+    .signature-links a:before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 6px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--teal);
+      transform: translateX(-50%) scale(0);
+      transition: .25s;
+    }
+
+    .signature-links a:hover {
+      color: var(--navy);
+      transform: translateY(-1px)
+    }
+
+    .signature-links a.active {
+      color: var(--navy);
+      background: var(--paper);
+      box-shadow: 0 7px 20px rgba(22, 50, 79, .09);
+    }
+
+    .signature-links a.active:before {
+      transform: translateX(-50%) scale(1)
+    }
+
+    @media (max-width:900px) {
+      .signature-nav {
+        grid-template-columns: 1fr auto;
+        width: calc(100% - 22px);
+        padding-left: 15px
+      }
+
+      .signature-links {
+        display: none
+      }
+
+      .signature-name small {
+        display: none
+      }
+    }
+
+    @media (max-width:560px) {
+      .signature-nav {
+        height: 62px;
+        top: 10px
+      }
+
+      .signature-name b {
+        font-size: 15px
+      }
+    }
+
+    .nav-auth {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    @media (max-width:900px) {
+      .nav-auth {
+        margin-left: auto
+      }
+    }
+
+    @media (max-width:650px) {
+      .signature-name small {
+        display: none
+      }
+    }
+
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      padding: 0;
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(246, 249, 250, .74);
+      color: var(--navy);
+      cursor: pointer;
+      overflow: hidden;
+      transition: background .26s, border-color .26s, color .26s, box-shadow .26s
+    }
+
+    .theme-toggle span {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      transition: opacity .26s, transform .26s
+    }
+
+    .theme-toggle .sun {
+      opacity: 0;
+      transform: rotate(70deg) scale(.65)
+    }
+
+    .theme-toggle .moon {
+      opacity: 1;
+      transform: none
+    }
+
+    :root.dark .signature-nav {
+      background: rgba(1, 20, 43, .82);
+      border-color: rgba(117, 201, 190, .16);
+      box-shadow: 0 18px 55px rgba(0, 8, 22, .34), inset 0 1px 0 rgba(117, 201, 190, .07)
+    }
+
+    :root.dark .signature-nav.is-compact {
+      background: rgba(1, 20, 43, .94);
+      box-shadow: 0 20px 62px rgba(0, 8, 22, .42)
+    }
+
+    :root.dark .signature-links {
+      background: rgba(14, 48, 60, .62);
+      box-shadow: inset 0 0 0 1px rgba(117, 201, 190, .08)
+    }
+
+    :root.dark .signature-links a {
+      color: #E8F5F1
+    }
+
+    :root.dark .signature-links a:hover {
+      color: #F7FCFB
+    }
+
+    :root.dark .signature-links a.active {
+      color: #F7FCFB;
+      background: rgba(117, 201, 190, .13);
+      box-shadow: none
+    }
+
+    :root.dark .signature-brand {
+      color: #F7FCFB
+    }
+
+    :root.dark .signature-name small {
+      color: #B9DAD4
+    }
+
+    :root.dark .theme-toggle {
+      background: rgba(14, 48, 60, .70);
+      border-color: rgba(117, 201, 190, .22);
+      color: #75C9BE
+    }
+
+    :root.dark .theme-toggle .sun {
+      opacity: 1;
+      transform: none
+    }
+
+    :root.dark .theme-toggle .moon {
+      opacity: 0;
+      transform: rotate(-70deg) scale(.65)
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+
+      .theme-toggle,
+      .theme-toggle span {
+        transition: none !important
+      }
+    }
+
+    .nav-auth-profile {
+      display: none;
+      text-decoration: none;
+      color: var(--navy);
+      font-size: 8px;
+      font-weight: 700;
+      padding: 9px 11px;
+      border-radius: 10px;
+      background: rgba(117, 201, 190, .13)
+    }
+
+    body.demo-logged-in .nav-auth-profile {
+      display: block
+    }
+
+    .signature-nav {
+      position: fixed
+    }
+
+    .nav-logo-picture {
+      display: flex;
+      align-items: center;
+      width: 38px;
+      height: 34px;
+      flex: 0 0 38px;
+      overflow: hidden
+    }
+
+    .nav-real-logo {
+      display: block;
+      width: 38px;
+      height: auto;
+      max-height: 31px;
+      object-fit: contain;
+      object-position: left center
+    }
+
+    :root.dark .signature-links a {
+      color: var(--dark-text-secondary) !important
+    }
+
+    :root.dark .signature-links a:hover,
+    :root.dark .signature-links a.active {
+      color: #fff !important
+    }
+
+    .signature-nav {
+      grid-template-columns: minmax(225px, 1fr) auto minmax(225px, 1fr)
+    }
+
+    .signature-links {
+      gap: 2px
+    }
+
+    .signature-links a {
+      padding-left: 10px;
+      padding-right: 10px
+    }
+
+    .profile-menu {
+      position: relative;
+      display: none
+    }
+
+    body.demo-logged-in .profile-menu {
+      display: block
+    }
+
+    .profile-avatar-btn {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border: 1px solid rgba(42, 140, 130, .24);
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      display: grid;
+      place-items: center
+    }
+
+    .profile-avatar-btn:hover,
+    .profile-avatar-btn[aria-expanded="true"] {
+      background: rgba(117, 201, 190, .16)
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      right: 0;
+      top: 48px;
+      width: 235px;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(246, 249, 250, .97);
+      box-shadow: 0 24px 70px rgba(22, 50, 79, .18);
+      backdrop-filter: blur(20px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-7px);
+      transition: .2s;
+      z-index: 100
+    }
+
+    .profile-menu.open .profile-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: none
+    }
+
+    .profile-dropdown-head {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 9px 13px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 5px
+    }
+
+    .profile-dropdown-head b {
+      display: block;
+      font: 800 10px Manrope
+    }
+
+    .profile-dropdown-head small {
+      display: block;
+      font-size: 7px;
+      color: var(--blue);
+      margin-top: 3px
+    }
+
+    .profile-dropdown>a,
+    .profile-dropdown>button {
+      width: 100%;
+      box-sizing: border-box;
+      border: 0;
+      background: transparent;
+      text-decoration: none;
+      color: var(--navy);
+      font: 700 8px Manrope;
+      padding: 10px 9px;
+      border-radius: 9px;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer
+    }
+
+    .profile-dropdown>a:hover,
+    .profile-dropdown>button:hover {
+      background: var(--mist)
+    }
+
+    .profile-dropdown>button {
+      color: #9a3d3d
+    }
+
+    :root.dark .profile-dropdown {
+      background: rgba(6, 40, 58, .97);
+      border-color: rgba(117, 201, 190, .20)
+    }
+
+    :root.dark .profile-dropdown-head b,
+    :root.dark .profile-dropdown>a {
+      color: #F7FCFB !important
+    }
+
+    :root.dark .profile-dropdown-head small {
+      color: #B9DAD4 !important
+    }
+
+    @media (max-width:1100px) {
+      .signature-name small {
+        display: none
+      }
+
+      .signature-nav {
+        grid-template-columns: auto 1fr auto
+      }
+
+      .signature-links a {
+        padding-left: 7px;
+        padding-right: 7px
+      }
+    }
+
+    @media (max-width:850px) {
+
+      .signature-links a[href="history.html"],
+      .signature-links a[href="leaderboard.html"] {
+        display: none
+      }
+    }
+
+    .profile-menu {
+      display: block !important;
+      position: relative
+    }
+
+    .profile-avatar-btn {
+      display: grid !important;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1px solid rgba(42, 140, 130, .28);
+      background: rgba(246, 249, 250, .55);
+      color: var(--navy);
+      cursor: pointer;
+      transition: background .2s, border-color .2s, transform .2s
+    }
+
+    .profile-avatar-btn:hover,
+    .profile-avatar-btn[aria-expanded="true"] {
+      background: rgba(117, 201, 190, .18);
+      border-color: rgba(42, 140, 130, .52);
+      transform: translateY(-1px)
+    }
+
+    .profile-user-icon {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .profile-dropdown-head {
+      padding: 10px 9px 12px
+    }
+
+    .profile-dropdown-head b {
+      font-size: 9px
+    }
+
+    .profile-dropdown-head small {
+      font-size: 7px
+    }
+
+    :root.dark .profile-avatar-btn {
+      background: rgba(117, 201, 190, .08);
+      border-color: rgba(117, 201, 190, .28);
+      color: #F7FCFB
+    }
+
+    :root.dark .profile-avatar-btn:hover,
+    :root.dark .profile-avatar-btn[aria-expanded="true"] {
+      background: rgba(117, 201, 190, .16);
+      border-color: rgba(117, 201, 190, .55)
+    }
+
+    .signature-nav {
+      z-index: 9999 !important;
+      pointer-events: auto !important
+    }
+
+    .signature-nav * {
+      pointer-events: auto !important
+    }
+
+    .signature-links {
+      position: relative !important;
+      z-index: 2 !important
+    }
+
+    .signature-links a {
+      pointer-events: auto !important;
+      cursor: pointer !important
+    }
+
+    .nav-auth {
+      position: relative !important;
+      z-index: 3 !important
+    }
+
+    .theme-toggle,
+    .profile-avatar-btn {
+      pointer-events: auto !important;
+      cursor: pointer !important
+    }
+
+    @media (max-width:900px) {
+      .signature-nav {
+        grid-template-columns: auto minmax(0, 1fr) auto !important;
+        gap: 8px !important
+      }
+
+      .signature-links {
+        display: flex !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+        scrollbar-width: none;
+        justify-self: stretch
+      }
+
+      .signature-links::-webkit-scrollbar {
+        display: none
+      }
+
+      .signature-links a {
+        flex: 0 0 auto;
+        padding: 10px 9px !important
+      }
+    }
+
+    @media (max-width:650px) {
+      .signature-name {
+        display: none !important
+      }
+
+      .nav-logo-picture {
+        width: 30px !important;
+        flex-basis: 30px !important
+      }
+
+      .nav-real-logo {
+        width: 30px !important
+      }
+
+      .signature-nav {
+        padding-left: 10px !important;
+        padding-right: 8px !important
+      }
+
+      .signature-links a {
+        font-size: 7px !important;
+        padding: 9px 7px !important
+      }
+
+      .theme-toggle {
+        width: 34px !important;
+        height: 34px !important;
+        flex-basis: 34px !important
+      }
+
+      .profile-avatar-btn {
+        width: 34px !important;
+        height: 34px !important
+      }
+    }
+
+    html.dark .signature-nav,
+    html[data-theme="dark"] .signature-nav {
+      background: rgba(1, 20, 43, .90) !important;
+      border-color: rgba(117, 201, 190, .20) !important
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .signature-nav,
+    .signature-nav * {
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .signature-name b {
+      font-family: "Manrope", sans-serif;
+    }
+
+    :root.dark .signature-nav {
+      --navy: #F7FCFB;
+      --blue: #E8F5F1;
+      --teal: #75C9BE;
+      --mint: #58B7AA;
+      --paper: #01142B;
+      --mist: #0E303C;
+      --line: rgba(117, 201, 190, .18);
+    }
+  </style>
+  <style>
+    /* Footer only — extracted from SIAQ index reference */
+    .signature-footer {
       width: calc(100% - 36px);
       max-width: 1240px;
       min-height: 370px;
@@ -1147,22 +1645,26 @@ body{font-family:"DM Sans",sans-serif;}
       color: var(--paper);
       box-shadow: 0 40px 110px rgba(22, 50, 79, .23);
     }
-.footer-art {
+
+    .footer-art {
       position: absolute;
       inset: 0;
       pointer-events: none;
       overflow: hidden
     }
-.footer-disc {
+
+    .footer-disc {
       position: absolute;
       border-radius: 50%
     }
-.footer-orbit {
+
+    .footer-orbit {
       position: absolute;
       border-radius: 50%;
       border: 1px solid rgba(246, 249, 250, .12)
     }
-.footer-main {
+
+    .footer-main {
       min-height: 290px;
       position: relative;
       z-index: 2;
@@ -1171,40 +1673,47 @@ body{font-family:"DM Sans",sans-serif;}
       gap: 40px;
       align-items: center;
     }
-@media  (max-width:900px) {
-.signature-footer {
+
+    @media (max-width:900px) {
+      .signature-footer {
         width: calc(100% - 22px);
         padding: 0 28px;
         border-radius: 27px
       }
-.footer-main {
+
+      .footer-main {
         grid-template-columns: 1fr 50px
       }
-}
-@media  (max-width:560px) {
-.signature-footer {
+    }
+
+    @media (max-width:560px) {
+      .signature-footer {
         min-height: 350px;
         margin-top: 55px;
         padding: 0 22px
       }
-.footer-main {
+
+      .footer-main {
         min-height: 275px;
         grid-template-columns: 1fr 44px;
         gap: 10px
       }
-}
-:root.dark .signature-footer {
+    }
+
+    :root.dark .signature-footer {
       background: radial-gradient(circle at 86% 0%, rgba(42, 140, 130, .24), transparent 30%), linear-gradient(120deg, #06283A 0%, #0B3540 55%, #01142B 100%);
       border-color: rgba(117, 201, 190, .14);
       box-shadow: 0 40px 110px rgba(0, 8, 22, .42)
     }
-.footer-logo-picture {
+
+    .footer-logo-picture {
       display: flex;
       align-items: center;
       height: 48px;
       margin-bottom: 15px
     }
-.footer-real-logo {
+
+    .footer-real-logo {
       display: block;
       width: 104px;
       height: auto;
@@ -1212,72 +1721,86 @@ body{font-family:"DM Sans",sans-serif;}
       object-fit: contain;
       object-position: left center
     }
-.signature-footer {
+
+    .signature-footer {
       display: block !important;
       height: auto !important;
       min-height: 0 !important;
       padding: 48px 48px 0 !important
     }
-.footer-main {
+
+    .footer-main {
       width: 100%;
       position: relative;
       z-index: 2;
     }
-.footer-brand p {
+
+    .footer-brand p {
       max-width: 390px;
       margin: 0;
       color: var(--blue);
       font-size: 10px;
       line-height: 1.8
     }
-.footer-column {
+
+    .footer-column {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 10px
     }
-.footer-column b {
+
+    .footer-column b {
       font: 800 10px Manrope;
       color: var(--navy);
       margin-bottom: 5px
     }
-.footer-column a {
+
+    .footer-column a {
       font-size: 9px;
       color: var(--blue);
       text-decoration: none;
       transition: .22s
     }
-.footer-column a:hover {
+
+    .footer-column a:hover {
       color: var(--teal);
       transform: translateX(2px)
     }
-.footer-bottom {
+
+    .footer-bottom {
       border-top: 1px solid var(--line);
       padding: 18px 0 20px;
       text-align: center;
       color: var(--blue);
       font-size: 8px
     }
-:root.dark .signature-footer {
+
+    :root.dark .signature-footer {
       background: radial-gradient(circle at 86% 0%, rgba(42, 140, 130, .24), transparent 30%), linear-gradient(120deg, #06283A 0%, #0B3540 55%, #01142B 100%) !important;
       border-color: rgba(117, 201, 190, .14) !important
     }
-:root.dark .footer-column a {
+
+    :root.dark .footer-column a {
       color: var(--dark-text-secondary) !important
     }
-:root.dark .footer-column a:hover {
+
+    :root.dark .footer-column a:hover {
       color: var(--dark-accent) !important
     }
-:root.dark .footer-bottom {
+
+    :root.dark .footer-bottom {
       border-color: rgba(117, 201, 190, .15);
       color: #B9DAD4 !important
     }
-@media  (max-width:650px) {
-.signature-footer {
+
+    @media (max-width:650px) {
+      .signature-footer {
         padding: 38px 24px 0 !important
       }
-}
-.signature-footer {
+    }
+
+    .signature-footer {
       position: relative;
       overflow: hidden;
       background: linear-gradient(125deg, #16324F 0%, #214D69 46%, #2A8C82 100%) !important;
@@ -1285,46 +1808,56 @@ body{font-family:"DM Sans",sans-serif;}
       color: #F6F9FA !important;
       padding-top: 0 !important
     }
-.footer-accent {
+
+    .footer-accent {
       height: 4px;
       background: linear-gradient(90deg, #75C9BE 0%, #F6F9FA 48%, #75C9BE 100%);
       opacity: .9
     }
-@media   (max-width: 650px) {
-.signature-footer .footer-main {
+
+    @media (max-width: 650px) {
+      .signature-footer .footer-main {
         grid-template-columns: 1fr !important;
         row-gap: 24px !important;
       }
-}
-.signature-footer .footer-brand p,
+    }
+
+    .signature-footer .footer-brand p,
     .signature-footer .footer-column a {
       color: #DDEFF0 !important
     }
-.signature-footer .footer-column b {
+
+    .signature-footer .footer-column b {
       color: #FFFFFF !important;
       font-size: 10px
     }
-.signature-footer .footer-column a:hover {
+
+    .signature-footer .footer-column a:hover {
       color: #FFFFFF !important
     }
-.signature-footer .footer-bottom {
+
+    .signature-footer .footer-bottom {
       display: flex;
       justify-content: space-between;
       gap: 20px;
       color: #EAF7F5 !important;
       border-top: 1px solid rgba(255, 255, 255, .18) !important
     }
-.signature-footer .footer-real-logo {
+
+    .signature-footer .footer-real-logo {
       content: url("assets/siaq-logo-white.png")
     }
-:root.dark .signature-footer {
+
+    :root.dark .signature-footer {
       background: linear-gradient(125deg, #01142B 0%, #083443 48%, #176A65 100%) !important
     }
-:root.dark .signature-footer .footer-brand p,
+
+    :root.dark .signature-footer .footer-brand p,
     :root.dark .signature-footer .footer-column a {
       color: #D7E9E5 !important
     }
-.footer-email {
+
+    .footer-email {
       display: inline-flex;
       align-items: center;
       width: max-content;
@@ -1347,7 +1880,8 @@ body{font-family:"DM Sans",sans-serif;}
 
       transition: background 0.2s, border-color 0.2s;
     }
-.footer-mail-icon {
+
+    .footer-mail-icon {
       width: 22px;
       height: 22px;
       display: grid;
@@ -1358,20 +1892,24 @@ body{font-family:"DM Sans",sans-serif;}
       background: #75C9BE;
       color: #01142B;
     }
-.footer-mail-icon svg {
+
+    .footer-mail-icon svg {
       display: block;
       width: 15px;
       height: 15px;
     }
-.footer-email:hover {
+
+    .footer-email:hover {
       background: rgba(117, 201, 190, 0.14);
       border-color: rgba(117, 201, 190, 0.42);
     }
-.signature-footer {
+
+    .signature-footer {
       position: relative;
       overflow: hidden;
     }
-.signature-footer::before {
+
+    .signature-footer::before {
       content: "";
       position: absolute;
       width: 220px;
@@ -1383,100 +1921,115 @@ body{font-family:"DM Sans",sans-serif;}
       transform: rotate(24deg);
       pointer-events: none;
     }
-@media  (max-width:650px) {
-.signature-footer .footer-bottom {
+
+    @media (max-width:650px) {
+      .signature-footer .footer-bottom {
         flex-direction: column;
         align-items: center;
         text-align: center;
         gap: 6px
       }
-}
-.signature-footer .footer-brand,
+    }
+
+    .signature-footer .footer-brand,
     .signature-footer .footer-links {
       align-self: start;
     }
-.signature-footer .footer-links {
+
+    .signature-footer .footer-links {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 12px;
     }
-.signature-footer .footer-email {
+
+    .signature-footer .footer-email {
       margin-top: 18px !important;
     }
-.signature-footer.refined-footer {
-  background: linear-gradient(
-    115deg,
-    #092B42 0%,
-    #0A3950 55%,
-    #12665F 100%
-  ) !important;
 
-  height: auto !important;
-  min-height: 0 !important;
-  padding: 0 42px !important;
-}
-.signature-footer.refined-footer .footer-accent {
-  margin-top: 18px;
-}
-.signature-footer.refined-footer .footer-main {
-  min-height: 0 !important;
-  height: auto !important;
-  padding: 12px 0 22px !important;
-  margin: 0 auto !important;
+    .signature-footer.refined-footer {
+      background: linear-gradient(115deg,
+          #092B42 0%,
+          #0A3950 55%,
+          #12665F 100%) !important;
 
-  display: grid !important;
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr) !important;
-  column-gap: 65px !important;
-  align-items: start !important;
-}
-.signature-footer.refined-footer .footer-brand {
-  grid-column: auto !important;
-  align-self: start !important;
-  max-width: 440px !important;
-  margin: 0 !important;
-}
-.signature-footer.refined-footer .footer-links-group {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr !important;
-  gap: 45px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  align-self: start !important;
-}
-.signature-footer.refined-footer .footer-column {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 10px !important;
-}
-.signature-footer.refined-footer .footer-bottom {
-  min-height: 0 !important;
-  margin: 0 !important;
-  padding: 13px 0 16px !important;
-}
-@media   (max-width: 850px) {
-.signature-footer.refined-footer .footer-main {
-    grid-template-columns: 1fr !important;
-    gap: 25px !important;
-  }
-.signature-footer.refined-footer .footer-links-group {
-    max-width: 440px;
-  }
-}
-@media   (max-width: 520px) {
-.signature-footer.refined-footer {
-    padding: 0 22px !important;
-  }
-.signature-footer.refined-footer .footer-links-group {
-    gap: 20px !important;
-  }
-}
-.signature-footer.refined-footer {
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 0 42px !important;
+    }
+
+    .signature-footer.refined-footer .footer-accent {
+      margin-top: 18px;
+    }
+
+    .signature-footer.refined-footer .footer-main {
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 12px 0 22px !important;
+      margin: 0 auto !important;
+
+      display: grid !important;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr) !important;
+      column-gap: 65px !important;
+      align-items: start !important;
+    }
+
+    .signature-footer.refined-footer .footer-brand {
+      grid-column: auto !important;
+      align-self: start !important;
+      max-width: 440px !important;
+      margin: 0 !important;
+    }
+
+    .signature-footer.refined-footer .footer-links-group {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 45px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      align-self: start !important;
+    }
+
+    .signature-footer.refined-footer .footer-column {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+
+    .signature-footer.refined-footer .footer-bottom {
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 13px 0 16px !important;
+    }
+
+    @media (max-width: 850px) {
+      .signature-footer.refined-footer .footer-main {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+      }
+
+      .signature-footer.refined-footer .footer-links-group {
+        max-width: 440px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .signature-footer.refined-footer {
+        padding: 0 22px !important;
+      }
+
+      .signature-footer.refined-footer .footer-links-group {
+        gap: 20px !important;
+      }
+    }
+
+    .signature-footer.refined-footer {
       min-height: 0 !important;
       height: auto !important;
       padding: 24px 42px 0 !important;
     }
-.signature-footer.refined-footer .footer-main {
+
+    .signature-footer.refined-footer .footer-main {
       width: 100%;
       max-width: 1152px;
       min-height: 0 !important;
@@ -1490,504 +2043,2177 @@ body{font-family:"DM Sans",sans-serif;}
       gap: 65px !important;
       align-items: start !important;
     }
-.signature-footer.refined-footer .footer-brand {
+
+    .signature-footer.refined-footer .footer-brand {
       grid-column: auto !important;
       max-width: 440px;
       min-width: 0;
       align-self: start;
     }
-.signature-footer.refined-footer .footer-links-group {
+
+    .signature-footer.refined-footer .footer-links-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 56px;
       padding-top: 5px;
     }
-.signature-footer.refined-footer .footer-column {
+
+    .signature-footer.refined-footer .footer-column {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
       gap: 11px;
     }
-.signature-footer.refined-footer .footer-bottom {
+
+    .signature-footer.refined-footer .footer-bottom {
       padding: 14px 0 16px !important;
     }
-@media   (max-width: 850px) {
-.signature-footer.refined-footer .footer-main {
+
+    @media (max-width: 850px) {
+      .signature-footer.refined-footer .footer-main {
         grid-template-columns: 1fr !important;
         gap: 25px !important;
       }
-.signature-footer.refined-footer .footer-links-group {
+
+      .signature-footer.refined-footer .footer-links-group {
         max-width: 430px;
         gap: 35px;
       }
-}
-@media   (max-width: 520px) {
-.signature-footer.refined-footer {
+    }
+
+    @media (max-width: 520px) {
+      .signature-footer.refined-footer {
         padding: 24px 22px 0 !important;
       }
-.signature-footer.refined-footer .footer-main {
+
+      .signature-footer.refined-footer .footer-main {
         padding-bottom: 22px !important;
       }
-.signature-footer.refined-footer .footer-links-group {
+
+      .signature-footer.refined-footer .footer-links-group {
         grid-template-columns: 1fr 1fr;
         gap: 24px;
       }
-}
-.refined-footer{
-  position:relative;
-  overflow:hidden;
-  padding:0 48px!important;
-  color:var(--navy)!important;
-  background:
-    radial-gradient(520px 260px at 5% 15%,rgba(117,201,190,.20),transparent 68%),
-    radial-gradient(460px 240px at 96% 90%,rgba(49,93,125,.11),transparent 70%),
-    linear-gradient(145deg,#F6F9FA 0%,#EEF4F3 48%,#E4ECEF 100%)!important;
-  border-top:1px solid rgba(22,50,79,.12)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.7);
-}
-.refined-footer::before{
-  content:"";
-  position:absolute;
-  width:220px;height:220px;
-  right:-105px;top:-125px;
-  border:1px solid rgba(42,140,130,.14);
-  border-radius:58px;
-  transform:rotate(24deg);
-  pointer-events:none;
-}
-.refined-footer .footer-main{
-  max-width:1152px;
-  margin:0 auto;
-  padding:52px 0 42px!important;
-  display:grid;
-  grid-template-columns:minmax(300px,1.55fr) minmax(300px,1fr);
-  gap:80px;
-  align-items:start;
-}
-.refined-footer .footer-brand{max-width:440px}
-.refined-footer .footer-logo-picture{height:45px;margin:0 0 17px;display:flex;align-items:center}
-.refined-footer .footer-real-logo{
-  content:url("assets/siaq-logo-navy.png")!important;
-  width:100px;
-  max-height:43px;
-  object-fit:contain;
-  object-position:left center;
-}
-.refined-footer .footer-brand p{
-  max-width:410px;
-  margin:0 0 19px;
-  color:#315D7D!important;
-  font-size:10px;
-  line-height:1.75;
-}
-.footer-email{
-  width:max-content;
-  max-width:100%;
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-  padding:9px 12px;
-  border:1px solid rgba(42,140,130,.20);
-  border-radius:11px;
-  background:rgba(255,255,255,.48);
-  color:#16324F!important;
-  text-decoration:none;
-  font:700 8px Manrope;
-  transition:transform .22s,background .22s,border-color .22s;
-}
-.footer-email:hover{
-  transform:translateY(-1px);
-  background:rgba(117,201,190,.17);
-  border-color:rgba(42,140,130,.38);
-  color:#16324F!important;
-}
-.footer-mail-icon{
-  width:22px;height:22px;
-  display:grid;place-items:center;
-  border-radius:7px;
-  background:#2A8C82;
-  color:#F6F9FA;
-  font-size:10px;
-}
-.footer-links-group{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:56px;
-  padding-top:5px;
-}
-.refined-footer .footer-column{gap:11px}
-.refined-footer .footer-column b{
-  margin-bottom:5px;
-  color:#16324F!important;
-  font:800 10px Manrope;
-  letter-spacing:.02em;
-}
-.refined-footer .footer-column a{
-  width:max-content;
-  color:#315D7D!important;
-  font-size:9px;
-  line-height:1.4;
-  text-decoration:none;
-  transition:color .2s,transform .2s;
-}
-.refined-footer .footer-column a:hover{
-  color:#2A8C82!important;
-  transform:translateX(2px);
-}
-.refined-footer .footer-bottom{
-  max-width:1152px;
-  margin:0 auto;
-  padding:18px 0 21px!important;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:24px;
-  border-top:1px solid rgba(22,50,79,.12)!important;
-  color:#55758C!important;
-  font-size:8px;
-}
-html.dark .refined-footer,
-html[data-theme="dark"] .refined-footer{
-  color:#F7FCFB!important;
-  background:
-    radial-gradient(520px 260px at 5% 15%,rgba(117,201,190,.12),transparent 68%),
-    radial-gradient(460px 240px at 96% 90%,rgba(42,140,130,.13),transparent 70%),
-    linear-gradient(145deg,#01142B 0%,#06283A 52%,#0B3540 100%)!important;
-  border-top-color:rgba(117,201,190,.15)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
-}
-html.dark .refined-footer::before,
-html[data-theme="dark"] .refined-footer::before{
-  border-color:rgba(117,201,190,.12);
-}
-html.dark .refined-footer .footer-real-logo,
-html[data-theme="dark"] .refined-footer .footer-real-logo{
-  content:url("assets/siaq-logo-white.png")!important;
-}
-html.dark .refined-footer .footer-brand p,
-html[data-theme="dark"] .refined-footer .footer-brand p{
-  color:#BFD8D4!important;
-}
-html.dark .refined-footer .footer-column b,
-html[data-theme="dark"] .refined-footer .footer-column b{
-  color:#F7FCFB!important;
-}
-html.dark .refined-footer .footer-column a,
-html[data-theme="dark"] .refined-footer .footer-column a{
-  color:#BFD8D4!important;
-}
-html.dark .refined-footer .footer-column a:hover,
-html[data-theme="dark"] .refined-footer .footer-column a:hover{
-  color:#75C9BE!important;
-}
-html.dark .footer-email,
-html[data-theme="dark"] .footer-email{
-  color:#EAF7F5!important;
-  background:rgba(117,201,190,.07);
-  border-color:rgba(117,201,190,.18);
-}
-html.dark .footer-email:hover,
-html[data-theme="dark"] .footer-email:hover{
-  color:#FFFFFF!important;
-  background:rgba(117,201,190,.13);
-  border-color:rgba(117,201,190,.34);
-}
-html.dark .footer-mail-icon,
-html[data-theme="dark"] .footer-mail-icon{
-  background:#75C9BE;
-  color:#01142B;
-}
-html.dark .refined-footer .footer-bottom,
-html[data-theme="dark"] .refined-footer .footer-bottom{
-  color:#9FC5BF!important;
-  border-top-color:rgba(117,201,190,.13)!important;
-}
-@media  (max-width:850px){
-.refined-footer{padding:0 30px!important}
-.refined-footer .footer-main{grid-template-columns:1fr;gap:35px;padding-top:44px!important}
-.refined-footer .footer-brand{max-width:520px}
-.refined-footer .footer-links-group{max-width:430px;gap:45px}
-}
-@media  (max-width:520px){
-.refined-footer{padding:0 22px!important}
-.refined-footer .footer-main{padding:38px 0 30px!important}
-.refined-footer .footer-links-group{grid-template-columns:1fr 1fr;gap:24px}
-.refined-footer .footer-bottom{flex-direction:column;align-items:flex-start;gap:6px}
-.footer-email{font-size:7px}
-}
-.refined-footer,
-html.dark .refined-footer,
-html[data-theme="dark"] .refined-footer{
-  color:#F6F9FA!important;
-  background:
-    radial-gradient(560px 290px at 2% 0%,rgba(117,201,190,.13),transparent 67%),
-    radial-gradient(520px 280px at 100% 100%,rgba(42,140,130,.20),transparent 70%),
-    linear-gradient(128deg,#01142B 0%,#082B3D 48%,#123E49 100%)!important;
-  border-top:1px solid rgba(117,201,190,.18)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
-}
-.refined-footer::before,
-html.dark .refined-footer::before,
-html[data-theme="dark"] .refined-footer::before{
-  border-color:rgba(117,201,190,.14)!important;
-}
-.refined-footer .footer-real-logo,
-html.dark .refined-footer .footer-real-logo,
-html[data-theme="dark"] .refined-footer .footer-real-logo{
-  content:url("assets/siaq-logo-white.png")!important;
-}
-.refined-footer .footer-brand p,
-html.dark .refined-footer .footer-brand p,
-html[data-theme="dark"] .refined-footer .footer-brand p{
-  color:#C8DEDC!important;
-}
-.refined-footer .footer-column b,
-html.dark .refined-footer .footer-column b,
-html[data-theme="dark"] .refined-footer .footer-column b{
-  color:#FFFFFF!important;
-}
-.refined-footer .footer-column a,
-html.dark .refined-footer .footer-column a,
-html[data-theme="dark"] .refined-footer .footer-column a{
-  color:#B9D8D4!important;
-}
-.refined-footer .footer-column a:hover,
-html.dark .refined-footer .footer-column a:hover,
-html[data-theme="dark"] .refined-footer .footer-column a:hover{
-  color:#75C9BE!important;
-}
-.refined-footer .footer-email,
-html.dark .refined-footer .footer-email,
-html[data-theme="dark"] .refined-footer .footer-email{
-  color:#F3FBFA!important;
-  background:rgba(117,201,190,.075)!important;
-  border-color:rgba(117,201,190,.22)!important;
-}
-.refined-footer .footer-email:hover,
-html.dark .refined-footer .footer-email:hover,
-html[data-theme="dark"] .refined-footer .footer-email:hover{
-  color:#FFFFFF!important;
-  background:rgba(117,201,190,.14)!important;
-  border-color:rgba(117,201,190,.42)!important;
-}
-.refined-footer .footer-mail-icon,
-html.dark .refined-footer .footer-mail-icon,
-html[data-theme="dark"] .refined-footer .footer-mail-icon{
-  background:#75C9BE!important;
-  color:#01142B!important;
-}
-.refined-footer .footer-bottom,
-html.dark .refined-footer .footer-bottom,
-html[data-theme="dark"] .refined-footer .footer-bottom{
-  color:#9FC5BF!important;
-  border-top-color:rgba(117,201,190,.15)!important;
-}
-.signature-footer.refined-footer{min-height:370px!important;height:auto!important;padding:0 48px!important}
-.signature-footer.refined-footer .footer-main{min-height:290px!important;height:auto!important;max-width:1152px!important;margin:0 auto!important;padding:52px 0 42px!important;grid-template-columns:minmax(300px,1.55fr) minmax(300px,1fr)!important;gap:80px!important;align-items:start!important}
-.signature-footer.refined-footer .footer-bottom{min-height:0!important;max-width:1152px!important;margin:0 auto!important;padding:18px 0 21px!important}
-@media  (max-width:850px){
-.signature-footer.refined-footer{padding:0 30px!important}
-.signature-footer.refined-footer .footer-main{grid-template-columns:1fr!important;gap:35px!important;padding:44px 0 42px!important}
-}
-@media  (max-width:520px){
-.signature-footer.refined-footer{padding:0 22px!important}
-.signature-footer.refined-footer .footer-main{padding:38px 0 30px!important}
-}
-html:not(.dark):not([data-theme="dark"]) .signature-footer.refined-footer {
-  background:linear-gradient(125deg,#16324F 0%,#214D69 46%,#2A8C82 100%)!important;
-  color:#F6F9FA!important;
-  border-top-color:transparent!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
-}
-html:not(.dark):not([data-theme="dark"]) .refined-footer::before {border-color:rgba(117,201,190,.14)!important}
-html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-real-logo {content:url("assets/siaq-logo-white.png")!important}
-html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-brand p,
-html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column a {color:#DDEFF0!important}
-html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column b {color:#FFFFFF!important}
-html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column a:hover {color:#FFFFFF!important}
-html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-email {color:#F3FBFA!important;background:rgba(117,201,190,.075)!important;border-color:rgba(117,201,190,.22)!important}
-html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-mail-icon {background:rgba(117,201,190,.16)!important;color:#F6F9FA!important}
-html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-bottom {color:#EAF7F5!important;border-top-color:rgba(255,255,255,.18)!important}
-html.dark .signature-footer.refined-footer,html[data-theme="dark"] .signature-footer.refined-footer {
-  background:linear-gradient(125deg,#01142B 0%,#083443 48%,#176A65 100%)!important;
-}
-html.dark .refined-footer .footer-brand p,html.dark .refined-footer .footer-column a,
-html[data-theme="dark"] .refined-footer .footer-brand p,html[data-theme="dark"] .refined-footer .footer-column a {color:#D7E9E5!important}
-</style>
-<style>
-/* ABOUT PAGE ONLY — existing navigation/footer CSS is unchanged */
-body{background:linear-gradient(150deg,#F6F9FA 0%,#EDF5F4 45%,#F6F9FA 100%);}
-.about-page{max-width:1180px;margin:0 auto;padding:157px 28px 90px;}
-.about-kicker{display:inline-flex;align-items:center;gap:11px;font:800 10px 'DM Sans',sans-serif;letter-spacing:.20em;text-transform:uppercase;color:#2A8C82;}
-.about-kicker:before{content:"";width:23px;height:2px;background:#2A8C82;display:block;}
-.about-hero{position:relative;min-height:410px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:38px;align-items:center;padding:32px 0 65px;}
-.about-hero h1{font:800 clamp(52px,6.5vw,92px)/1.03 Manrope,sans-serif;letter-spacing:-.075em;color:#16324F;margin:24px 0 23px;}
-.about-hero h1 span{color:#2A8C82;}
-.about-intro{font:400 15px/1.95 'DM Sans',sans-serif;color:#49677B;max-width:520px;margin:0;}
-.about-art{height:340px;position:relative;display:grid;place-items:center;isolation:isolate;}
-.about-art:before{content:"";position:absolute;width:290px;height:290px;border:1px solid rgba(42,140,130,.22);border-radius:50%;box-shadow:0 0 0 38px rgba(42,140,130,.045),0 0 0 78px rgba(42,140,130,.035);}
-.about-art:after{content:"";position:absolute;width:188px;height:188px;border:1px dashed rgba(49,93,125,.25);border-radius:50%;}
-.art-center{z-index:2;width:152px;height:152px;border-radius:36px;transform:rotate(-8deg);background:linear-gradient(145deg,#16324F,#2A8C82);box-shadow:0 25px 60px rgba(22,50,79,.20);display:grid;place-items:center;}
-.art-center span{font:800 36px Manrope,sans-serif;letter-spacing:-.075em;color:white;transform:rotate(8deg);}
-.art-square{position:absolute;width:55px;height:55px;border:1px solid rgba(42,140,130,.33);border-radius:15px;transform:rotate(25deg);background:rgba(255,255,255,.7);}
-.art-square.a{top:30px;right:55px}.art-square.b{bottom:28px;left:48px;width:40px;height:40px;background:#75C9BE33}
-.about-split{border-top:1px solid rgba(49,93,125,.16);display:grid;grid-template-columns:1fr 1.25fr;gap:75px;padding:66px 0 72px;align-items:start;}
-.about-section-title{font:800 clamp(32px,4vw,49px)/1.18 Manrope,sans-serif;letter-spacing:-.055em;color:#16324F;margin:17px 0 0;}
-.about-copy{font:400 15px/1.95 'DM Sans',sans-serif;color:#49677B;margin:13px 0 0;max-width:580px;}
-.about-vision{background:linear-gradient(120deg,#16324F 0%,#24546A 54%,#2A8C82 100%);border-radius:26px;padding:56px 62px;display:grid;grid-template-columns:1fr 1.3fr;gap:55px;align-items:center;position:relative;overflow:hidden;}
-.about-vision:after{content:"";width:260px;height:260px;border:1px solid rgba(255,255,255,.13);border-radius:50%;position:absolute;right:-130px;top:-145px;box-shadow:0 0 0 55px rgba(255,255,255,.035);pointer-events:none;}
-.about-vision .about-kicker{color:#A6E7DD}.about-vision .about-kicker:before{background:#A6E7DD}
-.about-vision .about-section-title{color:#fff}.about-vision .about-copy{color:#E0F2F0;margin:0;position:relative;z-index:1}
-.team-section{padding:100px 0 12px;}
-.team-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:34px;}
-.team-heading .about-section-title{margin-top:15px;}
-.team-mark{font:800 12px Manrope,sans-serif;color:#2A8C82;letter-spacing:.13em;white-space:nowrap;padding-bottom:6px;}
-.team-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;}
-.team-card{min-height:210px;padding:26px 23px 24px;background:rgba(255,255,255,.83);border:1px solid #DFE9EC;border-radius:20px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s,border-color .2s,box-shadow .2s;}
-.team-card:hover{transform:translateY(-4px);border-color:#75C9BE;box-shadow:0 18px 42px rgba(22,50,79,.08);}
-.team-number{font:700 11px Manrope,sans-serif;letter-spacing:.13em;color:#2A8C82;}
-.team-name{font:800 clamp(17px,1.7vw,23px)/1.3 Manrope,sans-serif;letter-spacing:-.045em;color:#16324F;margin:0;overflow-wrap:break-word;}
-.team-caption{font:600 10px 'DM Sans',sans-serif;letter-spacing:.08em;color:#617F8A;text-transform:uppercase;margin-top:12px;}
-:root.dark .about-page{color:#F7FCFB}
-:root.dark .about-hero h1,:root.dark .about-section-title,:root.dark .team-name{color:#F7FCFB}
-:root.dark .about-hero h1 span{color:#75C9BE}
-:root.dark .about-kicker,:root.dark .team-number,:root.dark .team-mark{color:#75C9BE}
-:root.dark .about-kicker:before{background:#75C9BE}
-:root.dark .about-intro,:root.dark .about-copy{color:#D7E9E5}
-:root.dark .about-split{border-color:rgba(117,201,190,.2)}
-:root.dark .team-card{background:rgba(8,44,59,.86);border-color:rgba(117,201,190,.23)}
-:root.dark .team-caption{color:#B9DAD4}
-:root.dark .about-vision{background:linear-gradient(120deg,#082C3B,#0B464B 60%,#176A65)}
-:root.dark .art-square{background:rgba(14,48,60,.75)}
-@media(max-width:900px){.about-hero{grid-template-columns:1fr .7fr;gap:15px}.about-art{transform:scale(.75);transform-origin:center}.about-split{gap:36px}.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.about-vision{gap:28px;padding:42px}}
-@media(max-width:650px){.about-page{padding:115px 18px 55px}.about-hero{display:block;min-height:0;padding:18px 0 55px}.about-hero h1{font-size:clamp(47px,11vw,68px)}.about-art{display:none}.about-split{grid-template-columns:1fr;gap:12px;padding:45px 0}.about-vision{grid-template-columns:1fr;gap:15px;padding:35px 28px;border-radius:22px}.team-section{padding:65px 0 10px}.team-grid{gap:11px}.team-card{min-height:172px;padding:19px 16px}.team-name{font-size:18px}.team-heading{align-items:start}.team-mark{display:none}}
-@media(max-width:370px){.team-grid{grid-template-columns:1fr}.team-card{min-height:140px}}
+    }
 
-/* About team: compact editorial cards, right-aligned heading and restored accent line */
-.about-hero{display:block;min-height:0;padding:40px 0 76px;max-width:900px}
-.about-hero h1{max-width:860px}
-.team-section{padding-top:75px}
-.team-heading{justify-content:flex-start;text-align:left;margin-bottom:26px}
-.team-heading .about-kicker{justify-content:flex-start}
-.team-heading .about-kicker:before{display:block}
-.team-heading .about-section-title{font-size:clamp(29px,3.3vw,42px);margin-top:12px}
-.team-grid{max-width:none;margin:0;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.team-card{min-height:205px;padding:22px 14px 18px;align-items:center;justify-content:center;text-align:center;gap:10px;border-radius:19px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(228,242,241,.75));border:1px solid rgba(42,140,130,.17);box-shadow:0 8px 25px rgba(22,50,79,.035)}
-.team-card:hover{transform:translateY(-3px);border-color:rgba(42,140,130,.42);box-shadow:0 15px 34px rgba(22,50,79,.09)}
-.team-avatar{width:50px;height:50px;border-radius:15px;background:linear-gradient(145deg,#E4ECEF,#D6EDE8);color:#315D7D;display:grid;place-items:center;margin-bottom:2px}
-.team-avatar svg{width:23px;height:23px}
-.team-name{font:800 clamp(14px,1.35vw,18px)/1.3 Manrope,sans-serif;letter-spacing:-.04em;margin:0;overflow-wrap:anywhere}
-.team-caption{font:600 10px 'DM Sans',sans-serif;color:#2A8C82;letter-spacing:.01em;text-transform:none;margin:0}
-.team-linkedin{color:#315D7D;display:grid;place-items:center;width:29px;height:29px;border-radius:8px;transition:color .2s,background .2s,transform .2s}
-.team-linkedin svg{width:18px;height:18px}
-.team-linkedin:hover,.team-linkedin:focus-visible{color:#2A8C82;background:rgba(42,140,130,.09);transform:translateY(-2px)}
-:root.dark .team-card{background:linear-gradient(145deg,rgba(8,44,59,.96),rgba(15,65,70,.9));border-color:rgba(117,201,190,.23)}
-:root.dark .team-avatar{background:linear-gradient(145deg,#164554,#1A5A5B);color:#C4E3E0}
-:root.dark .team-caption,:root.dark .team-linkedin{color:#75C9BE}
-@media(max-width:900px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.team-card{min-height:195px}}
-@media(max-width:650px){.about-hero{padding:18px 0 55px}.team-section{padding-top:60px}.team-heading{margin-bottom:22px}.team-heading .about-section-title{font-size:32px}.team-grid{gap:10px}.team-card{min-height:180px;padding:18px 9px;gap:8px}.team-avatar{width:43px;height:43px;border-radius:13px}.team-name{font-size:clamp(12px,3.5vw,16px)}.team-caption{font-size:9px}}
-@media(max-width:370px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.team-card{min-height:180px}}
-</style>
+    .refined-footer {
+      position: relative;
+      overflow: hidden;
+      padding: 0 48px !important;
+      color: var(--navy) !important;
+      background:
+        radial-gradient(520px 260px at 5% 15%, rgba(117, 201, 190, .20), transparent 68%),
+        radial-gradient(460px 240px at 96% 90%, rgba(49, 93, 125, .11), transparent 70%),
+        linear-gradient(145deg, #F6F9FA 0%, #EEF4F3 48%, #E4ECEF 100%) !important;
+      border-top: 1px solid rgba(22, 50, 79, .12) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7);
+    }
+
+    .refined-footer::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -105px;
+      top: -125px;
+      border: 1px solid rgba(42, 140, 130, .14);
+      border-radius: 58px;
+      transform: rotate(24deg);
+      pointer-events: none;
+    }
+
+    .refined-footer .footer-main {
+      max-width: 1152px;
+      margin: 0 auto;
+      padding: 52px 0 42px !important;
+      display: grid;
+      grid-template-columns: minmax(300px, 1.55fr) minmax(300px, 1fr);
+      gap: 80px;
+      align-items: start;
+    }
+
+    .refined-footer .footer-brand {
+      max-width: 440px
+    }
+
+    .refined-footer .footer-logo-picture {
+      height: 45px;
+      margin: 0 0 17px;
+      display: flex;
+      align-items: center
+    }
+
+    .refined-footer .footer-real-logo {
+      content: url("assets/siaq-logo-navy.png") !important;
+      width: 100px;
+      max-height: 43px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .refined-footer .footer-brand p {
+      max-width: 410px;
+      margin: 0 0 19px;
+      color: #315D7D !important;
+      font-size: 10px;
+      line-height: 1.75;
+    }
+
+    .footer-email {
+      width: max-content;
+      max-width: 100%;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 12px;
+      border: 1px solid rgba(42, 140, 130, .20);
+      border-radius: 11px;
+      background: rgba(255, 255, 255, .48);
+      color: #16324F !important;
+      text-decoration: none;
+      font: 700 8px Manrope;
+      transition: transform .22s, background .22s, border-color .22s;
+    }
+
+    .footer-email:hover {
+      transform: translateY(-1px);
+      background: rgba(117, 201, 190, .17);
+      border-color: rgba(42, 140, 130, .38);
+      color: #16324F !important;
+    }
+
+    .footer-mail-icon {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      background: #2A8C82;
+      color: #F6F9FA;
+      font-size: 10px;
+    }
+
+    .footer-links-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      padding-top: 5px;
+    }
+
+    .refined-footer .footer-column {
+      gap: 11px
+    }
+
+    .refined-footer .footer-column b {
+      margin-bottom: 5px;
+      color: #16324F !important;
+      font: 800 10px Manrope;
+      letter-spacing: .02em;
+    }
+
+    .refined-footer .footer-column a {
+      width: max-content;
+      color: #315D7D !important;
+      font-size: 9px;
+      line-height: 1.4;
+      text-decoration: none;
+      transition: color .2s, transform .2s;
+    }
+
+    .refined-footer .footer-column a:hover {
+      color: #2A8C82 !important;
+      transform: translateX(2px);
+    }
+
+    .refined-footer .footer-bottom {
+      max-width: 1152px;
+      margin: 0 auto;
+      padding: 18px 0 21px !important;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      border-top: 1px solid rgba(22, 50, 79, .12) !important;
+      color: #55758C !important;
+      font-size: 8px;
+    }
+
+    html.dark .refined-footer,
+    html[data-theme="dark"] .refined-footer {
+      color: #F7FCFB !important;
+      background:
+        radial-gradient(520px 260px at 5% 15%, rgba(117, 201, 190, .12), transparent 68%),
+        radial-gradient(460px 240px at 96% 90%, rgba(42, 140, 130, .13), transparent 70%),
+        linear-gradient(145deg, #01142B 0%, #06283A 52%, #0B3540 100%) !important;
+      border-top-color: rgba(117, 201, 190, .15) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025);
+    }
+
+    html.dark .refined-footer::before,
+    html[data-theme="dark"] .refined-footer::before {
+      border-color: rgba(117, 201, 190, .12);
+    }
+
+    html.dark .refined-footer .footer-real-logo,
+    html[data-theme="dark"] .refined-footer .footer-real-logo {
+      content: url("assets/siaq-logo-white.png") !important;
+    }
+
+    html.dark .refined-footer .footer-brand p,
+    html[data-theme="dark"] .refined-footer .footer-brand p {
+      color: #BFD8D4 !important;
+    }
+
+    html.dark .refined-footer .footer-column b,
+    html[data-theme="dark"] .refined-footer .footer-column b {
+      color: #F7FCFB !important;
+    }
+
+    html.dark .refined-footer .footer-column a,
+    html[data-theme="dark"] .refined-footer .footer-column a {
+      color: #BFD8D4 !important;
+    }
+
+    html.dark .refined-footer .footer-column a:hover,
+    html[data-theme="dark"] .refined-footer .footer-column a:hover {
+      color: #75C9BE !important;
+    }
+
+    html.dark .footer-email,
+    html[data-theme="dark"] .footer-email {
+      color: #EAF7F5 !important;
+      background: rgba(117, 201, 190, .07);
+      border-color: rgba(117, 201, 190, .18);
+    }
+
+    html.dark .footer-email:hover,
+    html[data-theme="dark"] .footer-email:hover {
+      color: #FFFFFF !important;
+      background: rgba(117, 201, 190, .13);
+      border-color: rgba(117, 201, 190, .34);
+    }
+
+    html.dark .footer-mail-icon,
+    html[data-theme="dark"] .footer-mail-icon {
+      background: #75C9BE;
+      color: #01142B;
+    }
+
+    html.dark .refined-footer .footer-bottom,
+    html[data-theme="dark"] .refined-footer .footer-bottom {
+      color: #9FC5BF !important;
+      border-top-color: rgba(117, 201, 190, .13) !important;
+    }
+
+    @media (max-width:850px) {
+      .refined-footer {
+        padding: 0 30px !important
+      }
+
+      .refined-footer .footer-main {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding-top: 44px !important
+      }
+
+      .refined-footer .footer-brand {
+        max-width: 520px
+      }
+
+      .refined-footer .footer-links-group {
+        max-width: 430px;
+        gap: 45px
+      }
+    }
+
+    @media (max-width:520px) {
+      .refined-footer {
+        padding: 0 22px !important
+      }
+
+      .refined-footer .footer-main {
+        padding: 38px 0 30px !important
+      }
+
+      .refined-footer .footer-links-group {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px
+      }
+
+      .refined-footer .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px
+      }
+
+      .footer-email {
+        font-size: 7px
+      }
+    }
+
+    .refined-footer,
+    html.dark .refined-footer,
+    html[data-theme="dark"] .refined-footer {
+      color: #F6F9FA !important;
+      background:
+        radial-gradient(560px 290px at 2% 0%, rgba(117, 201, 190, .13), transparent 67%),
+        radial-gradient(520px 280px at 100% 100%, rgba(42, 140, 130, .20), transparent 70%),
+        linear-gradient(128deg, #01142B 0%, #082B3D 48%, #123E49 100%) !important;
+      border-top: 1px solid rgba(117, 201, 190, .18) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .035) !important;
+    }
+
+    .refined-footer::before,
+    html.dark .refined-footer::before,
+    html[data-theme="dark"] .refined-footer::before {
+      border-color: rgba(117, 201, 190, .14) !important;
+    }
+
+    .refined-footer .footer-real-logo,
+    html.dark .refined-footer .footer-real-logo,
+    html[data-theme="dark"] .refined-footer .footer-real-logo {
+      content: url("assets/siaq-logo-white.png") !important;
+    }
+
+    .refined-footer .footer-brand p,
+    html.dark .refined-footer .footer-brand p,
+    html[data-theme="dark"] .refined-footer .footer-brand p {
+      color: #C8DEDC !important;
+    }
+
+    .refined-footer .footer-column b,
+    html.dark .refined-footer .footer-column b,
+    html[data-theme="dark"] .refined-footer .footer-column b {
+      color: #FFFFFF !important;
+    }
+
+    .refined-footer .footer-column a,
+    html.dark .refined-footer .footer-column a,
+    html[data-theme="dark"] .refined-footer .footer-column a {
+      color: #B9D8D4 !important;
+    }
+
+    .refined-footer .footer-column a:hover,
+    html.dark .refined-footer .footer-column a:hover,
+    html[data-theme="dark"] .refined-footer .footer-column a:hover {
+      color: #75C9BE !important;
+    }
+
+    .refined-footer .footer-email,
+    html.dark .refined-footer .footer-email,
+    html[data-theme="dark"] .refined-footer .footer-email {
+      color: #F3FBFA !important;
+      background: rgba(117, 201, 190, .075) !important;
+      border-color: rgba(117, 201, 190, .22) !important;
+    }
+
+    .refined-footer .footer-email:hover,
+    html.dark .refined-footer .footer-email:hover,
+    html[data-theme="dark"] .refined-footer .footer-email:hover {
+      color: #FFFFFF !important;
+      background: rgba(117, 201, 190, .14) !important;
+      border-color: rgba(117, 201, 190, .42) !important;
+    }
+
+    .refined-footer .footer-mail-icon,
+    html.dark .refined-footer .footer-mail-icon,
+    html[data-theme="dark"] .refined-footer .footer-mail-icon {
+      background: #75C9BE !important;
+      color: #01142B !important;
+    }
+
+    .refined-footer .footer-bottom,
+    html.dark .refined-footer .footer-bottom,
+    html[data-theme="dark"] .refined-footer .footer-bottom {
+      color: #9FC5BF !important;
+      border-top-color: rgba(117, 201, 190, .15) !important;
+    }
+
+    .signature-footer.refined-footer {
+      min-height: 370px !important;
+      height: auto !important;
+      padding: 0 48px !important
+    }
+
+    .signature-footer.refined-footer .footer-main {
+      min-height: 290px !important;
+      height: auto !important;
+      max-width: 1152px !important;
+      margin: 0 auto !important;
+      padding: 52px 0 42px !important;
+      grid-template-columns: minmax(300px, 1.55fr) minmax(300px, 1fr) !important;
+      gap: 80px !important;
+      align-items: start !important
+    }
+
+    .signature-footer.refined-footer .footer-bottom {
+      min-height: 0 !important;
+      max-width: 1152px !important;
+      margin: 0 auto !important;
+      padding: 18px 0 21px !important
+    }
+
+    @media (max-width:850px) {
+      .signature-footer.refined-footer {
+        padding: 0 30px !important
+      }
+
+      .signature-footer.refined-footer .footer-main {
+        grid-template-columns: 1fr !important;
+        gap: 35px !important;
+        padding: 44px 0 42px !important
+      }
+    }
+
+    @media (max-width:520px) {
+      .signature-footer.refined-footer {
+        padding: 0 22px !important
+      }
+
+      .signature-footer.refined-footer .footer-main {
+        padding: 38px 0 30px !important
+      }
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .signature-footer.refined-footer {
+      background: linear-gradient(125deg, #16324F 0%, #214D69 46%, #2A8C82 100%) !important;
+      color: #F6F9FA !important;
+      border-top-color: transparent !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .035) !important;
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer::before {
+      border-color: rgba(117, 201, 190, .14) !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-real-logo {
+      content: url("assets/siaq-logo-white.png") !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-brand p,
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column a {
+      color: #DDEFF0 !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column b {
+      color: #FFFFFF !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column a:hover {
+      color: #FFFFFF !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-email {
+      color: #F3FBFA !important;
+      background: rgba(117, 201, 190, .075) !important;
+      border-color: rgba(117, 201, 190, .22) !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-mail-icon {
+      background: rgba(117, 201, 190, .16) !important;
+      color: #F6F9FA !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-bottom {
+      color: #EAF7F5 !important;
+      border-top-color: rgba(255, 255, 255, .18) !important
+    }
+
+    html.dark .signature-footer.refined-footer,
+    html[data-theme="dark"] .signature-footer.refined-footer {
+      background: linear-gradient(125deg, #01142B 0%, #083443 48%, #176A65 100%) !important;
+    }
+
+    html.dark .refined-footer .footer-brand p,
+    html.dark .refined-footer .footer-column a,
+    html[data-theme="dark"] .refined-footer .footer-brand p,
+    html[data-theme="dark"] .refined-footer .footer-column a {
+      color: #D7E9E5 !important
+    }
+  </style>
+  <style>
+    /* ABOUT PAGE ONLY — existing navigation/footer CSS is unchanged */
+    body {
+      background: linear-gradient(150deg, #F6F9FA 0%, #EDF5F4 45%, #F6F9FA 100%);
+    }
+
+    .about-page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 157px 28px 90px;
+    }
+
+    .about-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font: 800 10px 'DM Sans', sans-serif;
+      letter-spacing: .20em;
+      text-transform: uppercase;
+      color: #2A8C82;
+    }
+
+    .about-kicker:before {
+      content: "";
+      width: 23px;
+      height: 2px;
+      background: #2A8C82;
+      display: block;
+    }
+
+    .about-hero {
+      position: relative;
+      min-height: 410px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, .95fr);
+      gap: 38px;
+      align-items: center;
+      padding: 32px 0 65px;
+    }
+
+    .about-hero h1 {
+      font: 800 clamp(52px, 6.5vw, 92px)/1.03 Manrope, sans-serif;
+      letter-spacing: -.075em;
+      color: #16324F;
+      margin: 24px 0 23px;
+    }
+
+    .about-hero h1 span {
+      color: #2A8C82;
+    }
+
+    .about-intro {
+      font: 400 15px/1.95 'DM Sans', sans-serif;
+      color: #49677B;
+      max-width: 520px;
+      margin: 0;
+    }
+
+    .about-art {
+      height: 340px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      isolation: isolate;
+    }
+
+    .about-art:before {
+      content: "";
+      position: absolute;
+      width: 290px;
+      height: 290px;
+      border: 1px solid rgba(42, 140, 130, .22);
+      border-radius: 50%;
+      box-shadow: 0 0 0 38px rgba(42, 140, 130, .045), 0 0 0 78px rgba(42, 140, 130, .035);
+    }
+
+    .about-art:after {
+      content: "";
+      position: absolute;
+      width: 188px;
+      height: 188px;
+      border: 1px dashed rgba(49, 93, 125, .25);
+      border-radius: 50%;
+    }
+
+    .art-center {
+      z-index: 2;
+      width: 152px;
+      height: 152px;
+      border-radius: 36px;
+      transform: rotate(-8deg);
+      background: linear-gradient(145deg, #16324F, #2A8C82);
+      box-shadow: 0 25px 60px rgba(22, 50, 79, .20);
+      display: grid;
+      place-items: center;
+    }
+
+    .art-center span {
+      font: 800 36px Manrope, sans-serif;
+      letter-spacing: -.075em;
+      color: white;
+      transform: rotate(8deg);
+    }
+
+    .art-square {
+      position: absolute;
+      width: 55px;
+      height: 55px;
+      border: 1px solid rgba(42, 140, 130, .33);
+      border-radius: 15px;
+      transform: rotate(25deg);
+      background: rgba(255, 255, 255, .7);
+    }
+
+    .art-square.a {
+      top: 30px;
+      right: 55px
+    }
+
+    .art-square.b {
+      bottom: 28px;
+      left: 48px;
+      width: 40px;
+      height: 40px;
+      background: #75C9BE33
+    }
+
+    .about-split {
+      border-top: 1px solid rgba(49, 93, 125, .16);
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 75px;
+      padding: 66px 0 72px;
+      align-items: start;
+    }
+
+    .about-section-title {
+      font: 800 clamp(32px, 4vw, 49px)/1.18 Manrope, sans-serif;
+      letter-spacing: -.055em;
+      color: #16324F;
+      margin: 17px 0 0;
+    }
+
+    .about-copy {
+      font: 400 15px/1.95 'DM Sans', sans-serif;
+      color: #49677B;
+      margin: 13px 0 0;
+      max-width: 580px;
+    }
+
+    .about-vision {
+      background: linear-gradient(120deg, #16324F 0%, #24546A 54%, #2A8C82 100%);
+      border-radius: 26px;
+      padding: 56px 62px;
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 55px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-vision:after {
+      content: "";
+      width: 260px;
+      height: 260px;
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 50%;
+      position: absolute;
+      right: -130px;
+      top: -145px;
+      box-shadow: 0 0 0 55px rgba(255, 255, 255, .035);
+      pointer-events: none;
+    }
+
+    .about-vision .about-kicker {
+      color: #A6E7DD
+    }
+
+    .about-vision .about-kicker:before {
+      background: #A6E7DD
+    }
+
+    .about-vision .about-section-title {
+      color: #fff
+    }
+
+    .about-vision .about-copy {
+      color: #E0F2F0;
+      margin: 0;
+      position: relative;
+      z-index: 1
+    }
+
+    .team-section {
+      padding: 100px 0 12px;
+    }
+
+    .team-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 34px;
+    }
+
+    .team-heading .about-section-title {
+      margin-top: 15px;
+    }
+
+    .team-mark {
+      font: 800 12px Manrope, sans-serif;
+      color: #2A8C82;
+      letter-spacing: .13em;
+      white-space: nowrap;
+      padding-bottom: 6px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .team-card {
+      min-height: 210px;
+      padding: 26px 23px 24px;
+      background: rgba(255, 255, 255, .83);
+      border: 1px solid #DFE9EC;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+    }
+
+    .team-card:hover {
+      transform: translateY(-4px);
+      border-color: #75C9BE;
+      box-shadow: 0 18px 42px rgba(22, 50, 79, .08);
+    }
+
+    .team-number {
+      font: 700 11px Manrope, sans-serif;
+      letter-spacing: .13em;
+      color: #2A8C82;
+    }
+
+    .team-name {
+      font: 800 clamp(17px, 1.7vw, 23px)/1.3 Manrope, sans-serif;
+      letter-spacing: -.045em;
+      color: #16324F;
+      margin: 0;
+      overflow-wrap: break-word;
+    }
+
+    .team-caption {
+      font: 600 10px 'DM Sans', sans-serif;
+      letter-spacing: .08em;
+      color: #617F8A;
+      text-transform: uppercase;
+      margin-top: 12px;
+    }
+
+    :root.dark .about-page {
+      color: #F7FCFB
+    }
+
+    :root.dark .about-hero h1,
+    :root.dark .about-section-title,
+    :root.dark .team-name {
+      color: #F7FCFB
+    }
+
+    :root.dark .about-hero h1 span {
+      color: #75C9BE
+    }
+
+    :root.dark .about-kicker,
+    :root.dark .team-number,
+    :root.dark .team-mark {
+      color: #75C9BE
+    }
+
+    :root.dark .about-kicker:before {
+      background: #75C9BE
+    }
+
+    :root.dark .about-intro,
+    :root.dark .about-copy {
+      color: #D7E9E5
+    }
+
+    :root.dark .about-split {
+      border-color: rgba(117, 201, 190, .2)
+    }
+
+    :root.dark .team-card {
+      background: rgba(8, 44, 59, .86);
+      border-color: rgba(117, 201, 190, .23)
+    }
+
+    :root.dark .team-caption {
+      color: #B9DAD4
+    }
+
+    :root.dark .about-vision {
+      background: linear-gradient(120deg, #082C3B, #0B464B 60%, #176A65)
+    }
+
+    :root.dark .art-square {
+      background: rgba(14, 48, 60, .75)
+    }
+
+    @media(max-width:900px) {
+      .about-hero {
+        grid-template-columns: 1fr .7fr;
+        gap: 15px
+      }
+
+      .about-art {
+        transform: scale(.75);
+        transform-origin: center
+      }
+
+      .about-split {
+        gap: 36px
+      }
+
+      .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      .about-vision {
+        gap: 28px;
+        padding: 42px
+      }
+    }
+
+    @media(max-width:650px) {
+      .about-page {
+        padding: 115px 18px 55px
+      }
+
+      .about-hero {
+        display: block;
+        min-height: 0;
+        padding: 18px 0 55px
+      }
+
+      .about-hero h1 {
+        font-size: clamp(47px, 11vw, 68px)
+      }
+
+      .about-art {
+        display: none
+      }
+
+      .about-split {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 45px 0
+      }
+
+      .about-vision {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 35px 28px;
+        border-radius: 22px
+      }
+
+      .team-section {
+        padding: 65px 0 10px
+      }
+
+      .team-grid {
+        gap: 11px
+      }
+
+      .team-card {
+        min-height: 172px;
+        padding: 19px 16px
+      }
+
+      .team-name {
+        font-size: 18px
+      }
+
+      .team-heading {
+        align-items: start
+      }
+
+      .team-mark {
+        display: none
+      }
+    }
+
+    @media(max-width:370px) {
+      .team-grid {
+        grid-template-columns: 1fr
+      }
+
+      .team-card {
+        min-height: 140px
+      }
+    }
+
+    /* About team: compact editorial cards, right-aligned heading and restored accent line */
+    .about-hero {
+      display: block;
+      min-height: 0;
+      padding: 40px 0 76px;
+      max-width: 900px
+    }
+
+    .about-hero h1 {
+      max-width: 860px
+    }
+
+    .team-section {
+      padding-top: 75px
+    }
+
+    .team-heading {
+      justify-content: flex-start;
+      text-align: left;
+      margin-bottom: 26px
+    }
+
+    .team-heading .about-kicker {
+      justify-content: flex-start
+    }
+
+    .team-heading .about-kicker:before {
+      display: block
+    }
+
+    .team-heading .about-section-title {
+      font-size: clamp(29px, 3.3vw, 42px);
+      margin-top: 12px
+    }
+
+    .team-grid {
+      max-width: none;
+      margin: 0;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px
+    }
+
+    .team-card {
+      min-height: 205px;
+      padding: 22px 14px 18px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 10px;
+      border-radius: 19px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, .96), rgba(228, 242, 241, .75));
+      border: 1px solid rgba(42, 140, 130, .17);
+      box-shadow: 0 8px 25px rgba(22, 50, 79, .035)
+    }
+
+    .team-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(42, 140, 130, .42);
+      box-shadow: 0 15px 34px rgba(22, 50, 79, .09)
+    }
+
+    .team-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+      background: linear-gradient(145deg, #E4ECEF, #D6EDE8);
+      color: #315D7D;
+      display: grid;
+      place-items: center;
+      margin-bottom: 2px
+    }
+
+    .team-avatar svg {
+      width: 23px;
+      height: 23px
+    }
+
+    .team-name {
+      font: 800 clamp(14px, 1.35vw, 18px)/1.3 Manrope, sans-serif;
+      letter-spacing: -.04em;
+      margin: 0;
+      overflow-wrap: anywhere
+    }
+
+    .team-caption {
+      font: 600 10px 'DM Sans', sans-serif;
+      color: #2A8C82;
+      letter-spacing: .01em;
+      text-transform: none;
+      margin: 0
+    }
+
+    .team-linkedin {
+      color: #315D7D;
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 8px;
+      transition: color .2s, background .2s, transform .2s
+    }
+
+    .team-linkedin svg {
+      width: 18px;
+      height: 18px
+    }
+
+    .team-linkedin:hover,
+    .team-linkedin:focus-visible {
+      color: #2A8C82;
+      background: rgba(42, 140, 130, .09);
+      transform: translateY(-2px)
+    }
+
+    :root.dark .team-card {
+      background: linear-gradient(145deg, rgba(8, 44, 59, .96), rgba(15, 65, 70, .9));
+      border-color: rgba(117, 201, 190, .23)
+    }
+
+    :root.dark .team-avatar {
+      background: linear-gradient(145deg, #164554, #1A5A5B);
+      color: #C4E3E0
+    }
+
+    :root.dark .team-caption,
+    :root.dark .team-linkedin {
+      color: #75C9BE
+    }
+
+    @media(max-width:900px) {
+      .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 13px
+      }
+
+      .team-card {
+        min-height: 195px
+      }
+    }
+
+    @media(max-width:650px) {
+      .about-hero {
+        padding: 18px 0 55px
+      }
+
+      .team-section {
+        padding-top: 60px
+      }
+
+      .team-heading {
+        margin-bottom: 22px
+      }
+
+      .team-heading .about-section-title {
+        font-size: 32px
+      }
+
+      .team-grid {
+        gap: 10px
+      }
+
+      .team-card {
+        min-height: 180px;
+        padding: 18px 9px;
+        gap: 8px
+      }
+
+      .team-avatar {
+        width: 43px;
+        height: 43px;
+        border-radius: 13px
+      }
+
+      .team-name {
+        font-size: clamp(12px, 3.5vw, 16px)
+      }
+
+      .team-caption {
+        font-size: 9px
+      }
+    }
+
+    @media(max-width:370px) {
+      .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      .team-card {
+        min-height: 180px
+      }
+    }
+  </style>
+  <style>
+    /* Evaluation dimensions — SIAQ editorial card design */
+    .eval-section {
+      padding: 88px 0 18px
+    }
+
+    .eval-heading {
+      margin-bottom: 30px
+    }
+
+    .eval-heading .about-section-title {
+      font-size: clamp(32px, 3.6vw, 45px);
+      margin-top: 15px
+    }
+
+    .eval-dot {
+      color: #2A8C82
+    }
+
+    .eval-lead {
+      font: 400 14px/1.8 'DM Sans', sans-serif;
+      color: #49677B;
+      margin: 10px 0 0
+    }
+
+    .eval-cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+      align-items: stretch
+    }
+
+    .eval-card {
+      --lift: 0px;
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 345px;
+      padding: 29px 25px 27px;
+      border: 1px solid rgba(49, 93, 125, .15);
+      border-radius: 21px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, .97), rgba(247, 251, 250, .88));
+      box-shadow: 0 9px 28px rgba(22, 50, 79, .035);
+      transform: translateY(var(--lift));
+      transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease
+    }
+
+    .eval-card:hover {
+      --lift: -6px;
+      border-color: rgba(42, 140, 130, .44);
+      box-shadow: 0 20px 44px rgba(22, 50, 79, .085)
+    }
+
+    .eval-card:before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 3px;
+      background: linear-gradient(90deg, #315D7D, #75C9BE);
+      opacity: .65
+    }
+
+    .eval-card-feature {
+      background: linear-gradient(155deg, #F0F8F6 0%, #FFFFFF 80%);
+      border-color: rgba(42, 140, 130, .28)
+    }
+
+    .eval-card-feature:before {
+      opacity: 1
+    }
+
+    .eval-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px
+    }
+
+    .eval-index {
+      font: 800 10px 'DM Sans', sans-serif;
+      letter-spacing: .13em;
+      color: #2A8C82
+    }
+
+    .eval-symbol {
+      font: 400 19px Manrope, sans-serif;
+      color: #8DA9AD;
+      transition: transform .3s, color .3s
+    }
+
+    .eval-card:hover .eval-symbol {
+      transform: translate(3px, -3px);
+      color: #2A8C82
+    }
+
+    .eval-card h3 {
+      font: 800 clamp(19px, 2vw, 25px)/1.26 Manrope, sans-serif;
+      letter-spacing: -.055em;
+      color: #16324F;
+      margin: 0 0 17px
+    }
+
+    .eval-tagline {
+      font: 700 12px/1.6 'DM Sans', sans-serif;
+      color: #2A8C82;
+      margin: 0 0 12px
+    }
+
+    .eval-desc {
+      font: 400 12.5px/1.85 'DM Sans', sans-serif;
+      color: #49677B;
+      margin: 0
+    }
+
+    .eval-bottom-line {
+      height: 1px;
+      background: linear-gradient(90deg, rgba(42, 140, 130, .3), transparent);
+      margin-top: auto;
+      padding-top: 26px;
+      background-clip: content-box
+    }
+
+    .eval-aspects {
+      border-top: 1px solid rgba(42, 140, 130, .19);
+      margin-top: 23px;
+      padding-top: 19px
+    }
+
+    .eval-aspects-title {
+      font: 800 9px 'DM Sans', sans-serif;
+      letter-spacing: .16em;
+      color: #2A8C82;
+      margin-bottom: 13px
+    }
+
+    .eval-aspect {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(49, 93, 125, .09)
+    }
+
+    .eval-aspect:last-child {
+      border-bottom: 0
+    }
+
+    .eval-aspect strong {
+      font: 700 11px/1.5 'DM Sans', sans-serif;
+      color: #16324F
+    }
+
+    .eval-aspect span {
+      font: 400 11px/1.65 'DM Sans', sans-serif;
+      color: #49677B
+    }
+
+    .eval-foot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      border-bottom: 1px solid rgba(49, 93, 125, .15);
+      padding: 27px 2px 25px
+    }
+
+    .eval-foot-label {
+      font: 800 10px 'DM Sans', sans-serif;
+      letter-spacing: .14em;
+      color: #2A8C82
+    }
+
+    .eval-foot p {
+      font: 400 12.5px/1.7 'DM Sans', sans-serif;
+      color: #49677B;
+      margin: 6px 0 0;
+      max-width: 560px
+    }
+
+    .eval-foot a {
+      font: 600 11px/1.6 'DM Sans', sans-serif;
+      color: #315D7D;
+      text-decoration: none;
+      white-space: nowrap
+    }
+
+    .eval-foot a:hover {
+      color: #2A8C82;
+      text-decoration: underline;
+      text-underline-offset: 4px
+    }
+
+    .eval-foot a span {
+      margin-left: 5px
+    }
+
+    .eval-reveal {
+      opacity: 1
+    }
+
+    .eval-motion .eval-reveal:not(.eval-visible) {
+      opacity: 0;
+      transform: translateY(22px)
+    }
+
+    .eval-motion .eval-reveal {
+      transition: opacity .65s ease, transform .65s cubic-bezier(.2, .75, .2, 1), border-color .35s, box-shadow .35s
+    }
+
+    .eval-motion .eval-reveal.eval-visible {
+      opacity: 1;
+      transform: translateY(var(--lift, 0px))
+    }
+
+    .eval-motion .eval-card:nth-child(2) {
+      transition-delay: 90ms
+    }
+
+    .eval-motion .eval-card:nth-child(3) {
+      transition-delay: 180ms
+    }
+
+    :root.dark .eval-card {
+      background: linear-gradient(160deg, #0B2D3B, #103D46);
+      border-color: rgba(117, 201, 190, .23)
+    }
+
+    :root.dark .eval-card-feature {
+      background: linear-gradient(160deg, #123F49, #0B303D)
+    }
+
+    :root.dark .eval-card h3,
+    :root.dark .eval-aspect strong {
+      color: #F7FCFB
+    }
+
+    :root.dark .eval-desc,
+    :root.dark .eval-aspect span,
+    :root.dark .eval-lead,
+    :root.dark .eval-foot p {
+      color: #D7E9E5
+    }
+
+    :root.dark .eval-tagline,
+    :root.dark .eval-index,
+    :root.dark .eval-aspects-title,
+    :root.dark .eval-foot-label {
+      color: #75C9BE
+    }
+
+    :root.dark .eval-foot {
+      border-color: rgba(117, 201, 190, .2)
+    }
+
+    :root.dark .eval-foot a {
+      color: #A6E7DD
+    }
+
+    :root.dark .eval-aspect {
+      border-color: rgba(117, 201, 190, .13)
+    }
+
+    @media(max-width:900px) {
+      .eval-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      .eval-card-feature {
+        grid-row: span 2
+      }
+
+      .eval-card {
+        min-height: 300px
+      }
+    }
+
+    @media(max-width:650px) {
+      .eval-section {
+        padding: 62px 0 5px
+      }
+
+      .eval-heading {
+        margin-bottom: 22px
+      }
+
+      .eval-cards {
+        grid-template-columns: 1fr;
+        gap: 12px
+      }
+
+      .eval-card-feature {
+        grid-row: auto
+      }
+
+      .eval-card {
+        min-height: 0;
+        padding: 25px 22px
+      }
+
+      .eval-card-top {
+        margin-bottom: 24px
+      }
+
+      .eval-bottom-line {
+        padding-top: 23px
+      }
+
+      .eval-foot {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px
+      }
+
+      .eval-foot a {
+        white-space: normal
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      .eval-card,
+      .eval-reveal,
+      .eval-symbol {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important
+      }
+    }
+  </style>
+  <style>
+    /* Refined compact editorial dimension cards */
+    .eval-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: stretch
+    }
+
+    .eval-card {
+      min-height: 0;
+      padding: 25px 27px 24px;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 6px 24px rgba(22, 50, 79, .035)
+    }
+
+    .eval-card:nth-child(1) {
+      grid-column: 1;
+      grid-row: 1
+    }
+
+    .eval-card:nth-child(3) {
+      grid-column: 2;
+      grid-row: 1
+    }
+
+    .eval-card-feature {
+      grid-column: 1/-1;
+      grid-row: 2;
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(0, 1.45fr);
+      column-gap: 32px;
+      align-content: start;
+      background: linear-gradient(115deg, #EDF7F4 0%, #F7FBFA 58%, #FFFFFF 100%);
+      border-color: rgba(42, 140, 130, .23)
+    }
+
+    .eval-card-top {
+      margin-bottom: 16px
+    }
+
+    .eval-card h3 {
+      font-size: clamp(20px, 2vw, 24px);
+      margin-bottom: 11px;
+      letter-spacing: -.045em
+    }
+
+    .eval-tagline {
+      margin-bottom: 7px
+    }
+
+    .eval-desc {
+      line-height: 1.7
+    }
+
+    .eval-bottom-line {
+      display: none
+    }
+
+    .eval-card-feature .eval-card-top,
+    .eval-card-feature h3,
+    .eval-card-feature .eval-tagline,
+    .eval-card-feature .eval-desc {
+      grid-column: 1
+    }
+
+    .eval-card-feature .eval-aspects {
+      grid-column: 2;
+      grid-row: 1/span 4;
+      align-self: stretch;
+      margin: 0;
+      padding: 0 0 0 25px;
+      border-top: 0;
+      border-left: 1px solid rgba(42, 140, 130, .2);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 16px;
+      align-content: center
+    }
+
+    .eval-aspects-title {
+      grid-column: 1/-1;
+      margin: 0 0 2px
+    }
+
+    .eval-aspect {
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, .67);
+      border: 1px solid rgba(42, 140, 130, .12) !important;
+      border-radius: 10px;
+      gap: 4px
+    }
+
+    .eval-aspect strong {
+      font-size: 11px
+    }
+
+    .eval-aspect span {
+      font-size: 10.5px;
+      line-height: 1.5
+    }
+
+    .eval-card:before {
+      height: 2px;
+      opacity: .55
+    }
+
+    .eval-card-feature:before {
+      opacity: .9
+    }
+
+    .eval-card:hover {
+      --lift: -3px;
+      box-shadow: 0 12px 30px rgba(22, 50, 79, .075)
+    }
+
+    :root.dark .eval-card {
+      background: #10333F
+    }
+
+    :root.dark .eval-card-feature {
+      background: linear-gradient(115deg, #123E45, #10333F)
+    }
+
+    :root.dark .eval-aspect {
+      background: rgba(117, 201, 190, .055);
+      border-color: rgba(117, 201, 190, .18) !important
+    }
+
+    @media(max-width:900px) {
+      .eval-card-feature {
+        grid-row: 2;
+        grid-column: 1/-1
+      }
+
+      .eval-card {
+        min-height: 0
+      }
+    }
+
+    @media(max-width:650px) {
+      .eval-cards {
+        grid-template-columns: 1fr;
+        gap: 12px
+      }
+
+      .eval-card:nth-child(1),
+      .eval-card:nth-child(3),
+      .eval-card-feature {
+        grid-column: 1;
+        grid-row: auto
+      }
+
+      .eval-card {
+        padding: 23px 22px
+      }
+
+      .eval-card-feature {
+        display: block
+      }
+
+      .eval-card-feature .eval-aspects {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 18px;
+        padding: 16px 0 0;
+        border-left: 0;
+        border-top: 1px solid rgba(42, 140, 130, .2)
+      }
+
+      .eval-card-top {
+        margin-bottom: 13px
+      }
+
+      .eval-card h3 br {
+        display: none
+      }
+    }
+
+    @media(max-width:390px) {
+      .eval-card-feature .eval-aspects {
+        grid-template-columns: 1fr
+      }
+    }
+  </style>
+
+  <style>
+    /* Expressive but restrained dimension cards — SIAQ */
+    .eval-cards {
+      gap: 18px;
+      perspective: 1100px
+    }
+
+    .eval-card {
+      --mx: 50%;
+      --my: 50%;
+      border-radius: 22px;
+      padding: 29px 30px 27px;
+      box-shadow: 0 10px 35px rgba(22, 50, 79, .045);
+      transition: transform .38s cubic-bezier(.2, .8, .2, 1), box-shadow .38s, border-color .38s;
+      background: radial-gradient(260px circle at var(--mx) var(--my), rgba(117, 201, 190, .13), transparent 75%), linear-gradient(140deg, #fff, #F6FAFA);
+    }
+
+    .eval-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 20px 45px rgba(22, 50, 79, .11);
+      border-color: rgba(42, 140, 130, .32)
+    }
+
+    .eval-card:nth-child(3) {
+      background: radial-gradient(260px circle at var(--mx) var(--my), rgba(49, 93, 125, .1), transparent 75%), linear-gradient(145deg, #F3F8FB, #fff)
+    }
+
+    .eval-card:after {
+      content: '01';
+      position: absolute;
+      right: 17px;
+      top: 13px;
+      font: 800 clamp(75px, 8vw, 125px)/1 'Manrope', sans-serif;
+      letter-spacing: -.09em;
+      color: rgba(42, 140, 130, .065);
+      pointer-events: none;
+      z-index: -1
+    }
+
+    .eval-card:nth-child(3):after {
+      content: '03';
+      color: rgba(49, 93, 125, .07)
+    }
+
+    .eval-card-feature:after {
+      content: '02';
+      font-size: clamp(95px, 11vw, 160px);
+      right: 22px;
+      top: 6px;
+      color: rgba(42, 140, 130, .075)
+    }
+
+    .eval-card-top {
+      position: relative;
+      z-index: 1
+    }
+
+    .eval-index {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      letter-spacing: .14em
+    }
+
+    .eval-index:before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #2A8C82;
+      box-shadow: 0 0 0 4px rgba(42, 140, 130, .09)
+    }
+
+    .eval-card h3 {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(21px, 2.2vw, 27px);
+      letter-spacing: -.055em
+    }
+
+    .eval-tagline {
+      position: relative;
+      z-index: 1;
+      font-weight: 650
+    }
+
+    .eval-desc {
+      position: relative;
+      z-index: 1
+    }
+
+    .eval-card-feature {
+      background: radial-gradient(360px circle at var(--mx) var(--my), rgba(117, 201, 190, .22), transparent 78%), linear-gradient(110deg, #E9F5F2, #F7FBFA 65%, #fff);
+      border-color: rgba(42, 140, 130, .2)
+    }
+
+    .eval-aspect {
+      position: relative;
+      transition: background .25s, transform .25s, border-color .25s;
+      background: rgba(255, 255, 255, .76)
+    }
+
+    .eval-aspect:hover {
+      transform: translateY(-3px);
+      background: #fff;
+      border-color: rgba(42, 140, 130, .32) !important
+    }
+
+    .eval-aspect:before {
+      content: '';
+      display: block;
+      width: 17px;
+      height: 3px;
+      border-radius: 5px;
+      background: #2A8C82;
+      margin-bottom: 5px;
+      opacity: .65
+    }
+
+    .eval-aspect:nth-child(3):before {
+      background: #315D7D
+    }
+
+    .eval-aspect:nth-child(4):before {
+      background: #75C9BE
+    }
+
+    .eval-aspect:nth-child(5):before {
+      background: #16324F
+    }
+
+    .eval-bottom-line {
+      opacity: .55
+    }
+
+    :root.dark .eval-card,
+    :root.dark .eval-card:nth-child(3) {
+      background: radial-gradient(260px circle at var(--mx) var(--my), rgba(117, 201, 190, .11), transparent 75%), linear-gradient(135deg, #103744, #0B2D3B)
+    }
+
+    :root.dark .eval-card-feature {
+      background: radial-gradient(360px circle at var(--mx) var(--my), rgba(117, 201, 190, .14), transparent 78%), linear-gradient(110deg, #17454B, #0D333E)
+    }
+
+    :root.dark .eval-card:after {
+      color: rgba(117, 201, 190, .07)
+    }
+
+    @media(max-width:650px) {
+      .eval-card {
+        padding: 24px 23px
+      }
+
+      .eval-card:after {
+        font-size: 90px;
+        right: 13px
+      }
+
+      .eval-card-feature:after {
+        font-size: 110px
+      }
+
+      .eval-card:hover {
+        transform: translateY(-3px)
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      .eval-card,
+      .eval-aspect {
+        transition: none !important
+      }
+
+      .eval-card:hover,
+      .eval-aspect:hover {
+        transform: none !important
+      }
+    }
+  </style>
+  <style>
+    /* Final static editorial layout: preserve the SIAQ color distribution and oversized numbers. */
+    .eval-cards {
+      perspective: none;
+      gap: 16px
+    }
+
+    .eval-card,
+    .eval-card:nth-child(3),
+    .eval-card-feature {
+      --mx: 50%;
+      --my: 50%;
+      transition: none !important;
+      transform: none !important;
+      box-shadow: 0 7px 26px rgba(22, 50, 79, .045)
+    }
+
+    .eval-card:hover {
+      transform: none !important;
+      box-shadow: 0 7px 26px rgba(22, 50, 79, .045);
+      border-color: rgba(49, 93, 125, .15)
+    }
+
+    .eval-card-feature:hover {
+      border-color: rgba(42, 140, 130, .2)
+    }
+
+    .eval-aspect,
+    .eval-aspect:hover {
+      transition: none !important;
+      transform: none !important
+    }
+
+    .eval-aspect:hover {
+      background: rgba(255, 255, 255, .76);
+      border-color: rgba(42, 140, 130, .12) !important
+    }
+
+    .eval-reveal,
+    .eval-motion .eval-reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important
+    }
+
+    /* Stronger, legible 02; use a dedicated right-hand numeral away from the copy. */
+    .eval-card-feature:after {
+      content: '02';
+      right: 28px;
+      top: 12px;
+      font-size: clamp(90px, 10vw, 136px);
+      color: rgba(42, 140, 130, .17);
+      z-index: 0
+    }
+
+    .eval-card-feature .eval-card-top,
+    .eval-card-feature h3,
+    .eval-card-feature .eval-tagline,
+    .eval-card-feature .eval-desc,
+    .eval-card-feature .eval-aspects {
+      position: relative;
+      z-index: 1
+    }
+
+    /* Slightly more deliberate proportions for the upper pair and the feature card. */
+    .eval-card {
+      padding: 27px 29px 26px
+    }
+
+    .eval-card-feature {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.55fr);
+      column-gap: 36px;
+      padding: 29px 30px
+    }
+
+    .eval-card-feature .eval-aspects {
+      padding-left: 29px
+    }
+
+    :root.dark .eval-card-feature:after {
+      color: rgba(117, 201, 190, .2)
+    }
+
+    @media(max-width:650px) {
+      .eval-card {
+        padding: 24px 23px
+      }
+
+      .eval-card-feature {
+        display: block
+      }
+
+      .eval-card-feature:after {
+        right: 14px;
+        top: 10px;
+        font-size: 98px;
+        color: rgba(42, 140, 130, .13)
+      }
+
+      .eval-card-feature .eval-aspects {
+        padding: 16px 0 0
+      }
+    }
+  </style>
+  <style>
+    /* Cards respond only to an intentional tap/click, never to hovering. */
+    .eval-card {
+      cursor: pointer;
+      transition: transform .24s ease, box-shadow .24s ease, border-color .24s ease !important;
+      touch-action: manipulation
+    }
+
+    .eval-card:hover {
+      transform: none !important;
+      box-shadow: 0 7px 26px rgba(22, 50, 79, .045)
+    }
+
+    .eval-card.is-tapped,
+    .eval-card.is-tapped:hover {
+      transform: translateY(-5px) scale(1.008) !important;
+      box-shadow: 0 16px 34px rgba(22, 50, 79, .12);
+      border-color: rgba(42, 140, 130, .36)
+    }
+
+    /* Restore the original, subtler 02 numeral. */
+    .eval-card-feature:after {
+      font-size: clamp(95px, 11vw, 160px);
+      right: 22px;
+      top: 6px;
+      color: rgba(42, 140, 130, .075)
+    }
+
+    :root.dark .eval-card-feature:after {
+      color: rgba(117, 201, 190, .07)
+    }
+
+    @media(max-width:650px) {
+      .eval-card-feature:after {
+        font-size: 110px;
+        right: 13px;
+        top: 6px;
+        color: rgba(42, 140, 130, .075)
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      .eval-card {
+        transition: none !important
+      }
+
+      .eval-card.is-tapped {
+        transform: none !important
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div class="scrollbar" id="scrollbar"></div>
+  <div class="scrollbar" id="scrollbar"></div>
   <header class="signature-nav" id="signatureNav"><a aria-label="SIAQ home" class="signature-brand" href="index.html">
-<picture class="nav-logo-picture"><img alt="SIAQ logo" class="siaq-real-logo nav-real-logo" src="assets/siaq-logo-navy.png"/></picture><span class="signature-name"><b>SIAQ</b><small>Social Intelligence Alignment
+      <picture class="nav-logo-picture"><img alt="SIAQ logo" class="siaq-real-logo nav-real-logo"
+          src="assets/siaq-logo-navy.png" /></picture><span class="signature-name"><b>SIAQ</b><small>Social Intelligence
+          Alignment
           Quotient</small></span>
-</a>
-<nav aria-label="Primary navigation" class="signature-links">
-<a class="" href="index.html"><span>Home</span></a>
-<a class="" href="evaluation.html"><span>Evaluation</span></a>
-<a class="" href="history.html"><span>History</span></a>
-<a class="" href="leaderboard.html"><span>Leaderboard</span></a>
-<a class="active" aria-current="page" href="about.html"><span>About</span></a>
-</nav>
-<div class="nav-auth">
-<button aria-label="Switch theme" aria-pressed="false" class="theme-toggle" id="themeToggle" type="button"><span class="sun">☼</span><span class="moon">☾</span></button>
-<div class="profile-menu" id="profileMenu">
-<button aria-expanded="false" aria-label="Open profile menu" class="profile-avatar-btn" id="profileMenuButton" type="button">
-<svg aria-hidden="true" class="profile-user-icon" viewbox="0 0 24 24">
-<path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0"></path>
-</svg>
-</button>
-<div class="profile-dropdown" id="profileDropdown">
-<div class="profile-dropdown-head">
-<div><b id="navUserName">My Account</b><small id="navUserEmail"></small></div>
-</div>
-<a href="profile.html">Profile <span>→</span></a>
-<a href="history.html">History <span>→</span></a>
-<button id="logoutButton" type="button">Log out <span>↗</span></button>
-</div>
-</div>
-</div>
-</header>
-
-  
-<main class="about-page" id="main-content">
-  <section class="about-hero" aria-labelledby="about-title">
-    <div>
-      <div class="about-kicker">About SIAQ</div>
-      <h1 id="about-title">Beyond the<br><span>Response.</span></h1>
-      <p class="about-intro">SIAQ is a web-based AI evaluation platform that examines how conversational responses align with human expectations and socio-cultural values.</p>
-    </div>
-    
-  </section>
-  <section class="about-split" aria-labelledby="why-title">
-    <div><div class="about-kicker">Why SIAQ?</div><h2 class="about-section-title" id="why-title">Because context matters.</h2></div>
-    <p class="about-copy">A response can be technically correct yet socially inappropriate. SIAQ emphasizes evaluating AI beyond accuracy, considering how responses fit human and cultural contexts.</p>
-  </section>
-  <section class="about-vision" aria-labelledby="vision-title">
-    <div><div class="about-kicker">Our Vision</div><h2 class="about-section-title" id="vision-title">Towards more human-centered AI.</h2></div>
-    <p class="about-copy">To advance a future where conversational AI is not only intelligent, but also socially aware, culturally sensitive, and aligned with human values.</p>
-  </section>
-  <section class="team-section" aria-labelledby="team-title">
-    <div class="team-heading"><div><div class="about-kicker">The people behind SIAQ</div><h2 class="about-section-title" id="team-title">Meet the Team<span style="color:#2A8C82">.</span></h2></div></div>
-    <div class="team-grid">
-      <article class="team-card"><div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20"/></svg></div><h3 class="team-name">Yara Aldawsari</h3><div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="1" aria-label="LinkedIn profile for Yara Aldawsari (link to be added)" title="LinkedIn link coming soon" onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z"/></svg></a></article>
-      <article class="team-card"><div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20"/></svg></div><h3 class="team-name">Jood Aloqeely</h3><div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="2" aria-label="LinkedIn profile for Jood Aloqeely (link to be added)" title="LinkedIn link coming soon" onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z"/></svg></a></article>
-      <article class="team-card"><div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20"/></svg></div><h3 class="team-name">Jana Almughamis</h3><div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="3" aria-label="LinkedIn profile for Jana Almughamis (link to be added)" title="LinkedIn link coming soon" onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z"/></svg></a></article>
-      <article class="team-card"><div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20"/></svg></div><h3 class="team-name">Sarah Altamimi</h3><div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="4" aria-label="LinkedIn profile for Sarah Altamimi (link to be added)" title="LinkedIn link coming soon" onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z"/></svg></a></article>
-    </div>
-  </section>
-</main>
-<footer class="signature-footer refined-footer" id="footer">
-  <div class="footer-main">
-    <div class="footer-brand">
-      <picture class="footer-logo-picture">
-        <img class="siaq-real-logo footer-real-logo" src="assets/siaq-logo-navy.png" alt="SIAQ logo">
-      </picture>
-      <p>Evaluating conversational AI across appropriateness, positivity, and socio-cultural alignment.</p>
-      <a class="footer-email" href="mailto:siaq.alignment@gmail.com" aria-label="Email SIAQ">
-        <span class="footer-mail-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg></span>
-        <span>siaq.alignment@gmail.com</span>
-      </a>
-    </div>
-
-    <div class="footer-links-group">
-      <div class="footer-column">
-        <b>Explore</b>
-        <a href="index.html">Home</a>
-        <a href="evaluation.html">Evaluation</a>
-        <a href="history.html">History</a>
-        <a href="leaderboard.html">Leaderboard</a>
-      </div>
-      <div class="footer-column">
-        <b>SIAQ</b>
-        <a href="about.html">About</a>
-        <a href="profile.html">Profile</a>
-        <a href="index.html#framework">Framework</a>
-        <a href="index.html#process">Process</a>
+    </a>
+    <nav aria-label="Primary navigation" class="signature-links">
+      <a class="" href="index.html"><span>Home</span></a>
+      <a class="" href="evaluation.html"><span>Evaluation</span></a>
+      <a class="" href="history.html"><span>History</span></a>
+      <a class="" href="leaderboard.html"><span>Leaderboard</span></a>
+      <a class="active" aria-current="page" href="about.html"><span>About</span></a>
+    </nav>
+    <div class="nav-auth">
+      <button aria-label="Switch theme" aria-pressed="false" class="theme-toggle" id="themeToggle" type="button"><span
+          class="sun">☼</span><span class="moon">☾</span></button>
+      <div class="profile-menu" id="profileMenu">
+        <button aria-expanded="false" aria-label="Open profile menu" class="profile-avatar-btn" id="profileMenuButton"
+          type="button">
+          <svg aria-hidden="true" class="profile-user-icon" viewbox="0 0 24 24">
+            <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0"></path>
+          </svg>
+        </button>
+        <div class="profile-dropdown" id="profileDropdown">
+          <div class="profile-dropdown-head">
+            <div><b id="navUserName">My Account</b><small id="navUserEmail"></small></div>
+          </div>
+          <a href="profile.html">Profile <span>→</span></a>
+          <a href="history.html">History <span>→</span></a>
+          <button id="logoutButton" type="button">Log out <span>↗</span></button>
+        </div>
       </div>
     </div>
-  </div>
+  </header>
 
-  <div class="footer-bottom">
-    <span>© 2026 SIAQ. All rights reserved.</span>
-    <span>Social Intelligence Alignment Quotient</span>
-  </div>
-</footer>
-  
-<script>
+
+  <main class="about-page" id="main-content">
+    <section class="about-hero" aria-labelledby="about-title">
+      <div>
+        <div class="about-kicker">About SIAQ</div>
+        <h1 id="about-title">Beyond the<br><span>Response.</span></h1>
+        <p class="about-intro">SIAQ is a web-based AI evaluation platform that examines how conversational responses
+          align with human expectations and socio-cultural values.</p>
+      </div>
+
+    </section>
+    <section class="about-split" aria-labelledby="why-title">
+      <div>
+        <div class="about-kicker">Why SIAQ?</div>
+        <h2 class="about-section-title" id="why-title">Because context matters.</h2>
+      </div>
+      <p class="about-copy">A response can be technically correct yet socially inappropriate. SIAQ emphasizes evaluating
+        AI beyond accuracy, considering how responses fit human and cultural contexts.</p>
+    </section>
+    <section class="about-vision" aria-labelledby="vision-title">
+      <div>
+        <div class="about-kicker">Our Vision</div>
+        <h2 class="about-section-title" id="vision-title">Towards more human-centered AI.</h2>
+      </div>
+      <p class="about-copy">To advance a future where conversational AI is not only intelligent, but also socially
+        aware, culturally sensitive, and aligned with human values.</p>
+    </section>
+    <section class="eval-section" aria-labelledby="eval-title">
+      <div class="eval-heading">
+        <div class="about-kicker">OUR EVALUATION DIMENSIONS</div>
+        <h2 class="about-section-title" id="eval-title">Beyond Accuracy<span class="eval-dot">.</span></h2>
+        <p class="eval-lead">Three perspectives on how AI responds to people.</p>
+      </div>
+      <div class="eval-cards">
+        <article class="eval-card eval-reveal">
+          <div class="eval-card-top"><span class="eval-index">01 / CONTEXT</span></div>
+          <h3>Contextual<br>Appropriateness</h3>
+          <p class="eval-tagline">The right response for the right context.</p>
+          <p class="eval-desc">Evaluates how well a response matches the user’s intent, situation, and conversational
+            context.</p>
+          <div class="eval-bottom-line"></div>
+        </article>
+        <article class="eval-card eval-card-feature eval-reveal">
+          <div class="eval-card-top"><span class="eval-index">02 / COMMUNICATION</span></div>
+          <h3>Positivity<br>Alignment</h3>
+          <p class="eval-tagline">Supportive, realistic, and considerate.</p>
+          <p class="eval-desc">Evaluates whether a response maintains appropriate positivity without overlooking
+            concerns or offering unrealistic reassurance.</p>
+          <div class="eval-aspects">
+            <div class="eval-aspects-title">FOUR KEY ASPECTS</div>
+            <div class="eval-aspect"><strong>Dismissiveness</strong><span>Ignoring or disregarding concerns.</span>
+            </div>
+            <div class="eval-aspect"><strong>Minimization</strong><span>Downplaying the seriousness of a
+                situation.</span></div>
+            <div class="eval-aspect"><strong>Unrealistic Positivity</strong><span>Offering excessive or unfounded
+                reassurance.</span></div>
+            <div class="eval-aspect"><strong>Supportiveness</strong><span>Providing thoughtful and constructive
+                support.</span></div>
+          </div>
+          <div class="eval-bottom-line"></div>
+        </article>
+        <article class="eval-card eval-reveal">
+          <div class="eval-card-top"><span class="eval-index">03 / CULTURE</span></div>
+          <h3>Socio-Cultural<br>Alignment</h3>
+          <p class="eval-tagline">Respecting cultural and social differences.</p>
+          <p class="eval-desc">Evaluates whether a response considers relevant cultural values, social norms, and
+            expectations.</p>
+          <div class="eval-bottom-line"></div>
+        </article>
+      </div>
+      <div class="eval-foot eval-reveal">
+        <div><span class="eval-foot-label">WHY IT MATTERS</span>
+          <p>Looking beyond a single score helps reveal each model’s strengths and limitations.</p>
+        </div><a href="https://www.unesco.org/en/artificial-intelligence/recommendation-ethics" target="_blank"
+          rel="noopener noreferrer">Informed by UNESCO’s AI ethics principles <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+    <section class="team-section" aria-labelledby="team-title">
+      <div class="team-heading">
+        <div>
+          <div class="about-kicker">The people behind SIAQ</div>
+          <h2 class="about-section-title" id="team-title">Meet the Team<span style="color:#2A8C82">.</span></h2>
+        </div>
+      </div>
+      <div class="team-grid">
+        <article class="team-card">
+          <div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.3" />
+              <path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20" />
+            </svg></div>
+          <h3 class="team-name">Yara Aldawsari</h3>
+          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="1"
+            aria-label="LinkedIn profile for Yara Aldawsari (link to be added)" title="LinkedIn link coming soon"
+            onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
+              aria-hidden="true">
+              <path
+                d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z" />
+            </svg></a>
+        </article>
+        <article class="team-card">
+          <div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.3" />
+              <path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20" />
+            </svg></div>
+          <h3 class="team-name">Jood Aloqeely</h3>
+          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="2"
+            aria-label="LinkedIn profile for Jood Aloqeely (link to be added)" title="LinkedIn link coming soon"
+            onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
+              aria-hidden="true">
+              <path
+                d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z" />
+            </svg></a>
+        </article>
+        <article class="team-card">
+          <div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.3" />
+              <path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20" />
+            </svg></div>
+          <h3 class="team-name">Jana Almughamis</h3>
+          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="3"
+            aria-label="LinkedIn profile for Jana Almughamis (link to be added)" title="LinkedIn link coming soon"
+            onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
+              aria-hidden="true">
+              <path
+                d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z" />
+            </svg></a>
+        </article>
+        <article class="team-card">
+          <div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.3" />
+              <path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20" />
+            </svg></div>
+          <h3 class="team-name">Sarah Altamimi</h3>
+          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="4"
+            aria-label="LinkedIn profile for Sarah Altamimi (link to be added)" title="LinkedIn link coming soon"
+            onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
+              aria-hidden="true">
+              <path
+                d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z" />
+            </svg></a>
+        </article>
+      </div>
+    </section>
+  </main>
+  <footer class="signature-footer refined-footer" id="footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <picture class="footer-logo-picture">
+          <img class="siaq-real-logo footer-real-logo" src="assets/siaq-logo-navy.png" alt="SIAQ logo">
+        </picture>
+        <p>Evaluating conversational AI across appropriateness, positivity, and socio-cultural alignment.</p>
+        <a class="footer-email" href="mailto:siaq.alignment@gmail.com" aria-label="Email SIAQ">
+          <span class="footer-mail-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m2 6 10 7 10-7" />
+            </svg></span>
+          <span>siaq.alignment@gmail.com</span>
+        </a>
+      </div>
+
+      <div class="footer-links-group">
+        <div class="footer-column">
+          <b>Explore</b>
+          <a href="index.html">Home</a>
+          <a href="evaluation.html">Evaluation</a>
+          <a href="history.html">History</a>
+          <a href="leaderboard.html">Leaderboard</a>
+        </div>
+        <div class="footer-column">
+          <b>SIAQ</b>
+          <a href="about.html">About</a>
+          <a href="profile.html">Profile</a>
+          <a href="index.html#framework">Framework</a>
+          <a href="index.html#process">Process</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 SIAQ. All rights reserved.</span>
+      <span>Social Intelligence Alignment Quotient</span>
+    </div>
+  </footer>
+
+  <script>
     (function () {
       const root = document.documentElement, toggle = document.getElementById('themeToggle');
       const saved = localStorage.getItem('siaq-theme'); const dark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -1997,5 +4223,23 @@ body{background:linear-gradient(150deg,#F6F9FA 0%,#EDF5F4 45%,#F6F9FA 100%);}
       function onScroll() { document.getElementById('signatureNav').classList.toggle('is-compact', scrollY > 30); const max = document.documentElement.scrollHeight - innerHeight; document.getElementById('scrollbar').style.width = (max > 0 ? scrollY / max * 100 : 0) + '%' } addEventListener('scroll', onScroll, { passive: true }); onScroll();
     })();
   </script>
+
+
+  <script>
+    /* A short, deliberate press animation for the evaluation cards only. */
+    (() => {
+      document.querySelectorAll('.eval-cards .eval-card').forEach(card => {
+        let reset;
+        card.addEventListener('click', () => {
+          card.classList.remove('is-tapped');
+          void card.offsetWidth;
+          card.classList.add('is-tapped');
+          clearTimeout(reset);
+          reset = setTimeout(() => card.classList.remove('is-tapped'), 550);
+        });
+      });
+    })();
+  </script>
 </body>
+
 </html>
