@@ -407,12 +407,7 @@
       color: #a83e3e
     }
 
-    .footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 12px;
-      color: var(--muted)
-    }
+
 
     [hidden] {
       display: none !important
@@ -535,7 +530,7 @@
     }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: "DM Sans", sans-serif;
       background: linear-gradient(150deg, #F6F9FA, #EDF5F4 45%, #F6F9FA);
       color: var(--heading);
       min-height: 100vh
@@ -837,80 +832,27 @@
       background: var(--mist)
     }
 
-    .signature-footer {
-      position: relative;
-      max-width: 1240px;
-      margin: 20px auto 18px;
-      width: calc(100% - 36px);
-      border-radius: 28px;
-      overflow: hidden;
-      background: linear-gradient(125deg, #16324F, #214D69 46%, #2A8C82);
-      color: #F6F9FA;
-      box-shadow: 0 30px 80px rgba(22, 50, 79, .18)
-    }
 
-    .footer-accent {
-      height: 4px;
-      background: linear-gradient(90deg, #75C9BE, #F6F9FA, #75C9BE)
-    }
 
-    .footer-main {
-      padding: 50px 48px 40px;
-      display: grid;
-      grid-template-columns: minmax(260px, 1.7fr) repeat(2, minmax(120px, .7fr));
-      gap: 50px
-    }
 
-    .footer-logo-picture {
-      display: flex;
-      height: 48px;
-      align-items: center;
-      margin-bottom: 15px
-    }
 
-    .footer-real-logo {
-      width: 104px;
-      max-height: 46px;
-      object-fit: contain
-    }
 
-    .footer-brand p {
-      max-width: 390px;
-      font-size: 12px;
-      line-height: 1.8;
-      color: #DDEFF0
-    }
 
-    .footer-column {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px
-    }
 
-    .footer-column b {
-      font-size: 12px;
-      color: #fff
-    }
 
-    .footer-column a {
-      font-size: 11px;
-      color: #DDEFF0
-    }
 
-    .footer-column a:hover {
-      color: white
-    }
 
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      border-top: 1px solid rgba(255, 255, 255, .18);
-      padding: 20px 48px;
-      font-size: 10px;
-      color: #EAF7F5
-    }
+
+
+
+
+
+
+
+
+
+
+
 
     :root.dark {
       --paper: #01142B;
@@ -956,7 +898,7 @@
     }
 
     :root.dark .nav-real-logo {
-      content: url('assets/siaq-logo-white.png')
+      content: url("assets/siaq-logo-white.png")
     }
 
     :root.dark .panel {
@@ -992,9 +934,7 @@
       color: #FFC4C4
     }
 
-    :root.dark .signature-footer {
-      background: linear-gradient(125deg, #01142B, #083443 48%, #176A65)
-    }
+
 
     @media(max-width:1000px) {
       .signature-nav {
@@ -1014,9 +954,7 @@
         padding: 10px 8px
       }
 
-      .footer-main {
-        gap: 25px
-      }
+
     }
 
     @media(max-width:650px) {
@@ -1057,190 +995,1580 @@
         gap: 4px
       }
 
-      .footer-main {
-        grid-template-columns: 1fr 1fr;
-        padding: 35px 23px;
-        gap: 25px
-      }
 
-      .footer-brand {
-        grid-column: 1/-1
-      }
 
-      .footer-bottom {
-        padding: 18px 23px;
-        flex-direction: column;
-        text-align: center;
-        gap: 6px
-      }
 
-      .signature-footer {
-        width: calc(100% - 20px)
-      }
+
+
+
+
 
       .hero {
         min-height: 210px
       }
     }
   </style>
-<style>
-/* Index navbar parity overrides — scoped to navigation, no Firebase changes */
-.signature-nav{
-  position:fixed;z-index:90;top:18px;left:50%;
-  transform:translateX(-50%);
-  width:min(1180px,calc(100% - 34px));
-  height:74px;
-  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  padding:8px 9px 8px 20px;
-  border:1px solid rgba(49,93,125,.14);
-  border-radius:22px;
-  background:rgba(246,249,250,.82);
-  backdrop-filter:blur(26px);
-  -webkit-backdrop-filter:blur(26px);
-  box-shadow:0 18px 55px rgba(22,50,79,.10),inset 0 1px 0 rgba(246,249,250,.95);
-  transition:height .3s,top .3s,background .3s,box-shadow .3s,border-radius .3s;
-}
-.signature-nav.is-compact{
-  top:10px;height:64px;border-radius:18px;
-  background:rgba(246,249,250,.94);
-  box-shadow:0 20px 62px rgba(22,50,79,.15);
-}
-.signature-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy);width:max-content}
-.signature-name{display:flex;flex-direction:column}
-.signature-name b{font:800 17px Manrope;letter-spacing:-.04em;line-height:1}
-.signature-name small{margin-top:4px;color:var(--blue);font-size:6px;letter-spacing:.035em}
-.signature-links{
-  height:48px;padding:5px;
-  display:flex;align-items:center;gap:2px;
-  border-radius:15px;
-  background:rgba(228,236,239,.62);
-  box-shadow:inset 0 0 0 1px rgba(49,93,125,.07);
-}
-.signature-links a{
-  position:relative;padding:12px 17px;border-radius:11px;
-  color:var(--blue);text-decoration:none;
-  font-size:8px;font-weight:700;letter-spacing:.01em;
-  transition:color .25s,background .25s,box-shadow .25s,transform .25s;
-}
-.signature-links a:before{
-  content:"";position:absolute;left:50%;bottom:6px;
-  width:4px;height:4px;border-radius:50%;background:var(--teal);
-  transform:translateX(-50%) scale(0);transition:.25s;
-}
-.signature-links a:hover{color:var(--navy);transform:translateY(-1px)}
-.signature-links a.active{
-  color:var(--navy);background:var(--paper);
-  box-shadow:0 7px 20px rgba(22,50,79,.09);
-}
-.signature-links a.active:before{transform:translateX(-50%) scale(1)}
-@media (max-width:900px){.signature-nav{grid-template-columns:1fr auto;width:calc(100% - 22px);padding-left:15px}.signature-links{display:none}.signature-name small{display:none}}
-@media (max-width:560px){.signature-nav{height:62px;top:10px}.signature-name b{font-size:15px}}
-.nav-auth{justify-self:end;display:flex;align-items:center;gap:6px}
-@media (max-width:900px){.nav-auth{margin-left:auto}}
-@media (max-width:650px){.signature-name small{display:none}}
-.theme-toggle{width:40px;height:40px;flex:0 0 40px;padding:0;position:relative;border:1px solid var(--line);border-radius:12px;background:rgba(246,249,250,.74);color:var(--navy);cursor:pointer;overflow:hidden;transition:background .26s,border-color .26s,color .26s,box-shadow .26s}
-.theme-toggle span{position:absolute;inset:0;display:grid;place-items:center;font-size:15px;transition:opacity .26s,transform .26s}
-.theme-toggle .sun{opacity:0;transform:rotate(70deg) scale(.65)}
-.theme-toggle .moon{opacity:1;transform:none}
-:root.dark .signature-nav{background:rgba(1,20,43,.82);border-color:rgba(117,201,190,.16);box-shadow:0 18px 55px rgba(0,8,22,.34),inset 0 1px 0 rgba(117,201,190,.07)}
-:root.dark .signature-nav.is-compact{background:rgba(1,20,43,.94);box-shadow:0 20px 62px rgba(0,8,22,.42)}
-:root.dark .signature-links{background:rgba(14,48,60,.62);box-shadow:inset 0 0 0 1px rgba(117,201,190,.08)}
-:root.dark .signature-links a{color:#E8F5F1}
-:root.dark .signature-links a:hover{color:#F7FCFB}
-:root.dark .signature-links a.active{color:#F7FCFB;background:rgba(117,201,190,.13);box-shadow:none}
-:root.dark .signature-brand{color:#F7FCFB}
-:root.dark .signature-name small{color:#B9DAD4}
-:root.dark .theme-toggle{background:rgba(14,48,60,.70);border-color:rgba(117,201,190,.22);color:#75C9BE}
-:root.dark .theme-toggle .sun{opacity:1;transform:none}
-:root.dark .theme-toggle .moon{opacity:0;transform:rotate(-70deg) scale(.65)}
-@media (prefers-reduced-motion:reduce){.theme-toggle,.theme-toggle span{transition:none!important}}
-.nav-auth-profile{display:none;text-decoration:none;color:var(--navy);font-size:8px;font-weight:700;padding:9px 11px;border-radius:10px;background:rgba(117,201,190,.13)}
-body.demo-logged-in .nav-auth-profile{display:block}
-.signature-nav{position:fixed}
-.nav-logo-picture{display:flex;align-items:center;width:38px;height:34px;flex:0 0 38px;overflow:hidden}
-.nav-real-logo{display:block;width:38px;height:auto;max-height:31px;object-fit:contain;object-position:left center}
-:root.dark .signature-links a{color:var(--dark-text-secondary)!important}
-:root.dark .signature-links a:hover,:root.dark .signature-links a.active{color:#fff!important}
-.signature-nav{grid-template-columns:minmax(225px,1fr) auto minmax(225px,1fr)}
-.signature-links{gap:2px}
-.signature-links a{padding-left:10px;padding-right:10px}
-.profile-menu{position:relative;display:none}
-body.demo-logged-in .profile-menu{display:block}
-.profile-avatar-btn{width:38px;height:38px;padding:0;border:1px solid rgba(42,140,130,.24);border-radius:12px;background:transparent;cursor:pointer;display:grid;place-items:center}
-.profile-avatar-btn:hover,.profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.16)}
-.profile-dropdown{position:absolute;right:0;top:48px;width:235px;padding:9px;border:1px solid var(--line);border-radius:16px;background:rgba(246,249,250,.97);box-shadow:0 24px 70px rgba(22,50,79,.18);backdrop-filter:blur(20px);opacity:0;visibility:hidden;transform:translateY(-7px);transition:.2s;z-index:100}
-.profile-menu.open .profile-dropdown{opacity:1;visibility:visible;transform:none}
-.profile-dropdown-head{display:flex;align-items:center;gap:11px;padding:10px 9px 13px;border-bottom:1px solid var(--line);margin-bottom:5px}
-.profile-dropdown-head b{display:block;font:800 10px Manrope}
-.profile-dropdown-head small{display:block;font-size:7px;color:var(--blue);margin-top:3px}
-.profile-dropdown>a,.profile-dropdown>button{width:100%;box-sizing:border-box;border:0;background:transparent;text-decoration:none;color:var(--navy);font:700 8px Manrope;padding:10px 9px;border-radius:9px;display:flex;justify-content:space-between;cursor:pointer}
-.profile-dropdown>a:hover,.profile-dropdown>button:hover{background:var(--mist)}
-.profile-dropdown>button{color:#9a3d3d}
-:root.dark .profile-dropdown{background:rgba(6,40,58,.97);border-color:rgba(117,201,190,.20)}
-:root.dark .profile-dropdown-head b,:root.dark .profile-dropdown>a{color:#F7FCFB!important}
-:root.dark .profile-dropdown-head small{color:#B9DAD4!important}
-@media (max-width:1100px){.signature-name small{display:none}.signature-nav{grid-template-columns:auto 1fr auto}.signature-links a{padding-left:7px;padding-right:7px}}
-@media (max-width:850px){.signature-links a[href="history.html"],.signature-links a[href="leaderboard.html"]{display:none}}
-.profile-menu{display:block!important;position:relative}
-.profile-avatar-btn{display:grid!important;place-items:center;width:38px;height:38px;border-radius:11px;border:1px solid rgba(42,140,130,.28);background:rgba(246,249,250,.55);color:var(--navy);cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
-.profile-avatar-btn:hover,.profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.18);border-color:rgba(42,140,130,.52);transform:translateY(-1px)}
-.profile-user-icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.profile-dropdown-head{padding:10px 9px 12px}
-.profile-dropdown-head b{font-size:9px}
-.profile-dropdown-head small{font-size:7px}
-:root.dark .profile-avatar-btn{background:rgba(117,201,190,.08);border-color:rgba(117,201,190,.28);color:#F7FCFB}
-:root.dark .profile-avatar-btn:hover,:root.dark .profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.16);border-color:rgba(117,201,190,.55)}
-.signature-nav{z-index:9999!important;pointer-events:auto!important}
-.signature-nav *{pointer-events:auto!important}
-.signature-links{position:relative!important;z-index:2!important}
-.signature-links a{pointer-events:auto!important;cursor:pointer!important}
-.nav-auth{position:relative!important;z-index:3!important}
-.theme-toggle,.profile-avatar-btn{pointer-events:auto!important;cursor:pointer!important}
-@media (max-width:900px){.signature-nav{grid-template-columns:auto minmax(0,1fr) auto!important;gap:8px!important}.signature-links{display:flex!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap!important;scrollbar-width:none;justify-self:stretch}.signature-links::-webkit-scrollbar{display:none}.signature-links a{flex:0 0 auto;padding:10px 9px!important}}
-@media (max-width:650px){.signature-name{display:none!important}.nav-logo-picture{width:30px!important;flex-basis:30px!important}.nav-real-logo{width:30px!important}.signature-nav{padding-left:10px!important;padding-right:8px!important}.signature-links a{font-size:7px!important;padding:9px 7px!important}.theme-toggle{width:34px!important;height:34px!important;flex-basis:34px!important}.profile-avatar-btn{width:34px!important;height:34px!important}}
-html.dark .signature-nav,html[data-theme="dark"] .signature-nav{
-  background:rgba(1,20,43,.90)!important;border-color:rgba(117,201,190,.20)!important
-}
-body{font-family:"DM Sans",sans-serif;}
-.signature-nav,.signature-nav *{font-family:"DM Sans",sans-serif;}
-.signature-name b{font-family:"Manrope",sans-serif;}
-:root.dark .signature-nav{--navy:#F7FCFB;--blue:#E8F5F1;--teal:#75C9BE;--mint:#58B7AA;--paper:#01142B;--mist:#0E303C;--line:rgba(117,201,190,.18);}
+  <style>
+    /* Index navbar parity overrides — scoped to navigation, no Firebase changes */
+    .signature-nav {
+      position: fixed;
+      z-index: 90;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - 34px));
+      height: 74px;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 8px 9px 8px 20px;
+      border: 1px solid rgba(49, 93, 125, .14);
+      border-radius: 22px;
+      background: rgba(246, 249, 250, .82);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
+      box-shadow: 0 18px 55px rgba(22, 50, 79, .10), inset 0 1px 0 rgba(246, 249, 250, .95);
+      transition: height .3s, top .3s, background .3s, box-shadow .3s, border-radius .3s;
+    }
 
-</style>
+    .signature-nav.is-compact {
+      top: 10px;
+      height: 64px;
+      border-radius: 18px;
+      background: rgba(246, 249, 250, .94);
+      box-shadow: 0 20px 62px rgba(22, 50, 79, .15);
+    }
+
+    .signature-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--navy);
+      width: max-content
+    }
+
+    .signature-name {
+      display: flex;
+      flex-direction: column
+    }
+
+    .signature-name b {
+      font: 800 17px Manrope;
+      letter-spacing: -.04em;
+      line-height: 1
+    }
+
+    .signature-name small {
+      margin-top: 4px;
+      color: var(--blue);
+      font-size: 6px;
+      letter-spacing: .035em
+    }
+
+    .signature-links {
+      height: 48px;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      border-radius: 15px;
+      background: rgba(228, 236, 239, .62);
+      box-shadow: inset 0 0 0 1px rgba(49, 93, 125, .07);
+    }
+
+    .signature-links a {
+      position: relative;
+      padding: 12px 17px;
+      border-radius: 11px;
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      transition: color .25s, background .25s, box-shadow .25s, transform .25s;
+    }
+
+    .signature-links a:before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 6px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--teal);
+      transform: translateX(-50%) scale(0);
+      transition: .25s;
+    }
+
+    .signature-links a:hover {
+      color: var(--navy);
+      transform: translateY(-1px)
+    }
+
+    .signature-links a.active {
+      color: var(--navy);
+      background: var(--paper);
+      box-shadow: 0 7px 20px rgba(22, 50, 79, .09);
+    }
+
+    .signature-links a.active:before {
+      transform: translateX(-50%) scale(1)
+    }
+
+    @media (max-width:900px) {
+      .signature-nav {
+        grid-template-columns: 1fr auto;
+        width: calc(100% - 22px);
+        padding-left: 15px
+      }
+
+      .signature-links {
+        display: none
+      }
+
+      .signature-name small {
+        display: none
+      }
+    }
+
+    @media (max-width:560px) {
+      .signature-nav {
+        height: 62px;
+        top: 10px
+      }
+
+      .signature-name b {
+        font-size: 15px
+      }
+    }
+
+    .nav-auth {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    @media (max-width:900px) {
+      .nav-auth {
+        margin-left: auto
+      }
+    }
+
+    @media (max-width:650px) {
+      .signature-name small {
+        display: none
+      }
+    }
+
+    .theme-toggle {
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      padding: 0;
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(246, 249, 250, .74);
+      color: var(--navy);
+      cursor: pointer;
+      overflow: hidden;
+      transition: background .26s, border-color .26s, color .26s, box-shadow .26s
+    }
+
+    .theme-toggle span {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+      transition: opacity .26s, transform .26s
+    }
+
+    .theme-toggle .sun {
+      opacity: 0;
+      transform: rotate(70deg) scale(.65)
+    }
+
+    .theme-toggle .moon {
+      opacity: 1;
+      transform: none
+    }
+
+    :root.dark .signature-nav {
+      background: rgba(1, 20, 43, .82);
+      border-color: rgba(117, 201, 190, .16);
+      box-shadow: 0 18px 55px rgba(0, 8, 22, .34), inset 0 1px 0 rgba(117, 201, 190, .07)
+    }
+
+    :root.dark .signature-nav.is-compact {
+      background: rgba(1, 20, 43, .94);
+      box-shadow: 0 20px 62px rgba(0, 8, 22, .42)
+    }
+
+    :root.dark .signature-links {
+      background: rgba(14, 48, 60, .62);
+      box-shadow: inset 0 0 0 1px rgba(117, 201, 190, .08)
+    }
+
+    :root.dark .signature-links a {
+      color: #E8F5F1
+    }
+
+    :root.dark .signature-links a:hover {
+      color: #F7FCFB
+    }
+
+    :root.dark .signature-links a.active {
+      color: #F7FCFB;
+      background: rgba(117, 201, 190, .13);
+      box-shadow: none
+    }
+
+    :root.dark .signature-brand {
+      color: #F7FCFB
+    }
+
+    :root.dark .signature-name small {
+      color: #B9DAD4
+    }
+
+    :root.dark .theme-toggle {
+      background: rgba(14, 48, 60, .70);
+      border-color: rgba(117, 201, 190, .22);
+      color: #75C9BE
+    }
+
+    :root.dark .theme-toggle .sun {
+      opacity: 1;
+      transform: none
+    }
+
+    :root.dark .theme-toggle .moon {
+      opacity: 0;
+      transform: rotate(-70deg) scale(.65)
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+
+      .theme-toggle,
+      .theme-toggle span {
+        transition: none !important
+      }
+    }
+
+    .nav-auth-profile {
+      display: none;
+      text-decoration: none;
+      color: var(--navy);
+      font-size: 8px;
+      font-weight: 700;
+      padding: 9px 11px;
+      border-radius: 10px;
+      background: rgba(117, 201, 190, .13)
+    }
+
+    body.demo-logged-in .nav-auth-profile {
+      display: block
+    }
+
+    .signature-nav {
+      position: fixed
+    }
+
+    .nav-logo-picture {
+      display: flex;
+      align-items: center;
+      width: 38px;
+      height: 34px;
+      flex: 0 0 38px;
+      overflow: hidden
+    }
+
+    .nav-real-logo {
+      display: block;
+      width: 38px;
+      height: auto;
+      max-height: 31px;
+      object-fit: contain;
+      object-position: left center
+    }
+
+    :root.dark .signature-links a {
+      color: var(--dark-text-secondary) !important
+    }
+
+    :root.dark .signature-links a:hover,
+    :root.dark .signature-links a.active {
+      color: #fff !important
+    }
+
+    .signature-nav {
+      grid-template-columns: minmax(225px, 1fr) auto minmax(225px, 1fr)
+    }
+
+    .signature-links {
+      gap: 2px
+    }
+
+    .signature-links a {
+      padding-left: 10px;
+      padding-right: 10px
+    }
+
+    .profile-menu {
+      position: relative;
+      display: none
+    }
+
+    body.demo-logged-in .profile-menu {
+      display: block
+    }
+
+    .profile-avatar-btn {
+      width: 38px;
+      height: 38px;
+      padding: 0;
+      border: 1px solid rgba(42, 140, 130, .24);
+      border-radius: 12px;
+      background: transparent;
+      cursor: pointer;
+      display: grid;
+      place-items: center
+    }
+
+    .profile-avatar-btn:hover,
+    .profile-avatar-btn[aria-expanded="true"] {
+      background: rgba(117, 201, 190, .16)
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      right: 0;
+      top: 48px;
+      width: 235px;
+      padding: 9px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(246, 249, 250, .97);
+      box-shadow: 0 24px 70px rgba(22, 50, 79, .18);
+      backdrop-filter: blur(20px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-7px);
+      transition: .2s;
+      z-index: 100
+    }
+
+    .profile-menu.open .profile-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: none
+    }
+
+    .profile-dropdown-head {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 9px 13px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 5px
+    }
+
+    .profile-dropdown-head b {
+      display: block;
+      font: 800 10px Manrope
+    }
+
+    .profile-dropdown-head small {
+      display: block;
+      font-size: 7px;
+      color: var(--blue);
+      margin-top: 3px
+    }
+
+    .profile-dropdown>a,
+    .profile-dropdown>button {
+      width: 100%;
+      box-sizing: border-box;
+      border: 0;
+      background: transparent;
+      text-decoration: none;
+      color: var(--navy);
+      font: 700 8px Manrope;
+      padding: 10px 9px;
+      border-radius: 9px;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer
+    }
+
+    .profile-dropdown>a:hover,
+    .profile-dropdown>button:hover {
+      background: var(--mist)
+    }
+
+    .profile-dropdown>button {
+      color: #9a3d3d
+    }
+
+    :root.dark .profile-dropdown {
+      background: rgba(6, 40, 58, .97);
+      border-color: rgba(117, 201, 190, .20)
+    }
+
+    :root.dark .profile-dropdown-head b,
+    :root.dark .profile-dropdown>a {
+      color: #F7FCFB !important
+    }
+
+    :root.dark .profile-dropdown-head small {
+      color: #B9DAD4 !important
+    }
+
+    @media (max-width:1100px) {
+      .signature-name small {
+        display: none
+      }
+
+      .signature-nav {
+        grid-template-columns: auto 1fr auto
+      }
+
+      .signature-links a {
+        padding-left: 7px;
+        padding-right: 7px
+      }
+    }
+
+    @media (max-width:850px) {
+
+      .signature-links a[href="history.html"],
+      .signature-links a[href="leaderboard.html"] {
+        display: none
+      }
+    }
+
+    .profile-menu {
+      display: block !important;
+      position: relative
+    }
+
+    .profile-avatar-btn {
+      display: grid !important;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border-radius: 11px;
+      border: 1px solid rgba(42, 140, 130, .28);
+      background: rgba(246, 249, 250, .55);
+      color: var(--navy);
+      cursor: pointer;
+      transition: background .2s, border-color .2s, transform .2s
+    }
+
+    .profile-avatar-btn:hover,
+    .profile-avatar-btn[aria-expanded="true"] {
+      background: rgba(117, 201, 190, .18);
+      border-color: rgba(42, 140, 130, .52);
+      transform: translateY(-1px)
+    }
+
+    .profile-user-icon {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round
+    }
+
+    .profile-dropdown-head {
+      padding: 10px 9px 12px
+    }
+
+    .profile-dropdown-head b {
+      font-size: 9px
+    }
+
+    .profile-dropdown-head small {
+      font-size: 7px
+    }
+
+    :root.dark .profile-avatar-btn {
+      background: rgba(117, 201, 190, .08);
+      border-color: rgba(117, 201, 190, .28);
+      color: #F7FCFB
+    }
+
+    :root.dark .profile-avatar-btn:hover,
+    :root.dark .profile-avatar-btn[aria-expanded="true"] {
+      background: rgba(117, 201, 190, .16);
+      border-color: rgba(117, 201, 190, .55)
+    }
+
+    .signature-nav {
+      z-index: 9999 !important;
+      pointer-events: auto !important
+    }
+
+    .signature-nav * {
+      pointer-events: auto !important
+    }
+
+    .signature-links {
+      position: relative !important;
+      z-index: 2 !important
+    }
+
+    .signature-links a {
+      pointer-events: auto !important;
+      cursor: pointer !important
+    }
+
+    .nav-auth {
+      position: relative !important;
+      z-index: 3 !important
+    }
+
+    .theme-toggle,
+    .profile-avatar-btn {
+      pointer-events: auto !important;
+      cursor: pointer !important
+    }
+
+    @media (max-width:900px) {
+      .signature-nav {
+        grid-template-columns: auto minmax(0, 1fr) auto !important;
+        gap: 8px !important
+      }
+
+      .signature-links {
+        display: flex !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+        scrollbar-width: none;
+        justify-self: stretch
+      }
+
+      .signature-links::-webkit-scrollbar {
+        display: none
+      }
+
+      .signature-links a {
+        flex: 0 0 auto;
+        padding: 10px 9px !important
+      }
+    }
+
+    @media (max-width:650px) {
+      .signature-name {
+        display: none !important
+      }
+
+      .nav-logo-picture {
+        width: 30px !important;
+        flex-basis: 30px !important
+      }
+
+      .nav-real-logo {
+        width: 30px !important
+      }
+
+      .signature-nav {
+        padding-left: 10px !important;
+        padding-right: 8px !important
+      }
+
+      .signature-links a {
+        font-size: 7px !important;
+        padding: 9px 7px !important
+      }
+
+      .theme-toggle {
+        width: 34px !important;
+        height: 34px !important;
+        flex-basis: 34px !important
+      }
+
+      .profile-avatar-btn {
+        width: 34px !important;
+        height: 34px !important
+      }
+    }
+
+    html.dark .signature-nav,
+    html[data-theme="dark"] .signature-nav {
+      background: rgba(1, 20, 43, .90) !important;
+      border-color: rgba(117, 201, 190, .20) !important
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .signature-nav,
+    .signature-nav * {
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .signature-name b {
+      font-family: "Manrope", sans-serif;
+    }
+
+    :root.dark .signature-nav {
+      --navy: #F7FCFB;
+      --blue: #E8F5F1;
+      --teal: #75C9BE;
+      --mint: #58B7AA;
+      --paper: #01142B;
+      --mist: #0E303C;
+      --line: rgba(117, 201, 190, .18);
+    }
+  </style>
+  <style>
+    /* Footer only — extracted from SIAQ index reference */
+    .signature-footer {
+      width: calc(100% - 36px);
+      max-width: 1240px;
+      min-height: 370px;
+      margin: 90px auto 18px;
+      padding: 0 54px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      background: var(--navy);
+      color: var(--paper);
+      box-shadow: 0 40px 110px rgba(22, 50, 79, .23);
+    }
+
+    .footer-art {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden
+    }
+
+    .footer-disc {
+      position: absolute;
+      border-radius: 50%
+    }
+
+    .footer-orbit {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(246, 249, 250, .12)
+    }
+
+    .footer-main {
+      min-height: 290px;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr auto 60px;
+      gap: 40px;
+      align-items: center;
+    }
+
+    @media (max-width:900px) {
+      .signature-footer {
+        width: calc(100% - 22px);
+        padding: 0 28px;
+        border-radius: 27px
+      }
+
+      .footer-main {
+        grid-template-columns: 1fr 50px
+      }
+    }
+
+    @media (max-width:560px) {
+      .signature-footer {
+        min-height: 350px;
+        margin-top: 55px;
+        padding: 0 22px
+      }
+
+      .footer-main {
+        min-height: 275px;
+        grid-template-columns: 1fr 44px;
+        gap: 10px
+      }
+    }
+
+    :root.dark .signature-footer {
+      background: radial-gradient(circle at 86% 0%, rgba(42, 140, 130, .24), transparent 30%), linear-gradient(120deg, #06283A 0%, #0B3540 55%, #01142B 100%);
+      border-color: rgba(117, 201, 190, .14);
+      box-shadow: 0 40px 110px rgba(0, 8, 22, .42)
+    }
+
+    .footer-logo-picture {
+      display: flex;
+      align-items: center;
+      height: 48px;
+      margin-bottom: 15px
+    }
+
+    .footer-real-logo {
+      display: block;
+      width: 104px;
+      height: auto;
+      max-height: 46px;
+      object-fit: contain;
+      object-position: left center
+    }
+
+    .signature-footer {
+      display: block !important;
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 48px 48px 0 !important
+    }
+
+    .footer-main {
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-brand p {
+      max-width: 390px;
+      margin: 0;
+      color: var(--blue);
+      font-size: 10px;
+      line-height: 1.8
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px
+    }
+
+    .footer-column b {
+      font: 800 10px Manrope;
+      color: var(--navy);
+      margin-bottom: 5px
+    }
+
+    .footer-column a {
+      font-size: 9px;
+      color: var(--blue);
+      text-decoration: none;
+      transition: .22s
+    }
+
+    .footer-column a:hover {
+      color: var(--teal);
+      transform: translateX(2px)
+    }
+
+    .footer-bottom {
+      border-top: 1px solid var(--line);
+      padding: 18px 0 20px;
+      text-align: center;
+      color: var(--blue);
+      font-size: 8px
+    }
+
+    :root.dark .signature-footer {
+      background: radial-gradient(circle at 86% 0%, rgba(42, 140, 130, .24), transparent 30%), linear-gradient(120deg, #06283A 0%, #0B3540 55%, #01142B 100%) !important;
+      border-color: rgba(117, 201, 190, .14) !important
+    }
+
+    :root.dark .footer-column a {
+      color: var(--dark-text-secondary) !important
+    }
+
+    :root.dark .footer-column a:hover {
+      color: var(--dark-accent) !important
+    }
+
+    :root.dark .footer-bottom {
+      border-color: rgba(117, 201, 190, .15);
+      color: #B9DAD4 !important
+    }
+
+    @media (max-width:650px) {
+      .signature-footer {
+        padding: 38px 24px 0 !important
+      }
+    }
+
+    .signature-footer {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(125deg, #16324F 0%, #214D69 46%, #2A8C82 100%) !important;
+      border-top: 0 !important;
+      color: #F6F9FA !important;
+      padding-top: 0 !important
+    }
+
+    .footer-accent {
+      height: 4px;
+      background: linear-gradient(90deg, #75C9BE 0%, #F6F9FA 48%, #75C9BE 100%);
+      opacity: .9
+    }
+
+    @media (max-width: 650px) {
+      .signature-footer .footer-main {
+        grid-template-columns: 1fr !important;
+        row-gap: 24px !important;
+      }
+    }
+
+    .signature-footer .footer-brand p,
+    .signature-footer .footer-column a {
+      color: #DDEFF0 !important
+    }
+
+    .signature-footer .footer-column b {
+      color: #FFFFFF !important;
+      font-size: 10px
+    }
+
+    .signature-footer .footer-column a:hover {
+      color: #FFFFFF !important
+    }
+
+    .signature-footer .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #EAF7F5 !important;
+      border-top: 1px solid rgba(255, 255, 255, .18) !important
+    }
+
+    .signature-footer .footer-real-logo {
+      content: url("assets/siaq-logo-white.png")
+    }
+
+    :root.dark .signature-footer {
+      background: linear-gradient(125deg, #01142B 0%, #083443 48%, #176A65 100%) !important
+    }
+
+    :root.dark .signature-footer .footer-brand p,
+    :root.dark .signature-footer .footer-column a {
+      color: #D7E9E5 !important
+    }
+
+    .footer-email {
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      max-width: 100%;
+      gap: 9px;
+
+      margin: 12px 0 0 !important;
+      padding: 7px 12px;
+
+      border: 1px solid rgba(117, 201, 190, 0.22);
+      border-radius: 11px;
+      background: rgba(117, 201, 190, 0.075);
+
+      color: #F3FBFA !important;
+      font-family: "Manrope", sans-serif;
+      font-size: 10px !important;
+      font-weight: 500 !important;
+      line-height: 1.4;
+      text-decoration: none;
+
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .footer-mail-icon {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+
+      border-radius: 7px;
+      background: #75C9BE;
+      color: #01142B;
+    }
+
+    .footer-mail-icon svg {
+      display: block;
+      width: 15px;
+      height: 15px;
+    }
+
+    .footer-email:hover {
+      background: rgba(117, 201, 190, 0.14);
+      border-color: rgba(117, 201, 190, 0.42);
+    }
+
+    .signature-footer {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .signature-footer::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -105px;
+      top: -125px;
+      border: 1px solid rgba(117, 201, 190, 0.14);
+      border-radius: 58px;
+      transform: rotate(24deg);
+      pointer-events: none;
+    }
+
+    @media (max-width:650px) {
+      .signature-footer .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 6px
+      }
+    }
+
+    .signature-footer .footer-brand,
+    .signature-footer .footer-links {
+      align-self: start;
+    }
+
+    .signature-footer .footer-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .signature-footer .footer-email {
+      margin-top: 18px !important;
+    }
+
+    .signature-footer.refined-footer {
+      background: linear-gradient(115deg,
+          #092B42 0%,
+          #0A3950 55%,
+          #12665F 100%) !important;
+
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 0 42px !important;
+    }
+
+    .signature-footer.refined-footer .footer-accent {
+      margin-top: 18px;
+    }
+
+    .signature-footer.refined-footer .footer-main {
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 12px 0 22px !important;
+      margin: 0 auto !important;
+
+      display: grid !important;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr) !important;
+      column-gap: 65px !important;
+      align-items: start !important;
+    }
+
+    .signature-footer.refined-footer .footer-brand {
+      grid-column: auto !important;
+      align-self: start !important;
+      max-width: 440px !important;
+      margin: 0 !important;
+    }
+
+    .signature-footer.refined-footer .footer-links-group {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 45px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      align-self: start !important;
+    }
+
+    .signature-footer.refined-footer .footer-column {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 10px !important;
+    }
+
+    .signature-footer.refined-footer .footer-bottom {
+      min-height: 0 !important;
+      margin: 0 !important;
+      padding: 13px 0 16px !important;
+    }
+
+    @media (max-width: 850px) {
+      .signature-footer.refined-footer .footer-main {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+      }
+
+      .signature-footer.refined-footer .footer-links-group {
+        max-width: 440px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .signature-footer.refined-footer {
+        padding: 0 22px !important;
+      }
+
+      .signature-footer.refined-footer .footer-links-group {
+        gap: 20px !important;
+      }
+    }
+
+    .signature-footer.refined-footer {
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 24px 42px 0 !important;
+    }
+
+    .signature-footer.refined-footer .footer-main {
+      width: 100%;
+      max-width: 1152px;
+      min-height: 0 !important;
+      margin: 0 auto;
+      padding: 0 0 24px !important;
+
+      display: grid !important;
+      grid-template-columns:
+        minmax(0, 1.55fr) minmax(0, 1fr) !important;
+
+      gap: 65px !important;
+      align-items: start !important;
+    }
+
+    .signature-footer.refined-footer .footer-brand {
+      grid-column: auto !important;
+      max-width: 440px;
+      min-width: 0;
+      align-self: start;
+    }
+
+    .signature-footer.refined-footer .footer-links-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      padding-top: 5px;
+    }
+
+    .signature-footer.refined-footer .footer-column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 11px;
+    }
+
+    .signature-footer.refined-footer .footer-bottom {
+      padding: 14px 0 16px !important;
+    }
+
+    @media (max-width: 850px) {
+      .signature-footer.refined-footer .footer-main {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+      }
+
+      .signature-footer.refined-footer .footer-links-group {
+        max-width: 430px;
+        gap: 35px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .signature-footer.refined-footer {
+        padding: 24px 22px 0 !important;
+      }
+
+      .signature-footer.refined-footer .footer-main {
+        padding-bottom: 22px !important;
+      }
+
+      .signature-footer.refined-footer .footer-links-group {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+    }
+
+    .refined-footer {
+      position: relative;
+      overflow: hidden;
+      padding: 0 48px !important;
+      color: var(--navy) !important;
+      background:
+        radial-gradient(520px 260px at 5% 15%, rgba(117, 201, 190, .20), transparent 68%),
+        radial-gradient(460px 240px at 96% 90%, rgba(49, 93, 125, .11), transparent 70%),
+        linear-gradient(145deg, #F6F9FA 0%, #EEF4F3 48%, #E4ECEF 100%) !important;
+      border-top: 1px solid rgba(22, 50, 79, .12) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7);
+    }
+
+    .refined-footer::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -105px;
+      top: -125px;
+      border: 1px solid rgba(42, 140, 130, .14);
+      border-radius: 58px;
+      transform: rotate(24deg);
+      pointer-events: none;
+    }
+
+    .refined-footer .footer-main {
+      max-width: 1152px;
+      margin: 0 auto;
+      padding: 52px 0 42px !important;
+      display: grid;
+      grid-template-columns: minmax(300px, 1.55fr) minmax(300px, 1fr);
+      gap: 80px;
+      align-items: start;
+    }
+
+    .refined-footer .footer-brand {
+      max-width: 440px
+    }
+
+    .refined-footer .footer-logo-picture {
+      height: 45px;
+      margin: 0 0 17px;
+      display: flex;
+      align-items: center
+    }
+
+    .refined-footer .footer-real-logo {
+      content: url("assets/siaq-logo-navy.png") !important;
+      width: 100px;
+      max-height: 43px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .refined-footer .footer-brand p {
+      max-width: 410px;
+      margin: 0 0 19px;
+      color: #315D7D !important;
+      font-size: 10px;
+      line-height: 1.75;
+    }
+
+    .footer-email {
+      width: max-content;
+      max-width: 100%;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 12px;
+      border: 1px solid rgba(42, 140, 130, .20);
+      border-radius: 11px;
+      background: rgba(255, 255, 255, .48);
+      color: #16324F !important;
+      text-decoration: none;
+      font: 700 8px Manrope;
+      transition: transform .22s, background .22s, border-color .22s;
+    }
+
+    .footer-email:hover {
+      transform: translateY(-1px);
+      background: rgba(117, 201, 190, .17);
+      border-color: rgba(42, 140, 130, .38);
+      color: #16324F !important;
+    }
+
+    .footer-mail-icon {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 7px;
+      background: #2A8C82;
+      color: #F6F9FA;
+      font-size: 10px;
+    }
+
+    .footer-links-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      padding-top: 5px;
+    }
+
+    .refined-footer .footer-column {
+      gap: 11px
+    }
+
+    .refined-footer .footer-column b {
+      margin-bottom: 5px;
+      color: #16324F !important;
+      font: 800 10px Manrope;
+      letter-spacing: .02em;
+    }
+
+    .refined-footer .footer-column a {
+      width: max-content;
+      color: #315D7D !important;
+      font-size: 9px;
+      line-height: 1.4;
+      text-decoration: none;
+      transition: color .2s, transform .2s;
+    }
+
+    .refined-footer .footer-column a:hover {
+      color: #2A8C82 !important;
+      transform: translateX(2px);
+    }
+
+    .refined-footer .footer-bottom {
+      max-width: 1152px;
+      margin: 0 auto;
+      padding: 18px 0 21px !important;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      border-top: 1px solid rgba(22, 50, 79, .12) !important;
+      color: #55758C !important;
+      font-size: 8px;
+    }
+
+    html.dark .refined-footer,
+    html[data-theme="dark"] .refined-footer {
+      color: #F7FCFB !important;
+      background:
+        radial-gradient(520px 260px at 5% 15%, rgba(117, 201, 190, .12), transparent 68%),
+        radial-gradient(460px 240px at 96% 90%, rgba(42, 140, 130, .13), transparent 70%),
+        linear-gradient(145deg, #01142B 0%, #06283A 52%, #0B3540 100%) !important;
+      border-top-color: rgba(117, 201, 190, .15) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025);
+    }
+
+    html.dark .refined-footer::before,
+    html[data-theme="dark"] .refined-footer::before {
+      border-color: rgba(117, 201, 190, .12);
+    }
+
+    html.dark .refined-footer .footer-real-logo,
+    html[data-theme="dark"] .refined-footer .footer-real-logo {
+      content: url("assets/siaq-logo-white.png") !important;
+    }
+
+    html.dark .refined-footer .footer-brand p,
+    html[data-theme="dark"] .refined-footer .footer-brand p {
+      color: #BFD8D4 !important;
+    }
+
+    html.dark .refined-footer .footer-column b,
+    html[data-theme="dark"] .refined-footer .footer-column b {
+      color: #F7FCFB !important;
+    }
+
+    html.dark .refined-footer .footer-column a,
+    html[data-theme="dark"] .refined-footer .footer-column a {
+      color: #BFD8D4 !important;
+    }
+
+    html.dark .refined-footer .footer-column a:hover,
+    html[data-theme="dark"] .refined-footer .footer-column a:hover {
+      color: #75C9BE !important;
+    }
+
+    html.dark .footer-email,
+    html[data-theme="dark"] .footer-email {
+      color: #EAF7F5 !important;
+      background: rgba(117, 201, 190, .07);
+      border-color: rgba(117, 201, 190, .18);
+    }
+
+    html.dark .footer-email:hover,
+    html[data-theme="dark"] .footer-email:hover {
+      color: #FFFFFF !important;
+      background: rgba(117, 201, 190, .13);
+      border-color: rgba(117, 201, 190, .34);
+    }
+
+    html.dark .footer-mail-icon,
+    html[data-theme="dark"] .footer-mail-icon {
+      background: #75C9BE;
+      color: #01142B;
+    }
+
+    html.dark .refined-footer .footer-bottom,
+    html[data-theme="dark"] .refined-footer .footer-bottom {
+      color: #9FC5BF !important;
+      border-top-color: rgba(117, 201, 190, .13) !important;
+    }
+
+    @media (max-width:850px) {
+      .refined-footer {
+        padding: 0 30px !important
+      }
+
+      .refined-footer .footer-main {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding-top: 44px !important
+      }
+
+      .refined-footer .footer-brand {
+        max-width: 520px
+      }
+
+      .refined-footer .footer-links-group {
+        max-width: 430px;
+        gap: 45px
+      }
+    }
+
+    @media (max-width:520px) {
+      .refined-footer {
+        padding: 0 22px !important
+      }
+
+      .refined-footer .footer-main {
+        padding: 38px 0 30px !important
+      }
+
+      .refined-footer .footer-links-group {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px
+      }
+
+      .refined-footer .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px
+      }
+
+      .footer-email {
+        font-size: 7px
+      }
+    }
+
+    .refined-footer,
+    html.dark .refined-footer,
+    html[data-theme="dark"] .refined-footer {
+      color: #F6F9FA !important;
+      background:
+        radial-gradient(560px 290px at 2% 0%, rgba(117, 201, 190, .13), transparent 67%),
+        radial-gradient(520px 280px at 100% 100%, rgba(42, 140, 130, .20), transparent 70%),
+        linear-gradient(128deg, #01142B 0%, #082B3D 48%, #123E49 100%) !important;
+      border-top: 1px solid rgba(117, 201, 190, .18) !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .035) !important;
+    }
+
+    .refined-footer::before,
+    html.dark .refined-footer::before,
+    html[data-theme="dark"] .refined-footer::before {
+      border-color: rgba(117, 201, 190, .14) !important;
+    }
+
+    .refined-footer .footer-real-logo,
+    html.dark .refined-footer .footer-real-logo,
+    html[data-theme="dark"] .refined-footer .footer-real-logo {
+      content: url("assets/siaq-logo-white.png") !important;
+    }
+
+    .refined-footer .footer-brand p,
+    html.dark .refined-footer .footer-brand p,
+    html[data-theme="dark"] .refined-footer .footer-brand p {
+      color: #C8DEDC !important;
+    }
+
+    .refined-footer .footer-column b,
+    html.dark .refined-footer .footer-column b,
+    html[data-theme="dark"] .refined-footer .footer-column b {
+      color: #FFFFFF !important;
+    }
+
+    .refined-footer .footer-column a,
+    html.dark .refined-footer .footer-column a,
+    html[data-theme="dark"] .refined-footer .footer-column a {
+      color: #B9D8D4 !important;
+    }
+
+    .refined-footer .footer-column a:hover,
+    html.dark .refined-footer .footer-column a:hover,
+    html[data-theme="dark"] .refined-footer .footer-column a:hover {
+      color: #75C9BE !important;
+    }
+
+    .refined-footer .footer-email,
+    html.dark .refined-footer .footer-email,
+    html[data-theme="dark"] .refined-footer .footer-email {
+      color: #F3FBFA !important;
+      background: rgba(117, 201, 190, .075) !important;
+      border-color: rgba(117, 201, 190, .22) !important;
+    }
+
+    .refined-footer .footer-email:hover,
+    html.dark .refined-footer .footer-email:hover,
+    html[data-theme="dark"] .refined-footer .footer-email:hover {
+      color: #FFFFFF !important;
+      background: rgba(117, 201, 190, .14) !important;
+      border-color: rgba(117, 201, 190, .42) !important;
+    }
+
+    .refined-footer .footer-mail-icon,
+    html.dark .refined-footer .footer-mail-icon,
+    html[data-theme="dark"] .refined-footer .footer-mail-icon {
+      background: #75C9BE !important;
+      color: #01142B !important;
+    }
+
+    .refined-footer .footer-bottom,
+    html.dark .refined-footer .footer-bottom,
+    html[data-theme="dark"] .refined-footer .footer-bottom {
+      color: #9FC5BF !important;
+      border-top-color: rgba(117, 201, 190, .15) !important;
+    }
+
+    .signature-footer.refined-footer {
+      min-height: 370px !important;
+      height: auto !important;
+      padding: 0 48px !important
+    }
+
+    .signature-footer.refined-footer .footer-main {
+      min-height: 290px !important;
+      height: auto !important;
+      max-width: 1152px !important;
+      margin: 0 auto !important;
+      padding: 52px 0 42px !important;
+      grid-template-columns: minmax(300px, 1.55fr) minmax(300px, 1fr) !important;
+      gap: 80px !important;
+      align-items: start !important
+    }
+
+    .signature-footer.refined-footer .footer-bottom {
+      min-height: 0 !important;
+      max-width: 1152px !important;
+      margin: 0 auto !important;
+      padding: 18px 0 21px !important
+    }
+
+    @media (max-width:850px) {
+      .signature-footer.refined-footer {
+        padding: 0 30px !important
+      }
+
+      .signature-footer.refined-footer .footer-main {
+        grid-template-columns: 1fr !important;
+        gap: 35px !important;
+        padding: 44px 0 42px !important
+      }
+    }
+
+    @media (max-width:520px) {
+      .signature-footer.refined-footer {
+        padding: 0 22px !important
+      }
+
+      .signature-footer.refined-footer .footer-main {
+        padding: 38px 0 30px !important
+      }
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .signature-footer.refined-footer {
+      background: linear-gradient(125deg, #16324F 0%, #214D69 46%, #2A8C82 100%) !important;
+      color: #F6F9FA !important;
+      border-top-color: transparent !important;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .035) !important;
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer::before {
+      border-color: rgba(117, 201, 190, .14) !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-real-logo {
+      content: url("assets/siaq-logo-white.png") !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-brand p,
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column a {
+      color: #DDEFF0 !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column b {
+      color: #FFFFFF !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column a:hover {
+      color: #FFFFFF !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-email {
+      color: #F3FBFA !important;
+      background: rgba(117, 201, 190, .075) !important;
+      border-color: rgba(117, 201, 190, .22) !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-mail-icon {
+      background: rgba(117, 201, 190, .16) !important;
+      color: #F6F9FA !important
+    }
+
+    html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-bottom {
+      color: #EAF7F5 !important;
+      border-top-color: rgba(255, 255, 255, .18) !important
+    }
+
+    html.dark .signature-footer.refined-footer,
+    html[data-theme="dark"] .signature-footer.refined-footer {
+      background: linear-gradient(125deg, #01142B 0%, #083443 48%, #176A65 100%) !important;
+    }
+
+    html.dark .refined-footer .footer-brand p,
+    html.dark .refined-footer .footer-column a,
+    html[data-theme="dark"] .refined-footer .footer-brand p,
+    html[data-theme="dark"] .refined-footer .footer-column a {
+      color: #D7E9E5 !important
+    }
+  </style>
 </head>
 
 <body>
   <div class="scrollbar" id="scrollbar"></div>
   <header class="signature-nav" id="signatureNav"><a aria-label="SIAQ home" class="signature-brand" href="index.html">
-<picture class="nav-logo-picture"><img alt="SIAQ logo" class="siaq-real-logo nav-real-logo" src="assets/siaq-logo-navy.png"/></picture><span class="signature-name"><b>SIAQ</b><small>Social Intelligence Alignment
+      <picture class="nav-logo-picture"><img alt="SIAQ logo" class="siaq-real-logo nav-real-logo"
+          src="assets/siaq-logo-navy.png" /></picture><span class="signature-name"><b>SIAQ</b><small>Social Intelligence
+          Alignment
           Quotient</small></span>
-</a>
-<nav aria-label="Primary navigation" class="signature-links">
-<a class="" href="index.html"><span>Home</span></a>
-<a class="" href="evaluation.html"><span>Evaluation</span></a>
-<a class="" href="history.html"><span>History</span></a>
-<a class="" href="leaderboard.html"><span>Leaderboard</span></a>
-<a class="" href="about.html"><span>About</span></a>
-</nav>
-<div class="nav-auth">
-<button aria-label="Switch theme" aria-pressed="false" class="theme-toggle" id="themeToggle" type="button"><span class="sun">☼</span><span class="moon">☾</span></button>
-<div class="profile-menu" id="profileMenu">
-<button aria-expanded="false" aria-label="Open profile menu" class="profile-avatar-btn" id="profileMenuButton" type="button">
-<svg aria-hidden="true" class="profile-user-icon" viewbox="0 0 24 24">
-<path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0"></path>
-</svg>
-</button>
-<div class="profile-dropdown" id="profileDropdown">
-<div class="profile-dropdown-head">
-<div><b id="navUserName">My Account</b><small id="navUserEmail"></small></div>
-</div>
-<a href="profile.html">Profile <span>→</span></a>
-<a href="history.html">History <span>→</span></a>
-<button id="logoutButton" type="button">Log out <span>↗</span></button>
-</div>
-</div>
-</div>
-</header>
+    </a>
+    <nav aria-label="Primary navigation" class="signature-links">
+      <a class="" href="index.html"><span>Home</span></a>
+      <a class="" href="evaluation.html"><span>Evaluation</span></a>
+      <a class="" href="history.html"><span>History</span></a>
+      <a class="" href="leaderboard.html"><span>Leaderboard</span></a>
+      <a class="" href="about.html"><span>About</span></a>
+    </nav>
+    <div class="nav-auth">
+      <button aria-label="Switch theme" aria-pressed="false" class="theme-toggle" id="themeToggle" type="button"><span
+          class="sun">☼</span><span class="moon">☾</span></button>
+      <div class="profile-menu" id="profileMenu">
+        <button aria-expanded="false" aria-label="Open profile menu" class="profile-avatar-btn" id="profileMenuButton"
+          type="button">
+          <svg aria-hidden="true" class="profile-user-icon" viewbox="0 0 24 24">
+            <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0"></path>
+          </svg>
+        </button>
+        <div class="profile-dropdown" id="profileDropdown">
+          <div class="profile-dropdown-head">
+            <div><b id="navUserName">My Account</b><small id="navUserEmail"></small></div>
+          </div>
+          <a href="profile.html">Profile <span>→</span></a>
+          <a href="history.html">History <span>→</span></a>
+          <button id="logoutButton" type="button">Log out <span>↗</span></button>
+        </div>
+      </div>
+    </div>
+  </header>
 
   <main>
     <div class="breadcrumb">My Account</div>
@@ -1322,21 +2650,46 @@ body{font-family:"DM Sans",sans-serif;}
       </div>
     </div>
   </main>
-  <footer class="signature-footer" id="footer">
-    <div class="footer-accent"></div>
+  <footer class="signature-footer refined-footer" id="footer">
     <div class="footer-main">
       <div class="footer-brand">
-        <picture class="footer-logo-picture"><img class="footer-real-logo" src="assets/siaq-logo-white.png"
-            alt="SIAQ logo"></picture>
+        <picture class="footer-logo-picture">
+          <img class="siaq-real-logo footer-real-logo" src="assets/siaq-logo-navy.png" alt="SIAQ logo">
+        </picture>
         <p>Evaluating conversational AI across appropriateness, positivity, and socio-cultural alignment.</p>
+        <a class="footer-email" href="mailto:siaq.alignment@gmail.com" aria-label="Email SIAQ">
+          <span class="footer-mail-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m2 6 10 7 10-7" />
+            </svg></span>
+          <span>siaq.alignment@gmail.com</span>
+        </a>
       </div>
-      <div class="footer-column"><b>Explore</b><a href="index.html">Home</a><a href="evaluation.html">Evaluation</a><a
-          href="history.html">History</a><a href="leaderboard.html">Leaderboard</a></div>
-      <div class="footer-column"><b>SIAQ</b><a href="about.html">About</a><a href="profile.html">Profile</a><a
-          href="index.html#framework">Framework</a><a href="index.html#process">Process</a></div>
+
+      <div class="footer-links-group">
+        <div class="footer-column">
+          <b>Explore</b>
+          <a href="index.html">Home</a>
+          <a href="evaluation.html">Evaluation</a>
+          <a href="history.html">History</a>
+          <a href="leaderboard.html">Leaderboard</a>
+        </div>
+        <div class="footer-column">
+          <b>SIAQ</b>
+          <a href="about.html">About</a>
+          <a href="profile.html">Profile</a>
+          <a href="index.html#framework">Framework</a>
+          <a href="index.html#process">Process</a>
+        </div>
+      </div>
     </div>
-    <div class="footer-bottom"><span>© 2026 SIAQ. All rights reserved.</span><span>Social Intelligence Alignment
-        Quotient</span></div>
+
+    <div class="footer-bottom">
+      <span>© 2026 SIAQ. All rights reserved.</span>
+      <span>Social Intelligence Alignment Quotient</span>
+    </div>
   </footer>
   <script>
     (function () {
