@@ -1,37 +1,1375 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Profile — SIAQ</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"><script>(function(){try{if(localStorage.getItem("siaq-theme")==="dark")document.documentElement.classList.add("dark")}catch(e){}})();</script><link rel="stylesheet" href="styles.css"></head><body class="demo-logged-in"><div class="siaq-architecture" aria-hidden="true">
-  <div class="arch-grid"></div>
-  <div class="arch-orb orb-teal"></div><div class="arch-orb orb-sage"></div><div class="arch-orb orb-sky"></div><div class="arch-orb orb-cream"></div>
-  <div class="arch-square sq-a"></div><div class="arch-square sq-b"></div><div class="arch-square sq-c"></div><div class="arch-square sq-d"></div><div class="arch-square sq-e"></div><div class="arch-square sq-f"></div>
-  <div class="arch-ring ring-a"></div><div class="arch-ring ring-b"></div><div class="arch-ring ring-c"></div>
-  <div class="arch-beam beam-a"></div><div class="arch-beam beam-b"></div>
-</div><div class="scrollbar" id="scrollbar"></div><header class="signature-nav" id="signatureNav"><a class="signature-brand" href="index.html" aria-label="SIAQ home"><span class="signature-mark"><i></i><i></i><i></i></span><span class="signature-name"><b>SIAQ</b><small>Social Intelligence Alignment Quotient</small></span></a><nav class="signature-links" aria-label="Primary navigation"><a class="" href="index.html"><span>Home</span></a><a class="" href="evaluation.html"><span>Evaluation</span></a><a class="" href="about.html"><span>About</span></a></nav><div class="nav-auth"><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" aria-pressed="false"><span class="sun">☼</span><span class="moon">☾</span></button><a class="nav-auth-profile" href="profile.html">Profile</a><a class="login-link" href="login.html">Log in</a><a class="signup-button" href="signup.html"><span>Sign up</span><b>↗</b></a></div></header><main class="page-main"><div class="page-shell"><div class="page-hero"><div><small>YOUR PROFILE</small><h1>Evaluation activity,<br><span>in one place.</span></h1></div><p>Demo profile data for presentation and usability testing. Account data can be connected to the backend later.</p></div><div class="profile-grid"><aside class="page-card profile-card"><div class="avatar">YA</div><h2>Yara Al-Dosari</h2><p>yara@example.com</p><div class="profile-list"><div><span>Preferred language</span><b>Arabic / English</b></div><div><span>Theme</span><b id="profileTheme">System</b></div><div><span>Saved results</span><b>12</b></div><div><span>Evaluations</span><b>28</b></div></div></aside><section class="page-card history"><h3>Recent evaluations</h3><div class="history-row"><b>Mistral vs Aya</b><span>Appropriateness</span><span class="status-pill">Aligned</span><span class="score">88</span></div><div class="history-row"><b>Aya vs Mistral</b><span>Positivity</span><span class="status-pill">Aligned</span><span class="score">84</span></div><div class="history-row"><b>Mistral vs Aya</b><span>Socio-Cultural</span><span class="status-pill">Partial</span><span class="score">76</span></div><div class="history-row"><b>Aya vs Mistral</b><span>Overall</span><span class="status-pill">Aligned</span><span class="score">82</span></div></section></div><div class="page-grid" style="margin-top:18px"><article class="info-card"><span class="metric">28</span><b>Total evaluations</b><p>Comparative evaluation sessions completed in this demo account.</p></article><article class="info-card"><span class="metric">84</span><b>Average alignment</b><p>Average overall score across recent saved evaluation results.</p></article><article class="info-card"><span class="metric">12</span><b>Saved results</b><p>Results saved for later review, comparison, or report generation.</p></article></div></div></main><footer class="signature-footer" id="footer">
-  <div class="footer-art" aria-hidden="true">
-    <span class="footer-disc disc-a"></span>
-    <span class="footer-disc disc-b"></span>
-    <span class="footer-orbit orbit-a"></span>
-    <span class="footer-orbit orbit-b"></span>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
 
-  <div class="footer-main">
-    <div class="footer-identity">
-      <a class="footer-logo" href="index.html">
-        <span class="signature-mark footer-mark"><i></i><i></i><i></i></span>
-        <span><b>SIAQ</b><small>Social Intelligence Alignment Quotient</small></span>
-      </a>
-      <p>Human-grounded evaluation for more context-aware, supportive, and culturally aligned conversational AI.</p>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My Profile | SIAQ</title>
+  <style>
+    :root {
+      --navy: #16324f;
+      --blue: #315d7d;
+      --teal: #2a8c82;
+      --mint: #75c9be;
+      --bg: #f6f9fa;
+      --border: #e4ecef;
+      --ink: #17354b;
+      --muted: #61788a;
+      --white: #fff;
+      --danger: #b54848
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink)
+    }
+
+    button,
+    input {
+      font: inherit
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    .topbar {
+      height: 76px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 max(28px, calc((100vw - 1220px)/2));
+      gap: 20px
+    }
+
+    .brand {
+      font-size: 26px;
+      font-weight: 850;
+      letter-spacing: 2px;
+      color: var(--navy)
+    }
+
+    .brand i {
+      color: var(--teal);
+      font-style: normal
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 13px;
+      font-weight: 650;
+      color: var(--blue)
+    }
+
+    .nav a:hover,
+    .nav .active {
+      color: var(--teal)
+    }
+
+    .nav button {
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 11px;
+      padding: 10px 14px;
+      color: var(--blue)
+    }
+
+    main {
+      max-width: 1050px;
+      margin: 42px auto 90px;
+      padding: 0 28px
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px
+    }
+
+    .pagehead {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 27px
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--teal);
+      text-transform: uppercase
+    }
+
+    .pagehead h1 {
+      font-size: 36px;
+      letter-spacing: -1.3px;
+      margin: 8px 0
+    }
+
+    .pagehead p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    .pill {
+      background: #e5f5f1;
+      color: #177b71;
+      border: 1px solid #c8e8e0;
+      border-radius: 30px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 750
+    }
+
+    .hero {
+      background: linear-gradient(115deg, #16324f 0%, #315d7d 62%, #2a8c82 100%);
+      border-radius: 22px;
+      min-height: 195px;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      padding: 40px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px
+    }
+
+    .hero-info {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      z-index: 1
+    }
+
+    .avatar {
+      width: 94px;
+      height: 94px;
+      flex: none;
+      display: grid;
+      place-items: center;
+      background: #e3f8f3;
+      color: #1a716e;
+      border: 5px solid #ffffff60;
+      border-radius: 25px;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 1px
+    }
+
+    .hero h2 {
+      font-size: 27px;
+      margin: 0 0 8px
+    }
+
+    .hero p {
+      margin: 0;
+      color: #d7edf0;
+      font-size: 14px;
+      overflow-wrap: anywhere
+    }
+
+    .hero small {
+      display: inline-block;
+      margin-top: 12px;
+      color: #d4e7ec;
+      font-size: 12px
+    }
+
+    .hero button {
+      z-index: 1;
+      border: 1px solid #ffffff75;
+      background: #ffffff19;
+      color: white;
+      border-radius: 12px;
+      padding: 13px 18px;
+      font-weight: 750;
+      white-space: nowrap
+    }
+
+    .hero button:hover {
+      background: #ffffff32
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+      margin-top: 27px
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px
+    }
+
+    .content {
+      display: grid;
+      gap: 22px
+    }
+
+    .panel {
+      padding: 30px
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: start;
+      margin-bottom: 25px
+    }
+
+    .panel-head h3 {
+      font-size: 19px;
+      margin: 0 0 7px;
+      color: var(--navy)
+    }
+
+    .panel-head p {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 19px
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      min-width: 0
+    }
+
+    .field.wide {
+      grid-column: 1/-1
+    }
+
+    .field label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--blue)
+    }
+
+    .field input {
+      width: 100%;
+      height: 48px;
+      border: 1px solid #d8e4e9;
+      background: #fff;
+      border-radius: 11px;
+      padding: 0 15px;
+      color: var(--ink);
+      outline: none
+    }
+
+    .field input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px #2a8c821b
+    }
+
+    .field input:disabled {
+      background: #f5f8fa;
+      color: #5f7684;
+      opacity: 1
+    }
+
+    .helper {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 24px;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      border: 1px solid #d6e5e8;
+      border-radius: 11px;
+      padding: 12px 19px;
+      background: white;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 750
+    }
+
+    .btn.primary {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: white
+    }
+
+    .btn.primary:hover {
+      background: #23766e
+    }
+
+    .btn:disabled {
+      opacity: .55;
+      cursor: not-allowed
+    }
+
+    .email-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .status {
+      font-size: 11px;
+      font-weight: 750;
+      padding: 6px 10px;
+      border-radius: 20px;
+      background: #f4f0e4;
+      color: #92702c
+    }
+
+    .status.ok {
+      background: #e4f4ed;
+      color: #18755e
+    }
+
+    .security-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border)
+    }
+
+    .security-row:first-of-type {
+      border-top: 0
+    }
+
+    .security-row strong {
+      font-size: 14px;
+      color: var(--navy)
+    }
+
+    .security-row p {
+      margin: 6px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .message {
+      display: none;
+      border-radius: 11px;
+      padding: 13px 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 18px;
+      background: #e6f5f0;
+      color: #176c60
+    }
+
+    .message.show {
+      display: block
+    }
+
+    .message.error {
+      background: #fff0ef;
+      color: #a83e3e
+    }
+
+    .footer {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted)
+    }
+
+    [hidden] {
+      display: none !important
+    }
+
+    @media(max-width:800px) {
+      .nav {
+        gap: 12px
+      }
+
+      .nav a:not(.active) {
+        display: none
+      }
+
+      .layout {
+        grid-template-columns: 1fr
+      }
+
+      .hero {
+        padding: 27px;
+        min-height: 210px
+      }
+
+      .hero-info {
+        gap: 15px
+      }
+
+      .avatar {
+        width: 75px;
+        height: 75px;
+        font-size: 25px
+      }
+
+      .hero h2 {
+        font-size: 22px
+      }
+    }
+
+    @media(max-width:520px) {
+      main {
+        padding: 0 16px;
+        margin-top: 27px
+      }
+
+      .topbar {
+        padding: 0 17px
+      }
+
+      .pagehead h1 {
+        font-size: 29px
+      }
+
+      .hero {
+        align-items: start;
+        flex-direction: column
+      }
+
+      .hero button {
+        align-self: flex-end
+      }
+
+      .panel {
+        padding: 22px 18px
+      }
+
+      .fields {
+        grid-template-columns: 1fr
+      }
+
+      .field.wide {
+        grid-column: auto
+      }
+
+      .security-row {
+        align-items: start;
+        flex-direction: column
+      }
+
+      .actions .btn {
+        flex: 1
+      }
+    }
+
+
+    .hero:before,
+    .hero:after {
+      content: "";
+      position: absolute;
+      border: 1px solid #ffffff30;
+      border-radius: 30px;
+      transform: rotate(27deg);
+      pointer-events: none
+    }
+
+    .hero:before {
+      width: 300px;
+      height: 300px;
+      right: 120px;
+      top: -210px
+    }
+
+    .hero:after {
+      width: 210px;
+      height: 210px;
+      right: -70px;
+      bottom: -120px
+    }
+
+    /* SIAQ shared navigation, footer and light/dark theme */
+    :root {
+      --paper: #F6F9FA;
+      --mist: #E4ECEF;
+      --line: rgba(49, 93, 125, .16);
+      --surface: #fff;
+      --field: #fff;
+      --soft: #e5f5f1;
+      --secondary: #315D7D;
+      --heading: #16324F;
+      --shadow: rgba(22, 50, 79, .10)
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: linear-gradient(150deg, #F6F9FA, #EDF5F4 45%, #F6F9FA);
+      color: var(--heading);
+      min-height: 100vh
+    }
+
+    h1,
+    h2,
+    h3,
+    .signature-name b,
+    .footer-column b {
+      font-family: Manrope, sans-serif
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 132px 25px 100px
+    }
+
+    .breadcrumb {
+      color: var(--secondary)
+    }
+
+    .pagehead h1 {
+      color: var(--heading)
+    }
+
+    .panel {
+      background: var(--surface);
+      border-color: var(--line);
+      box-shadow: 0 20px 65px var(--shadow)
+    }
+
+    .panel-head h3,
+    .security-row strong {
+      color: var(--heading)
+    }
+
+    .panel-head p,
+    .security-row p,
+    .helper {
+      color: var(--secondary)
+    }
+
+    .field label {
+      color: var(--secondary)
+    }
+
+    .field input {
+      background: var(--field);
+      border-color: var(--line);
+      color: var(--heading)
+    }
+
+    .field input:disabled {
+      background: var(--mist);
+      color: var(--secondary)
+    }
+
+    .btn {
+      background: var(--surface);
+      border-color: var(--line);
+      color: var(--heading)
+    }
+
+    .btn.primary {
+      background: #2A8C82;
+      color: white
+    }
+
+    .security-row {
+      border-color: var(--line)
+    }
+
+    .status {
+      background: var(--mist);
+      color: var(--heading)
+    }
+
+    .status.ok {
+      background: var(--soft);
+      color: #167367
+    }
+
+    .hero {
+      background: linear-gradient(115deg, #16324F 0%, #315D7D 62%, #2A8C82 100%);
+      color: white
+    }
+
+    .hero h2 {
+      color: white
+    }
+
+    .hero p {
+      color: #E4F3F0
+    }
+
+    .scrollbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      z-index: 10001;
+      background: linear-gradient(90deg, #315D7D, #2A8C82, #75C9BE)
+    }
+
+    .signature-nav {
+      position: fixed;
+      z-index: 9999;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - 34px));
+      min-height: 74px;
+      display: grid;
+      grid-template-columns: minmax(210px, 1fr) auto minmax(120px, 1fr);
+      align-items: center;
+      gap: 14px;
+      padding: 8px 15px 8px 20px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(246, 249, 250, .90);
+      backdrop-filter: blur(26px);
+      box-shadow: 0 18px 55px var(--shadow);
+      transition: .25s
+    }
+
+    .signature-nav.is-compact {
+      top: 10px;
+      min-height: 64px;
+      border-radius: 18px
+    }
+
+    .signature-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--heading);
+      width: max-content
+    }
+
+    .nav-logo-picture {
+      display: flex;
+      align-items: center;
+      width: 38px;
+      height: 34px
+    }
+
+    .nav-real-logo {
+      display: block;
+      width: 38px;
+      max-height: 32px;
+      object-fit: contain
+    }
+
+    .signature-name {
+      display: flex;
+      flex-direction: column
+    }
+
+    .signature-name b {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1
+    }
+
+    .signature-name small {
+      margin-top: 4px;
+      font-size: 6px;
+      color: var(--secondary)
+    }
+
+    .signature-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 5px;
+      border-radius: 15px;
+      background: var(--mist)
+    }
+
+    .signature-links a {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 12px 12px;
+      border-radius: 11px;
+      color: var(--secondary);
+      white-space: nowrap
+    }
+
+    .signature-links a:hover {
+      background: var(--surface);
+      color: var(--heading)
+    }
+
+    .nav-auth {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 9px
+    }
+
+    .theme-toggle,
+    .profile-avatar-btn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--heading);
+      cursor: pointer
+    }
+
+    .theme-toggle span {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 19px;
+      transition: .2s
+    }
+
+    .theme-toggle .sun {
+      opacity: 0;
+      transform: rotate(70deg) scale(.7)
+    }
+
+    .theme-toggle .moon {
+      opacity: 1
+    }
+
+    .profile-menu {
+      position: relative
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      right: 0;
+      top: 49px;
+      width: 245px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: 0 24px 70px var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-7px);
+      transition: .2s
+    }
+
+    .profile-menu.open .profile-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: none
+    }
+
+    .profile-dropdown-head {
+      padding: 10px 9px 14px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 5px
+    }
+
+    .profile-dropdown-head b {
+      display: block;
+      font-size: 12px;
+      color: var(--heading)
+    }
+
+    .profile-dropdown-head small {
+      display: block;
+      margin-top: 5px;
+      font-size: 10px;
+      color: var(--secondary);
+      overflow-wrap: anywhere
+    }
+
+    .profile-dropdown>a,
+    .profile-dropdown>button {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--heading);
+      font: 700 11px Manrope;
+      text-decoration: none;
+      padding: 12px 9px;
+      border-radius: 9px;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer
+    }
+
+    .profile-dropdown>a:hover,
+    .profile-dropdown>button:hover {
+      background: var(--mist)
+    }
+
+    .signature-footer {
+      position: relative;
+      max-width: 1240px;
+      margin: 20px auto 18px;
+      width: calc(100% - 36px);
+      border-radius: 28px;
+      overflow: hidden;
+      background: linear-gradient(125deg, #16324F, #214D69 46%, #2A8C82);
+      color: #F6F9FA;
+      box-shadow: 0 30px 80px rgba(22, 50, 79, .18)
+    }
+
+    .footer-accent {
+      height: 4px;
+      background: linear-gradient(90deg, #75C9BE, #F6F9FA, #75C9BE)
+    }
+
+    .footer-main {
+      padding: 50px 48px 40px;
+      display: grid;
+      grid-template-columns: minmax(260px, 1.7fr) repeat(2, minmax(120px, .7fr));
+      gap: 50px
+    }
+
+    .footer-logo-picture {
+      display: flex;
+      height: 48px;
+      align-items: center;
+      margin-bottom: 15px
+    }
+
+    .footer-real-logo {
+      width: 104px;
+      max-height: 46px;
+      object-fit: contain
+    }
+
+    .footer-brand p {
+      max-width: 390px;
+      font-size: 12px;
+      line-height: 1.8;
+      color: #DDEFF0
+    }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px
+    }
+
+    .footer-column b {
+      font-size: 12px;
+      color: #fff
+    }
+
+    .footer-column a {
+      font-size: 11px;
+      color: #DDEFF0
+    }
+
+    .footer-column a:hover {
+      color: white
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-top: 1px solid rgba(255, 255, 255, .18);
+      padding: 20px 48px;
+      font-size: 10px;
+      color: #EAF7F5
+    }
+
+    :root.dark {
+      --paper: #01142B;
+      --mist: #0E303C;
+      --line: rgba(117, 201, 190, .24);
+      --surface: #082C3B;
+      --field: #041F31;
+      --soft: #0C4846;
+      --secondary: #D7E9E5;
+      --heading: #F7FCFB;
+      --shadow: rgba(0, 8, 22, .40);
+      --ink: #F7FCFB;
+      --muted: #D7E9E5;
+      --border: rgba(117, 201, 190, .24)
+    }
+
+    :root.dark body {
+      background: radial-gradient(900px 700px at 94% 8%, rgba(42, 140, 130, .34), transparent 66%), linear-gradient(150deg, #01142B 0%, #05253A 45%, #08363D 72%, #01142B 100%);
+      color: #F7FCFB
+    }
+
+    :root.dark .signature-nav {
+      background: rgba(1, 20, 43, .91);
+      border-color: var(--line)
+    }
+
+    :root.dark .signature-links {
+      background: #0E303C
+    }
+
+    :root.dark .signature-links a:hover {
+      background: #164D52
+    }
+
+    :root.dark .theme-toggle .sun {
+      opacity: 1;
+      transform: none
+    }
+
+    :root.dark .theme-toggle .moon {
+      opacity: 0;
+      transform: rotate(-70deg) scale(.7)
+    }
+
+    :root.dark .nav-real-logo {
+      content: url('assets/siaq-logo-white.png')
+    }
+
+    :root.dark .panel {
+      background: linear-gradient(145deg, #082C3B, #0B3540)
+    }
+
+    :root.dark .field input:focus {
+      border-color: #75C9BE;
+      box-shadow: 0 0 0 3px rgba(117, 201, 190, .16)
+    }
+
+    :root.dark .btn.primary {
+      background: #75C9BE;
+      color: #01142B;
+      border-color: #75C9BE
+    }
+
+    :root.dark .btn.primary:hover {
+      background: #58B7AA
+    }
+
+    :root.dark .status.ok {
+      color: #A7EDE0
+    }
+
+    :root.dark .message:not(.error) {
+      background: #0E4847;
+      color: #BDF3E9
+    }
+
+    :root.dark .message.error {
+      background: #512B38;
+      color: #FFC4C4
+    }
+
+    :root.dark .signature-footer {
+      background: linear-gradient(125deg, #01142B, #083443 48%, #176A65)
+    }
+
+    @media(max-width:1000px) {
+      .signature-nav {
+        grid-template-columns: auto minmax(0, 1fr) auto
+      }
+
+      .signature-name small {
+        display: none
+      }
+
+      .signature-links {
+        overflow-x: auto;
+        scrollbar-width: none
+      }
+
+      .signature-links a {
+        padding: 10px 8px
+      }
+
+      .footer-main {
+        gap: 25px
+      }
+    }
+
+    @media(max-width:650px) {
+      main {
+        padding: 110px 16px 65px;
+        margin: 0
+      }
+
+      .signature-nav {
+        top: 10px;
+        width: calc(100% - 20px);
+        padding: 8px;
+        gap: 6px;
+        min-height: 60px
+      }
+
+      .signature-name {
+        display: none
+      }
+
+      .nav-logo-picture,
+      .nav-real-logo {
+        width: 30px
+      }
+
+      .signature-links a {
+        font-size: 9px;
+        padding: 9px 7px
+      }
+
+      .theme-toggle,
+      .profile-avatar-btn {
+        width: 34px;
+        height: 34px
+      }
+
+      .nav-auth {
+        gap: 4px
+      }
+
+      .footer-main {
+        grid-template-columns: 1fr 1fr;
+        padding: 35px 23px;
+        gap: 25px
+      }
+
+      .footer-brand {
+        grid-column: 1/-1
+      }
+
+      .footer-bottom {
+        padding: 18px 23px;
+        flex-direction: column;
+        text-align: center;
+        gap: 6px
+      }
+
+      .signature-footer {
+        width: calc(100% - 20px)
+      }
+
+      .hero {
+        min-height: 210px
+      }
+    }
+  </style>
+<style>
+/* Index navbar parity overrides — scoped to navigation, no Firebase changes */
+.signature-nav{
+  position:fixed;z-index:90;top:18px;left:50%;
+  transform:translateX(-50%);
+  width:min(1180px,calc(100% - 34px));
+  height:74px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:8px 9px 8px 20px;
+  border:1px solid rgba(49,93,125,.14);
+  border-radius:22px;
+  background:rgba(246,249,250,.82);
+  backdrop-filter:blur(26px);
+  -webkit-backdrop-filter:blur(26px);
+  box-shadow:0 18px 55px rgba(22,50,79,.10),inset 0 1px 0 rgba(246,249,250,.95);
+  transition:height .3s,top .3s,background .3s,box-shadow .3s,border-radius .3s;
+}
+.signature-nav.is-compact{
+  top:10px;height:64px;border-radius:18px;
+  background:rgba(246,249,250,.94);
+  box-shadow:0 20px 62px rgba(22,50,79,.15);
+}
+.signature-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy);width:max-content}
+.signature-name{display:flex;flex-direction:column}
+.signature-name b{font:800 17px Manrope;letter-spacing:-.04em;line-height:1}
+.signature-name small{margin-top:4px;color:var(--blue);font-size:6px;letter-spacing:.035em}
+.signature-links{
+  height:48px;padding:5px;
+  display:flex;align-items:center;gap:2px;
+  border-radius:15px;
+  background:rgba(228,236,239,.62);
+  box-shadow:inset 0 0 0 1px rgba(49,93,125,.07);
+}
+.signature-links a{
+  position:relative;padding:12px 17px;border-radius:11px;
+  color:var(--blue);text-decoration:none;
+  font-size:8px;font-weight:700;letter-spacing:.01em;
+  transition:color .25s,background .25s,box-shadow .25s,transform .25s;
+}
+.signature-links a:before{
+  content:"";position:absolute;left:50%;bottom:6px;
+  width:4px;height:4px;border-radius:50%;background:var(--teal);
+  transform:translateX(-50%) scale(0);transition:.25s;
+}
+.signature-links a:hover{color:var(--navy);transform:translateY(-1px)}
+.signature-links a.active{
+  color:var(--navy);background:var(--paper);
+  box-shadow:0 7px 20px rgba(22,50,79,.09);
+}
+.signature-links a.active:before{transform:translateX(-50%) scale(1)}
+@media (max-width:900px){.signature-nav{grid-template-columns:1fr auto;width:calc(100% - 22px);padding-left:15px}.signature-links{display:none}.signature-name small{display:none}}
+@media (max-width:560px){.signature-nav{height:62px;top:10px}.signature-name b{font-size:15px}}
+.nav-auth{justify-self:end;display:flex;align-items:center;gap:6px}
+@media (max-width:900px){.nav-auth{margin-left:auto}}
+@media (max-width:650px){.signature-name small{display:none}}
+.theme-toggle{width:40px;height:40px;flex:0 0 40px;padding:0;position:relative;border:1px solid var(--line);border-radius:12px;background:rgba(246,249,250,.74);color:var(--navy);cursor:pointer;overflow:hidden;transition:background .26s,border-color .26s,color .26s,box-shadow .26s}
+.theme-toggle span{position:absolute;inset:0;display:grid;place-items:center;font-size:15px;transition:opacity .26s,transform .26s}
+.theme-toggle .sun{opacity:0;transform:rotate(70deg) scale(.65)}
+.theme-toggle .moon{opacity:1;transform:none}
+:root.dark .signature-nav{background:rgba(1,20,43,.82);border-color:rgba(117,201,190,.16);box-shadow:0 18px 55px rgba(0,8,22,.34),inset 0 1px 0 rgba(117,201,190,.07)}
+:root.dark .signature-nav.is-compact{background:rgba(1,20,43,.94);box-shadow:0 20px 62px rgba(0,8,22,.42)}
+:root.dark .signature-links{background:rgba(14,48,60,.62);box-shadow:inset 0 0 0 1px rgba(117,201,190,.08)}
+:root.dark .signature-links a{color:#E8F5F1}
+:root.dark .signature-links a:hover{color:#F7FCFB}
+:root.dark .signature-links a.active{color:#F7FCFB;background:rgba(117,201,190,.13);box-shadow:none}
+:root.dark .signature-brand{color:#F7FCFB}
+:root.dark .signature-name small{color:#B9DAD4}
+:root.dark .theme-toggle{background:rgba(14,48,60,.70);border-color:rgba(117,201,190,.22);color:#75C9BE}
+:root.dark .theme-toggle .sun{opacity:1;transform:none}
+:root.dark .theme-toggle .moon{opacity:0;transform:rotate(-70deg) scale(.65)}
+@media (prefers-reduced-motion:reduce){.theme-toggle,.theme-toggle span{transition:none!important}}
+.nav-auth-profile{display:none;text-decoration:none;color:var(--navy);font-size:8px;font-weight:700;padding:9px 11px;border-radius:10px;background:rgba(117,201,190,.13)}
+body.demo-logged-in .nav-auth-profile{display:block}
+.signature-nav{position:fixed}
+.nav-logo-picture{display:flex;align-items:center;width:38px;height:34px;flex:0 0 38px;overflow:hidden}
+.nav-real-logo{display:block;width:38px;height:auto;max-height:31px;object-fit:contain;object-position:left center}
+:root.dark .signature-links a{color:var(--dark-text-secondary)!important}
+:root.dark .signature-links a:hover,:root.dark .signature-links a.active{color:#fff!important}
+.signature-nav{grid-template-columns:minmax(225px,1fr) auto minmax(225px,1fr)}
+.signature-links{gap:2px}
+.signature-links a{padding-left:10px;padding-right:10px}
+.profile-menu{position:relative;display:none}
+body.demo-logged-in .profile-menu{display:block}
+.profile-avatar-btn{width:38px;height:38px;padding:0;border:1px solid rgba(42,140,130,.24);border-radius:12px;background:transparent;cursor:pointer;display:grid;place-items:center}
+.profile-avatar-btn:hover,.profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.16)}
+.profile-dropdown{position:absolute;right:0;top:48px;width:235px;padding:9px;border:1px solid var(--line);border-radius:16px;background:rgba(246,249,250,.97);box-shadow:0 24px 70px rgba(22,50,79,.18);backdrop-filter:blur(20px);opacity:0;visibility:hidden;transform:translateY(-7px);transition:.2s;z-index:100}
+.profile-menu.open .profile-dropdown{opacity:1;visibility:visible;transform:none}
+.profile-dropdown-head{display:flex;align-items:center;gap:11px;padding:10px 9px 13px;border-bottom:1px solid var(--line);margin-bottom:5px}
+.profile-dropdown-head b{display:block;font:800 10px Manrope}
+.profile-dropdown-head small{display:block;font-size:7px;color:var(--blue);margin-top:3px}
+.profile-dropdown>a,.profile-dropdown>button{width:100%;box-sizing:border-box;border:0;background:transparent;text-decoration:none;color:var(--navy);font:700 8px Manrope;padding:10px 9px;border-radius:9px;display:flex;justify-content:space-between;cursor:pointer}
+.profile-dropdown>a:hover,.profile-dropdown>button:hover{background:var(--mist)}
+.profile-dropdown>button{color:#9a3d3d}
+:root.dark .profile-dropdown{background:rgba(6,40,58,.97);border-color:rgba(117,201,190,.20)}
+:root.dark .profile-dropdown-head b,:root.dark .profile-dropdown>a{color:#F7FCFB!important}
+:root.dark .profile-dropdown-head small{color:#B9DAD4!important}
+@media (max-width:1100px){.signature-name small{display:none}.signature-nav{grid-template-columns:auto 1fr auto}.signature-links a{padding-left:7px;padding-right:7px}}
+@media (max-width:850px){.signature-links a[href="history.html"],.signature-links a[href="leaderboard.html"]{display:none}}
+.profile-menu{display:block!important;position:relative}
+.profile-avatar-btn{display:grid!important;place-items:center;width:38px;height:38px;border-radius:11px;border:1px solid rgba(42,140,130,.28);background:rgba(246,249,250,.55);color:var(--navy);cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.profile-avatar-btn:hover,.profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.18);border-color:rgba(42,140,130,.52);transform:translateY(-1px)}
+.profile-user-icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.profile-dropdown-head{padding:10px 9px 12px}
+.profile-dropdown-head b{font-size:9px}
+.profile-dropdown-head small{font-size:7px}
+:root.dark .profile-avatar-btn{background:rgba(117,201,190,.08);border-color:rgba(117,201,190,.28);color:#F7FCFB}
+:root.dark .profile-avatar-btn:hover,:root.dark .profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.16);border-color:rgba(117,201,190,.55)}
+.signature-nav{z-index:9999!important;pointer-events:auto!important}
+.signature-nav *{pointer-events:auto!important}
+.signature-links{position:relative!important;z-index:2!important}
+.signature-links a{pointer-events:auto!important;cursor:pointer!important}
+.nav-auth{position:relative!important;z-index:3!important}
+.theme-toggle,.profile-avatar-btn{pointer-events:auto!important;cursor:pointer!important}
+@media (max-width:900px){.signature-nav{grid-template-columns:auto minmax(0,1fr) auto!important;gap:8px!important}.signature-links{display:flex!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap!important;scrollbar-width:none;justify-self:stretch}.signature-links::-webkit-scrollbar{display:none}.signature-links a{flex:0 0 auto;padding:10px 9px!important}}
+@media (max-width:650px){.signature-name{display:none!important}.nav-logo-picture{width:30px!important;flex-basis:30px!important}.nav-real-logo{width:30px!important}.signature-nav{padding-left:10px!important;padding-right:8px!important}.signature-links a{font-size:7px!important;padding:9px 7px!important}.theme-toggle{width:34px!important;height:34px!important;flex-basis:34px!important}.profile-avatar-btn{width:34px!important;height:34px!important}}
+html.dark .signature-nav,html[data-theme="dark"] .signature-nav{
+  background:rgba(1,20,43,.90)!important;border-color:rgba(117,201,190,.20)!important
+}
+body{font-family:"DM Sans",sans-serif;}
+.signature-nav,.signature-nav *{font-family:"DM Sans",sans-serif;}
+.signature-name b{font-family:"Manrope",sans-serif;}
+:root.dark .signature-nav{--navy:#F7FCFB;--blue:#E8F5F1;--teal:#75C9BE;--mint:#58B7AA;--paper:#01142B;--mist:#0E303C;--line:rgba(117,201,190,.18);}
+
+</style>
+</head>
+
+<body>
+  <div class="scrollbar" id="scrollbar"></div>
+  <header class="signature-nav" id="signatureNav"><a aria-label="SIAQ home" class="signature-brand" href="index.html">
+<picture class="nav-logo-picture"><img alt="SIAQ logo" class="siaq-real-logo nav-real-logo" src="assets/siaq-logo-navy.png"/></picture><span class="signature-name"><b>SIAQ</b><small>Social Intelligence Alignment
+          Quotient</small></span>
+</a>
+<nav aria-label="Primary navigation" class="signature-links">
+<a class="" href="index.html"><span>Home</span></a>
+<a class="" href="evaluation.html"><span>Evaluation</span></a>
+<a class="" href="history.html"><span>History</span></a>
+<a class="" href="leaderboard.html"><span>Leaderboard</span></a>
+<a class="" href="about.html"><span>About</span></a>
+</nav>
+<div class="nav-auth">
+<button aria-label="Switch theme" aria-pressed="false" class="theme-toggle" id="themeToggle" type="button"><span class="sun">☼</span><span class="moon">☾</span></button>
+<div class="profile-menu" id="profileMenu">
+<button aria-expanded="false" aria-label="Open profile menu" class="profile-avatar-btn" id="profileMenuButton" type="button">
+<svg aria-hidden="true" class="profile-user-icon" viewbox="0 0 24 24">
+<path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0"></path>
+</svg>
+</button>
+<div class="profile-dropdown" id="profileDropdown">
+<div class="profile-dropdown-head">
+<div><b id="navUserName">My Account</b><small id="navUserEmail"></small></div>
+</div>
+<a href="profile.html">Profile <span>→</span></a>
+<a href="history.html">History <span>→</span></a>
+<button id="logoutButton" type="button">Log out <span>↗</span></button>
+</div>
+</div>
+</div>
+</header>
+
+  <main>
+    <div class="breadcrumb">My Account</div>
+    <div class="pagehead">
+      <div>
+        <h1>My Profile</h1>
+      </div>
     </div>
+    <section class="hero">
+      <div class="hero-info">
+        <div class="avatar" id="avatar">S</div>
+        <div>
+          <h2 id="heroName"></h2>
+          <p id="heroEmail"></p>
+        </div>
+      </div><button type="button" id="heroEdit">Edit Profile ↗</button>
+    </section>
+    <div class="layout">
+      <div class="content">
+        <section class="panel" id="personal">
+          <div class="panel-head">
+            <div>
+              <h3>Personal Information</h3>
+            </div>
+          </div>
+          <form id="profileForm">
+            <div class="fields">
+              <div class="field"><label for="firstName">First Name</label><input id="firstName" maxlength="50" required
+                  disabled autocomplete="given-name"></div>
+              <div class="field"><label for="lastName">Last Name</label><input id="lastName" maxlength="50" required
+                  disabled autocomplete="family-name"></div>
+              <div class="field wide"><label for="fullName">Full Name</label><input id="fullName" disabled></div>
+            </div>
+            <div class="actions"><button type="button" class="btn" id="cancelEdit" hidden>Cancel</button><button
+                type="button" class="btn" id="editProfile">Edit
+                Information</button><button type="submit" class="btn primary" id="saveProfile" hidden>Save
+                Changes</button></div>
+            <div class="message" id="profileMessage" role="status" aria-live="polite"></div>
+          </form>
+        </section>
+        <section class="panel" id="security">
+          <div class="panel-head">
+            <div>
+              <h3>Account & Security</h3>
+            </div>
+          </div>
+          <div class="security-row">
+            <div><strong>Email Address</strong>
+              <p id="currentEmail"></p>
+              <div class="email-line" style="margin-top:10px"><span id="verificationBadge" class="status"></span></div>
+            </div><button type="button" class="btn" id="changeEmailBtn">Change Email</button>
+          </div>
+          <form id="emailForm" hidden>
+            <div class="field"><label for="newEmail">New Email Address</label><input type="email" id="newEmail"
+                autocomplete="email" required><span class="helper">A verification link
+                will be sent to the new address. Your current email remains active until verification is
+                complete.</span></div>
+            <div class="actions"><button type="button" class="btn" id="cancelEmail">Cancel</button><button type="submit"
+                class="btn primary" id="saveEmail">Send Verification</button></div>
+          </form>
+          <div class="security-row">
+            <div><strong>Password</strong></div><button type="button" class="btn" id="changePasswordBtn">Change
+              Password</button>
+          </div>
+          <form id="passwordForm" hidden>
+            <div class="fields">
+              <div class="field wide"><label for="currentPassword">Current Password</label><input id="currentPassword"
+                  type="password" autocomplete="current-password" required></div>
+              <div class="field"><label for="newPassword">New Password</label><input id="newPassword" type="password"
+                  autocomplete="new-password" minlength="8" required></div>
+              <div class="field"><label for="confirmPassword">Confirm New Password</label><input id="confirmPassword"
+                  type="password" autocomplete="new-password" minlength="8" required></div>
+            </div><span class="helper">Use at least 8 characters including a letter and a number.</span>
+            <div class="actions"><button type="button" class="btn" id="cancelPassword">Cancel</button><button
+                type="submit" class="btn primary" id="savePassword">Update Password</button></div>
+          </form>
+          <div class="message" id="securityMessage" role="status" aria-live="polite"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="signature-footer" id="footer">
+    <div class="footer-accent"></div>
+    <div class="footer-main">
+      <div class="footer-brand">
+        <picture class="footer-logo-picture"><img class="footer-real-logo" src="assets/siaq-logo-white.png"
+            alt="SIAQ logo"></picture>
+        <p>Evaluating conversational AI across appropriateness, positivity, and socio-cultural alignment.</p>
+      </div>
+      <div class="footer-column"><b>Explore</b><a href="index.html">Home</a><a href="evaluation.html">Evaluation</a><a
+          href="history.html">History</a><a href="leaderboard.html">Leaderboard</a></div>
+      <div class="footer-column"><b>SIAQ</b><a href="about.html">About</a><a href="profile.html">Profile</a><a
+          href="index.html#framework">Framework</a><a href="index.html#process">Process</a></div>
+    </div>
+    <div class="footer-bottom"><span>© 2026 SIAQ. All rights reserved.</span><span>Social Intelligence Alignment
+        Quotient</span></div>
+  </footer>
+  <script>
+    (function () {
+      const root = document.documentElement, toggle = document.getElementById('themeToggle');
+      const saved = localStorage.getItem('siaq-theme'); const dark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      function apply(on) { root.classList.toggle('dark', on); root.dataset.theme = on ? 'dark' : 'light'; toggle.setAttribute('aria-pressed', String(on)); toggle.setAttribute('aria-label', on ? 'Switch to light mode' : 'Switch to dark mode'); localStorage.setItem('siaq-theme', on ? 'dark' : 'light') }
+      apply(dark); toggle.addEventListener('click', () => apply(!root.classList.contains('dark')));
+      const menu = document.getElementById('profileMenu'), btn = document.getElementById('profileMenuButton'); btn.addEventListener('click', () => { const open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open)) }); document.addEventListener('click', e => { if (!menu.contains(e.target)) { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false') } }); document.addEventListener('keydown', e => { if (e.key === 'Escape') { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false') } });
+      function onScroll() { document.getElementById('signatureNav').classList.toggle('is-compact', scrollY > 30); const max = document.documentElement.scrollHeight - innerHeight; document.getElementById('scrollbar').style.width = (max > 0 ? scrollY / max * 100 : 0) + '%' } addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    })();
+  </script>
+  <script type="module">
+    import { auth, db } from './js/firebase.js';
+    import { onAuthStateChanged, reload, updateProfile, verifyBeforeUpdateEmail, EmailAuthProvider, reauthenticateWithCredential, updatePassword, signOut } from 'https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js';
+    import { doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js';
+    const $ = id => document.getElementById(id); let currentUser = null, stored = null;
+    function message(id, text, error = false) { const el = $(id); el.textContent = text; el.className = 'message show' + (error ? ' error' : '') }
+    function clearMessage(id) { $(id).className = 'message'; $(id).textContent = '' }
+    function errText(e) { switch (e.code) { case 'permission-denied': return 'Firestore permissions denied. Check your security rules.'; case 'auth/requires-recent-login': return 'For security, please log out and sign in again before changing your email.'; case 'auth/email-already-in-use': return 'This email address is already registered.'; case 'auth/invalid-email': return 'Please enter a valid email address.'; case 'auth/weak-password': return 'Please choose a stronger password.'; case 'auth/wrong-password': case 'auth/invalid-credential': return 'Your current password is incorrect.'; case 'auth/too-many-requests': return 'Too many attempts. Please try again later.'; case 'auth/network-request-failed': return 'Network error. Please check your connection.'; default: return e.message || 'Something went wrong. Please try again.' } }
+    function setEditing(active) { $('firstName').disabled = !active; $('lastName').disabled = !active; $('editProfile').hidden = active; $('saveProfile').hidden = !active; $('cancelEdit').hidden = !active; if (active) $('firstName').focus() }
+    function fill(data) { stored = data; $('firstName').value = data.first_name || ''; $('lastName').value = data.last_name || ''; updateName(); setEditing(false) }
+    function updateName() { const first = $('firstName').value.trim(), last = $('lastName').value.trim(), name = [first, last].filter(Boolean).join(' '); $('fullName').value = name; $('heroName').textContent = name || 'Your Profile'; $('avatar').textContent = ([first[0], last[0]].filter(Boolean).join('') || 'S').toUpperCase(); $('navUserName').textContent = name || 'My Account' }
+    $('firstName').addEventListener('input', updateName); $('lastName').addEventListener('input', updateName);
+    async function syncEmail() { if (!currentUser) return; await reload(currentUser); $('currentEmail').textContent = currentUser.email || '—'; $('heroEmail').textContent = currentUser.email || '—'; $('navUserEmail').textContent = currentUser.email || ''; $('verificationBadge').textContent = currentUser.emailVerified ? 'Verified Email' : 'Email Not Verified'; $('verificationBadge').className = 'status' + (currentUser.emailVerified ? ' ok' : ''); if (stored && currentUser.email && stored.email !== currentUser.email) { try { await updateDoc(doc(db, 'users', currentUser.uid), { email: currentUser.email }); stored.email = currentUser.email } catch (e) { message('securityMessage', 'Your Authentication email is updated, but Firestore synchronization failed: ' + errText(e), true) } } }
+    onAuthStateChanged(auth, async user => { if (!user) { location.replace('login.html'); return } currentUser = user; try { const snapshot = await getDoc(doc(db, 'users', user.uid)); if (!snapshot.exists()) throw new Error('User profile was not found in Firestore.'); const data = snapshot.data(); if (data.status === 'blocked') { location.replace('index.html'); return } fill(data); await syncEmail() } catch (e) { message('profileMessage', errText(e), true) } });
+    $('heroEdit').onclick = $('editProfile').onclick = () => { clearMessage('profileMessage'); setEditing(true) }; $('cancelEdit').onclick = () => { fill(stored); clearMessage('profileMessage') };
+    $('profileForm').onsubmit = async e => { e.preventDefault(); if (!currentUser) return; const first = $('firstName').value.trim(), last = $('lastName').value.trim(); if (!first || !last || first.length > 50 || last.length > 50) { message('profileMessage', 'Enter a first and last name (maximum 50 characters each).', true); return } const btn = $('saveProfile'); btn.disabled = true; try { await updateDoc(doc(db, 'users', currentUser.uid), { first_name: first, last_name: last }); stored = { ...stored, first_name: first, last_name: last }; try { await updateProfile(currentUser, { displayName: first + ' ' + last }) } catch (e) { console.warn('Auth display name sync:', e) } fill(stored); message('profileMessage', 'Your profile information has been saved successfully.') } catch (e) { message('profileMessage', errText(e), true) } finally { btn.disabled = false } };
+    $('changeEmailBtn').onclick = () => { $('emailForm').hidden = false; $('changeEmailBtn').hidden = true; clearMessage('securityMessage'); $('newEmail').focus() }; $('cancelEmail').onclick = () => { $('emailForm').hidden = true; $('changeEmailBtn').hidden = false; $('newEmail').value = '' };
+    $('emailForm').onsubmit = async e => { e.preventDefault(); if (!currentUser) return; const email = $('newEmail').value.trim(); if (email.toLowerCase() === (currentUser.email || '').toLowerCase()) { message('securityMessage', 'Enter a different email address.', true); return } const btn = $('saveEmail'); btn.disabled = true; try { await verifyBeforeUpdateEmail(currentUser, email); message('securityMessage', 'Verification sent to ' + email + '. Open the link in that inbox to complete your email change.'); $('cancelEmail').click() } catch (e) { message('securityMessage', errText(e), true) } finally { btn.disabled = false } };
+    $('changePasswordBtn').onclick = () => { $('passwordForm').hidden = false; $('changePasswordBtn').hidden = true; clearMessage('securityMessage') }; $('cancelPassword').onclick = () => { $('passwordForm').reset(); $('passwordForm').hidden = true; $('changePasswordBtn').hidden = false };
+    $('passwordForm').onsubmit = async e => { e.preventDefault(); if (!currentUser) return; const old = $('currentPassword').value, next = $('newPassword').value, confirm = $('confirmPassword').value; if (next !== confirm) { message('securityMessage', 'New passwords do not match.', true); return } if (next.length < 8 || !/[A-Za-z]/.test(next) || !/[0-9]/.test(next)) { message('securityMessage', 'Password must be at least 8 characters and contain a letter and a number.', true); return } const btn = $('savePassword'); btn.disabled = true; try { const cred = EmailAuthProvider.credential(currentUser.email, old); await reauthenticateWithCredential(currentUser, cred); await updatePassword(currentUser, next); $('cancelPassword').click(); message('securityMessage', 'Your password has been updated successfully.') } catch (e) { message('securityMessage', errText(e), true) } finally { btn.disabled = false } };
+    window.addEventListener('focus', () => { if (currentUser) syncEmail().catch(console.warn) }); $('logoutButton').addEventListener('click', async () => { try { await signOut(auth); location.href = 'index.html' } catch (e) { message('securityMessage', errText(e), true) } });
+  </script>
+</body>
 
-    <div class="footer-wordmark" aria-hidden="true">SIAQ</div>
-
-    <a class="footer-up" href="index.html">
-      <span>↑</span>
-      <small>TOP</small>
-    </a>
-  </div>
-
-  <div class="footer-rule"></div>
-
-  <div class="footer-meta footer-meta-centered">
-    <span>© 2026 SIAQ</span>
-  </div>
-</footer><script src="script.js"></script></body></html>
+</html>
