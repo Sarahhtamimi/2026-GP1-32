@@ -1,37 +1,2001 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>About SIAQ</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet"><script>(function(){try{if(localStorage.getItem("siaq-theme")==="dark")document.documentElement.classList.add("dark")}catch(e){}})();</script><link rel="stylesheet" href="styles.css"></head><body class=""><div class="siaq-architecture" aria-hidden="true">
-  <div class="arch-grid"></div>
-  <div class="arch-orb orb-teal"></div><div class="arch-orb orb-sage"></div><div class="arch-orb orb-sky"></div><div class="arch-orb orb-cream"></div>
-  <div class="arch-square sq-a"></div><div class="arch-square sq-b"></div><div class="arch-square sq-c"></div><div class="arch-square sq-d"></div><div class="arch-square sq-e"></div><div class="arch-square sq-f"></div>
-  <div class="arch-ring ring-a"></div><div class="arch-ring ring-b"></div><div class="arch-ring ring-c"></div>
-  <div class="arch-beam beam-a"></div><div class="arch-beam beam-b"></div>
-</div><div class="scrollbar" id="scrollbar"></div><header class="signature-nav" id="signatureNav"><a class="signature-brand" href="index.html" aria-label="SIAQ home"><span class="signature-mark"><i></i><i></i><i></i></span><span class="signature-name"><b>SIAQ</b><small>Social Intelligence Alignment Quotient</small></span></a><nav class="signature-links" aria-label="Primary navigation"><a class="" href="index.html"><span>Home</span></a><a class="" href="evaluation.html"><span>Evaluation</span></a><a class="active" href="about.html"><span>About</span></a></nav><div class="nav-auth"><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme" aria-pressed="false"><span class="sun">☼</span><span class="moon">☾</span></button><a class="nav-auth-profile" href="profile.html">Profile</a><a class="login-link" href="login.html">Log in</a><a class="signup-button" href="signup.html"><span>Sign up</span><b>↗</b></a></div></header><main class="page-main"><div class="page-shell"><div class="page-hero"><div><small>ABOUT SIAQ</small><h1>Alignment needs<br><span>human context.</span></h1></div><p>SIAQ is a web-based evaluation platform for examining normative alignment in conversational AI across context, supportive communication, and socio-cultural expectations.</p></div><div class="about-lead"><article class="page-card about-story"><small class="panel-kicker">PLATFORM OVERVIEW</small><h2>What SIAQ is</h2><p>SIAQ — Social Intelligence Alignment Quotient — supports structured, human-grounded comparison of conversational responses from open-source language models. Rather than acting as a general benchmark of model capability, it focuses on three defined dimensions of normative alignment.</p><p>Evaluators compare model responses to the same conversational scenario, assess each response using predefined criteria, and use the resulting dimension scores to understand model behavior more clearly.</p></article><aside class="mission-card"><small class="panel-kicker">PURPOSE</small><h3>More context-aware conversational AI.</h3><p>SIAQ is designed to make alignment evaluation more structured, explainable, multilingual, and culturally aware while keeping human judgment central to the process.</p></aside></div><div class="page-grid"><article class="info-card"><small class="panel-kicker">01 · APPROPRIATENESS</small><b>Context fit</b><p>Examines whether a response appropriately addresses the user’s conversational context, intent, and situation.</p></article><article class="info-card"><small class="panel-kicker">02 · POSITIVITY</small><b>Supportive calibration</b><p>Examines whether positive language is genuinely supportive rather than dismissive, minimizing, or unrealistic.</p></article><article class="info-card"><small class="panel-kicker">03 · SOCIO-CULTURAL</small><b>Cultural awareness</b><p>Examines whether a response respects relevant social and cultural expectations in the conversation.</p></article></div><div class="page-grid" style="margin-top:18px"><article class="info-card"><span class="metric">AR / EN</span><b>Cross-lingual foundation</b><p>Arabic and English are the seed languages, with a framework designed to accommodate additional languages and dialects.</p></article><article class="info-card"><span class="metric">2×</span><b>Comparative evaluation</b><p>Two model responses are reviewed side by side using the same prompt and the same alignment dimensions.</p></article><article class="info-card"><span class="metric">HUMAN</span><b>Human-grounded</b><p>Structured criteria support consistent human judgment while keeping contextual interpretation at the center.</p></article></div></div></main><footer class="signature-footer" id="footer">
-  <div class="footer-art" aria-hidden="true">
-    <span class="footer-disc disc-a"></span>
-    <span class="footer-disc disc-b"></span>
-    <span class="footer-orbit orbit-a"></span>
-    <span class="footer-orbit orbit-b"></span>
-  </div>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>About SIAQ | Human-Centered AI Evaluation</title>
+  <style>
+    :root {
+      --navy: #16324f;
+      --blue: #315d7d;
+      --teal: #2a8c82;
+      --mint: #75c9be;
+      --bg: #f6f9fa;
+      --border: #e4ecef;
+      --ink: #17354b;
+      --muted: #61788a;
+      --white: #fff;
+      --danger: #b54848
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink)
+    }
+
+    button,
+    input {
+      font: inherit
+    }
+
+    button {
+      cursor: pointer
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    .topbar {
+      height: 76px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 max(28px, calc((100vw - 1220px)/2));
+      gap: 20px
+    }
+
+    .brand {
+      font-size: 26px;
+      font-weight: 850;
+      letter-spacing: 2px;
+      color: var(--navy)
+    }
+
+    .brand i {
+      color: var(--teal);
+      font-style: normal
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 13px;
+      font-weight: 650;
+      color: var(--blue)
+    }
+
+    .nav a:hover,
+    .nav .active {
+      color: var(--teal)
+    }
+
+    .nav button {
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 11px;
+      padding: 10px 14px;
+      color: var(--blue)
+    }
+
+    main {
+      max-width: 1050px;
+      margin: 42px auto 90px;
+      padding: 0 28px
+    }
+
+    .breadcrumb {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 16px
+    }
+
+    .pagehead {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 27px
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--teal);
+      text-transform: uppercase
+    }
+
+    .pagehead h1 {
+      font-size: 36px;
+      letter-spacing: -1.3px;
+      margin: 8px 0
+    }
+
+    .pagehead p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px
+    }
+
+    .pill {
+      background: #e5f5f1;
+      color: #177b71;
+      border: 1px solid #c8e8e0;
+      border-radius: 30px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: 750
+    }
+
+    .hero {
+      background: linear-gradient(115deg, #16324f 0%, #315d7d 62%, #2a8c82 100%);
+      border-radius: 22px;
+      min-height: 195px;
+      position: relative;
+      overflow: hidden;
+      color: white;
+      padding: 40px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px
+    }
+
+    .hero-info {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      z-index: 1
+    }
+
+    .avatar {
+      width: 94px;
+      height: 94px;
+      flex: none;
+      display: grid;
+      place-items: center;
+      background: #e3f8f3;
+      color: #1a716e;
+      border: 5px solid #ffffff60;
+      border-radius: 25px;
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: 1px
+    }
+
+    .hero h2 {
+      font-size: 27px;
+      margin: 0 0 8px
+    }
+
+    .hero p {
+      margin: 0;
+      color: #d7edf0;
+      font-size: 14px;
+      overflow-wrap: anywhere
+    }
+
+    .hero small {
+      display: inline-block;
+      margin-top: 12px;
+      color: #d4e7ec;
+      font-size: 12px
+    }
+
+    .hero button {
+      z-index: 1;
+      border: 1px solid #ffffff75;
+      background: #ffffff19;
+      color: white;
+      border-radius: 12px;
+      padding: 13px 18px;
+      font-weight: 750;
+      white-space: nowrap
+    }
+
+    .hero button:hover {
+      background: #ffffff32
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 24px;
+      margin-top: 27px
+    }
+
+    .panel {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px
+    }
+
+    .content {
+      display: grid;
+      gap: 22px
+    }
+
+    .panel {
+      padding: 30px
+    }
+
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: start;
+      margin-bottom: 25px
+    }
+
+    .panel-head h3 {
+      font-size: 19px;
+      margin: 0 0 7px;
+      color: var(--navy)
+    }
+
+    .panel-head p {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.6
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 19px
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      min-width: 0
+    }
+
+    .field.wide {
+      grid-column: 1/-1
+    }
+
+    .field label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--blue)
+    }
+
+    .field input {
+      width: 100%;
+      height: 48px;
+      border: 1px solid #d8e4e9;
+      background: #fff;
+      border-radius: 11px;
+      padding: 0 15px;
+      color: var(--ink);
+      outline: none
+    }
+
+    .field input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px #2a8c821b
+    }
+
+    .field input:disabled {
+      background: #f5f8fa;
+      color: #5f7684;
+      opacity: 1
+    }
+
+    .helper {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 24px;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      border: 1px solid #d6e5e8;
+      border-radius: 11px;
+      padding: 12px 19px;
+      background: white;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 750
+    }
+
+    .btn.primary {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: white
+    }
+
+    .btn.primary:hover {
+      background: #23766e
+    }
+
+    .btn:disabled {
+      opacity: .55;
+      cursor: not-allowed
+    }
+
+    .email-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .status {
+      font-size: 11px;
+      font-weight: 750;
+      padding: 6px 10px;
+      border-radius: 20px;
+      background: #f4f0e4;
+      color: #92702c
+    }
+
+    .status.ok {
+      background: #e4f4ed;
+      color: #18755e
+    }
+
+    .security-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      padding: 20px 0;
+      border-top: 1px solid var(--border)
+    }
+
+    .security-row:first-of-type {
+      border-top: 0
+    }
+
+    .security-row strong {
+      font-size: 14px;
+      color: var(--navy)
+    }
+
+    .security-row p {
+      margin: 6px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .message {
+      display: none;
+      border-radius: 11px;
+      padding: 13px 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-top: 18px;
+      background: #e6f5f0;
+      color: #176c60
+    }
+
+    .message.show {
+      display: block
+    }
+
+    .message.error {
+      background: #fff0ef;
+      color: #a83e3e
+    }
+
+    
+
+    [hidden] {
+      display: none !important
+    }
+
+    @media(max-width:800px) {
+      .nav {
+        gap: 12px
+      }
+
+      .nav a:not(.active) {
+        display: none
+      }
+
+      .layout {
+        grid-template-columns: 1fr
+      }
+
+      .hero {
+        padding: 27px;
+        min-height: 210px
+      }
+
+      .hero-info {
+        gap: 15px
+      }
+
+      .avatar {
+        width: 75px;
+        height: 75px;
+        font-size: 25px
+      }
+
+      .hero h2 {
+        font-size: 22px
+      }
+    }
+
+    @media(max-width:520px) {
+      main {
+        padding: 0 16px;
+        margin-top: 27px
+      }
+
+      .topbar {
+        padding: 0 17px
+      }
+
+      .pagehead h1 {
+        font-size: 29px
+      }
+
+      .hero {
+        align-items: start;
+        flex-direction: column
+      }
+
+      .hero button {
+        align-self: flex-end
+      }
+
+      .panel {
+        padding: 22px 18px
+      }
+
+      .fields {
+        grid-template-columns: 1fr
+      }
+
+      .field.wide {
+        grid-column: auto
+      }
+
+      .security-row {
+        align-items: start;
+        flex-direction: column
+      }
+
+      .actions .btn {
+        flex: 1
+      }
+    }
+
+
+    .hero:before,
+    .hero:after {
+      content: "";
+      position: absolute;
+      border: 1px solid #ffffff30;
+      border-radius: 30px;
+      transform: rotate(27deg);
+      pointer-events: none
+    }
+
+    .hero:before {
+      width: 300px;
+      height: 300px;
+      right: 120px;
+      top: -210px
+    }
+
+    .hero:after {
+      width: 210px;
+      height: 210px;
+      right: -70px;
+      bottom: -120px
+    }
+
+    /* SIAQ shared navigation, footer and light/dark theme */
+    :root {
+      --paper: #F6F9FA;
+      --mist: #E4ECEF;
+      --line: rgba(49, 93, 125, .16);
+      --surface: #fff;
+      --field: #fff;
+      --soft: #e5f5f1;
+      --secondary: #315D7D;
+      --heading: #16324F;
+      --shadow: rgba(22, 50, 79, .10)
+    }
+
+    body {
+      font-family: "DM Sans", sans-serif;
+      background: linear-gradient(150deg, #F6F9FA, #EDF5F4 45%, #F6F9FA);
+      color: var(--heading);
+      min-height: 100vh
+    }
+
+    h1,
+    h2,
+    h3,
+    .signature-name b,
+    .footer-column b {
+      font-family: Manrope, sans-serif
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 132px 25px 100px
+    }
+
+    .breadcrumb {
+      color: var(--secondary)
+    }
+
+    .pagehead h1 {
+      color: var(--heading)
+    }
+
+    .panel {
+      background: var(--surface);
+      border-color: var(--line);
+      box-shadow: 0 20px 65px var(--shadow)
+    }
+
+    .panel-head h3,
+    .security-row strong {
+      color: var(--heading)
+    }
+
+    .panel-head p,
+    .security-row p,
+    .helper {
+      color: var(--secondary)
+    }
+
+    .field label {
+      color: var(--secondary)
+    }
+
+    .field input {
+      background: var(--field);
+      border-color: var(--line);
+      color: var(--heading)
+    }
+
+    .field input:disabled {
+      background: var(--mist);
+      color: var(--secondary)
+    }
+
+    .btn {
+      background: var(--surface);
+      border-color: var(--line);
+      color: var(--heading)
+    }
+
+    .btn.primary {
+      background: #2A8C82;
+      color: white
+    }
+
+    .security-row {
+      border-color: var(--line)
+    }
+
+    .status {
+      background: var(--mist);
+      color: var(--heading)
+    }
+
+    .status.ok {
+      background: var(--soft);
+      color: #167367
+    }
+
+    .hero {
+      background: linear-gradient(115deg, #16324F 0%, #315D7D 62%, #2A8C82 100%);
+      color: white
+    }
+
+    .hero h2 {
+      color: white
+    }
+
+    .hero p {
+      color: #E4F3F0
+    }
+
+    .scrollbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0;
+      z-index: 10001;
+      background: linear-gradient(90deg, #315D7D, #2A8C82, #75C9BE)
+    }
+
+    .signature-nav {
+      position: fixed;
+      z-index: 9999;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1180px, calc(100% - 34px));
+      min-height: 74px;
+      display: grid;
+      grid-template-columns: minmax(210px, 1fr) auto minmax(120px, 1fr);
+      align-items: center;
+      gap: 14px;
+      padding: 8px 15px 8px 20px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(246, 249, 250, .90);
+      backdrop-filter: blur(26px);
+      box-shadow: 0 18px 55px var(--shadow);
+      transition: .25s
+    }
+
+    .signature-nav.is-compact {
+      top: 10px;
+      min-height: 64px;
+      border-radius: 18px
+    }
+
+    .signature-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--heading);
+      width: max-content
+    }
+
+    .nav-logo-picture {
+      display: flex;
+      align-items: center;
+      width: 38px;
+      height: 34px
+    }
+
+    .nav-real-logo {
+      display: block;
+      width: 38px;
+      max-height: 32px;
+      object-fit: contain
+    }
+
+    .signature-name {
+      display: flex;
+      flex-direction: column
+    }
+
+    .signature-name b {
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1
+    }
+
+    .signature-name small {
+      margin-top: 4px;
+      font-size: 6px;
+      color: var(--secondary)
+    }
+
+    .signature-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 5px;
+      border-radius: 15px;
+      background: var(--mist)
+    }
+
+    .signature-links a {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 12px 12px;
+      border-radius: 11px;
+      color: var(--secondary);
+      white-space: nowrap
+    }
+
+    .signature-links a:hover {
+      background: var(--surface);
+      color: var(--heading)
+    }
+
+    .nav-auth {
+      justify-self: end;
+      display: flex;
+      align-items: center;
+      gap: 9px
+    }
+
+    .theme-toggle,
+    .profile-avatar-btn {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--heading);
+      cursor: pointer
+    }
+
+    .theme-toggle span {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-size: 19px;
+      transition: .2s
+    }
+
+    .theme-toggle .sun {
+      opacity: 0;
+      transform: rotate(70deg) scale(.7)
+    }
+
+    .theme-toggle .moon {
+      opacity: 1
+    }
+
+    .profile-menu {
+      position: relative
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      right: 0;
+      top: 49px;
+      width: 245px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--surface);
+      box-shadow: 0 24px 70px var(--shadow);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-7px);
+      transition: .2s
+    }
+
+    .profile-menu.open .profile-dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: none
+    }
+
+    .profile-dropdown-head {
+      padding: 10px 9px 14px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 5px
+    }
+
+    .profile-dropdown-head b {
+      display: block;
+      font-size: 12px;
+      color: var(--heading)
+    }
+
+    .profile-dropdown-head small {
+      display: block;
+      margin-top: 5px;
+      font-size: 10px;
+      color: var(--secondary);
+      overflow-wrap: anywhere
+    }
+
+    .profile-dropdown>a,
+    .profile-dropdown>button {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: var(--heading);
+      font: 700 11px Manrope;
+      text-decoration: none;
+      padding: 12px 9px;
+      border-radius: 9px;
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer
+    }
+
+    .profile-dropdown>a:hover,
+    .profile-dropdown>button:hover {
+      background: var(--mist)
+    }
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    :root.dark {
+      --paper: #01142B;
+      --mist: #0E303C;
+      --line: rgba(117, 201, 190, .24);
+      --surface: #082C3B;
+      --field: #041F31;
+      --soft: #0C4846;
+      --secondary: #D7E9E5;
+      --heading: #F7FCFB;
+      --shadow: rgba(0, 8, 22, .40);
+      --ink: #F7FCFB;
+      --muted: #D7E9E5;
+      --border: rgba(117, 201, 190, .24)
+    }
+
+    :root.dark body {
+      background: radial-gradient(900px 700px at 94% 8%, rgba(42, 140, 130, .34), transparent 66%), linear-gradient(150deg, #01142B 0%, #05253A 45%, #08363D 72%, #01142B 100%);
+      color: #F7FCFB
+    }
+
+    :root.dark .signature-nav {
+      background: rgba(1, 20, 43, .91);
+      border-color: var(--line)
+    }
+
+    :root.dark .signature-links {
+      background: #0E303C
+    }
+
+    :root.dark .signature-links a:hover {
+      background: #164D52
+    }
+
+    :root.dark .theme-toggle .sun {
+      opacity: 1;
+      transform: none
+    }
+
+    :root.dark .theme-toggle .moon {
+      opacity: 0;
+      transform: rotate(-70deg) scale(.7)
+    }
+
+    :root.dark .nav-real-logo {
+      content: url("assets/siaq-logo-white.png")
+    }
+
+    :root.dark .panel {
+      background: linear-gradient(145deg, #082C3B, #0B3540)
+    }
+
+    :root.dark .field input:focus {
+      border-color: #75C9BE;
+      box-shadow: 0 0 0 3px rgba(117, 201, 190, .16)
+    }
+
+    :root.dark .btn.primary {
+      background: #75C9BE;
+      color: #01142B;
+      border-color: #75C9BE
+    }
+
+    :root.dark .btn.primary:hover {
+      background: #58B7AA
+    }
+
+    :root.dark .status.ok {
+      color: #A7EDE0
+    }
+
+    :root.dark .message:not(.error) {
+      background: #0E4847;
+      color: #BDF3E9
+    }
+
+    :root.dark .message.error {
+      background: #512B38;
+      color: #FFC4C4
+    }
+
+    
+
+    @media(max-width:1000px) {
+      .signature-nav {
+        grid-template-columns: auto minmax(0, 1fr) auto
+      }
+
+      .signature-name small {
+        display: none
+      }
+
+      .signature-links {
+        overflow-x: auto;
+        scrollbar-width: none
+      }
+
+      .signature-links a {
+        padding: 10px 8px
+      }
+
+      
+    }
+
+    @media(max-width:650px) {
+      main {
+        padding: 110px 16px 65px;
+        margin: 0
+      }
+
+      .signature-nav {
+        top: 10px;
+        width: calc(100% - 20px);
+        padding: 8px;
+        gap: 6px;
+        min-height: 60px
+      }
+
+      .signature-name {
+        display: none
+      }
+
+      .nav-logo-picture,
+      .nav-real-logo {
+        width: 30px
+      }
+
+      .signature-links a {
+        font-size: 9px;
+        padding: 9px 7px
+      }
+
+      .theme-toggle,
+      .profile-avatar-btn {
+        width: 34px;
+        height: 34px
+      }
+
+      .nav-auth {
+        gap: 4px
+      }
+
+      
+
+      
+
+      
+
+      
+
+      .hero {
+        min-height: 210px
+      }
+    }
+  </style>
+<style>
+/* Index navbar parity overrides — scoped to navigation, no Firebase changes */
+.signature-nav{
+  position:fixed;z-index:90;top:18px;left:50%;
+  transform:translateX(-50%);
+  width:min(1180px,calc(100% - 34px));
+  height:74px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:8px 9px 8px 20px;
+  border:1px solid rgba(49,93,125,.14);
+  border-radius:22px;
+  background:rgba(246,249,250,.82);
+  backdrop-filter:blur(26px);
+  -webkit-backdrop-filter:blur(26px);
+  box-shadow:0 18px 55px rgba(22,50,79,.10),inset 0 1px 0 rgba(246,249,250,.95);
+  transition:height .3s,top .3s,background .3s,box-shadow .3s,border-radius .3s;
+}
+.signature-nav.is-compact{
+  top:10px;height:64px;border-radius:18px;
+  background:rgba(246,249,250,.94);
+  box-shadow:0 20px 62px rgba(22,50,79,.15);
+}
+.signature-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy);width:max-content}
+.signature-name{display:flex;flex-direction:column}
+.signature-name b{font:800 17px Manrope;letter-spacing:-.04em;line-height:1}
+.signature-name small{margin-top:4px;color:var(--blue);font-size:6px;letter-spacing:.035em}
+.signature-links{
+  height:48px;padding:5px;
+  display:flex;align-items:center;gap:2px;
+  border-radius:15px;
+  background:rgba(228,236,239,.62);
+  box-shadow:inset 0 0 0 1px rgba(49,93,125,.07);
+}
+.signature-links a{
+  position:relative;padding:12px 17px;border-radius:11px;
+  color:var(--blue);text-decoration:none;
+  font-size:8px;font-weight:700;letter-spacing:.01em;
+  transition:color .25s,background .25s,box-shadow .25s,transform .25s;
+}
+.signature-links a:before{
+  content:"";position:absolute;left:50%;bottom:6px;
+  width:4px;height:4px;border-radius:50%;background:var(--teal);
+  transform:translateX(-50%) scale(0);transition:.25s;
+}
+.signature-links a:hover{color:var(--navy);transform:translateY(-1px)}
+.signature-links a.active{
+  color:var(--navy);background:var(--paper);
+  box-shadow:0 7px 20px rgba(22,50,79,.09);
+}
+.signature-links a.active:before{transform:translateX(-50%) scale(1)}
+@media (max-width:900px){.signature-nav{grid-template-columns:1fr auto;width:calc(100% - 22px);padding-left:15px}.signature-links{display:none}.signature-name small{display:none}}
+@media (max-width:560px){.signature-nav{height:62px;top:10px}.signature-name b{font-size:15px}}
+.nav-auth{justify-self:end;display:flex;align-items:center;gap:6px}
+@media (max-width:900px){.nav-auth{margin-left:auto}}
+@media (max-width:650px){.signature-name small{display:none}}
+.theme-toggle{width:40px;height:40px;flex:0 0 40px;padding:0;position:relative;border:1px solid var(--line);border-radius:12px;background:rgba(246,249,250,.74);color:var(--navy);cursor:pointer;overflow:hidden;transition:background .26s,border-color .26s,color .26s,box-shadow .26s}
+.theme-toggle span{position:absolute;inset:0;display:grid;place-items:center;font-size:15px;transition:opacity .26s,transform .26s}
+.theme-toggle .sun{opacity:0;transform:rotate(70deg) scale(.65)}
+.theme-toggle .moon{opacity:1;transform:none}
+:root.dark .signature-nav{background:rgba(1,20,43,.82);border-color:rgba(117,201,190,.16);box-shadow:0 18px 55px rgba(0,8,22,.34),inset 0 1px 0 rgba(117,201,190,.07)}
+:root.dark .signature-nav.is-compact{background:rgba(1,20,43,.94);box-shadow:0 20px 62px rgba(0,8,22,.42)}
+:root.dark .signature-links{background:rgba(14,48,60,.62);box-shadow:inset 0 0 0 1px rgba(117,201,190,.08)}
+:root.dark .signature-links a{color:#E8F5F1}
+:root.dark .signature-links a:hover{color:#F7FCFB}
+:root.dark .signature-links a.active{color:#F7FCFB;background:rgba(117,201,190,.13);box-shadow:none}
+:root.dark .signature-brand{color:#F7FCFB}
+:root.dark .signature-name small{color:#B9DAD4}
+:root.dark .theme-toggle{background:rgba(14,48,60,.70);border-color:rgba(117,201,190,.22);color:#75C9BE}
+:root.dark .theme-toggle .sun{opacity:1;transform:none}
+:root.dark .theme-toggle .moon{opacity:0;transform:rotate(-70deg) scale(.65)}
+@media (prefers-reduced-motion:reduce){.theme-toggle,.theme-toggle span{transition:none!important}}
+.nav-auth-profile{display:none;text-decoration:none;color:var(--navy);font-size:8px;font-weight:700;padding:9px 11px;border-radius:10px;background:rgba(117,201,190,.13)}
+body.demo-logged-in .nav-auth-profile{display:block}
+.signature-nav{position:fixed}
+.nav-logo-picture{display:flex;align-items:center;width:38px;height:34px;flex:0 0 38px;overflow:hidden}
+.nav-real-logo{display:block;width:38px;height:auto;max-height:31px;object-fit:contain;object-position:left center}
+:root.dark .signature-links a{color:var(--dark-text-secondary)!important}
+:root.dark .signature-links a:hover,:root.dark .signature-links a.active{color:#fff!important}
+.signature-nav{grid-template-columns:minmax(225px,1fr) auto minmax(225px,1fr)}
+.signature-links{gap:2px}
+.signature-links a{padding-left:10px;padding-right:10px}
+.profile-menu{position:relative;display:none}
+body.demo-logged-in .profile-menu{display:block}
+.profile-avatar-btn{width:38px;height:38px;padding:0;border:1px solid rgba(42,140,130,.24);border-radius:12px;background:transparent;cursor:pointer;display:grid;place-items:center}
+.profile-avatar-btn:hover,.profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.16)}
+.profile-dropdown{position:absolute;right:0;top:48px;width:235px;padding:9px;border:1px solid var(--line);border-radius:16px;background:rgba(246,249,250,.97);box-shadow:0 24px 70px rgba(22,50,79,.18);backdrop-filter:blur(20px);opacity:0;visibility:hidden;transform:translateY(-7px);transition:.2s;z-index:100}
+.profile-menu.open .profile-dropdown{opacity:1;visibility:visible;transform:none}
+.profile-dropdown-head{display:flex;align-items:center;gap:11px;padding:10px 9px 13px;border-bottom:1px solid var(--line);margin-bottom:5px}
+.profile-dropdown-head b{display:block;font:800 10px Manrope}
+.profile-dropdown-head small{display:block;font-size:7px;color:var(--blue);margin-top:3px}
+.profile-dropdown>a,.profile-dropdown>button{width:100%;box-sizing:border-box;border:0;background:transparent;text-decoration:none;color:var(--navy);font:700 8px Manrope;padding:10px 9px;border-radius:9px;display:flex;justify-content:space-between;cursor:pointer}
+.profile-dropdown>a:hover,.profile-dropdown>button:hover{background:var(--mist)}
+.profile-dropdown>button{color:#9a3d3d}
+:root.dark .profile-dropdown{background:rgba(6,40,58,.97);border-color:rgba(117,201,190,.20)}
+:root.dark .profile-dropdown-head b,:root.dark .profile-dropdown>a{color:#F7FCFB!important}
+:root.dark .profile-dropdown-head small{color:#B9DAD4!important}
+@media (max-width:1100px){.signature-name small{display:none}.signature-nav{grid-template-columns:auto 1fr auto}.signature-links a{padding-left:7px;padding-right:7px}}
+@media (max-width:850px){.signature-links a[href="history.html"],.signature-links a[href="leaderboard.html"]{display:none}}
+.profile-menu{display:block!important;position:relative}
+.profile-avatar-btn{display:grid!important;place-items:center;width:38px;height:38px;border-radius:11px;border:1px solid rgba(42,140,130,.28);background:rgba(246,249,250,.55);color:var(--navy);cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.profile-avatar-btn:hover,.profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.18);border-color:rgba(42,140,130,.52);transform:translateY(-1px)}
+.profile-user-icon{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.profile-dropdown-head{padding:10px 9px 12px}
+.profile-dropdown-head b{font-size:9px}
+.profile-dropdown-head small{font-size:7px}
+:root.dark .profile-avatar-btn{background:rgba(117,201,190,.08);border-color:rgba(117,201,190,.28);color:#F7FCFB}
+:root.dark .profile-avatar-btn:hover,:root.dark .profile-avatar-btn[aria-expanded="true"]{background:rgba(117,201,190,.16);border-color:rgba(117,201,190,.55)}
+.signature-nav{z-index:9999!important;pointer-events:auto!important}
+.signature-nav *{pointer-events:auto!important}
+.signature-links{position:relative!important;z-index:2!important}
+.signature-links a{pointer-events:auto!important;cursor:pointer!important}
+.nav-auth{position:relative!important;z-index:3!important}
+.theme-toggle,.profile-avatar-btn{pointer-events:auto!important;cursor:pointer!important}
+@media (max-width:900px){.signature-nav{grid-template-columns:auto minmax(0,1fr) auto!important;gap:8px!important}.signature-links{display:flex!important;overflow-x:auto!important;overflow-y:hidden!important;white-space:nowrap!important;scrollbar-width:none;justify-self:stretch}.signature-links::-webkit-scrollbar{display:none}.signature-links a{flex:0 0 auto;padding:10px 9px!important}}
+@media (max-width:650px){.signature-name{display:none!important}.nav-logo-picture{width:30px!important;flex-basis:30px!important}.nav-real-logo{width:30px!important}.signature-nav{padding-left:10px!important;padding-right:8px!important}.signature-links a{font-size:7px!important;padding:9px 7px!important}.theme-toggle{width:34px!important;height:34px!important;flex-basis:34px!important}.profile-avatar-btn{width:34px!important;height:34px!important}}
+html.dark .signature-nav,html[data-theme="dark"] .signature-nav{
+  background:rgba(1,20,43,.90)!important;border-color:rgba(117,201,190,.20)!important
+}
+body{font-family:"DM Sans",sans-serif;}
+.signature-nav,.signature-nav *{font-family:"DM Sans",sans-serif;}
+.signature-name b{font-family:"Manrope",sans-serif;}
+:root.dark .signature-nav{--navy:#F7FCFB;--blue:#E8F5F1;--teal:#75C9BE;--mint:#58B7AA;--paper:#01142B;--mist:#0E303C;--line:rgba(117,201,190,.18);}
+
+</style>
+<style>
+/* Footer only — extracted from SIAQ index reference */
+.signature-footer {
+      width: calc(100% - 36px);
+      max-width: 1240px;
+      min-height: 370px;
+      margin: 90px auto 18px;
+      padding: 0 54px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      background: var(--navy);
+      color: var(--paper);
+      box-shadow: 0 40px 110px rgba(22, 50, 79, .23);
+    }
+.footer-art {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden
+    }
+.footer-disc {
+      position: absolute;
+      border-radius: 50%
+    }
+.footer-orbit {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(246, 249, 250, .12)
+    }
+.footer-main {
+      min-height: 290px;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr auto 60px;
+      gap: 40px;
+      align-items: center;
+    }
+@media  (max-width:900px) {
+.signature-footer {
+        width: calc(100% - 22px);
+        padding: 0 28px;
+        border-radius: 27px
+      }
+.footer-main {
+        grid-template-columns: 1fr 50px
+      }
+}
+@media  (max-width:560px) {
+.signature-footer {
+        min-height: 350px;
+        margin-top: 55px;
+        padding: 0 22px
+      }
+.footer-main {
+        min-height: 275px;
+        grid-template-columns: 1fr 44px;
+        gap: 10px
+      }
+}
+:root.dark .signature-footer {
+      background: radial-gradient(circle at 86% 0%, rgba(42, 140, 130, .24), transparent 30%), linear-gradient(120deg, #06283A 0%, #0B3540 55%, #01142B 100%);
+      border-color: rgba(117, 201, 190, .14);
+      box-shadow: 0 40px 110px rgba(0, 8, 22, .42)
+    }
+.footer-logo-picture {
+      display: flex;
+      align-items: center;
+      height: 48px;
+      margin-bottom: 15px
+    }
+.footer-real-logo {
+      display: block;
+      width: 104px;
+      height: auto;
+      max-height: 46px;
+      object-fit: contain;
+      object-position: left center
+    }
+.signature-footer {
+      display: block !important;
+      height: auto !important;
+      min-height: 0 !important;
+      padding: 48px 48px 0 !important
+    }
+.footer-main {
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+.footer-brand p {
+      max-width: 390px;
+      margin: 0;
+      color: var(--blue);
+      font-size: 10px;
+      line-height: 1.8
+    }
+.footer-column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px
+    }
+.footer-column b {
+      font: 800 10px Manrope;
+      color: var(--navy);
+      margin-bottom: 5px
+    }
+.footer-column a {
+      font-size: 9px;
+      color: var(--blue);
+      text-decoration: none;
+      transition: .22s
+    }
+.footer-column a:hover {
+      color: var(--teal);
+      transform: translateX(2px)
+    }
+.footer-bottom {
+      border-top: 1px solid var(--line);
+      padding: 18px 0 20px;
+      text-align: center;
+      color: var(--blue);
+      font-size: 8px
+    }
+:root.dark .signature-footer {
+      background: radial-gradient(circle at 86% 0%, rgba(42, 140, 130, .24), transparent 30%), linear-gradient(120deg, #06283A 0%, #0B3540 55%, #01142B 100%) !important;
+      border-color: rgba(117, 201, 190, .14) !important
+    }
+:root.dark .footer-column a {
+      color: var(--dark-text-secondary) !important
+    }
+:root.dark .footer-column a:hover {
+      color: var(--dark-accent) !important
+    }
+:root.dark .footer-bottom {
+      border-color: rgba(117, 201, 190, .15);
+      color: #B9DAD4 !important
+    }
+@media  (max-width:650px) {
+.signature-footer {
+        padding: 38px 24px 0 !important
+      }
+}
+.signature-footer {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(125deg, #16324F 0%, #214D69 46%, #2A8C82 100%) !important;
+      border-top: 0 !important;
+      color: #F6F9FA !important;
+      padding-top: 0 !important
+    }
+.footer-accent {
+      height: 4px;
+      background: linear-gradient(90deg, #75C9BE 0%, #F6F9FA 48%, #75C9BE 100%);
+      opacity: .9
+    }
+@media   (max-width: 650px) {
+.signature-footer .footer-main {
+        grid-template-columns: 1fr !important;
+        row-gap: 24px !important;
+      }
+}
+.signature-footer .footer-brand p,
+    .signature-footer .footer-column a {
+      color: #DDEFF0 !important
+    }
+.signature-footer .footer-column b {
+      color: #FFFFFF !important;
+      font-size: 10px
+    }
+.signature-footer .footer-column a:hover {
+      color: #FFFFFF !important
+    }
+.signature-footer .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      color: #EAF7F5 !important;
+      border-top: 1px solid rgba(255, 255, 255, .18) !important
+    }
+.signature-footer .footer-real-logo {
+      content: url("assets/siaq-logo-white.png")
+    }
+:root.dark .signature-footer {
+      background: linear-gradient(125deg, #01142B 0%, #083443 48%, #176A65 100%) !important
+    }
+:root.dark .signature-footer .footer-brand p,
+    :root.dark .signature-footer .footer-column a {
+      color: #D7E9E5 !important
+    }
+.footer-email {
+      display: inline-flex;
+      align-items: center;
+      width: max-content;
+      max-width: 100%;
+      gap: 9px;
+
+      margin: 12px 0 0 !important;
+      padding: 7px 12px;
+
+      border: 1px solid rgba(117, 201, 190, 0.22);
+      border-radius: 11px;
+      background: rgba(117, 201, 190, 0.075);
+
+      color: #F3FBFA !important;
+      font-family: "Manrope", sans-serif;
+      font-size: 10px !important;
+      font-weight: 500 !important;
+      line-height: 1.4;
+      text-decoration: none;
+
+      transition: background 0.2s, border-color 0.2s;
+    }
+.footer-mail-icon {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+
+      border-radius: 7px;
+      background: #75C9BE;
+      color: #01142B;
+    }
+.footer-mail-icon svg {
+      display: block;
+      width: 15px;
+      height: 15px;
+    }
+.footer-email:hover {
+      background: rgba(117, 201, 190, 0.14);
+      border-color: rgba(117, 201, 190, 0.42);
+    }
+.signature-footer {
+      position: relative;
+      overflow: hidden;
+    }
+.signature-footer::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -105px;
+      top: -125px;
+      border: 1px solid rgba(117, 201, 190, 0.14);
+      border-radius: 58px;
+      transform: rotate(24deg);
+      pointer-events: none;
+    }
+@media  (max-width:650px) {
+.signature-footer .footer-bottom {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 6px
+      }
+}
+.signature-footer .footer-brand,
+    .signature-footer .footer-links {
+      align-self: start;
+    }
+.signature-footer .footer-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+.signature-footer .footer-email {
+      margin-top: 18px !important;
+    }
+.signature-footer.refined-footer {
+  background: linear-gradient(
+    115deg,
+    #092B42 0%,
+    #0A3950 55%,
+    #12665F 100%
+  ) !important;
+
+  height: auto !important;
+  min-height: 0 !important;
+  padding: 0 42px !important;
+}
+.signature-footer.refined-footer .footer-accent {
+  margin-top: 18px;
+}
+.signature-footer.refined-footer .footer-main {
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 12px 0 22px !important;
+  margin: 0 auto !important;
+
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr) !important;
+  column-gap: 65px !important;
+  align-items: start !important;
+}
+.signature-footer.refined-footer .footer-brand {
+  grid-column: auto !important;
+  align-self: start !important;
+  max-width: 440px !important;
+  margin: 0 !important;
+}
+.signature-footer.refined-footer .footer-links-group {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 45px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  align-self: start !important;
+}
+.signature-footer.refined-footer .footer-column {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+.signature-footer.refined-footer .footer-bottom {
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 13px 0 16px !important;
+}
+@media   (max-width: 850px) {
+.signature-footer.refined-footer .footer-main {
+    grid-template-columns: 1fr !important;
+    gap: 25px !important;
+  }
+.signature-footer.refined-footer .footer-links-group {
+    max-width: 440px;
+  }
+}
+@media   (max-width: 520px) {
+.signature-footer.refined-footer {
+    padding: 0 22px !important;
+  }
+.signature-footer.refined-footer .footer-links-group {
+    gap: 20px !important;
+  }
+}
+.signature-footer.refined-footer {
+      min-height: 0 !important;
+      height: auto !important;
+      padding: 24px 42px 0 !important;
+    }
+.signature-footer.refined-footer .footer-main {
+      width: 100%;
+      max-width: 1152px;
+      min-height: 0 !important;
+      margin: 0 auto;
+      padding: 0 0 24px !important;
+
+      display: grid !important;
+      grid-template-columns:
+        minmax(0, 1.55fr) minmax(0, 1fr) !important;
+
+      gap: 65px !important;
+      align-items: start !important;
+    }
+.signature-footer.refined-footer .footer-brand {
+      grid-column: auto !important;
+      max-width: 440px;
+      min-width: 0;
+      align-self: start;
+    }
+.signature-footer.refined-footer .footer-links-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      padding-top: 5px;
+    }
+.signature-footer.refined-footer .footer-column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 11px;
+    }
+.signature-footer.refined-footer .footer-bottom {
+      padding: 14px 0 16px !important;
+    }
+@media   (max-width: 850px) {
+.signature-footer.refined-footer .footer-main {
+        grid-template-columns: 1fr !important;
+        gap: 25px !important;
+      }
+.signature-footer.refined-footer .footer-links-group {
+        max-width: 430px;
+        gap: 35px;
+      }
+}
+@media   (max-width: 520px) {
+.signature-footer.refined-footer {
+        padding: 24px 22px 0 !important;
+      }
+.signature-footer.refined-footer .footer-main {
+        padding-bottom: 22px !important;
+      }
+.signature-footer.refined-footer .footer-links-group {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+}
+.refined-footer{
+  position:relative;
+  overflow:hidden;
+  padding:0 48px!important;
+  color:var(--navy)!important;
+  background:
+    radial-gradient(520px 260px at 5% 15%,rgba(117,201,190,.20),transparent 68%),
+    radial-gradient(460px 240px at 96% 90%,rgba(49,93,125,.11),transparent 70%),
+    linear-gradient(145deg,#F6F9FA 0%,#EEF4F3 48%,#E4ECEF 100%)!important;
+  border-top:1px solid rgba(22,50,79,.12)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7);
+}
+.refined-footer::before{
+  content:"";
+  position:absolute;
+  width:220px;height:220px;
+  right:-105px;top:-125px;
+  border:1px solid rgba(42,140,130,.14);
+  border-radius:58px;
+  transform:rotate(24deg);
+  pointer-events:none;
+}
+.refined-footer .footer-main{
+  max-width:1152px;
+  margin:0 auto;
+  padding:52px 0 42px!important;
+  display:grid;
+  grid-template-columns:minmax(300px,1.55fr) minmax(300px,1fr);
+  gap:80px;
+  align-items:start;
+}
+.refined-footer .footer-brand{max-width:440px}
+.refined-footer .footer-logo-picture{height:45px;margin:0 0 17px;display:flex;align-items:center}
+.refined-footer .footer-real-logo{
+  content:url("assets/siaq-logo-navy.png")!important;
+  width:100px;
+  max-height:43px;
+  object-fit:contain;
+  object-position:left center;
+}
+.refined-footer .footer-brand p{
+  max-width:410px;
+  margin:0 0 19px;
+  color:#315D7D!important;
+  font-size:10px;
+  line-height:1.75;
+}
+.footer-email{
+  width:max-content;
+  max-width:100%;
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  padding:9px 12px;
+  border:1px solid rgba(42,140,130,.20);
+  border-radius:11px;
+  background:rgba(255,255,255,.48);
+  color:#16324F!important;
+  text-decoration:none;
+  font:700 8px Manrope;
+  transition:transform .22s,background .22s,border-color .22s;
+}
+.footer-email:hover{
+  transform:translateY(-1px);
+  background:rgba(117,201,190,.17);
+  border-color:rgba(42,140,130,.38);
+  color:#16324F!important;
+}
+.footer-mail-icon{
+  width:22px;height:22px;
+  display:grid;place-items:center;
+  border-radius:7px;
+  background:#2A8C82;
+  color:#F6F9FA;
+  font-size:10px;
+}
+.footer-links-group{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:56px;
+  padding-top:5px;
+}
+.refined-footer .footer-column{gap:11px}
+.refined-footer .footer-column b{
+  margin-bottom:5px;
+  color:#16324F!important;
+  font:800 10px Manrope;
+  letter-spacing:.02em;
+}
+.refined-footer .footer-column a{
+  width:max-content;
+  color:#315D7D!important;
+  font-size:9px;
+  line-height:1.4;
+  text-decoration:none;
+  transition:color .2s,transform .2s;
+}
+.refined-footer .footer-column a:hover{
+  color:#2A8C82!important;
+  transform:translateX(2px);
+}
+.refined-footer .footer-bottom{
+  max-width:1152px;
+  margin:0 auto;
+  padding:18px 0 21px!important;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:24px;
+  border-top:1px solid rgba(22,50,79,.12)!important;
+  color:#55758C!important;
+  font-size:8px;
+}
+html.dark .refined-footer,
+html[data-theme="dark"] .refined-footer{
+  color:#F7FCFB!important;
+  background:
+    radial-gradient(520px 260px at 5% 15%,rgba(117,201,190,.12),transparent 68%),
+    radial-gradient(460px 240px at 96% 90%,rgba(42,140,130,.13),transparent 70%),
+    linear-gradient(145deg,#01142B 0%,#06283A 52%,#0B3540 100%)!important;
+  border-top-color:rgba(117,201,190,.15)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.025);
+}
+html.dark .refined-footer::before,
+html[data-theme="dark"] .refined-footer::before{
+  border-color:rgba(117,201,190,.12);
+}
+html.dark .refined-footer .footer-real-logo,
+html[data-theme="dark"] .refined-footer .footer-real-logo{
+  content:url("assets/siaq-logo-white.png")!important;
+}
+html.dark .refined-footer .footer-brand p,
+html[data-theme="dark"] .refined-footer .footer-brand p{
+  color:#BFD8D4!important;
+}
+html.dark .refined-footer .footer-column b,
+html[data-theme="dark"] .refined-footer .footer-column b{
+  color:#F7FCFB!important;
+}
+html.dark .refined-footer .footer-column a,
+html[data-theme="dark"] .refined-footer .footer-column a{
+  color:#BFD8D4!important;
+}
+html.dark .refined-footer .footer-column a:hover,
+html[data-theme="dark"] .refined-footer .footer-column a:hover{
+  color:#75C9BE!important;
+}
+html.dark .footer-email,
+html[data-theme="dark"] .footer-email{
+  color:#EAF7F5!important;
+  background:rgba(117,201,190,.07);
+  border-color:rgba(117,201,190,.18);
+}
+html.dark .footer-email:hover,
+html[data-theme="dark"] .footer-email:hover{
+  color:#FFFFFF!important;
+  background:rgba(117,201,190,.13);
+  border-color:rgba(117,201,190,.34);
+}
+html.dark .footer-mail-icon,
+html[data-theme="dark"] .footer-mail-icon{
+  background:#75C9BE;
+  color:#01142B;
+}
+html.dark .refined-footer .footer-bottom,
+html[data-theme="dark"] .refined-footer .footer-bottom{
+  color:#9FC5BF!important;
+  border-top-color:rgba(117,201,190,.13)!important;
+}
+@media  (max-width:850px){
+.refined-footer{padding:0 30px!important}
+.refined-footer .footer-main{grid-template-columns:1fr;gap:35px;padding-top:44px!important}
+.refined-footer .footer-brand{max-width:520px}
+.refined-footer .footer-links-group{max-width:430px;gap:45px}
+}
+@media  (max-width:520px){
+.refined-footer{padding:0 22px!important}
+.refined-footer .footer-main{padding:38px 0 30px!important}
+.refined-footer .footer-links-group{grid-template-columns:1fr 1fr;gap:24px}
+.refined-footer .footer-bottom{flex-direction:column;align-items:flex-start;gap:6px}
+.footer-email{font-size:7px}
+}
+.refined-footer,
+html.dark .refined-footer,
+html[data-theme="dark"] .refined-footer{
+  color:#F6F9FA!important;
+  background:
+    radial-gradient(560px 290px at 2% 0%,rgba(117,201,190,.13),transparent 67%),
+    radial-gradient(520px 280px at 100% 100%,rgba(42,140,130,.20),transparent 70%),
+    linear-gradient(128deg,#01142B 0%,#082B3D 48%,#123E49 100%)!important;
+  border-top:1px solid rgba(117,201,190,.18)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+.refined-footer::before,
+html.dark .refined-footer::before,
+html[data-theme="dark"] .refined-footer::before{
+  border-color:rgba(117,201,190,.14)!important;
+}
+.refined-footer .footer-real-logo,
+html.dark .refined-footer .footer-real-logo,
+html[data-theme="dark"] .refined-footer .footer-real-logo{
+  content:url("assets/siaq-logo-white.png")!important;
+}
+.refined-footer .footer-brand p,
+html.dark .refined-footer .footer-brand p,
+html[data-theme="dark"] .refined-footer .footer-brand p{
+  color:#C8DEDC!important;
+}
+.refined-footer .footer-column b,
+html.dark .refined-footer .footer-column b,
+html[data-theme="dark"] .refined-footer .footer-column b{
+  color:#FFFFFF!important;
+}
+.refined-footer .footer-column a,
+html.dark .refined-footer .footer-column a,
+html[data-theme="dark"] .refined-footer .footer-column a{
+  color:#B9D8D4!important;
+}
+.refined-footer .footer-column a:hover,
+html.dark .refined-footer .footer-column a:hover,
+html[data-theme="dark"] .refined-footer .footer-column a:hover{
+  color:#75C9BE!important;
+}
+.refined-footer .footer-email,
+html.dark .refined-footer .footer-email,
+html[data-theme="dark"] .refined-footer .footer-email{
+  color:#F3FBFA!important;
+  background:rgba(117,201,190,.075)!important;
+  border-color:rgba(117,201,190,.22)!important;
+}
+.refined-footer .footer-email:hover,
+html.dark .refined-footer .footer-email:hover,
+html[data-theme="dark"] .refined-footer .footer-email:hover{
+  color:#FFFFFF!important;
+  background:rgba(117,201,190,.14)!important;
+  border-color:rgba(117,201,190,.42)!important;
+}
+.refined-footer .footer-mail-icon,
+html.dark .refined-footer .footer-mail-icon,
+html[data-theme="dark"] .refined-footer .footer-mail-icon{
+  background:#75C9BE!important;
+  color:#01142B!important;
+}
+.refined-footer .footer-bottom,
+html.dark .refined-footer .footer-bottom,
+html[data-theme="dark"] .refined-footer .footer-bottom{
+  color:#9FC5BF!important;
+  border-top-color:rgba(117,201,190,.15)!important;
+}
+.signature-footer.refined-footer{min-height:370px!important;height:auto!important;padding:0 48px!important}
+.signature-footer.refined-footer .footer-main{min-height:290px!important;height:auto!important;max-width:1152px!important;margin:0 auto!important;padding:52px 0 42px!important;grid-template-columns:minmax(300px,1.55fr) minmax(300px,1fr)!important;gap:80px!important;align-items:start!important}
+.signature-footer.refined-footer .footer-bottom{min-height:0!important;max-width:1152px!important;margin:0 auto!important;padding:18px 0 21px!important}
+@media  (max-width:850px){
+.signature-footer.refined-footer{padding:0 30px!important}
+.signature-footer.refined-footer .footer-main{grid-template-columns:1fr!important;gap:35px!important;padding:44px 0 42px!important}
+}
+@media  (max-width:520px){
+.signature-footer.refined-footer{padding:0 22px!important}
+.signature-footer.refined-footer .footer-main{padding:38px 0 30px!important}
+}
+html:not(.dark):not([data-theme="dark"]) .signature-footer.refined-footer {
+  background:linear-gradient(125deg,#16324F 0%,#214D69 46%,#2A8C82 100%)!important;
+  color:#F6F9FA!important;
+  border-top-color:transparent!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035)!important;
+}
+html:not(.dark):not([data-theme="dark"]) .refined-footer::before {border-color:rgba(117,201,190,.14)!important}
+html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-real-logo {content:url("assets/siaq-logo-white.png")!important}
+html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-brand p,
+html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column a {color:#DDEFF0!important}
+html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column b {color:#FFFFFF!important}
+html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-column a:hover {color:#FFFFFF!important}
+html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-email {color:#F3FBFA!important;background:rgba(117,201,190,.075)!important;border-color:rgba(117,201,190,.22)!important}
+html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-mail-icon {background:rgba(117,201,190,.16)!important;color:#F6F9FA!important}
+html:not(.dark):not([data-theme="dark"]) .refined-footer .footer-bottom {color:#EAF7F5!important;border-top-color:rgba(255,255,255,.18)!important}
+html.dark .signature-footer.refined-footer,html[data-theme="dark"] .signature-footer.refined-footer {
+  background:linear-gradient(125deg,#01142B 0%,#083443 48%,#176A65 100%)!important;
+}
+html.dark .refined-footer .footer-brand p,html.dark .refined-footer .footer-column a,
+html[data-theme="dark"] .refined-footer .footer-brand p,html[data-theme="dark"] .refined-footer .footer-column a {color:#D7E9E5!important}
+</style>
+<style>
+/* ABOUT PAGE ONLY — existing navigation/footer CSS is unchanged */
+body{background:linear-gradient(150deg,#F6F9FA 0%,#EDF5F4 45%,#F6F9FA 100%);}
+.about-page{max-width:1180px;margin:0 auto;padding:157px 28px 90px;}
+.about-kicker{display:inline-flex;align-items:center;gap:11px;font:800 10px 'DM Sans',sans-serif;letter-spacing:.20em;text-transform:uppercase;color:#2A8C82;}
+.about-kicker:before{content:"";width:23px;height:2px;background:#2A8C82;display:block;}
+.about-hero{position:relative;min-height:410px;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(300px,.95fr);gap:38px;align-items:center;padding:32px 0 65px;}
+.about-hero h1{font:800 clamp(52px,6.5vw,92px)/1.03 Manrope,sans-serif;letter-spacing:-.075em;color:#16324F;margin:24px 0 23px;}
+.about-hero h1 span{color:#2A8C82;}
+.about-intro{font:400 15px/1.95 'DM Sans',sans-serif;color:#49677B;max-width:520px;margin:0;}
+.about-art{height:340px;position:relative;display:grid;place-items:center;isolation:isolate;}
+.about-art:before{content:"";position:absolute;width:290px;height:290px;border:1px solid rgba(42,140,130,.22);border-radius:50%;box-shadow:0 0 0 38px rgba(42,140,130,.045),0 0 0 78px rgba(42,140,130,.035);}
+.about-art:after{content:"";position:absolute;width:188px;height:188px;border:1px dashed rgba(49,93,125,.25);border-radius:50%;}
+.art-center{z-index:2;width:152px;height:152px;border-radius:36px;transform:rotate(-8deg);background:linear-gradient(145deg,#16324F,#2A8C82);box-shadow:0 25px 60px rgba(22,50,79,.20);display:grid;place-items:center;}
+.art-center span{font:800 36px Manrope,sans-serif;letter-spacing:-.075em;color:white;transform:rotate(8deg);}
+.art-square{position:absolute;width:55px;height:55px;border:1px solid rgba(42,140,130,.33);border-radius:15px;transform:rotate(25deg);background:rgba(255,255,255,.7);}
+.art-square.a{top:30px;right:55px}.art-square.b{bottom:28px;left:48px;width:40px;height:40px;background:#75C9BE33}
+.about-split{border-top:1px solid rgba(49,93,125,.16);display:grid;grid-template-columns:1fr 1.25fr;gap:75px;padding:66px 0 72px;align-items:start;}
+.about-section-title{font:800 clamp(32px,4vw,49px)/1.18 Manrope,sans-serif;letter-spacing:-.055em;color:#16324F;margin:17px 0 0;}
+.about-copy{font:400 15px/1.95 'DM Sans',sans-serif;color:#49677B;margin:13px 0 0;max-width:580px;}
+.about-vision{background:linear-gradient(120deg,#16324F 0%,#24546A 54%,#2A8C82 100%);border-radius:26px;padding:56px 62px;display:grid;grid-template-columns:1fr 1.3fr;gap:55px;align-items:center;position:relative;overflow:hidden;}
+.about-vision:after{content:"";width:260px;height:260px;border:1px solid rgba(255,255,255,.13);border-radius:50%;position:absolute;right:-130px;top:-145px;box-shadow:0 0 0 55px rgba(255,255,255,.035);pointer-events:none;}
+.about-vision .about-kicker{color:#A6E7DD}.about-vision .about-kicker:before{background:#A6E7DD}
+.about-vision .about-section-title{color:#fff}.about-vision .about-copy{color:#E0F2F0;margin:0;position:relative;z-index:1}
+.team-section{padding:100px 0 12px;}
+.team-heading{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:34px;}
+.team-heading .about-section-title{margin-top:15px;}
+.team-mark{font:800 12px Manrope,sans-serif;color:#2A8C82;letter-spacing:.13em;white-space:nowrap;padding-bottom:6px;}
+.team-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;}
+.team-card{min-height:210px;padding:26px 23px 24px;background:rgba(255,255,255,.83);border:1px solid #DFE9EC;border-radius:20px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .2s,border-color .2s,box-shadow .2s;}
+.team-card:hover{transform:translateY(-4px);border-color:#75C9BE;box-shadow:0 18px 42px rgba(22,50,79,.08);}
+.team-number{font:700 11px Manrope,sans-serif;letter-spacing:.13em;color:#2A8C82;}
+.team-name{font:800 clamp(17px,1.7vw,23px)/1.3 Manrope,sans-serif;letter-spacing:-.045em;color:#16324F;margin:0;overflow-wrap:break-word;}
+.team-caption{font:600 10px 'DM Sans',sans-serif;letter-spacing:.08em;color:#617F8A;text-transform:uppercase;margin-top:12px;}
+:root.dark .about-page{color:#F7FCFB}
+:root.dark .about-hero h1,:root.dark .about-section-title,:root.dark .team-name{color:#F7FCFB}
+:root.dark .about-hero h1 span{color:#75C9BE}
+:root.dark .about-kicker,:root.dark .team-number,:root.dark .team-mark{color:#75C9BE}
+:root.dark .about-kicker:before{background:#75C9BE}
+:root.dark .about-intro,:root.dark .about-copy{color:#D7E9E5}
+:root.dark .about-split{border-color:rgba(117,201,190,.2)}
+:root.dark .team-card{background:rgba(8,44,59,.86);border-color:rgba(117,201,190,.23)}
+:root.dark .team-caption{color:#B9DAD4}
+:root.dark .about-vision{background:linear-gradient(120deg,#082C3B,#0B464B 60%,#176A65)}
+:root.dark .art-square{background:rgba(14,48,60,.75)}
+@media(max-width:900px){.about-hero{grid-template-columns:1fr .7fr;gap:15px}.about-art{transform:scale(.75);transform-origin:center}.about-split{gap:36px}.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.about-vision{gap:28px;padding:42px}}
+@media(max-width:650px){.about-page{padding:115px 18px 55px}.about-hero{display:block;min-height:0;padding:18px 0 55px}.about-hero h1{font-size:clamp(47px,11vw,68px)}.about-art{display:none}.about-split{grid-template-columns:1fr;gap:12px;padding:45px 0}.about-vision{grid-template-columns:1fr;gap:15px;padding:35px 28px;border-radius:22px}.team-section{padding:65px 0 10px}.team-grid{gap:11px}.team-card{min-height:172px;padding:19px 16px}.team-name{font-size:18px}.team-heading{align-items:start}.team-mark{display:none}}
+@media(max-width:370px){.team-grid{grid-template-columns:1fr}.team-card{min-height:140px}}
+
+/* About team: compact editorial cards, right-aligned heading and restored accent line */
+.about-hero{display:block;min-height:0;padding:40px 0 76px;max-width:900px}
+.about-hero h1{max-width:860px}
+.team-section{padding-top:75px}
+.team-heading{justify-content:flex-start;text-align:left;margin-bottom:26px}
+.team-heading .about-kicker{justify-content:flex-start}
+.team-heading .about-kicker:before{display:block}
+.team-heading .about-section-title{font-size:clamp(29px,3.3vw,42px);margin-top:12px}
+.team-grid{max-width:none;margin:0;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.team-card{min-height:205px;padding:22px 14px 18px;align-items:center;justify-content:center;text-align:center;gap:10px;border-radius:19px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(228,242,241,.75));border:1px solid rgba(42,140,130,.17);box-shadow:0 8px 25px rgba(22,50,79,.035)}
+.team-card:hover{transform:translateY(-3px);border-color:rgba(42,140,130,.42);box-shadow:0 15px 34px rgba(22,50,79,.09)}
+.team-avatar{width:50px;height:50px;border-radius:15px;background:linear-gradient(145deg,#E4ECEF,#D6EDE8);color:#315D7D;display:grid;place-items:center;margin-bottom:2px}
+.team-avatar svg{width:23px;height:23px}
+.team-name{font:800 clamp(14px,1.35vw,18px)/1.3 Manrope,sans-serif;letter-spacing:-.04em;margin:0;overflow-wrap:anywhere}
+.team-caption{font:600 10px 'DM Sans',sans-serif;color:#2A8C82;letter-spacing:.01em;text-transform:none;margin:0}
+.team-linkedin{color:#315D7D;display:grid;place-items:center;width:29px;height:29px;border-radius:8px;transition:color .2s,background .2s,transform .2s}
+.team-linkedin svg{width:18px;height:18px}
+.team-linkedin:hover,.team-linkedin:focus-visible{color:#2A8C82;background:rgba(42,140,130,.09);transform:translateY(-2px)}
+:root.dark .team-card{background:linear-gradient(145deg,rgba(8,44,59,.96),rgba(15,65,70,.9));border-color:rgba(117,201,190,.23)}
+:root.dark .team-avatar{background:linear-gradient(145deg,#164554,#1A5A5B);color:#C4E3E0}
+:root.dark .team-caption,:root.dark .team-linkedin{color:#75C9BE}
+@media(max-width:900px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.team-card{min-height:195px}}
+@media(max-width:650px){.about-hero{padding:18px 0 55px}.team-section{padding-top:60px}.team-heading{margin-bottom:22px}.team-heading .about-section-title{font-size:32px}.team-grid{gap:10px}.team-card{min-height:180px;padding:18px 9px;gap:8px}.team-avatar{width:43px;height:43px;border-radius:13px}.team-name{font-size:clamp(12px,3.5vw,16px)}.team-caption{font-size:9px}}
+@media(max-width:370px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.team-card{min-height:180px}}
+</style>
+</head>
+<body>
+<div class="scrollbar" id="scrollbar"></div>
+  <header class="signature-nav" id="signatureNav"><a aria-label="SIAQ home" class="signature-brand" href="index.html">
+<picture class="nav-logo-picture"><img alt="SIAQ logo" class="siaq-real-logo nav-real-logo" src="assets/siaq-logo-navy.png"/></picture><span class="signature-name"><b>SIAQ</b><small>Social Intelligence Alignment
+          Quotient</small></span>
+</a>
+<nav aria-label="Primary navigation" class="signature-links">
+<a class="" href="index.html"><span>Home</span></a>
+<a class="" href="evaluation.html"><span>Evaluation</span></a>
+<a class="" href="history.html"><span>History</span></a>
+<a class="" href="leaderboard.html"><span>Leaderboard</span></a>
+<a class="active" aria-current="page" href="about.html"><span>About</span></a>
+</nav>
+<div class="nav-auth">
+<button aria-label="Switch theme" aria-pressed="false" class="theme-toggle" id="themeToggle" type="button"><span class="sun">☼</span><span class="moon">☾</span></button>
+<div class="profile-menu" id="profileMenu">
+<button aria-expanded="false" aria-label="Open profile menu" class="profile-avatar-btn" id="profileMenuButton" type="button">
+<svg aria-hidden="true" class="profile-user-icon" viewbox="0 0 24 24">
+<path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0"></path>
+</svg>
+</button>
+<div class="profile-dropdown" id="profileDropdown">
+<div class="profile-dropdown-head">
+<div><b id="navUserName">My Account</b><small id="navUserEmail"></small></div>
+</div>
+<a href="profile.html">Profile <span>→</span></a>
+<a href="history.html">History <span>→</span></a>
+<button id="logoutButton" type="button">Log out <span>↗</span></button>
+</div>
+</div>
+</div>
+</header>
+
+  
+<main class="about-page" id="main-content">
+  <section class="about-hero" aria-labelledby="about-title">
+    <div>
+      <div class="about-kicker">About SIAQ</div>
+      <h1 id="about-title">Beyond the<br><span>Response.</span></h1>
+      <p class="about-intro">SIAQ is a web-based AI evaluation platform that examines how conversational responses align with human expectations and socio-cultural values.</p>
+    </div>
+    
+  </section>
+  <section class="about-split" aria-labelledby="why-title">
+    <div><div class="about-kicker">Why SIAQ?</div><h2 class="about-section-title" id="why-title">Because context matters.</h2></div>
+    <p class="about-copy">A response can be technically correct yet socially inappropriate. SIAQ emphasizes evaluating AI beyond accuracy, considering how responses fit human and cultural contexts.</p>
+  </section>
+  <section class="about-vision" aria-labelledby="vision-title">
+    <div><div class="about-kicker">Our Vision</div><h2 class="about-section-title" id="vision-title">Towards more human-centered AI.</h2></div>
+    <p class="about-copy">To advance a future where conversational AI is not only intelligent, but also socially aware, culturally sensitive, and aligned with human values.</p>
+  </section>
+  <section class="team-section" aria-labelledby="team-title">
+    <div class="team-heading"><div><div class="about-kicker">The people behind SIAQ</div><h2 class="about-section-title" id="team-title">Meet the Team<span style="color:#2A8C82">.</span></h2></div></div>
+    <div class="team-grid">
+      <article class="team-card"><div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20"/></svg></div><h3 class="team-name">Yara Aldawsari</h3><div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="1" aria-label="LinkedIn profile for Yara Aldawsari (link to be added)" title="LinkedIn link coming soon" onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z"/></svg></a></article>
+      <article class="team-card"><div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20"/></svg></div><h3 class="team-name">Jood Aloqeely</h3><div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="2" aria-label="LinkedIn profile for Jood Aloqeely (link to be added)" title="LinkedIn link coming soon" onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z"/></svg></a></article>
+      <article class="team-card"><div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20"/></svg></div><h3 class="team-name">Jana Almughamis</h3><div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="3" aria-label="LinkedIn profile for Jana Almughamis (link to be added)" title="LinkedIn link coming soon" onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z"/></svg></a></article>
+      <article class="team-card"><div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.3"/><path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20"/></svg></div><h3 class="team-name">Sarah Altamimi</h3><div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="4" aria-label="LinkedIn profile for Sarah Altamimi (link to be added)" title="LinkedIn link coming soon" onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor" aria-hidden="true"><path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z"/></svg></a></article>
+    </div>
+  </section>
+</main>
+<footer class="signature-footer refined-footer" id="footer">
   <div class="footer-main">
-    <div class="footer-identity">
-      <a class="footer-logo" href="index.html">
-        <span class="signature-mark footer-mark"><i></i><i></i><i></i></span>
-        <span><b>SIAQ</b><small>Social Intelligence Alignment Quotient</small></span>
+    <div class="footer-brand">
+      <picture class="footer-logo-picture">
+        <img class="siaq-real-logo footer-real-logo" src="assets/siaq-logo-navy.png" alt="SIAQ logo">
+      </picture>
+      <p>Evaluating conversational AI across appropriateness, positivity, and socio-cultural alignment.</p>
+      <a class="footer-email" href="mailto:siaq.alignment@gmail.com" aria-label="Email SIAQ">
+        <span class="footer-mail-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg></span>
+        <span>siaq.alignment@gmail.com</span>
       </a>
-      <p>Human-grounded evaluation for more context-aware, supportive, and culturally aligned conversational AI.</p>
     </div>
 
-    <div class="footer-wordmark" aria-hidden="true">SIAQ</div>
-
-    <a class="footer-up" href="index.html">
-      <span>↑</span>
-      <small>TOP</small>
-    </a>
+    <div class="footer-links-group">
+      <div class="footer-column">
+        <b>Explore</b>
+        <a href="index.html">Home</a>
+        <a href="evaluation.html">Evaluation</a>
+        <a href="history.html">History</a>
+        <a href="leaderboard.html">Leaderboard</a>
+      </div>
+      <div class="footer-column">
+        <b>SIAQ</b>
+        <a href="about.html">About</a>
+        <a href="profile.html">Profile</a>
+        <a href="index.html#framework">Framework</a>
+        <a href="index.html#process">Process</a>
+      </div>
+    </div>
   </div>
 
-  <div class="footer-rule"></div>
-
-  <div class="footer-meta footer-meta-centered">
-    <span>© 2026 SIAQ</span>
+  <div class="footer-bottom">
+    <span>© 2026 SIAQ. All rights reserved.</span>
+    <span>Social Intelligence Alignment Quotient</span>
   </div>
-</footer><script src="script.js"></script></body></html>
+</footer>
+  
+<script>
+    (function () {
+      const root = document.documentElement, toggle = document.getElementById('themeToggle');
+      const saved = localStorage.getItem('siaq-theme'); const dark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      function apply(on) { root.classList.toggle('dark', on); root.dataset.theme = on ? 'dark' : 'light'; toggle.setAttribute('aria-pressed', String(on)); toggle.setAttribute('aria-label', on ? 'Switch to light mode' : 'Switch to dark mode'); localStorage.setItem('siaq-theme', on ? 'dark' : 'light') }
+      apply(dark); toggle.addEventListener('click', () => apply(!root.classList.contains('dark')));
+      const menu = document.getElementById('profileMenu'), btn = document.getElementById('profileMenuButton'); btn.addEventListener('click', () => { const open = menu.classList.toggle('open'); btn.setAttribute('aria-expanded', String(open)) }); document.addEventListener('click', e => { if (!menu.contains(e.target)) { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false') } }); document.addEventListener('keydown', e => { if (e.key === 'Escape') { menu.classList.remove('open'); btn.setAttribute('aria-expanded', 'false') } });
+      function onScroll() { document.getElementById('signatureNav').classList.toggle('is-compact', scrollY > 30); const max = document.documentElement.scrollHeight - innerHeight; document.getElementById('scrollbar').style.width = (max > 0 ? scrollY / max * 100 : 0) + '%' } addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    })();
+  </script>
+</body>
+</html>
