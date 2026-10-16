@@ -1,6 +1,3 @@
-// ==========================================
-// SIAQ - Authentication
-// ==========================================
 
 import { auth, db } from "./firebase.js";
 
@@ -19,9 +16,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.4.0/firebase-firestore.js";
 
 
-// ==========================================
 // SIGN UP
-// ==========================================
 
 const signupForm = document.getElementById("signupForm");
 
@@ -35,10 +30,6 @@ if (signupForm) {
   const termsInput = document.getElementById("terms");
   const signupMessage = document.getElementById("signupMessage");
 
-
-  // ------------------------------------------
-  // Helper Functions
-  // ------------------------------------------
 
   function showFieldError(input, message) {
 
@@ -129,9 +120,7 @@ if (signupForm) {
   });
 
 
-  // ------------------------------------------
   // Submit Sign Up Form
-  // ------------------------------------------
 
   signupForm.addEventListener(
     "submit",
@@ -164,10 +153,7 @@ if (signupForm) {
       let hasError = false;
 
 
-      // ----------------------------------------
       // First Name Validation
-      // ----------------------------------------
-
       if (!firstName) {
 
         showFieldError(
@@ -187,10 +173,7 @@ if (signupForm) {
         hasError = true;
       }
 
-
-      // ----------------------------------------
       // Last Name Validation
-      // ----------------------------------------
 
       if (!lastName) {
 
@@ -212,10 +195,8 @@ if (signupForm) {
       }
 
 
-      // ----------------------------------------
+      
       // Email Validation
-      // ----------------------------------------
-
       const emailPattern =
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -240,9 +221,7 @@ if (signupForm) {
       }
 
 
-      // ----------------------------------------
       // Password Validation
-      // ----------------------------------------
 
       const hasLetter =
         /[A-Za-z]/.test(password);
@@ -275,9 +254,7 @@ if (signupForm) {
       }
 
 
-      // ----------------------------------------
       // Confirm Password Validation
-      // ----------------------------------------
 
       if (!confirmPassword) {
 
@@ -299,9 +276,7 @@ if (signupForm) {
       }
 
 
-      // ----------------------------------------
       // Terms Validation
-      // ----------------------------------------
 
       if (!terms) {
 
@@ -318,9 +293,7 @@ if (signupForm) {
       }
 
 
-      // ----------------------------------------
       // Firebase Sign Up
-      // ----------------------------------------
 
       try {
 
@@ -336,9 +309,7 @@ if (signupForm) {
           userCredential.user;
 
 
-        // --------------------------------------
         // Save User Information in Firestore
-        // --------------------------------------
 
         await setDoc(
           doc(
@@ -366,9 +337,7 @@ if (signupForm) {
         );
 
 
-        // --------------------------------------
         // Successful Sign Up
-        // --------------------------------------
 
         showSignupMessage(
           "Account created successfully. Redirecting to the homepage...",
@@ -456,9 +425,7 @@ if (signupForm) {
 }
 
 
-// ==========================================
 // LOGIN
-// ==========================================
 
 const loginForm = document.getElementById("loginForm");
 
@@ -474,9 +441,7 @@ if (loginForm) {
     document.getElementById("loginMessage");
 
 
-  // ------------------------------------------
   // Helper Functions
-  // ------------------------------------------
 
   function showLoginFieldError(input, message) {
 
@@ -542,9 +507,7 @@ if (loginForm) {
   }
 
 
-  // ------------------------------------------
   // Remove Errors While Typing
-  // ------------------------------------------
 
   emailInput.addEventListener(
     "input",
@@ -570,9 +533,7 @@ if (loginForm) {
   );
 
 
-  // ------------------------------------------
   // Submit Login Form
-  // ------------------------------------------
 
   loginForm.addEventListener(
     "submit",
@@ -593,9 +554,7 @@ if (loginForm) {
       let hasError = false;
 
 
-      // ----------------------------------------
       // Email Validation
-      // ----------------------------------------
 
       const emailPattern =
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -623,9 +582,8 @@ if (loginForm) {
       }
 
 
-      // ----------------------------------------
+      
       // Password Validation
-      // ----------------------------------------
 
       if (!password) {
 
@@ -643,9 +601,7 @@ if (loginForm) {
       }
 
 
-      // ----------------------------------------
       // Firebase Login
-      // ----------------------------------------
 
       try {
 
@@ -661,9 +617,7 @@ if (loginForm) {
           userCredential.user;
 
 
-        // --------------------------------------
         // Get User Information From Firestore
-        // --------------------------------------
 
         const userDocument =
           await getDoc(
@@ -675,9 +629,7 @@ if (loginForm) {
           );
 
 
-        // --------------------------------------
         // User Document Must Exist
-        // --------------------------------------
 
         if (!userDocument.exists()) {
 
@@ -691,9 +643,7 @@ if (loginForm) {
         }
 
 
-        // --------------------------------------
         // Check Account Status
-        // --------------------------------------
 
         const userData =
           userDocument.data();
@@ -713,9 +663,7 @@ if (loginForm) {
         }
 
 
-        // --------------------------------------
         // Successful Login
-        // --------------------------------------
 
         console.log(
           "Logged in successfully"
@@ -803,9 +751,7 @@ if (loginForm) {
 }
 
 
-// ==========================================
 // LOGOUT
-// ==========================================
 
 const logoutBtn =
   document.getElementById("logoutBtn");
@@ -834,8 +780,7 @@ if (logoutBtn) {
           error
         );
 
-        // No popup alert.
-        // The user remains on the current page.
+        
 
       }
 
@@ -845,9 +790,7 @@ if (logoutBtn) {
 }
 
 
-// ==========================================
 // AUTH NAVIGATION STATE
-// ==========================================
 
 const navProfile =
   document.getElementById("navProfile");

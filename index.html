@@ -4697,10 +4697,10 @@
       }
     }
 
-    /* FINAL NAV FIX — profile icon always visible; no login/signup in navbar */
-    .profile-menu {
+    /* Profile is visible only for authenticated users; preserve existing appearance. */
+    #profileMenu:not([hidden]) {
       display: block !important;
-      position: relative
+      position: relative;
     }
 
     .login-link,
@@ -5172,6 +5172,17 @@
         gap: 24px;
       }
     }
+
+    /* Authentication-aware navbar: preserve existing SIAQ profile dropdown. */
+    #guestAuthButtons[hidden], #profileMenu[hidden] { display: none !important; }
+    #guestAuthButtons { display: flex; align-items: center; gap: 10px; }
+    #guestAuthButtons a { box-sizing: border-box; min-height: 42px; padding: 0 17px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 12px; text-decoration: none; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 700; white-space: nowrap; transition: background .2s, border-color .2s, transform .2s; }
+    #guestAuthButtons .guest-login-btn { color: var(--navy, #16324F); border: 1px solid rgba(22,50,79,.22); background: transparent; }
+    #guestAuthButtons .guest-login-btn:hover { background: rgba(42,140,130,.08); border-color: #2A8C82; }
+    #guestAuthButtons .guest-signup-btn { color: #fff; border: 1px solid #16324F; background: #16324F; box-shadow: 0 6px 16px rgba(22,50,79,.14); }
+    #guestAuthButtons .guest-signup-btn:hover { background: #2A8C82; border-color: #2A8C82; transform: translateY(-2px); }
+    :root.dark #guestAuthButtons .guest-login-btn { color: #F7FCFB; border-color: rgba(247,252,251,.25); }
+    @media(max-width:650px) { #guestAuthButtons { gap: 6px; } #guestAuthButtons a { min-height: 38px; padding: 0 10px; font-size: 11px; gap: 5px; } }
   </style>
 </head>
 
@@ -5211,7 +5222,11 @@
     <div class="nav-auth">
       <button class="theme-toggle" id="themeToggle" type="button" onclick="toggleSiaqTheme()" aria-label="Switch theme"
         aria-pressed="false"><span class="sun">☼</span><span class="moon">☾</span></button>
-      <div class="profile-menu" id="profileMenu">
+      <div class="guest-auth-buttons" id="guestAuthButtons">
+        <a href="login.html" class="guest-login-btn">Log in</a>
+        <a href="signup.html" class="guest-signup-btn">Sign up <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="profile-menu" id="profileMenu" hidden>
         <button class="profile-avatar-btn" id="profileMenuButton" type="button" aria-label="Open profile menu"
           aria-expanded="false">
           <svg class="profile-user-icon" viewBox="0 0 24 24" aria-hidden="true">
@@ -5727,7 +5742,6 @@ html[data-theme="dark"] .refined-footer .footer-brand p,html[data-theme="dark"] 
 </footer>
 
   <script>
-    // Index-only dropdown behavior; does not alter shared scripts.
     (() => {
       const menu = document.getElementById('profileMenu');
       const button = document.getElementById('profileMenuButton');
@@ -5747,9 +5761,23 @@ html[data-theme="dark"] .refined-footer .footer-brand p,html[data-theme="dark"] 
     import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/12.4.0/firebase-auth.js';
     const name = document.getElementById('navUserName');
     const email = document.getElementById('navUserEmail');
+    const guestButtons = document.getElementById('guestAuthButtons');
+    const profileMenu = document.getElementById('profileMenu');
+    const profileButton = document.getElementById('profileMenuButton');
     onAuthStateChanged(auth, user => {
+      const signedIn = Boolean(user);
+      if (guestButtons) guestButtons.hidden = signedIn;
+      if (profileMenu) {
+        profileMenu.hidden = !signedIn;
+        if (!signedIn) profileMenu.classList.remove('open');
+      }
+      if (!signedIn && profileButton) profileButton.setAttribute('aria-expanded', 'false');
       if (name) name.textContent = user ? (user.displayName || 'My Account') : 'Guest';
-      if (email) email.textContent = user?.email || 'Sign in to access your account';
+      if (email) email.textContent = user?.email || '';
+    }, error => {
+      console.error('Authentication state error:', error);
+      if (guestButtons) guestButtons.hidden = false;
+      if (profileMenu) profileMenu.hidden = true;
     });
     document.getElementById('logoutButton')?.addEventListener('click', async () => {
       try { await signOut(auth); window.location.href = 'login.html'; }
