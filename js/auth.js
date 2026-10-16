@@ -325,7 +325,7 @@ if (signupForm) {
 
             last_name: lastName,
 
-            email: email,
+            email: user.email,
 
             role: "user",
 
