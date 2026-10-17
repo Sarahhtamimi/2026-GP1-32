@@ -2572,6 +2572,7 @@
 .evaluation-explanation small{display:block;margin-top:6px;font-weight:400;color:var(--muted)}
 #savedEvaluationChoices dd{white-space:pre-wrap;overflow-wrap:anywhere}
 </style>
+<link rel="stylesheet" href="evaluation-chrome.css">
 </head>
   <body class="evaluation-page" id="top">
     <div class="siaq-architecture" aria-hidden="true">
@@ -2593,34 +2594,43 @@
       <div class="arch-beam beam-b"></div>
     </div>
     <div class="scrollbar" id="scrollbar"></div>
-    <header class="product-header" id="signatureNav">
-      <div class="product-header-inner">
-        <a class="product-brand" href="index.html" aria-label="SIAQ home">
-          <span class="signature-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="product-brand-name">SIAQ<small>Social Intelligence Alignment Quotient</small></span>
-        </a>
-        <div class="product-navigation" id="productNavigation">
-          <nav class="product-links" aria-label="Primary navigation">
-            <a href="index.html">Home</a>
-            <a href="evaluation.html" aria-current="page">Evaluation</a>
-            <a href="about.html">About</a>
-          </nav>
-          <nav class="product-account" aria-label="Account navigation">
-            <a class="product-profile" id="navProfile" href="profile.html" style="display:none"><span class="product-avatar" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M5.5 20v-2a6.5 6.5 0 0 1 13 0v2"/></svg></span><span>Profile</span><svg class="product-profile-chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m2 4 4 4 4-4"/></svg></a>
-            <a class="product-login" id="navLogin" href="login.html">Log in</a>
-            <a class="product-signup" id="navSignup" href="signup.html">Sign up</a>
-            <button id="logoutBtn" class="product-login" type="button" style="display:none;background:none;border:none;cursor:pointer;font:inherit">Log out</button>
-          </nav>
-        </div>
-        <div class="product-header-tools">
-          <button class="theme-toggle product-theme" id="themeToggle" type="button" aria-label="Switch theme" aria-pressed="false">
-            <span class="sun" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></span>
-            <span class="moon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/></svg></span>
-          </button>
-          <button id="productMenuToggle" class="product-menu-toggle" type="button" aria-expanded="false" aria-controls="productNavigation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><span>Menu</span></button>
+    <header class="signature-nav" id="signatureNav"><a class="signature-brand" href="index.html" aria-label="SIAQ home">
+      <picture class="nav-logo-picture"><img class="siaq-real-logo nav-real-logo" src="assets/siaq-logo-navy.png"
+          alt="SIAQ logo"></picture><span class="signature-name"><b>SIAQ</b><small>Social Intelligence Alignment
+          Quotient</small></span>
+    </a>
+    <nav class="signature-links" aria-label="Primary navigation">
+      <a class="" href="index.html"><span>Home</span></a>
+      <a class="active" aria-current="page" href="evaluation.html"><span>Evaluation</span></a>
+      <a class="" href="history.html"><span>History</span></a>
+      <a class="" href="leaderboard.html"><span>Leaderboard</span></a>
+      <a class="" href="about.html"><span>About</span></a>
+    </nav>
+    <div class="nav-auth">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch theme"
+        aria-pressed="false"><span class="sun">☼</span><span class="moon">☾</span></button>
+      <div class="guest-auth-buttons" id="guestAuthButtons">
+        <a href="login.html" class="guest-login-btn">Log in</a>
+        <a href="signup.html" class="guest-signup-btn">Sign up <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="profile-menu" id="profileMenu" hidden>
+        <button class="profile-avatar-btn" id="profileMenuButton" type="button" aria-label="Open profile menu"
+          aria-expanded="false">
+          <svg class="profile-user-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm7 8a7 7 0 0 0-14 0" />
+          </svg>
+        </button>
+        <div class="profile-dropdown" id="profileDropdown">
+          <div class="profile-dropdown-head">
+            <div><b id="navUserName">My Account</b><small id="navUserEmail"></small></div>
+          </div>
+          <a href="profile.html">Profile <span>→</span></a>
+          <a href="history.html">History <span>→</span></a>
+          <button type="button" id="logoutButton">Log out <span>↗</span></button>
         </div>
       </div>
-    </header>
+    </div>
+  </header>
     <main class="page-main">
       <div class="page-shell">
         <div class="page-hero">
@@ -2778,36 +2788,42 @@
         </section>
       </div>
     </main>
-    <footer class="product-footer" id="footer">
-      <div class="product-footer-inner">
-        <div class="product-footer-main">
-          <div class="product-footer-brand">
-            <a class="product-brand" href="index.html" aria-label="SIAQ home">
-              <span class="signature-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="product-brand-name">SIAQ<small>Social Intelligence Alignment Quotient</small></span>
-            </a>
-            <p>Human-grounded evaluation for more context-aware, supportive, and culturally aligned conversational AI.</p>
-            <span class="product-footer-statement">Better alignment starts with human context.</span>
-          </div>
-          <nav class="product-footer-links" aria-label="Footer site navigation">
-            <h2>Explore</h2>
-            <a href="index.html">Home</a>
-            <a href="evaluation.html" aria-current="page">Evaluation</a>
-            <a href="about.html">About SIAQ</a>
-          </nav>
-          <nav class="product-footer-links" aria-label="Footer account navigation">
-            <h2>Your account</h2>
-            <a href="profile.html">Profile</a>
-            <a href="login.html">Log in</a>
-            <a href="signup.html">Sign up</a>
-          </nav>
-        </div>
-        <div class="product-footer-bottom">
-          <span>&copy; 2026 SIAQ</span>
-          <span class="product-footer-caption">Social Intelligence Alignment Quotient</span>
-        </div>
+    <footer class="signature-footer refined-footer" id="footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <picture class="footer-logo-picture">
+        <img class="siaq-real-logo footer-real-logo" src="assets/siaq-logo-navy.png" alt="SIAQ logo">
+      </picture>
+      <p>Evaluating conversational AI across appropriateness, positivity, and socio-cultural alignment.</p>
+      <a class="footer-email" href="mailto:siaq.alignment@gmail.com" aria-label="Email SIAQ">
+        <span class="footer-mail-icon"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 6 10 7 10-7"/></svg></span>
+        <span>siaq.alignment@gmail.com</span>
+      </a>
+    </div>
+
+    <div class="footer-links-group">
+      <div class="footer-column">
+        <b>Explore</b>
+        <a href="index.html">Home</a>
+        <a href="evaluation.html">Evaluation</a>
+        <a href="history.html">History</a>
+        <a href="leaderboard.html">Leaderboard</a>
       </div>
-    </footer>
+      <div class="footer-column">
+        <b>SIAQ</b>
+        <a href="about.html">About</a>
+        <a href="profile.html">Profile</a>
+        <a href="index.html#framework">Framework</a>
+        <a href="index.html#process">Process</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 SIAQ. All rights reserved.</span>
+    <span>Social Intelligence Alignment Quotient</span>
+  </div>
+</footer>
     <script>
       // Page chrome: scroll progress, navigation, and saved appearance preference.
       const themeRoot = document.documentElement;
@@ -2833,35 +2849,21 @@
       themeButton?.addEventListener('click', () => applyTheme(themeRoot.classList.contains('dark') ? 'light' : 'dark'));
       applyTheme(themeRoot.classList.contains('dark') ? 'dark' : 'light');
       
-      // Responsive product navigation; evaluation state is unaffected.
-      (() => {
-        const header = document.querySelector('.product-header');
-        const toggle = document.getElementById('productMenuToggle');
-        const navigation = document.getElementById('productNavigation');
-        if (!header || !toggle || !navigation) return;
-        const mobile = window.matchMedia('(max-width: 800px)');
-        function setOpen(open, returnFocus = false) {
-          header.classList.toggle('is-menu-open', open);
-          toggle.setAttribute('aria-expanded', String(open));
-          toggle.querySelector('span').textContent = open ? 'Close' : 'Menu';
-          if (returnFocus) toggle.focus({ preventScroll: true });
-        }
-        toggle.addEventListener('click', () => {
-          const open = toggle.getAttribute('aria-expanded') !== 'true';
-          setOpen(open);
-          if (open) navigation.querySelector('a')?.focus({ preventScroll: true });
-        });
-        document.addEventListener('keydown', event => {
-          if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-            setOpen(false, true);
-          }
-        });
-        document.addEventListener('click', event => {
-          if (!header.contains(event.target)) setOpen(false);
-        });
-        navigation.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
-        mobile.addEventListener('change', () => setOpen(false));
-      })();
+
+    (() => {
+      const menu = document.getElementById('profileMenu');
+      const button = document.getElementById('profileMenuButton');
+      if (!menu || !button) return;
+      const close = () => { menu.classList.remove('open'); button.setAttribute('aria-expanded', 'false'); };
+      button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        const open = menu.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(open));
+      });
+      document.addEventListener('click', (event) => { if (!menu.contains(event.target)) close(); });
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') close(); });
+    })();
+  
     </script>
     <script type="module">
 import { auth } from './js/firebase.js';
@@ -3763,7 +3765,7 @@ async function apiFetch(path, body, expectedUid) {
       
 // Navigation and logout for this page.
 const logoutBtn =
-  document.getElementById("logoutBtn");
+  document.getElementById("logoutButton");
 
 if (logoutBtn) {
 
@@ -3804,65 +3806,23 @@ if (logoutBtn) {
 // AUTH NAVIGATION STATE
 // ==========================================
 
-const navProfile =
-  document.getElementById("navProfile");
-
-const navLogin =
-  document.getElementById("navLogin");
-
-const navSignup =
-  document.getElementById("navSignup");
-
-const navLogout =
-  document.getElementById("logoutBtn");
-
-
-onAuthStateChanged(
-  auth,
-  (user) => {
-
-    if (user) {
-
-      // Logged in
-      if (navProfile) {
-        navProfile.style.display = "block";
-      }
-
-      if (navLogout) {
-        navLogout.style.display = "inline-flex";
-      }
-
-      if (navLogin) {
-        navLogin.style.display = "none";
-      }
-
-      if (navSignup) {
-        navSignup.style.display = "none";
-      }
-
-    } else {
-
-      // Logged out
-      if (navProfile) {
-        navProfile.style.display = "none";
-      }
-
-      if (navLogout) {
-        navLogout.style.display = "none";
-      }
-
-      if (navLogin) {
-        navLogin.style.display = "";
-      }
-
-      if (navSignup) {
-        navSignup.style.display = "";
-      }
-
-    }
-
+const guestButtons = document.getElementById('guestAuthButtons');
+const profileMenu = document.getElementById('profileMenu');
+const profileButton = document.getElementById('profileMenuButton');
+onAuthStateChanged(auth, user => {
+  guestButtons.hidden = Boolean(user);
+  profileMenu.hidden = !user;
+  document.getElementById('navUserName').textContent = user?.displayName || 'My Account';
+  document.getElementById('navUserEmail').textContent = user?.email || '';
+  if (!user) {
+    profileMenu.classList.remove('open');
+    profileButton.setAttribute('aria-expanded', 'false');
   }
-);
+}, error => {
+  console.error('Authentication state error:', error);
+  guestButtons.hidden = false;
+  profileMenu.hidden = true;
+});
     </script>
   </body>
 </html>
