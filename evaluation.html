@@ -2573,6 +2573,74 @@
 #savedEvaluationChoices dd{white-space:pre-wrap;overflow-wrap:anywhere}
 </style>
 <link rel="stylesheet" href="evaluation-chrome.css">
+    <style>
+      /* Authentication gate: styles are limited to the evaluation workspace. */
+      .evaluation-access { position: relative; }
+      .evaluation-access.is-locked #evaluationWorkspace {
+        filter: blur(3px);
+        opacity: .48;
+        pointer-events: none;
+        user-select: none;
+      }
+      .evaluation-login-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        border-radius: 24px;
+        background: rgba(22,50,79,.08);
+      }
+      .evaluation-login-overlay[hidden] { display: none; }
+      .evaluation-login-card {
+        width: min(100%, 440px);
+        padding: 32px 28px;
+        text-align: center;
+        color: var(--navy);
+        background: rgba(246,249,250,.98);
+        border: 1px solid rgba(42,140,130,.22);
+        border-radius: 22px;
+        box-shadow: 0 24px 64px rgba(22,50,79,.16);
+      }
+      .evaluation-lock-icon {
+        display: grid;
+        place-items: center;
+        width: 56px;
+        height: 56px;
+        margin: 0 auto 18px;
+        border-radius: 17px;
+        color: var(--teal);
+        background: rgba(117,201,190,.18);
+      }
+      .evaluation-lock-icon svg { width: 28px; height: 28px; }
+      .evaluation-login-card h2 { margin: 0 0 12px; font: 800 clamp(20px,3vw,26px)/1.3 'Manrope',sans-serif; }
+      .evaluation-login-card p { margin: 0 auto 24px; max-width: 330px; font-size: 14px; line-height: 1.7; color: var(--blue); }
+      .evaluation-login-continue {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        min-height: 46px;
+        padding: 12px 22px;
+        border-radius: 12px;
+        background: var(--navy);
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .evaluation-login-continue:hover { background: var(--teal); }
+      .evaluation-login-continue:focus-visible { outline: 3px solid var(--teal); outline-offset: 4px; }
+      :root.dark .evaluation-login-card { background: #09283b; color: #f6f9fa; border-color: rgba(117,201,190,.3); }
+      :root.dark .evaluation-login-card p { color: #bfd6dc; }
+      :root.dark .evaluation-lock-icon { color: var(--mint); }
+      :root.dark .evaluation-login-continue { background: var(--teal); }
+      @media (max-width: 520px) {
+        .evaluation-login-overlay { padding: 12px; }
+        .evaluation-login-card { padding: 26px 18px; }
+      }
+    </style>
 </head>
   <body class="evaluation-page" id="top">
     <div class="siaq-architecture" aria-hidden="true">
@@ -2640,7 +2708,8 @@
           </div>
           <p>Use SIAQ’s human-grounded workflow to compare two model responses across the three alignment dimensions.</p>
         </div>
-        <section class="evaluate section" id="evaluationWorkspace" aria-label="Evaluation workspace">
+        <div class="evaluation-access is-locked" id="evaluationAccess">
+        <section class="evaluate section" id="evaluationWorkspace" aria-label="Evaluation workspace" inert>
           <div class="workspace evaluation-workspace">
             <div class="evaluation-body">
               <form id="evaluationSetup" class="evaluation-setup">
@@ -2786,6 +2855,15 @@
             </div>
           </div>
         </section>
+        <section class="evaluation-login-overlay" id="evaluationLoginOverlay" aria-labelledby="evaluationLockTitle" aria-describedby="evaluationLockDescription">
+          <div class="evaluation-login-card">
+            <span class="evaluation-lock-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1"/><path d="M12 16v2"/></svg></span>
+            <h2 id="evaluationLockTitle">Unlock SIAQ Evaluation</h2>
+            <p id="evaluationLockDescription">Log in to access this feature and start evaluating AI responses.</p>
+            <a class="evaluation-login-continue" href="login.html?next=evaluation.html">Log In to Continue <span aria-hidden="true">&#8594;</span></a>
+          </div>
+        </section>
+        </div>
       </div>
     </main>
     <footer class="signature-footer refined-footer" id="footer">
@@ -2874,10 +2952,22 @@ import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/
 // Backend address used by this evaluation page.
 const BACKEND_URL = 'http://127.0.0.1:8000';
 
+// Keep the workspace locked until Firebase confirms an authenticated user.
+function setEvaluationLocked(locked) {
+  document.getElementById('evaluationAccess').classList.toggle('is-locked', locked);
+  document.getElementById('evaluationWorkspace').inert = locked;
+  document.getElementById('evaluationLoginOverlay').hidden = !locked;
+  if (locked) document.getElementById('responseViewer')?.close();
+}
+onAuthStateChanged(auth, user => setEvaluationLocked(!user), error => {
+  setEvaluationLocked(true);
+  console.error('Evaluation authentication error:', error);
+});
+
 async function requireUser(next = 'evaluation.html') {
   await auth.authStateReady();
   if (!auth.currentUser) {
-    window.location.replace(`login.html?next=${encodeURIComponent(next)}`);
+    setEvaluationLocked(true);
     throw new Error('Please log in to continue.');
   }
   return auth.currentUser;
@@ -2919,6 +3009,15 @@ async function apiFetch(path, body, expectedUid) {
       (async () => {
         const workspace = document.getElementById('evaluationWorkspace');
         if (!workspace) return;
+        // Guests stay on this page; initialize the existing workflow only after login.
+        await auth.authStateReady();
+        if (!auth.currentUser) {
+          await new Promise((resolve, reject) => {
+            const unsubscribe = onAuthStateChanged(auth, user => {
+              if (user) { unsubscribe(); resolve(); }
+            }, reject);
+          });
+        }
         let signedIn;
         try { signedIn = await requireUser('evaluation.html'); }
         catch (exception) {
@@ -3027,7 +3126,7 @@ async function apiFetch(path, body, expectedUid) {
           if (user?.uid !== signedIn.uid) {
             sessionEnded = true;
             clearLocalSession();
-            window.location.replace(user ? 'evaluation.html' : 'login.html?next=evaluation.html');
+            window.location.replace('evaluation.html');
           }
         });
         window.addEventListener('pagehide', saveDraft);

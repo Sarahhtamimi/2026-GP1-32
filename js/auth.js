@@ -665,13 +665,19 @@ if (loginForm) {
 
         // Successful Login
 
+        // Honor the evaluation login link; keep the existing default for other logins.
+        const loginDestination = new URLSearchParams(window.location.search).get('next') === 'evaluation.html'
+          ? 'evaluation.html' : 'index.html';
+
         console.log(
           "Logged in successfully"
         );
 
 
         showLoginMessage(
-          "Login successful. Redirecting to the homepage...",
+          loginDestination === 'evaluation.html'
+            ? "Login successful. Returning to Evaluation..."
+            : "Login successful. Redirecting to the homepage...",
           "success"
         );
 
@@ -679,7 +685,7 @@ if (loginForm) {
         setTimeout(() => {
 
           window.location.href =
-            "index.html";
+            loginDestination;
 
         }, 700);
 
