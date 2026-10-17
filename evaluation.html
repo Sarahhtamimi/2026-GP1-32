@@ -2925,9 +2925,6 @@ async function apiFetch(path, body, expectedUid) {
           workspace.prepend(message);
           return;
         }
-        onAuthStateChanged(auth, user => {
-          if (user?.uid !== signedIn.uid) window.location.replace(user ? 'evaluation.html' : 'login.html?next=evaluation.html');
-        });
       
         // Frontend IDs are mapped to Hugging Face and OpenRouter models in the backend.
         const configurations = [
@@ -2957,6 +2954,16 @@ async function apiFetch(path, body, expectedUid) {
         // Chat history is read from Firestore. Local storage keeps the active ID and a pending prompt for safe retries.
         const activeKey = `siaq-active-conversation:${signedIn.uid}`;
         const pendingKey = `siaq-pending-round:v2:${signedIn.uid}`;
+        const draftPrefix = `siaq-evaluation-draft:v1:${signedIn.uid}:`;
+        const loginKey = `siaq-evaluation-login:${signedIn.uid}`;
+        let sessionEnded = false;
+        // A new sign-in starts a blank page, including when logout happened on another page.
+        const loginStamp = signedIn.metadata.lastSignInTime || '';
+        try {
+          const previousLogin = localStorage.getItem(loginKey);
+          if (previousLogin !== null && previousLogin !== loginStamp) clearLocalSession();
+          localStorage.setItem(loginKey, loginStamp);
+        } catch (error) {}
         let pendingRequest = null;
         try { pendingRequest = JSON.parse(localStorage.getItem(pendingKey) || 'null'); } catch (error) {}
         function remember(key, value) {
@@ -2970,6 +2977,59 @@ async function apiFetch(path, body, expectedUid) {
           remember(pendingKey, null);
         }
       
+        function clearDraft(id = session?.id) {
+          if (id) remember(draftPrefix + id, null);
+        }
+
+        function clearLocalSession() {
+          remember(activeKey, null);
+          remember(pendingKey, null);
+          try {
+            const keys = Object.keys(localStorage).filter(key => key.startsWith(draftPrefix));
+            keys.forEach(key => localStorage.removeItem(key));
+          } catch (error) {}
+        }
+
+        function saveDraft() {
+          if (sessionEnded || auth.currentUser?.uid !== signedIn.uid || !session || savedEvaluation) return;
+          remember(draftPrefix + session.id, JSON.stringify({
+            answers: evaluationAnswers,
+            explanations: evaluationExplanations,
+            dimensionIndex,
+            followup: question.value,
+          }));
+        }
+
+        function restoreDraft() {
+          if (!session || savedEvaluation) return;
+          try {
+            const draft = JSON.parse(localStorage.getItem(draftPrefix + session.id) || 'null');
+            if (!draft || typeof draft !== 'object') return;
+            for (const dimension of dimensions) {
+              for (const item of dimension.questions) {
+                const value = draft.answers?.[item.key];
+                if (optionValues.includes(value)) evaluationAnswers[item.key] = value;
+              }
+              const reason = draft.explanations?.[dimension.explanationKey];
+              if (typeof reason === 'string') evaluationExplanations[dimension.explanationKey] = reason.slice(0, 2000);
+            }
+            if (Number.isInteger(draft.dimensionIndex) && draft.dimensionIndex >= 0 && draft.dimensionIndex < dimensions.length) {
+              dimensionIndex = draft.dimensionIndex;
+            }
+            if (typeof draft.followup === 'string') question.value = draft.followup.slice(0, 2000);
+            renderEvaluation();
+          } catch (error) {}
+        }
+
+        onAuthStateChanged(auth, user => {
+          if (user?.uid !== signedIn.uid) {
+            sessionEnded = true;
+            clearLocalSession();
+            window.location.replace(user ? 'evaluation.html' : 'login.html?next=evaluation.html');
+          }
+        });
+        window.addEventListener('pagehide', saveDraft);
+
         const label = model => `${model.name} \u00b7 ${model.configuration}`;
         const showError = message => {
           error.textContent = message;
@@ -3048,6 +3108,7 @@ async function apiFetch(path, body, expectedUid) {
             remember(pendingKey, JSON.stringify(pendingRequest));
           }
           const data = await backendRequest('/generate', pendingRequest.body);
+          if (sessionEnded || auth.currentUser?.uid !== signedIn.uid) throw new Error('Your sign-in session has ended.');
           const answers = [data.model1?.response, data.model2?.response];
           if (!answers.every(answer => typeof answer === 'string' && answer.trim())) {
             throw new Error('The backend must return a non-empty response for each model.');
@@ -3086,7 +3147,9 @@ async function apiFetch(path, body, expectedUid) {
           setBusy(true, 'Loading your saved conversation…');
           try {
             const data = await backendRequest(`/conversations/${encodeURIComponent(id)}`);
+            if (sessionEnded || auth.currentUser?.uid !== signedIn.uid) return;
             if (data.status === 'evaluated' && !requestedId) {
+              clearDraft(id);
               remember(activeKey, null);
               clearPending();
               return;
@@ -3102,7 +3165,9 @@ async function apiFetch(path, body, expectedUid) {
             clearPending();
             resetEvaluation();
             showConversation();
+            if (data.status !== 'evaluated') restoreDraft();
             if (data.status === 'evaluated') {
+              clearDraft(id);
               savedEvaluation = { conversation_id: session.id };
               evaluationForm.hidden = true;
               find('evaluationProgress').hidden = true;
@@ -3112,16 +3177,20 @@ async function apiFetch(path, body, expectedUid) {
               title.textContent = 'Saved evaluation';
               const details = document.createElement('dl');
               const fields = {
-                contextualAppropriateness: 'appropriateness_choice', dismissiveness: 'dismissiveness_choice',
-                minimization: 'minimization_choice', unrealisticPositivity: 'unrealistic_choice',
-                supportiveness: 'supportiveness_choice', socioCulturalAlignment: 'sociocultural_choice'
+                contextualAppropriateness: ['appropriateness_choice'],
+                dismissiveness: ['positivity_choices', 'dismissiveness'],
+                minimization: ['positivity_choices', 'minimization'],
+                unrealisticPositivity: ['positivity_choices', 'unrealistic'],
+                supportiveness: ['positivity_choices', 'supportiveness'],
+                socioCulturalAlignment: ['sociocultural_choice']
               };
               const reverse = { model_1: 'model1', model_2: 'model2', both: 'equal', neither: 'neither' };
               for (const dimension of dimensions) for (const item of dimension.questions) {
                 const term = document.createElement('dt');
                 term.textContent = item.title;
                 const answer = document.createElement('dd');
-                const choice = reverse[data.evaluation?.[fields[item.key]]];
+                const storedChoice = fields[item.key].reduce((value, key) => value?.[key], data.evaluation);
+                const choice = reverse[storedChoice];
                 answer.textContent = item.options[optionValues.indexOf(choice)] || 'Not available';
                 details.append(term, answer);
               }
@@ -3204,7 +3273,10 @@ async function apiFetch(path, body, expectedUid) {
           showError('');
           updateControls();
         });
-        question.addEventListener('input', updateControls);
+        question.addEventListener('input', () => {
+          updateControls();
+          saveDraft();
+        });
       
         setup.addEventListener('submit', async event => {
           event.preventDefault();
@@ -3220,6 +3292,7 @@ async function apiFetch(path, body, expectedUid) {
           setBusy(true, 'Generating responses for both models\u2026');
           try {
             const result = await generateResponse(selected, text);
+            clearDraft();
             session = { id: result.id, models: selected, prompt: text, turns: [{ prompt: text, responses: result.answers }] };
             window.history.replaceState(null, '', window.location.pathname);
             resetEvaluation();
@@ -3268,6 +3341,7 @@ async function apiFetch(path, body, expectedUid) {
             promptTotal += 1;
             scrollToLatest();
             question.value = '';
+            saveDraft();
           } catch (exception) {
             showError(exception.message || 'The follow-up could not be completed. Please try again.');
           } finally {
@@ -3518,6 +3592,7 @@ async function apiFetch(path, body, expectedUid) {
                 if (busy || !radio.checked) return;
                 evaluationAnswers[item.key] = radio.value;
                 savedEvaluation = null;
+                saveDraft();
                 evaluationSuccess.hidden = true;
                 updateEvaluationControls();
               });
@@ -3542,6 +3617,7 @@ async function apiFetch(path, body, expectedUid) {
           explanationHint.textContent = 'Required: explain your choices for this dimension. Maximum 2000 characters.';
           explanationInput.addEventListener('input', () => {
             evaluationExplanations[dimension.explanationKey] = explanationInput.value;
+            saveDraft();
             explanationInput.setCustomValidity(explanationInput.value.trim() ? '' : 'Please explain your choices for this dimension.');
             updateEvaluationControls();
           });
@@ -3582,6 +3658,7 @@ async function apiFetch(path, body, expectedUid) {
         function resetNewEvaluation() {
           window.history.replaceState(null, '', window.location.pathname);
           setCompactReference(false, false);
+          clearDraft();
           session = null;
           remember(activeKey, null);
           clearPending();
@@ -3621,6 +3698,7 @@ async function apiFetch(path, body, expectedUid) {
         evaluationBack.addEventListener('click', () => {
           if (busy || dimensionIndex === 0) return;
           dimensionIndex -= 1;
+          saveDraft();
           // Returning to previous dimensions must not clear any selected answers.
           savedEvaluation = null;
           renderEvaluation(true);
@@ -3631,6 +3709,7 @@ async function apiFetch(path, body, expectedUid) {
           if (busy || !session || evaluation.hidden || savedEvaluation || !answered(dimensions[dimensionIndex])) return;
           if (dimensionIndex < 2) {
             dimensionIndex += 1;
+            saveDraft();
             renderEvaluation(true);
             return;
           }

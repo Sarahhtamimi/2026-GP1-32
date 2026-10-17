@@ -160,7 +160,13 @@ def get_saved_evaluation(conversation_id):
         raise HTTPException(status_code=409, detail="This conversation is marked evaluated but its evaluation is missing.")
     evaluation = snapshot.to_dict()
     explanations = evaluation.get("explanations")
-    if ("appropriateness_choice" not in evaluation or "submitted_at" not in evaluation
+    positivity_choices = evaluation.get("positivity_choices")
+    if ("appropriateness_choice" not in evaluation or "sociocultural_choice" not in evaluation
+            or "submitted_at" not in evaluation
+            or not isinstance(positivity_choices, dict)
+            or set(positivity_choices) != {"dismissiveness", "minimization", "unrealistic", "supportiveness"}
+            or any(not isinstance(value, str) or value not in {"model_1", "model_2", "both", "neither"}
+                   for value in positivity_choices.values())
             or not isinstance(explanations, dict)
             or not {"appropriateness", "positivity", "sociocultural"}.issubset(explanations)):
         raise HTTPException(status_code=409, detail="This evaluation uses the old field names. Migrate it before opening it with this version.")
@@ -430,9 +436,9 @@ def save_evaluation(user_input: dict, user=Depends(current_user)):
     if not valid_id(conversation_id):
         raise HTTPException(status_code=400, detail="Invalid conversation ID.")
     fields = {
-        "contextualAppropriateness": "appropriateness_choice", "dismissiveness": "dismissiveness_choice",
-        "minimization": "minimization_choice", "unrealisticPositivity": "unrealistic_choice",
-        "supportiveness": "supportiveness_choice", "socioCulturalAlignment": "sociocultural_choice",
+        "contextualAppropriateness": "appropriateness_choice", "dismissiveness": "dismissiveness",
+        "minimization": "minimization", "unrealisticPositivity": "unrealistic",
+        "supportiveness": "supportiveness", "socioCulturalAlignment": "sociocultural_choice",
     }
     values = {"model1": "model_1", "model2": "model_2", "equal": "both", "neither": "neither"}
     if not isinstance(answers, dict) or set(answers) != set(fields) or any(not isinstance(answers[key], str) or answers[key] not in values for key in fields):
@@ -445,7 +451,13 @@ def save_evaluation(user_input: dict, user=Depends(current_user)):
     if any(not isinstance(value, str) or not value.strip() or len(value) > 2000 for value in explanations.values()):
         raise HTTPException(status_code=400, detail="Each dimension requires a non-empty explanation of up to 2000 characters.")
     explanations = {key: explanations.get(key, "").strip() for key in explanation_keys}
-    data = {field: values[answers[key]] for key, field in fields.items()}
+    # Store the four positivity choices together; other dimensions stay top-level.
+    positivity_keys = ("dismissiveness", "minimization", "unrealisticPositivity", "supportiveness")
+    data = {
+        "appropriateness_choice": values[answers["contextualAppropriateness"]],
+        "positivity_choices": {fields[key]: values[answers[key]] for key in positivity_keys},
+        "sociocultural_choice": values[answers["socioCulturalAlignment"]],
+    }
     conversation_ref = db.collection("conversations").document(conversation_id)
     evaluation_ref = db.collection("evaluations").document(conversation_id)
     @firestore.transactional
