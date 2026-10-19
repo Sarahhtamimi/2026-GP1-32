@@ -3572,7 +3572,7 @@ async function apiFetch(path, body, expectedUid) {
           const bounds = evaluationSection.getBoundingClientRect();
           const progressTop = find('evaluationProgress').getBoundingClientRect().top;
           if (!compactReference && bounds.top <= Math.max(offset + 220, window.innerHeight * .65) && bounds.bottom > offset) {
-            setCompactReference(true);
+            //setCompactReference(true);
           } else if (compactReference && (progressTop > window.innerHeight * .8 || bounds.bottom <= offset)) {
             setCompactReference(false);
           }
