@@ -11,7 +11,7 @@ from firebase_admin import credentials, firestore, auth
 from firebase_admin.exceptions import FirebaseError
 from google.cloud.firestore_v1.base_query import FieldFilter
 from google.api_core.exceptions import GoogleAPICallError
-from uuid import UUID
+from uuid import UUID, uuid4
 import httpx
 import os
 from openai import OpenAI, APIConnectionError, APITimeoutError, APIStatusError
@@ -46,7 +46,7 @@ model_ids = {
     "mistral-baseline": "mistralai/ministral-8b-2512",
 }
 
-# Internal model IDs stay stable when database field names change.
+
 model_details = {
     "aya-baseline": {"name": "Tiny Aya Earth", "size": "3.35B", "model_family": "Aya"},
     "mistral-baseline": {"name": "Ministral 3 8B", "size": "8B", "model_family": "Mistral"},
@@ -62,7 +62,8 @@ system_message = {
 }
 
 MAX_PROMPTS = 7
-# A Firestore lease prevents simultaneous generation in the SAME conversation.
+# A temporary generation_locks document reserves a conversation without creating an empty one.
+# Firestore leases prevent simultaneous generation in the SAME conversation.
 # Different conversations can run concurrently, including across backend workers.
 GENERATION_LEASE = timedelta(minutes=15)
 key_name = os.environ.get("FIREBASE_SERVICE_ACCOUNT")
@@ -142,7 +143,7 @@ def get_conversation(conversation_id, uid):
 
 def get_messages(conversation_id, expected_count=None):
     snapshots = db.collection("messages").where(filter=FieldFilter("conversation_id", "==", conversation_id)).stream()
-    messages = [item.to_dict() for item in snapshots]
+    messages = [{**item.to_dict(), "message_id": item.id} for item in snapshots]
     # Never silently continue an old conversation without its original context.
     required = {"message_id", "conversation_id", "message_index", "round_id", "role", "model_id", "text"}
     if (any(not required.issubset(item) or type(item["message_index"]) is not int for item in messages)
@@ -159,6 +160,8 @@ def get_saved_evaluation(conversation_id):
     if not snapshot.exists:
         raise HTTPException(status_code=409, detail="This conversation is marked evaluated but its evaluation is missing.")
     evaluation = snapshot.to_dict()
+    evaluation.pop("user_id", None)  # Ownership is checked through the conversation.
+    evaluation["evaluation_id"] = snapshot.id
     explanations = evaluation.get("explanations")
     positivity_choices = evaluation.get("positivity_choices")
     if ("appropriateness_choice" not in evaluation or "sociocultural_choice" not in evaluation
@@ -185,6 +188,8 @@ def build_history(turns, model_choice):
 
 def start_generation(conversation_id, round_id, uid, first, second, prompt, expected_count):
     reference = db.collection("conversations").document(conversation_id)
+    lock_ref = db.collection("generation_locks").document(conversation_id)
+    lease_token = str(uuid4())
 
     @firestore.transactional
     def claim(transaction):
@@ -211,7 +216,15 @@ def start_generation(conversation_id, round_id, uid, first, second, prompt, expe
                 raise HTTPException(status_code=409, detail="The conversation changed. Refresh the page before sending again.")
         elif expected_count != 0:
             raise HTTPException(status_code=404, detail="Conversation not found.")
+        lock_snapshot = lock_ref.get(transaction=transaction)
+        if lock_snapshot.exists:
+            lock = lock_snapshot.to_dict()
+            check_owner(lock, uid)
+            started = lock.get("started_at")
+            if started and datetime.now(timezone.utc) - started < GENERATION_LEASE:
+                raise HTTPException(status_code=409, detail="A response is already being generated for this conversation. Please wait.")
         catalog = []
+        paths_to_add = []
         # Read all model documents before any transaction writes.
         # Existing model data must be migrated deliberately, never overwritten here.
         for choice in (first, second):
@@ -219,65 +232,94 @@ def start_generation(conversation_id, round_id, uid, first, second, prompt, expe
             model_snapshot = model_ref.get(transaction=transaction)
             if model_snapshot.exists:
                 model = model_snapshot.to_dict()
-                required = {"model_id", "model_family", "variant_type", "inference_model_id", "status", "added_at"}
+                required = {"model_family", "variant_type", "inference_model_id", "status", "added_at"}
                 if not required.issubset(model):
                     raise HTTPException(status_code=409, detail="Update the existing models documents to the new fields before generating responses.")
+                if "file_path" not in model:
+                    paths_to_add.append(model_ref)
                 if model["status"] != "active":
                     raise HTTPException(status_code=400, detail="One of the selected models is inactive.")
-                if (model["model_id"] != choice or model["inference_model_id"] != model_ids[choice]
+                if (model["inference_model_id"] != model_ids[choice]
                         or model["variant_type"] != "baseline"):
                     raise HTTPException(status_code=409, detail="The model configuration does not match the supported backend configuration.")
             else:
-                catalog.append((model_ref, {"model_id": choice, **model_details[choice],
+                catalog.append((model_ref, {**model_details[choice],
                     "inference_model_id": model_ids[choice], "variant_type": "baseline",
-                    "fine_tuned_dimension": None, "status": "active", "added_at": firestore.SERVER_TIMESTAMP}))
-        update = {"generation_request": round_id, "generation_started_at": firestore.SERVER_TIMESTAMP}
-        if data is None:
-            transaction.create(reference, {
-                "conversation_id": conversation_id, "user_id": uid,
-                "model_1_id": first, "model_2_id": second,
-                "created_at": firestore.SERVER_TIMESTAMP, "updated_at": firestore.SERVER_TIMESTAMP,
-                "prompt_count": 0, "status": "active", **update,
-            })
-        else:
-            transaction.update(reference, update)
+                    "fine_tuned_dimension": None, "file_path": None, "status": "active", "added_at": firestore.SERVER_TIMESTAMP}))
+        # All reads finish before writes. No conversation is created until save_round.
+        transaction.set(lock_ref, {
+            "user_id": uid, "round_id": round_id, "lease_token": lease_token,
+            "model_1_id": first, "model_2_id": second, "prompt_count": expected_count,
+            "started_at": firestore.SERVER_TIMESTAMP,
+        })
+        if data is not None:
+            transaction.update(reference, {"generation_request": round_id,
+                                          "generation_started_at": firestore.SERVER_TIMESTAMP})
         for model_ref, model_data in catalog:
             transaction.create(model_ref, model_data)
-        return {"cached": None}
+        for model_ref in paths_to_add:
+            transaction.update(model_ref, {"file_path": None})
+        return {"cached": None, "lease_token": lease_token}
     return claim(db.transaction())
 
 
-def release_generation(conversation_id, round_id):
+def release_generation(conversation_id, round_id, lease_token):
     reference = db.collection("conversations").document(conversation_id)
+    lock_ref = db.collection("generation_locks").document(conversation_id)
     @firestore.transactional
     def release(transaction):
+        lock_snapshot = lock_ref.get(transaction=transaction)
         snapshot = reference.get(transaction=transaction)
-        if snapshot.exists and snapshot.to_dict().get("generation_request") == round_id:
-            transaction.update(reference, {"generation_request": None, "generation_started_at": None})
+        if lock_snapshot.exists and lock_snapshot.to_dict().get("lease_token") == lease_token:
+            transaction.delete(lock_ref)
+            if snapshot.exists and snapshot.to_dict().get("generation_request") == round_id:
+                transaction.update(reference, {"generation_request": None, "generation_started_at": None})
     release(db.transaction())
 
 
-def save_round(conversation_id, round_id, uid, first, second, prompt, count, replies):
+def save_round(conversation_id, round_id, uid, first, second, prompt, count, replies, lease_token):
     reference = db.collection("conversations").document(conversation_id)
+    lock_ref = db.collection("generation_locks").document(conversation_id)
     @firestore.transactional
     def save(transaction):
         snapshot = reference.get(transaction=transaction)
-        data = snapshot.to_dict()
-        check_owner(data, uid)
-        if data.get("generation_request") != round_id or data.get("prompt_count") != count:
+        lock_snapshot = lock_ref.get(transaction=transaction)
+        lock = lock_snapshot.to_dict() if lock_snapshot.exists else {}
+        if (lock.get("lease_token") != lease_token or lock.get("round_id") != round_id
+                or lock.get("user_id") != uid or lock.get("prompt_count") != count
+                or (lock.get("model_1_id"), lock.get("model_2_id")) != (first, second)):
             raise HTTPException(status_code=409, detail="The generation session changed. Refresh the page.")
+        if snapshot.exists:
+            data = snapshot.to_dict()
+            check_owner(data, uid)
+            if (data.get("status") == "evaluated" or data.get("generation_request") != round_id
+                    or data.get("prompt_count") != count
+                    or (data.get("model_1_id"), data.get("model_2_id")) != (first, second)):
+                raise HTTPException(status_code=409, detail="The generation session changed. Refresh the page.")
+        elif count != 0:
+            raise HTTPException(status_code=404, detail="Conversation not found.")
+        if not snapshot.exists:
+            # Create the conversation and its first three messages in ONE atomic commit.
+            transaction.create(reference, {
+                "user_id": uid, "model_1_id": first, "model_2_id": second,
+                "created_at": firestore.SERVER_TIMESTAMP, "updated_at": firestore.SERVER_TIMESTAMP,
+                "prompt_count": 1, "status": "active",
+                "generation_request": None, "generation_started_at": None,
+            })
         for offset, (kind, choice, text) in enumerate([
             ("user", None, prompt), ("assistant", first, replies[0]), ("assistant", second, replies[1])
         ], start=1):
             index = count * 3 + offset
             message_id = f"{conversation_id}_{index}"
             transaction.create(db.collection("messages").document(message_id), {
-                "message_id": message_id, "conversation_id": conversation_id, "message_index": index,
+                "conversation_id": conversation_id, "message_index": index,
                 "role": kind, "model_id": choice, "text": text,
                 "round_id": round_id, "created_at": firestore.SERVER_TIMESTAMP,
             })
-        transaction.update(reference, {"prompt_count": count + 1, "updated_at": firestore.SERVER_TIMESTAMP,
-                                      "generation_request": None, "generation_started_at": None})
+        if snapshot.exists:
+            transaction.update(reference, {"prompt_count": count + 1, "updated_at": firestore.SERVER_TIMESTAMP,
+                                          "generation_request": None, "generation_started_at": None})
+        transaction.delete(lock_ref)
     save(db.transaction())
 
 
@@ -377,7 +419,7 @@ def recieve_input(user_input: dict, user=Depends(current_user)):
                 raise HTTPException(status_code=502, detail=detail)
 
             replies = [model1_response, model2_response]
-            save_round(conversation_id, round_id, user["uid"], first, second, prompt, count, replies)
+            save_round(conversation_id, round_id, user["uid"], first, second, prompt, count, replies, state["lease_token"])
         return {"conversation_id": conversation_id, "prompt_count": count + 1,
                 "model1": {"response": replies[0]}, "model2": {"response": replies[1]}}
     except GoogleAPICallError as error:
@@ -385,7 +427,7 @@ def recieve_input(user_input: dict, user=Depends(current_user)):
     finally:
         if acquired:
             try:
-                release_generation(conversation_id, round_id)
+                release_generation(conversation_id, round_id, state["lease_token"])
             except GoogleAPICallError as error:
                 # A stuck lease expires; never replace the original response/error.
                 print(f"Firestore lease cleanup failed: {type(error).__name__}")
@@ -481,8 +523,8 @@ def save_evaluation(user_input: dict, user=Depends(current_user)):
         if (conversation.get("generation_request") and started
                 and datetime.now(timezone.utc) - started < GENERATION_LEASE):
             raise HTTPException(status_code=409, detail="Wait for generation to finish before evaluating.")
-        transaction.create(evaluation_ref, {**data, "explanations": explanations, "evaluation_id": conversation_id, "conversation_id": conversation_id,
-                                           "user_id": user["uid"], "submitted_at": firestore.SERVER_TIMESTAMP})
+        transaction.create(evaluation_ref, {**data, "explanations": explanations, "conversation_id": conversation_id,
+                                           "submitted_at": firestore.SERVER_TIMESTAMP})
         transaction.update(conversation_ref, {"status": "evaluated", "updated_at": firestore.SERVER_TIMESTAMP,
                                              "generation_request": None, "generation_started_at": None})
     try:
