@@ -5184,9 +5184,10 @@
     :root.dark #guestAuthButtons .guest-login-btn { color: #F7FCFB; border-color: rgba(247,252,251,.25); }
     @media(max-width:650px) { #guestAuthButtons { gap: 6px; } #guestAuthButtons a { min-height: 38px; padding: 0 10px; font-size: 11px; gap: 5px; } }
   </style>
+  <link rel="stylesheet" href="evaluation-chrome.css">
 </head>
 
-<body class="">
+<body class="site-chrome">
   <div class="scrollbar" id="scrollbar"></div>
   <div class="top-architecture" aria-hidden="true">
     <div class="arch-orb orb-teal"></div>
@@ -5205,22 +5206,19 @@
     <div class="arch-beam beam-a"></div>
     <div class="arch-beam beam-b"></div>
   </div>
-  <header class="signature-nav" id="signatureNav"><a class="signature-brand" href="index.html"
-      onclick="goSiaq('index.html'); return false;" aria-label="SIAQ home">
+  <header class="signature-nav" id="signatureNav"><a class="signature-brand" href="index.html" aria-label="SIAQ home">
       <picture class="nav-logo-picture"><img class="siaq-real-logo nav-real-logo" src="assets/siaq-logo-navy.png"
-          alt="SIAQ logo"></picture><span class="signature-name"><b>SIAQ</b><small>Social Intelligence Alignment
-          Quotient</small></span>
+          alt="SIAQ logo" width="1098" height="319"></picture>
     </a>
     <nav class="signature-links" aria-label="Primary navigation">
-      <a class="active" href="index.html" onclick="goSiaq('index.html'); return false;"><span>Home</span></a>
-      <a class="" href="evaluation.html" onclick="goSiaq('evaluation.html'); return false;"><span>Evaluation</span></a>
-      <a class="" href="history.html" onclick="goSiaq('history.html'); return false;"><span>History</span></a>
-      <a class="" href="leaderboard.html"
-        onclick="goSiaq('leaderboard.html'); return false;"><span>Leaderboard</span></a>
-      <a class="" href="about.html" onclick="goSiaq('about.html'); return false;"><span>About</span></a>
+      <a class="active" aria-current="page" href="index.html"><span>Home</span></a>
+      <a class="" href="evaluation.html"><span>Evaluation</span></a>
+      <a class="" href="history.html"><span>History</span></a>
+      <a class="" href="leaderboard.html"><span>Leaderboard</span></a>
+      <a class="" href="about.html"><span>About</span></a>
     </nav>
     <div class="nav-auth">
-      <button class="theme-toggle" id="themeToggle" type="button" onclick="toggleSiaqTheme()" aria-label="Switch theme"
+      <button class="theme-toggle" id="themeToggle" onclick="toggleSiaqTheme()" type="button" aria-label="Switch theme"
         aria-pressed="false"><span class="sun">☼</span><span class="moon">☾</span></button>
       <div class="guest-auth-buttons" id="guestAuthButtons">
         <a href="login.html" class="guest-login-btn">Log in</a>
@@ -5787,6 +5785,49 @@ html[data-theme="dark"] .refined-footer .footer-brand p,html[data-theme="dark"] 
   <script src="index-behavior.js"></script>
   <script type="module" src="js/auth.js">
   </script>
+    <div class="coming-soon-notice" id="comingSoonNotice" role="status" aria-live="polite" aria-atomic="true" hidden>
+      <span class="coming-soon-icon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </span>
+      <div><strong id="comingSoonTitle">Coming soon</strong><p>We’re building this page. Check back soon.</p></div>
+    </div>
+<script>
+(() => {
+      const comingSoonNotice = document.getElementById('comingSoonNotice');
+      let comingSoonTimer;
+      function hideComingSoonNotice() {
+        clearTimeout(comingSoonTimer);
+        comingSoonNotice.hidden = true;
+      }
+      document.querySelectorAll('a[href="history.html"], a[href="leaderboard.html"]').forEach(link => {
+        link.addEventListener('click', event => {
+          event.preventDefault();
+          clearTimeout(comingSoonTimer);
+          document.getElementById('comingSoonTitle').textContent = (link.getAttribute('href') === 'history.html' ? 'History' : 'Leaderboard') + ' · Coming soon';
+          comingSoonNotice.hidden = false;
+          const anchor = link.getBoundingClientRect();
+          const notice = comingSoonNotice.getBoundingClientRect();
+          const viewportWidth = document.documentElement.clientWidth;
+          const left = Math.max(8, Math.min(anchor.left + (anchor.width - notice.width) / 2, viewportWidth - notice.width - 8));
+          const below = anchor.bottom + 8;
+          const top = below + notice.height <= window.innerHeight - 8 ? below : Math.max(8, anchor.top - notice.height - 8);
+          comingSoonNotice.dataset.placement = top === below ? 'below' : 'above';
+          comingSoonNotice.style.setProperty('--notice-arrow-left', Math.max(18, Math.min(anchor.left + anchor.width / 2 - left, notice.width - 18)) + 'px');
+          comingSoonNotice.style.left = left + 'px';
+          comingSoonNotice.style.top = top + 'px';
+          comingSoonTimer = setTimeout(hideComingSoonNotice, 3000);
+        });
+      });
+      window.addEventListener('scroll', hideComingSoonNotice, { passive: true, capture: true });
+      window.addEventListener('resize', hideComingSoonNotice);
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') hideComingSoonNotice();
+      });
+
+
+
+})();
+</script>
 </body>
 
 </html>
