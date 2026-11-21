@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
-from huggingface_hub import InferenceClient
+from huggingface_hub import InferenceClient #to send requests to the hugging face 
 from huggingface_hub.errors import HfHubHTTPError, InferenceTimeoutError
 from dotenv import load_dotenv
 from pathlib import Path
@@ -20,8 +20,8 @@ from openai import OpenAI, APIConnectionError, APITimeoutError, APIStatusError
 # to run the backend write this command in the terminal: python -m uvicorn main:app --app-dir Backend --reload --port 8000
 app = FastAPI()
 
-# We'll run the frontend with Live Server on port 5500 and the backend with Uvicorn on port 8000.
-# since they use different ports, we need CORS to let the frontend send requests and read the backend's responses.
+# we'll run the frontend with Live Server on port 5500 and the backend with Uvicorn on port 8000.
+# since they use different ports we need CORS to let the frontend send requests and read the backend's responses
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://127.0.0.1:5500", "http://localhost:5500"],
@@ -31,25 +31,39 @@ app.add_middleware(
 
 # create a .env file in the backend folder and add your Hugging Face & open router API keys to it.
 load_dotenv(Path(__file__).with_name(".env"))                                # in the .env file write: HF_TOKEN= وحطي التوكن هنا   
+
+# Private fine-tuned endpoint URL; keep HF_TOKEN in Backend/.env.
+MISTRAL_FT_ENDPOINT_URL = os.environ.get("MISTRAL_FT_ENDPOINT_URL", "").strip()
+
 client = InferenceClient(api_key=os.environ["HF_TOKEN"], timeout=180.0)      # also write: OPENROUTER_API_KEY= وحطي التوكن هنا
 
-openrouter_client = OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=os.environ["OPENROUTER_API_KEY"],
-    timeout=180.0,
-    max_retries=0,
-)
+openrouter_client = OpenAI(base_url="https://openrouter.ai/api/v1",api_key=os.environ["OPENROUTER_API_KEY"],timeout=180.0,max_retries=0)
 
 #  map the  frontend IDs to their exact name
 model_ids = {
-    "aya-baseline": "CohereLabs/tiny-aya-earth:cohere",
+    "aya-baseline": "CohereLabs/tiny-aya-global:cohere",
     "mistral-baseline": "mistralai/ministral-8b-2512",
+    "mistral-appropriateness": "Jood12312312/siaq-mistral-appropriateness",
 }
 
 
 model_details = {
-    "aya-baseline": {"name": "Tiny Aya Earth", "size": "3.35B", "model_family": "Aya"},
+    "aya-baseline": {"name": "Tiny Aya Global", "size": "3.35B", "model_family": "Aya"},
     "mistral-baseline": {"name": "Ministral 3 8B", "size": "8B", "model_family": "Mistral"},
+    "mistral-appropriateness": {
+        "name": "Mistral 7B — Appropriateness", "size": "7B", "model_family": "Mistral",
+    },
+}
+
+# Keep baseline and fine-tuned records distinct in Firestore.
+model_variants = {
+    "aya-baseline": {"variant_type": "baseline", "fine_tuned_dimension": None, "file_path": None},
+    "mistral-baseline": {"variant_type": "baseline", "fine_tuned_dimension": None, "file_path": None},
+    "mistral-appropriateness": {
+        "variant_type": "fine_tuned",
+        "fine_tuned_dimension": "appropriateness",
+        "file_path": "Jood12312312/siaq-mistral-appropriateness",
+    },
 }
 
 system_message = {
@@ -62,10 +76,10 @@ system_message = {
 }
 
 MAX_PROMPTS = 7
-# A temporary generation_locks document reserves a conversation without creating an empty one.
-# Firestore leases prevent simultaneous generation in the SAME conversation.
-# Different conversations can run concurrently, including across backend workers.
-GENERATION_LEASE = timedelta(minutes=15)
+
+GENERATION_LEASE = timedelta(minutes=15) #lock the conversation while generating responses to avoid multiple requests at the same time
+
+#--------------------------------connect to Firebase-----------------------
 key_name = os.environ.get("FIREBASE_SERVICE_ACCOUNT")
 if key_name:
     key_path = Path(key_name)
@@ -73,20 +87,20 @@ if key_name:
         key_path = Path(__file__).parent / key_path
     credential = credentials.Certificate(str(key_path))
 else:
-    credential = credentials.ApplicationDefault()  # For hosting with service identity.
+    credential = credentials.ApplicationDefault()  
 firebase_app = firebase_admin.initialize_app(credential, {
     "projectId": os.environ.get("FIREBASE_PROJECT_ID", "siaq-graduation-project")
 })
 db = firestore.client(app=firebase_app)
-bearer = HTTPBearer(auto_error=False)
+bearer = HTTPBearer(auto_error=False) #to get users token from frontend header
 
 
 def database_error(error):
-    print(f"Firestore error: {type(error).__name__}: {error}")
+    print(f"Firestore error: {type(error).__name__}: {error}") #503 Service Unavailable
     raise HTTPException(status_code=503, detail="Cannot read or save data in Firestore. Check the backend logs.")
 
-
-def verified_identity(token: HTTPAuthorizationCredentials = Depends(bearer)):
+# Verify user identity
+def verified_identity(token: HTTPAuthorizationCredentials = Depends(bearer)): #401 need to log in
     if token is None or token.scheme.lower() != "bearer":
         raise HTTPException(status_code=401, detail="Please log in.")
     try:
@@ -98,11 +112,10 @@ def verified_identity(token: HTTPAuthorizationCredentials = Depends(bearer)):
     except FirebaseError as error:
         print(f"Firebase Auth error: {type(error).__name__}")
         raise HTTPException(status_code=503, detail="Cannot verify login right now. Check the backend configuration.")
-    return decoded  # UID/email come from Firebase's verified token, never request JSON.
+    return decoded  # UID/email come from firebase's verified token
 
 
-# Read the profile created by the existing JavaScript signup code.
-# Authentication and signup stay in the team's auth.js; this backend does not create accounts.
+#---------------------------------get current user and profile-----------------------
 def current_user(identity=Depends(verified_identity)):
     uid = identity["uid"]
     try:
@@ -110,26 +123,26 @@ def current_user(identity=Depends(verified_identity)):
         if not snapshot.exists:
             raise HTTPException(status_code=403, detail="Your account profile is missing. Complete account registration first.")
         profile = snapshot.to_dict()
-        if profile.get("user_id") != uid or profile.get("status") != "active":
+        if profile.get("status") != "active":
             raise HTTPException(status_code=403, detail="Your account is not active.")
         return {"uid": uid, "profile": profile}
     except GoogleAPICallError as error:
         database_error(error)
 
 
-
+#check the user id format 
 def valid_id(value):
     try:
         return isinstance(value, str) and str(UUID(value)) == value
     except (ValueError, TypeError, AttributeError):
         return False
 
-
-def check_owner(data, uid):
+#check if the conversation belongs to the user
+def check_owner(data, uid): #uid is the users id that we verified 
     if data.get("user_id") != uid:
         raise HTTPException(status_code=403, detail="This conversation belongs to another user.")
 
-
+#---------------------------------get conversation and messages-----------------------
 def get_conversation(conversation_id, uid):
     if not valid_id(conversation_id):
         raise HTTPException(status_code=400, detail="Invalid conversation ID.")
@@ -175,7 +188,7 @@ def get_saved_evaluation(conversation_id):
         raise HTTPException(status_code=409, detail="This evaluation uses the old field names. Migrate it before opening it with this version.")
     return evaluation
 
-
+#history includes all messages and the model's response 
 def build_history(turns, model_choice):
     history = [system_message.copy()]
     for turn in turns:
@@ -185,7 +198,7 @@ def build_history(turns, model_choice):
             history.append({"role": "assistant", "content": turn["text"]})
     return history
 
-
+#reserve the lock 
 def start_generation(conversation_id, round_id, uid, first, second, prompt, expected_count):
     reference = db.collection("conversations").document(conversation_id)
     lock_ref = db.collection("generation_locks").document(conversation_id)
@@ -236,16 +249,18 @@ def start_generation(conversation_id, round_id, uid, first, second, prompt, expe
                 if not required.issubset(model):
                     raise HTTPException(status_code=409, detail="Update the existing models documents to the new fields before generating responses.")
                 if "file_path" not in model:
-                    paths_to_add.append(model_ref)
+                    paths_to_add.append((model_ref, model_variants[choice]["file_path"]))
                 if model["status"] != "active":
                     raise HTTPException(status_code=400, detail="One of the selected models is inactive.")
                 if (model["inference_model_id"] != model_ids[choice]
-                        or model["variant_type"] != "baseline"):
+                        or model["variant_type"] != model_variants[choice]["variant_type"]
+                        or model_variants[choice]["variant_type"] == "fine_tuned"
+                        and model.get("fine_tuned_dimension") != model_variants[choice]["fine_tuned_dimension"]):
                     raise HTTPException(status_code=409, detail="The model configuration does not match the supported backend configuration.")
             else:
                 catalog.append((model_ref, {**model_details[choice],
-                    "inference_model_id": model_ids[choice], "variant_type": "baseline",
-                    "fine_tuned_dimension": None, "file_path": None, "status": "active", "added_at": firestore.SERVER_TIMESTAMP}))
+                    "inference_model_id": model_ids[choice], **model_variants[choice],
+                    "status": "active", "added_at": firestore.SERVER_TIMESTAMP}))
         # All reads finish before writes. No conversation is created until save_round.
         transaction.set(lock_ref, {
             "user_id": uid, "round_id": round_id, "lease_token": lease_token,
@@ -257,8 +272,8 @@ def start_generation(conversation_id, round_id, uid, first, second, prompt, expe
                                           "generation_started_at": firestore.SERVER_TIMESTAMP})
         for model_ref, model_data in catalog:
             transaction.create(model_ref, model_data)
-        for model_ref in paths_to_add:
-            transaction.update(model_ref, {"file_path": None})
+        for model_ref, file_path in paths_to_add:
+            transaction.update(model_ref, {"file_path": file_path})
         return {"cached": None, "lease_token": lease_token}
     return claim(db.transaction())
 
@@ -322,8 +337,50 @@ def save_round(conversation_id, round_id, uid, first, second, prompt, count, rep
         transaction.delete(lock_ref)
     save(db.transaction())
 
-
+#--------------------------------generate response from the model-----------------------
 def generate_response(model_id, prompt, history):
+    if model_id == model_ids["mistral-appropriateness"]:
+        if not MISTRAL_FT_ENDPOINT_URL:
+            raise HTTPException(status_code=503, detail="Set MISTRAL_FT_ENDPOINT_URL in Backend/.env.")
+
+        # The handler adds its saved system prompt. Send only this model's history.
+        print("History sent to fine-tuned:", history)
+        response = httpx.post(
+            MISTRAL_FT_ENDPOINT_URL,
+            headers={"Authorization": f"Bearer {os.environ['HF_TOKEN']}"},
+            json={
+                "inputs": prompt,
+                "history": [message for message in history
+                            if message["role"] in ("user", "assistant")],
+                "parameters": {"max_new_tokens": 300},
+            },
+            timeout=180.0,
+        )
+        if response.is_error:
+            print(f"Fine-tuned endpoint error: HTTP {response.status_code}")
+            if response.status_code == 503:
+                detail = "The fine-tuned endpoint is not ready. Check its status and resume it if paused."
+                status = 503
+            elif response.status_code in (401, 403):
+                detail = "Check the HF token and its access to the private fine-tuned endpoint."
+                status = 502
+            elif response.status_code == 429:
+                detail = "The fine-tuned endpoint is busy. Please try again later."
+                status = 503
+            else:
+                detail = "The fine-tuned endpoint rejected the request. Check its logs, including the conversation token limit."
+                status = 502
+            raise HTTPException(status_code=status, detail=detail)
+
+        try:
+            result = response.json()
+        except ValueError:
+            raise HTTPException(status_code=502, detail="The fine-tuned endpoint returned invalid JSON.")
+        answer = result.get("generated_text") if isinstance(result, dict) else None
+        if not isinstance(answer, str) or not answer.strip():
+            raise HTTPException(status_code=502, detail="The fine-tuned endpoint returned no valid answer.")
+        return answer.strip()
+
     messages = history + [{"role": "user", "content": prompt}]
     if model_id == model_ids["mistral-baseline"]:
         selected_client = openrouter_client
@@ -333,8 +390,8 @@ def generate_response(model_id, prompt, history):
     completion = selected_client.chat.completions.create(    
         model=model_id,
         messages=messages,
-        max_tokens=300,  # Maximum output tokens; concise instructions reduce long replies. 
-        temperature=0.7,  # Initial setting shared by both models; validate later for evaluation. 
+        max_tokens=300,   
+        temperature=0.7,   
 
     )
 
@@ -344,7 +401,7 @@ def generate_response(model_id, prompt, history):
 
     return response.strip()
 
-
+#---------------------------------accept the prompt and generate responses from the two models-----------------------
 @app.post("/generate")
 def recieve_input(user_input: dict, user=Depends(current_user)):
     prompt = user_input.get("prompt")
@@ -432,7 +489,7 @@ def recieve_input(user_input: dict, user=Depends(current_user)):
                 # A stuck lease expires; never replace the original response/error.
                 print(f"Firestore lease cleanup failed: {type(error).__name__}")
 
-
+#-------------------------------get conversation and its messages-----------------------
 @app.get("/conversations/{conversation_id}")
 def load_conversation(conversation_id: str, user=Depends(current_user)):
     try:
@@ -455,7 +512,7 @@ def load_conversation(conversation_id: str, user=Depends(current_user)):
 @app.get("/conversations")
 def list_conversations(user=Depends(current_user)):
     try:
-        # Equality filter only; sort locally without a composite index.
+        
         snapshots = db.collection("conversations").where(filter=FieldFilter("user_id", "==", user["uid"])).stream()
         items = [{"conversation_id": item.id, "model1": item.to_dict()["model_1_id"],
                   "model2": item.to_dict()["model_2_id"], "prompt_count": item.to_dict().get("prompt_count", 0),
@@ -471,29 +528,38 @@ def list_conversations(user=Depends(current_user)):
     except GoogleAPICallError as error:
         database_error(error)
 
-
+#-------------------------------save evaluation for a conversation-----------------------
 @app.post("/evaluations")
 def save_evaluation(user_input: dict, user=Depends(current_user)):
     conversation_id, answers = user_input.get("conversation_id"), user_input.get("answers")
     if not valid_id(conversation_id):
         raise HTTPException(status_code=400, detail="Invalid conversation ID.")
+    
+    #map the frontend field names to the backend field names
     fields = {
         "contextualAppropriateness": "appropriateness_choice", "dismissiveness": "dismissiveness",
         "minimization": "minimization", "unrealisticPositivity": "unrealistic",
         "supportiveness": "supportiveness", "socioCulturalAlignment": "sociocultural_choice",
     }
     values = {"model1": "model_1", "model2": "model_2", "equal": "both", "neither": "neither"}
+
+    #validate the answers for each question
     if not isinstance(answers, dict) or set(answers) != set(fields) or any(not isinstance(answers[key], str) or answers[key] not in values for key in fields):
         raise HTTPException(status_code=400, detail="Answer all six evaluation questions.")
-    # Required user-written reasons, grouped by dimension in a Firestore map.
+    
+    
     explanation_keys = ("appropriateness", "positivity", "sociocultural")
     explanations = user_input.get("explanations")
+
+    #validate the explanations for each dimension
     if not isinstance(explanations, dict) or set(explanations) != set(explanation_keys):
         raise HTTPException(status_code=400, detail="Provide an explanation for each of the three dimensions.")
     if any(not isinstance(value, str) or not value.strip() or len(value) > 2000 for value in explanations.values()):
         raise HTTPException(status_code=400, detail="Each dimension requires a non-empty explanation of up to 2000 characters.")
     explanations = {key: explanations.get(key, "").strip() for key in explanation_keys}
-    # Store the four positivity choices together; other dimensions stay top-level.
+
+
+    #----save the evaluation in the database
     positivity_keys = ("dismissiveness", "minimization", "unrealisticPositivity", "supportiveness")
     data = {
         "appropriateness_choice": values[answers["contextualAppropriateness"]],
@@ -502,6 +568,7 @@ def save_evaluation(user_input: dict, user=Depends(current_user)):
     }
     conversation_ref = db.collection("conversations").document(conversation_id)
     evaluation_ref = db.collection("evaluations").document(conversation_id)
+    
     @firestore.transactional
     def save(transaction):
         snapshot = conversation_ref.get(transaction=transaction)

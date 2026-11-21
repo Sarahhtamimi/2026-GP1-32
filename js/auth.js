@@ -319,8 +319,6 @@ if (signupForm) {
           ),
           {
 
-            user_id: user.uid,
-
             first_name: firstName,
 
             last_name: lastName,
