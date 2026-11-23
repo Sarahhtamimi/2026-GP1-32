@@ -274,7 +274,7 @@
       margin: auto;
       padding: 150px 30px 80px;
       display: grid;
-      grid-template-columns: .88fr 1.12fr;
+      grid-template-columns: minmax(0, .88fr) minmax(0, 1.12fr);
       align-items: center;
       gap: 45px
     }
@@ -313,18 +313,20 @@
 
     .heroCopy>p {
       max-width: 520px;
-      font-size: 14px;
-      line-height: 1.8;
+      font-size: clamp(1rem, .9rem + .4vw, 1.125rem);
+      line-height: 1.65;
       color: var(--blue)
     }
 
     .heroActions {
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
       margin-top: 30px
     }
 
     .heroActions button {
+      font-size: .9375rem;
       padding: 14px 18px
     }
 
@@ -344,13 +346,13 @@
       align-items: center;
       gap: 13px;
       margin-top: 35px;
-      font-size: 8px;
+      font-size: 0.8125rem;
       color: var(--blue)
     }
 
     .heroMeta b {
       color: var(--navy);
-      font-size: 10px
+      font-size: 0.875rem
     }
 
     .heroMeta>i {
@@ -364,6 +366,7 @@
       position: relative;
       display: grid;
       place-items: center;
+      min-width: 0;
       perspective: 1200px
     }
 
@@ -378,7 +381,7 @@
     .dashboard {
       position: relative;
       z-index: 2;
-      width: 600px;
+      width: min(600px, 100%);
       border: 1px solid rgba(49, 93, 125, .18);
       border-radius: 21px;
       overflow: hidden;
@@ -395,7 +398,7 @@
       grid-template-columns: 1fr 2fr 1fr;
       align-items: center;
       border-bottom: 1px solid var(--line);
-      font-size: 7px;
+      font-size: 0.6875rem;
       color: var(--blue)
     }
 
@@ -414,7 +417,7 @@
 
     .dashTop>b {
       text-align: center;
-      font-size: 7px
+      font-size: 0.6875rem
     }
 
     .miniMark {
@@ -490,7 +493,7 @@
     }
 
     .dashTitle small {
-      font-size: 6px;
+      font-size: 0.6875rem;
       color: var(--teal);
       letter-spacing: .12em
     }
@@ -505,7 +508,7 @@
       padding: 6px 8px;
       border-radius: 6px;
       background: var(--mist);
-      font-size: 6px
+      font-size: 0.6875rem
     }
 
     .models {
@@ -547,23 +550,23 @@
     }
 
     .models p small {
-      font-size: 5px;
+      font-size: 0.625rem;
       color: var(--blue)
     }
 
     .models p b {
-      font-size: 8px
+      font-size: 0.875rem
     }
 
     .models em {
       font-style: normal;
-      font-size: 5px;
+      font-size: 0.625rem;
       color: var(--teal)
     }
 
     .models>span {
       text-align: center;
-      font-size: 6px;
+      font-size: 0.6875rem;
       color: var(--blue)
     }
 
@@ -576,12 +579,12 @@
     }
 
     .prompt small {
-      font-size: 5px;
+      font-size: 0.6875rem;
       color: var(--blue)
     }
 
     .prompt p {
-      font-size: 7px;
+      font-size: 0.8125rem;
       color: var(--blue);
       margin: 6px 95px 0 0
     }
@@ -595,7 +598,7 @@
       background: var(--navy);
       color: var(--paper);
       padding: 7px 9px;
-      font-size: 6px
+      font-size: 0.75rem
     }
 
     .dimTabs {
@@ -613,7 +616,7 @@
       grid-template-columns: 20px 1fr;
       gap: 5px;
       align-items: center;
-      font-size: 6px
+      font-size: 0.6875rem
     }
 
     .dimTabs b {
@@ -670,12 +673,12 @@
     }
 
     .floatTag small {
-      font-size: 5px;
+      font-size: 0.6875rem;
       color: var(--blue)
     }
 
     .floatTag b {
-      font-size: 7px
+      font-size: 0.75rem
     }
 
     .tag1 {
@@ -705,8 +708,9 @@
       justify-content: space-around;
       align-items: center;
       color: var(--blue);
-      font-size: 7px;
-      letter-spacing: .13em
+      font-size: 0.75rem;
+      letter-spacing: .09em;
+      font-weight: 600
     }
 
     .statement i {
@@ -785,7 +789,7 @@
     }
 
     .feature header>span {
-      font: 700 8px Manrope;
+      font: 700 .75rem Manrope;
       opacity: .55
     }
 
@@ -816,12 +820,12 @@
     }
 
     .feature h3 {
-      font: 800 21px Manrope;
+      font: 800 1.375rem Manrope;
       margin: 30px 0 10px
     }
 
     .feature>p {
-      font-size: 10px;
+      font-size: clamp(.875rem, .8rem + .25vw, 1rem);
       line-height: 1.75;
       opacity: .72;
       min-height: 55px
@@ -882,12 +886,12 @@
     }
 
     .scanner span {
-      font-size: 7px;
+      font-size: 0.75rem;
       flex: 1
     }
 
     .scanner b {
-      font-size: 6px;
+      font-size: 0.6875rem;
       color: var(--teal)
     }
 
@@ -963,7 +967,7 @@
       right: 20px;
       display: flex;
       justify-content: space-between;
-      font-size: 6px;
+      font-size: 0.75rem;
       color: var(--blue)
     }
 
@@ -999,7 +1003,7 @@
       color: var(--navy);
       display: grid;
       place-items: center;
-      font: 800 10px Manrope
+      font: 800 .75rem Manrope
     }
 
     .axis {
@@ -1045,7 +1049,7 @@
       padding: 7px 10px;
       border-radius: 8px;
       background: rgba(246, 249, 250, .12);
-      font-size: 7px
+      font-size: 0.75rem
     }
 
     .feature footer {
@@ -1084,7 +1088,8 @@
 
     .processIntro>p {
       color: var(--mist);
-      font-size: 11px
+      font-size: 1rem;
+      line-height: 1.6
     }
 
     .story {
@@ -1217,17 +1222,17 @@
 
     .step small {
       color: var(--mint);
-      font-size: 7px;
+      font-size: 0.75rem;
       letter-spacing: .14em
     }
 
     .step h3 {
-      font: 800 25px Manrope;
+      font: 800 1.5rem Manrope;
       margin: 7px 0
     }
 
     .step p {
-      font-size: 10px;
+      font-size: clamp(.875rem, .8rem + .25vw, 1rem);
       line-height: 1.7;
       color: var(--mist)
     }
@@ -1240,13 +1245,17 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 7px
+      font-size: 0.875rem
     }
 
     .stepUI em {
       font-style: normal;
       color: var(--mint);
       margin: auto
+    }
+
+    .stepUI .mdot {
+      margin-inline-end: 6px
     }
 
     .promptUI b {
@@ -1305,7 +1314,7 @@
     }
 
     .counter span {
-      font-size: 9px;
+      font-size: 0.8125rem;
       color: var(--mist)
     }
 
@@ -1512,14 +1521,13 @@
       }
 
       .hero {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         padding-top: 130px
       }
 
       .productHero {
-        height: 500px;
-        transform: scale(.85);
-        margin: -30px
+        height: auto;
+        padding: 24px 0
       }
 
       .featureGrid {
@@ -1575,7 +1583,12 @@
       }
 
       .hero h1 {
-        font-size: 44px
+        font-size: clamp(2.25rem, 7vw, 2.5rem);
+        line-height: 1.05
+      }
+
+      .heroActions button {
+        font-size: .875rem
       }
 
       .heroMeta {
@@ -1583,14 +1596,81 @@
       }
 
       .productHero {
-        height: 370px;
-        transform: scale(.6);
-        margin: -65px -120px
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        align-items: stretch
+      }
+
+      .productHero .dashboard {
+        grid-column: 1 / -1;
+        transform: none !important
+      }
+
+      .productHero .floatTag {
+        position: relative;
+        inset: auto;
+        animation: none
+      }
+
+      .dashBody {
+        grid-template-columns: 36px minmax(0, 1fr)
+      }
+
+      .side {
+        padding-inline: 2px
+      }
+
+      .dashMain {
+        padding: 12px
+      }
+
+      .dashTitle {
+        gap: 6px
+      }
+
+      .dashTitle > span {
+        height: auto;
+        align-self: flex-start;
+        white-space: nowrap
+      }
+
+      .models > div {
+        grid-template-columns: 8px minmax(0, 1fr);
+        padding: 8px;
+        gap: 4px
+      }
+
+      .models em {
+        grid-column: 2
+      }
+
+      .prompt p {
+        margin-right: 0
+      }
+
+      .prompt button {
+        position: static;
+        margin-top: 8px
+      }
+
+      .dimTabs {
+        grid-template-columns: 1fr
+      }
+
+      .halo {
+        width: 100%;
+        pointer-events: none
       }
 
       .statement {
-        gap: 8px;
-        flex-wrap: wrap
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        text-align: center
+      }
+
+      .statement i {
+        display: none
       }
 
       .section {
@@ -1622,7 +1702,7 @@
       }
 
       .step h3 {
-        font-size: 21px
+        font-size: 1.375rem
       }
 
       .responses {
@@ -3100,6 +3180,11 @@
     :root.dark .step {
       border-color: rgba(117, 201, 190, .16);
       box-shadow: 0 26px 70px -42px #000
+    }
+
+    :root.dark .step[data-step="0"] .stepUI > span,
+    :root.dark .resultUI > span {
+      color: #f3fbfa;
     }
 
     :root.dark .step:nth-child(3n+1) {
@@ -5249,9 +5334,8 @@
         <h1>Evaluate AI<br><span>beyond the output.</span></h1>
         <p>A structured way to understand how conversational AI aligns with context, supportive communication, and
           socio-cultural values.</p>
-        <div class="heroActions"><button class="primary" data-page="evaluation.html">Start evaluating
-            <span>↗</span></button><button class="secondary" data-go="#framework">Explore framework
-            <span>↓</span></button></div>
+        <div class="heroActions"><button class="primary" data-page="evaluation.html">Start evaluating</button>
+          <button class="secondary" data-go="#framework">Explore framework</button></div>
         <div class="heroMeta"><span><b>03</b> dimensions</span><i></i><span><b>AR / EN</b>
             languages</span><i></i><span><b>2×</b> comparison</span></div>
       </div>

@@ -316,6 +316,42 @@
       flex-wrap: wrap
     }
 
+    #emailForm,
+    #passwordForm {
+      padding-bottom: 20px;
+    }
+
+    #passwordForm > .helper {
+      display: block;
+      margin-top: 8px;
+    }
+
+    .profile-password-field {
+      position: relative;
+    }
+
+    .profile-password-field input {
+      padding-inline-end: 100px;
+    }
+
+    .profile-password-toggle {
+      position: absolute;
+      inset-inline-end: 4px;
+      inset-block: 4px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--heading);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .profile-password-toggle:hover {
+      background: var(--soft);
+    }
+
     .btn {
       border: 1px solid #d6e5e8;
       border-radius: 11px;
@@ -2671,12 +2707,30 @@
           </div>
           <form id="passwordForm" hidden>
             <div class="fields">
-              <div class="field wide"><label for="currentPassword">Current Password</label><input id="currentPassword"
-                  type="password" autocomplete="current-password" required></div>
-              <div class="field"><label for="newPassword">New Password</label><input id="newPassword" type="password"
-                  autocomplete="new-password" minlength="8" required></div>
-              <div class="field"><label for="confirmPassword">Confirm New Password</label><input id="confirmPassword"
-                  type="password" autocomplete="new-password" minlength="8" required></div>
+              <div class="field wide">
+                <label for="currentPassword">Current Password</label>
+                <div class="profile-password-field">
+                  <input id="currentPassword" type="password" autocomplete="current-password" required>
+                  <button type="button" class="profile-password-toggle" aria-controls="currentPassword"
+                    aria-label="Show current password" aria-pressed="false">Show</button>
+                </div>
+              </div>
+              <div class="field">
+                <label for="newPassword">New Password</label>
+                <div class="profile-password-field">
+                  <input id="newPassword" type="password" autocomplete="new-password" minlength="8" required>
+                  <button type="button" class="profile-password-toggle" aria-controls="newPassword"
+                    aria-label="Show new password" aria-pressed="false">Show</button>
+                </div>
+              </div>
+              <div class="field">
+                <label for="confirmPassword">Confirm New Password</label>
+                <div class="profile-password-field">
+                  <input id="confirmPassword" type="password" autocomplete="new-password" minlength="8" required>
+                  <button type="button" class="profile-password-toggle" aria-controls="confirmPassword"
+                    aria-label="Show password confirmation" aria-pressed="false">Show</button>
+                </div>
+              </div>
             </div><span class="helper">Use at least 8 characters including a letter and a number.</span>
             <div class="actions"><button type="button" class="btn" id="cancelPassword">Cancel</button><button
                 type="submit" class="btn primary" id="savePassword">Update Password</button></div>
@@ -2752,6 +2806,16 @@
     $('changeEmailBtn').onclick = () => { $('emailForm').hidden = false; $('changeEmailBtn').hidden = true; clearMessage('securityMessage'); $('newEmail').focus() }; $('cancelEmail').onclick = () => { $('emailForm').hidden = true; $('changeEmailBtn').hidden = false; $('newEmail').value = '' };
     $('emailForm').onsubmit = async e => { e.preventDefault(); if (!currentUser) return; const email = $('newEmail').value.trim(); if (email.toLowerCase() === (currentUser.email || '').toLowerCase()) { message('securityMessage', 'Enter a different email address.', true); return } const btn = $('saveEmail'); btn.disabled = true; try { await verifyBeforeUpdateEmail(currentUser, email); message('securityMessage', 'Verification sent to ' + email + '. Open the link in that inbox to complete your email change.'); $('cancelEmail').click() } catch (e) { message('securityMessage', errText(e), true) } finally { btn.disabled = false } };
     $('changePasswordBtn').onclick = () => { $('passwordForm').hidden = false; $('changePasswordBtn').hidden = true; clearMessage('securityMessage') }; $('cancelPassword').onclick = () => { $('passwordForm').reset(); $('passwordForm').hidden = true; $('changePasswordBtn').hidden = false };
+    $('passwordForm').querySelectorAll('.profile-password-toggle').forEach(button => {
+      const input = $(button.getAttribute('aria-controls'));
+      function setVisible(visible) {
+        input.type = visible ? 'text' : 'password';
+        button.setAttribute('aria-pressed', String(visible));
+        button.textContent = visible ? 'Hide' : 'Show';
+      }
+      button.addEventListener('click', () => setVisible(input.type === 'password'));
+      $('passwordForm').addEventListener('reset', () => setVisible(false));
+    });
     $('passwordForm').onsubmit = async e => { e.preventDefault(); if (!currentUser) return; const old = $('currentPassword').value, next = $('newPassword').value, confirm = $('confirmPassword').value; if (next !== confirm) { message('securityMessage', 'New passwords do not match.', true); return } if (next.length < 8 || !/[A-Za-z]/.test(next) || !/[0-9]/.test(next)) { message('securityMessage', 'Password must be at least 8 characters and contain a letter and a number.', true); return } const btn = $('savePassword'); btn.disabled = true; try { const cred = EmailAuthProvider.credential(currentUser.email, old); await reauthenticateWithCredential(currentUser, cred); await updatePassword(currentUser, next); $('cancelPassword').click(); message('securityMessage', 'Your password has been updated successfully.') } catch (e) { message('securityMessage', errText(e), true) } finally { btn.disabled = false } };
     window.addEventListener('focus', () => { if (currentUser) syncEmail().catch(console.warn) }); $('logoutButton').addEventListener('click', async () => { try { await signOut(auth); location.href = 'index.html' } catch (e) { message('securityMessage', errText(e), true) } });
   </script>

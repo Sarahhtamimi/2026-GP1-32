@@ -112,7 +112,7 @@
 
     .auth-form .checkline {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 10px;
       font-size: 12px;
       line-height: 1.5;
@@ -120,9 +120,9 @@
     }
 
     .auth-form .checkline input {
-      width: auto;
+      height: auto;
+      padding: 0;
       flex-shrink: 0;
-      margin-top: 3px;
       accent-color: var(--teal);
     }
 
@@ -272,30 +272,16 @@
 
   <!-- Sign Up Page -->
   <main class="auth-page">
-    <div class="auth-shell">
+    <div class="auth-shell auth-branded-shell">
 
       <!-- Brand Panel -->
       <div class="auth-brand-panel">
-        <div>
-          <span class="signature-mark auth-mark">
-            <i></i>
-            <i></i>
-            <i></i>
-          </span>
-
-          <b>SIAQ</b>
-
-          <small>
-            Social Intelligence Alignment Quotient
-          </small>
-        </div>
-
+        <img src="assets/siaq-logo-white.png" alt="SIAQ · Social Intelligence Alignment Quotient" width="1098" height="319">
         <p>
           Evaluate conversational AI with context,
-          human judgment, and cultural awareness.
+          human judgment, and cultural values.
         </p>
-
-        <div class="auth-art">
+        <div class="auth-art" aria-hidden="true">
           <i></i>
           <i></i>
           <i></i>
@@ -311,8 +297,7 @@
           <h2>Create your SIAQ account</h2>
 
           <p>
-            Create an account to save evaluations
-            and manage your alignment results.
+            Create an account to evaluate AI responses and save your evaluation history
           </p>
         </div>
 

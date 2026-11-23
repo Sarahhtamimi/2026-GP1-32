@@ -1405,6 +1405,9 @@ html[data-theme="dark"] :is(.evaluation-page, .site-chrome) .refined-footer .foo
   font-weight: 700;
   line-height: 1.5;
 }
+:root.dark :is(.evaluation-page, .site-chrome) .coming-soon-notice strong {
+  color: #f3fbfa;
+}
 :is(.evaluation-page, .site-chrome) .coming-soon-notice p {
   margin: 5px 0 0;
   color: var(--eval-muted);
