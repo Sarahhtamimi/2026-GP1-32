@@ -948,10 +948,14 @@
   letter-spacing: .05em;
 }
 
-#evaluationWorkspace .evaluation-conversation-heading .secondary {
+#evaluationWorkspace .evaluation-conversation-heading .evaluation-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   flex-shrink: 0;
   min-height: 40px;
   padding: 8px 14px;
+  font-weight: 700;
 }
 
       #evaluationWorkspace .evaluation-conversation {
@@ -2750,11 +2754,16 @@
 
       <button
         id="editEvaluation"
-        class="secondary"
+        class="primary evaluation-primary"
         type="button"
         aria-controls="evaluationSetup"
         aria-expanded="false">
-        Edit setup
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 5H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2v-6"/>
+          <path d="m17 4 3 3M10 14l1-4 7-7a2.1 2.1 0 0 1 3 3l-7 7-4 1Z"/>
+        </svg>
+        <span>New Conversation</span>
       </button>
 </div>
                 <div id="conversationHistory" class="evaluation-chat-columns">

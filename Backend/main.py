@@ -47,7 +47,7 @@ openrouter_client = OpenAI(base_url="https://openrouter.ai/api/v1",api_key=os.en
 model_ids = {
     "aya-baseline": "CohereLabs/tiny-aya-global:cohere",
     "mistral-baseline": "mistralai/ministral-8b-2512",
-    "mistral-appropriateness": "Jood12312312/siaq-mistral-appropriateness",
+    "mistral-appropriateness": "jana-almughamis/siaq-mistral-appropriateness",
     "mistral-sociocultural": "jana-almughamis/siaq-mistral-sociocultural",
 }
 
@@ -70,7 +70,7 @@ model_variants = {
     "mistral-appropriateness": {
         "variant_type": "fine_tuned",
         "fine_tuned_dimension": "appropriateness",
-        "file_path": "Jood12312312/siaq-mistral-appropriateness",
+        "file_path": "jana-almughamis/siaq-mistral-appropriateness",
     },
     "mistral-sociocultural": {
         "variant_type": "fine_tuned",
@@ -356,7 +356,7 @@ def generate_response(model_id, prompt, history):
     # Both endpoints implement: inputs + history + parameters -> generated_text.
     fine_tuned_endpoints = {
         model_ids["mistral-appropriateness"]: (
-            "MISTRAL_FT_ENDPOINT_URL", MISTRAL_FT_ENDPOINT_URL, os.environ["HF_TOKEN"]
+            "MISTRAL_FT_ENDPOINT_URL", MISTRAL_FT_ENDPOINT_URL, JANA_HF_TOKEN
         ),
         model_ids["mistral-sociocultural"]: (
             "MISTRAL_SOCIOCULTURAL_ENDPOINT_URL", MISTRAL_SOCIOCULTURAL_ENDPOINT_URL,
