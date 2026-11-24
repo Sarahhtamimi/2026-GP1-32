@@ -3077,7 +3077,8 @@ async function apiFetch(path, body, expectedUid) {
         { id: 'aya-baseline', name: 'Tiny Aya Global', configuration: 'Original' },
         { id: 'mistral-baseline', name: 'Ministral 3 8B', configuration: 'Original' },
         { id: 'mistral-appropriateness', name: 'Mistral 7B', configuration: 'Fine-tuned — Appropriateness' },
-        { id: 'mistral-sociocultural', name: 'Mistral 7B', configuration: 'Fine-tuned — Socio-Cultural' }
+        { id: 'mistral-sociocultural', name: 'Mistral 7B', configuration: 'Fine-tuned — Socio-Cultural' },
+        { id: 'aya-sociocultural', name: 'Tiny Aya', configuration: 'Fine-tuned — Socio-Cultural' }
       ];
         const find = id => workspace.querySelector('#' + id);
         const setup = find('evaluationSetup');
