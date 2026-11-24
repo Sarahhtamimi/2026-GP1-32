@@ -38,6 +38,8 @@ MISTRAL_FT_ENDPOINT_URL = os.environ.get("MISTRAL_FT_ENDPOINT_URL", "").strip()
 MISTRAL_SOCIOCULTURAL_ENDPOINT_URL = os.environ.get("MISTRAL_SOCIOCULTURAL_ENDPOINT_URL", "").strip()
 # A private endpoint owned by a different HF account may need its own token.
 JANA_HF_TOKEN = os.environ.get("JANA_HF_TOKEN", "").strip()
+AYA_SOCIOCULTURAL_ENDPOINT_URL = os.environ.get("AYA_SOCIOCULTURAL_ENDPOINT_URL", "").strip()
+
 
 client = InferenceClient(api_key=os.environ["HF_TOKEN"], timeout=180.0)      # also write: OPENROUTER_API_KEY= وحطي التوكن هنا
 
@@ -49,6 +51,7 @@ model_ids = {
     "mistral-baseline": "mistralai/ministral-8b-2512",
     "mistral-appropriateness": "jana-almughamis/siaq-mistral-appropriateness",
     "mistral-sociocultural": "jana-almughamis/siaq-mistral-sociocultural",
+    "aya-sociocultural": "jana-almughamis/siaq-aya-sociocultural",
 }
 
 
@@ -60,6 +63,9 @@ model_details = {
     },
     "mistral-sociocultural": {
         "name": "Mistral 7B — Socio-Cultural", "size": "7B", "model_family": "Mistral",
+    },
+    "aya-sociocultural": {
+        "name": "Tiny Aya — Socio-Cultural", "size": "3.35B", "model_family": "Aya",
     },
 }
 
@@ -76,6 +82,11 @@ model_variants = {
         "variant_type": "fine_tuned",
         "fine_tuned_dimension": "sociocultural",
         "file_path": "jana-almughamis/siaq-mistral-sociocultural",
+    },
+    "aya-sociocultural": {
+        "variant_type": "fine_tuned",
+        "fine_tuned_dimension": "sociocultural",
+        "file_path": "jana-almughamis/siaq-aya-sociocultural",
     },
 }
 
@@ -360,6 +371,10 @@ def generate_response(model_id, prompt, history):
         ),
         model_ids["mistral-sociocultural"]: (
             "MISTRAL_SOCIOCULTURAL_ENDPOINT_URL", MISTRAL_SOCIOCULTURAL_ENDPOINT_URL,
+            JANA_HF_TOKEN or os.environ["HF_TOKEN"]
+        ),
+        model_ids["aya-sociocultural"]: (
+            "AYA_SOCIOCULTURAL_ENDPOINT_URL", AYA_SOCIOCULTURAL_ENDPOINT_URL,
             JANA_HF_TOKEN or os.environ["HF_TOKEN"]
         ),
     }
