@@ -1,8 +1,6 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi.middleware.cors import CORSMiddleware
-from huggingface_hub import InferenceClient #to send requests to the hugging face 
-from huggingface_hub.errors import HfHubHTTPError, InferenceTimeoutError
 from dotenv import load_dotenv
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
@@ -14,7 +12,6 @@ from google.api_core.exceptions import GoogleAPICallError
 from uuid import UUID, uuid4
 import httpx
 import os
-from openai import OpenAI, APIConnectionError, APITimeoutError, APIStatusError
 
 
 # to run the backend write this command in the terminal: python -m uvicorn main:app --app-dir Backend --reload --port 8000
@@ -29,30 +26,17 @@ app.add_middleware(
     allow_headers=["Content-Type", "Authorization"],
 )
 
-# create a .env file in the backend folder and add your Hugging Face & open router API keys to it.
-load_dotenv(Path(__file__).with_name(".env"))                                # in the .env file write: HF_TOKEN= وحطي التوكن هنا   
-
-# Private fine-tuned endpoint URL; keep HF_TOKEN in Backend/.env.
-MISTRAL_FT_ENDPOINT_URL = os.environ.get("MISTRAL_FT_ENDPOINT_URL", "").strip()
-# Separate cloud endpoint for the socio-cultural LoRA adapter.
-MISTRAL_SOCIOCULTURAL_ENDPOINT_URL = os.environ.get("MISTRAL_SOCIOCULTURAL_ENDPOINT_URL", "").strip()
-# A private endpoint owned by a different HF account may need its own token.
-JANA_HF_TOKEN = os.environ.get("JANA_HF_TOKEN", "").strip()
-AYA_SOCIOCULTURAL_ENDPOINT_URL = os.environ.get("AYA_SOCIOCULTURAL_ENDPOINT_URL", "").strip()
-MISTRAL_POSITIVITY_ENDPOINT_URL = os.environ.get("MISTRAL_POSITIVITY_ENDPOINT_URL", "").strip()
-AYA_POSITIVITY_ENDPOINT_URL = os.environ.get("AYA_POSITIVITY_ENDPOINT_URL", "").strip()
-
-
-client = InferenceClient(api_key=os.environ["HF_TOKEN"], timeout=180.0)      # also write: OPENROUTER_API_KEY= وحطي التوكن هنا
-
-openrouter_client = OpenAI(base_url="https://openrouter.ai/api/v1",api_key=os.environ["OPENROUTER_API_KEY"],timeout=180.0,max_retries=0)
+load_dotenv(Path(__file__).with_name(".env"))
+JANA_HF_TOKEN = os.getenv("JANA_HF_TOKEN", "").strip()
+COHERE_API_KEY = os.getenv("COHERE_API_KEY", "").strip()
 
 #  map the  frontend IDs to their exact name
 model_ids = {
     "aya-baseline": "CohereLabs/tiny-aya-global:cohere",
-    "mistral-baseline": "mistralai/ministral-8b-2512",
+    "mistral-7b-v03-baseline": "mistralai/Mistral-7B-Instruct-v0.3",
     "mistral-appropriateness": "jana-almughamis/siaq-mistral-appropriateness",
     "mistral-sociocultural": "jana-almughamis/siaq-mistral-sociocultural",
+    "aya-appropriateness": "jana-almughamis/siaq-aya-appropriateness",
     "aya-sociocultural": "jana-almughamis/siaq-aya-sociocultural",
     "mistral-positivity": "jana-almughamis/siaq-mistral-positivity",
     "aya-positivity": "jana-almughamis/siaq-aya-positivity",
@@ -61,12 +45,15 @@ model_ids = {
 
 model_details = {
     "aya-baseline": {"name": "Tiny Aya Global", "size": "3.35B", "model_family": "Aya"},
-    "mistral-baseline": {"name": "Ministral 3 8B", "size": "8B", "model_family": "Mistral"},
+    "mistral-7b-v03-baseline": {"name": "Mistral 7B Instruct v0.3", "size": "7B", "model_family": "Mistral"},
     "mistral-appropriateness": {
         "name": "Mistral 7B — Appropriateness", "size": "7B", "model_family": "Mistral",
     },
     "mistral-sociocultural": {
         "name": "Mistral 7B — Socio-Cultural", "size": "7B", "model_family": "Mistral",
+    },
+    "aya-appropriateness": {
+        "name": "Tiny Aya — Appropriateness", "size": "3.35B", "model_family": "Aya",
     },
     "aya-sociocultural": {
         "name": "Tiny Aya — Socio-Cultural", "size": "3.35B", "model_family": "Aya",
@@ -82,7 +69,7 @@ model_details = {
 # Keep baseline and fine-tuned records distinct in Firestore.
 model_variants = {
     "aya-baseline": {"variant_type": "baseline", "fine_tuned_dimension": None, "file_path": None},
-    "mistral-baseline": {"variant_type": "baseline", "fine_tuned_dimension": None, "file_path": None},
+    "mistral-7b-v03-baseline": {"variant_type": "baseline", "fine_tuned_dimension": None, "file_path": None},
     "mistral-appropriateness": {
         "variant_type": "fine_tuned",
         "fine_tuned_dimension": "appropriateness",
@@ -92,6 +79,11 @@ model_variants = {
         "variant_type": "fine_tuned",
         "fine_tuned_dimension": "sociocultural",
         "file_path": "jana-almughamis/siaq-mistral-sociocultural",
+    },
+    "aya-appropriateness": {
+        "variant_type": "fine_tuned",
+        "fine_tuned_dimension": "appropriateness",
+        "file_path": "jana-almughamis/siaq-aya-appropriateness",
     },
     "aya-sociocultural": {
         "variant_type": "fine_tuned",
@@ -383,45 +375,32 @@ def save_round(conversation_id, round_id, uid, first, second, prompt, count, rep
 
 #--------------------------------generate response from the model-----------------------
 def generate_response(model_id, prompt, history):
-    # Each custom fine-tuned model uses its own private Hugging Face Endpoint.
-    # Fine-tuned endpoints implement: inputs + history + parameters -> generated_text.
-    fine_tuned_endpoints = {
-        model_ids["mistral-appropriateness"]: (
-            "MISTRAL_FT_ENDPOINT_URL", MISTRAL_FT_ENDPOINT_URL, JANA_HF_TOKEN
-        ),
-        model_ids["mistral-sociocultural"]: (
-            "MISTRAL_SOCIOCULTURAL_ENDPOINT_URL", MISTRAL_SOCIOCULTURAL_ENDPOINT_URL,
-            JANA_HF_TOKEN or os.environ["HF_TOKEN"]
-        ),
-        model_ids["aya-sociocultural"]: (
-            "AYA_SOCIOCULTURAL_ENDPOINT_URL", AYA_SOCIOCULTURAL_ENDPOINT_URL,
-            JANA_HF_TOKEN or os.environ["HF_TOKEN"]
-        ),
-        model_ids["mistral-positivity"]: (
-            "MISTRAL_POSITIVITY_ENDPOINT_URL", MISTRAL_POSITIVITY_ENDPOINT_URL,
-            JANA_HF_TOKEN
-        ),
-        model_ids["aya-positivity"]: (
-            "AYA_POSITIVITY_ENDPOINT_URL", AYA_POSITIVITY_ENDPOINT_URL,
-            JANA_HF_TOKEN
-        ),
-    }
-    if model_id in fine_tuned_endpoints:
-        endpoint_variable, endpoint_url, endpoint_token = fine_tuned_endpoints[model_id]
-        if not endpoint_url:
-            raise HTTPException(status_code=503, detail=f"Set {endpoint_variable} in Backend/.env.")
+    if model_id != model_ids["aya-baseline"]:
+        endpoint_variables = {
+            model_ids["mistral-7b-v03-baseline"]: "MISTRAL_FT_ENDPOINT_URL",
+            model_ids["mistral-appropriateness"]: "MISTRAL_FT_ENDPOINT_URL",
+            model_ids["aya-appropriateness"]: "AYA_APPROPRIATENESS_ENDPOINT_URL",
+            model_ids["aya-sociocultural"]: "AYA_SOCIOCULTURAL_ENDPOINT_URL",
+            model_ids["mistral-sociocultural"]: "MISTRAL_SOCIOCULTURAL_ENDPOINT_URL",
+            model_ids["aya-positivity"]: "AYA_POSITIVITY_ENDPOINT_URL",
+            model_ids["mistral-positivity"]: "MISTRAL_POSITIVITY_ENDPOINT_URL",
+        }
+        variable = endpoint_variables[model_id]
+        endpoint_url = os.getenv(variable, "").strip()
+        if not endpoint_url or not JANA_HF_TOKEN:
+            missing = variable if not endpoint_url else "JANA_HF_TOKEN"
+            raise HTTPException(status_code=503, detail=f"Set {missing} in Backend/.env.")
 
-        # The handler adds its saved system prompt. Send only this model's history.
+        payload = {
+            "inputs": prompt,
+            "history": [m for m in history if m["role"] in ("user", "assistant")],
+            "parameters": {"max_new_tokens": 300},
+        }
+        if variable == "MISTRAL_FT_ENDPOINT_URL":
+            payload["mode"] = "baseline" if model_id == model_ids["mistral-7b-v03-baseline"] else "fine_tuned"
         response = httpx.post(
-            endpoint_url,
-            headers={"Authorization": f"Bearer {endpoint_token}"},
-            json={
-                "inputs": prompt,
-                "history": [message for message in history
-                            if message["role"] in ("user", "assistant")],
-                "parameters": {"max_new_tokens": 300},
-            },
-            timeout=180.0,
+            endpoint_url, headers={"Authorization": f"Bearer {JANA_HF_TOKEN}"},
+            json=payload, timeout=180.0,
         )
         if response.is_error:
             print(f"Fine-tuned endpoint error: HTTP {response.status_code}")
@@ -450,25 +429,29 @@ def generate_response(model_id, prompt, history):
             raise HTTPException(status_code=502, detail="The fine-tuned endpoint returned no valid answer.")
         return answer.strip()
 
-    messages = history + [{"role": "user", "content": prompt}]
-    if model_id == model_ids["mistral-baseline"]:
-        selected_client = openrouter_client
-    else:
-        selected_client = client
-
-    completion = selected_client.chat.completions.create(    
-        model=model_id,
-        messages=messages,
-        max_tokens=300,   
-        temperature=0.7,   
-
+    if not COHERE_API_KEY:
+        raise HTTPException(status_code=503, detail="Set COHERE_API_KEY in Backend/.env.")
+    response = httpx.post(
+        "https://api.cohere.com/v2/chat",
+        headers={"Authorization": f"Bearer {COHERE_API_KEY}"},
+        json={
+            "model": "tiny-aya-global",
+            "messages": history + [{"role": "user", "content": prompt}],
+            "max_tokens": 300,
+            "temperature": 0.7,
+        },
+        timeout=180.0,
     )
-
-    response = completion.choices[0].message.content
-    if not response or response.strip() == "":
-        raise HTTPException(status_code=502, detail="The model returned an empty response.")
-
-    return response.strip()
+    if response.is_error:
+        raise HTTPException(status_code=502, detail=f"Cohere returned HTTP {response.status_code}.")
+    try:
+        blocks = response.json()["message"]["content"]
+        answer = "".join(block["text"] for block in blocks if block["type"] == "text")
+    except (KeyError, ValueError, TypeError):
+        raise HTTPException(status_code=502, detail="Invalid Cohere response.")
+    if not answer.strip():
+        raise HTTPException(status_code=502, detail="Cohere returned an empty answer.")
+    return answer.strip()
 
 #---------------------------------accept the prompt and generate responses from the two models-----------------------
 @app.post("/generate")
@@ -502,47 +485,12 @@ def recieve_input(user_input: dict, user=Depends(current_user)):
             try:
                 model1_response = generate_response(model_ids[first], prompt, build_history(turns, first))
                 model2_response = generate_response(model_ids[second], prompt, build_history(turns, second))
-            except InferenceTimeoutError:
-                raise HTTPException(status_code=504, detail="Generation took too long. Please try again.")
-            except APITimeoutError:
-                raise HTTPException(
-                    status_code=504,
-                    detail="OpenRouter generation took too long."
-                )
-
-            except APIConnectionError as error:
-                print(f"OpenRouter connection error: {type(error).__name__}: {error.__cause__}")
-                raise HTTPException(
-                    status_code=503,
-                    detail="Cannot connect to OpenRouter."
-                )
-
-            except APIStatusError as error:
-                print(error)
-                raise HTTPException(
-                    status_code=502,
-                    detail="OpenRouter rejected the request. Check the backend logs and account credit."
-                )
             except httpx.TimeoutException:
                 raise HTTPException(status_code=504, detail="Generation took too long. Please try again.")
 
             except httpx.TransportError as error:
                 print(f"Provider connection error: {type(error).__name__}: {error}")
                 raise HTTPException(status_code=503, detail="Cannot connect to the inference provider. Check your internet connection.")
-
-            except HfHubHTTPError as error:
-                status = error.response.status_code if error.response is not None else None
-                if status in (401, 403):
-                    detail = "Check your HF token, inference permissions, and model access."
-                elif status == 402:
-                    detail = "Inference credit is unavailable. Check Hugging Face billing."
-                elif status == 429:
-                    detail = "The provider's request limit was reached. Please try again later."
-                else:
-                    detail = "The inference provider rejected the request. Check the backend logs."
-                print(f"Inference provider error: HTTP {status}")
-                print(error.response.text if error.response is not None else str(error))
-                raise HTTPException(status_code=502, detail=detail)
 
             replies = [model1_response, model2_response]
             save_round(conversation_id, round_id, user["uid"], first, second, prompt, count, replies, state["lease_token"])
