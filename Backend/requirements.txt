@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+firebase-admin
+google-cloud-firestore
+google-api-core
+huggingface-hub
+openai
+python-dotenv
+httpx
