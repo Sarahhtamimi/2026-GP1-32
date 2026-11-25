@@ -27,7 +27,6 @@ if (signupForm) {
   const emailInput = document.getElementById("signupEmail");
   const passwordInput = document.getElementById("signupPassword");
   const confirmInput = document.getElementById("signupConfirm");
-  const termsInput = document.getElementById("terms");
   const signupMessage = document.getElementById("signupMessage");
 
 
@@ -113,13 +112,6 @@ if (signupForm) {
   });
 
 
-  termsInput.addEventListener("change", () => {
-
-    clearSignupMessage();
-
-  });
-
-
   // Submit Sign Up Form
 
   signupForm.addEventListener(
@@ -145,10 +137,6 @@ if (signupForm) {
 
       const confirmPassword =
         confirmInput.value;
-
-      const terms =
-        termsInput.checked;
-
 
       let hasError = false;
 
@@ -270,18 +258,6 @@ if (signupForm) {
         showFieldError(
           confirmInput,
           "Passwords do not match."
-        );
-
-        hasError = true;
-      }
-
-
-      // Terms Validation
-
-      if (!terms) {
-
-        showSignupMessage(
-          "Please agree to the terms and conditions before creating your account."
         );
 
         hasError = true;
