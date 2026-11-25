@@ -3074,12 +3074,14 @@ async function apiFetch(path, body, expectedUid) {
       
         // Frontend IDs are mapped to Hugging Face and OpenRouter models in the backend.
         const configurations = [
-        { id: 'aya-baseline', name: 'Tiny Aya Global', configuration: 'Original' },
-        { id: 'mistral-baseline', name: 'Ministral 3 8B', configuration: 'Original' },
-        { id: 'mistral-appropriateness', name: 'Mistral 7B', configuration: 'Fine-tuned — Appropriateness' },
-        { id: 'mistral-sociocultural', name: 'Mistral 7B', configuration: 'Fine-tuned — Socio-Cultural' },
-        { id: 'aya-sociocultural', name: 'Tiny Aya', configuration: 'Fine-tuned — Socio-Cultural' }
-      ];
+      { id: 'aya-baseline', name: 'Tiny Aya Global', configuration: 'Original' },
+      { id: 'mistral-baseline', name: 'Ministral 3 8B', configuration: 'Original' },
+      { id: 'mistral-appropriateness', name: 'Mistral 7B', configuration: 'Fine-tuned — Appropriateness' },
+      { id: 'mistral-sociocultural', name: 'Mistral 7B', configuration: 'Fine-tuned — Socio-Cultural' },
+      { id: 'aya-sociocultural', name: 'Tiny Aya', configuration: 'Fine-tuned — Socio-Cultural' },
+      { id: 'mistral-positivity', name: 'Mistral 7B', configuration: 'Fine-tuned — Positivity' },
+      { id: 'aya-positivity', name: 'Tiny Aya Global', configuration: 'Fine-tuned — Positivity' }
+    ];
         const find = id => workspace.querySelector('#' + id);
         const setup = find('evaluationSetup');
         const selectors = [find('evaluationModel1'), find('evaluationModel2')];

@@ -39,6 +39,8 @@ MISTRAL_SOCIOCULTURAL_ENDPOINT_URL = os.environ.get("MISTRAL_SOCIOCULTURAL_ENDPO
 # A private endpoint owned by a different HF account may need its own token.
 JANA_HF_TOKEN = os.environ.get("JANA_HF_TOKEN", "").strip()
 AYA_SOCIOCULTURAL_ENDPOINT_URL = os.environ.get("AYA_SOCIOCULTURAL_ENDPOINT_URL", "").strip()
+MISTRAL_POSITIVITY_ENDPOINT_URL = os.environ.get("MISTRAL_POSITIVITY_ENDPOINT_URL", "").strip()
+AYA_POSITIVITY_ENDPOINT_URL = os.environ.get("AYA_POSITIVITY_ENDPOINT_URL", "").strip()
 
 
 client = InferenceClient(api_key=os.environ["HF_TOKEN"], timeout=180.0)      # also write: OPENROUTER_API_KEY= وحطي التوكن هنا
@@ -52,6 +54,8 @@ model_ids = {
     "mistral-appropriateness": "jana-almughamis/siaq-mistral-appropriateness",
     "mistral-sociocultural": "jana-almughamis/siaq-mistral-sociocultural",
     "aya-sociocultural": "jana-almughamis/siaq-aya-sociocultural",
+    "mistral-positivity": "jana-almughamis/siaq-mistral-positivity",
+    "aya-positivity": "jana-almughamis/siaq-aya-positivity",
 }
 
 
@@ -66,6 +70,12 @@ model_details = {
     },
     "aya-sociocultural": {
         "name": "Tiny Aya — Socio-Cultural", "size": "3.35B", "model_family": "Aya",
+    },
+    "mistral-positivity": {
+        "name": "Mistral 7B — Positivity", "size": "7B", "model_family": "Mistral",
+    },
+    "aya-positivity": {
+        "name": "Tiny Aya Global — Positivity", "size": "3.35B", "model_family": "Aya",
     },
 }
 
@@ -87,6 +97,16 @@ model_variants = {
         "variant_type": "fine_tuned",
         "fine_tuned_dimension": "sociocultural",
         "file_path": "jana-almughamis/siaq-aya-sociocultural",
+    },
+    "mistral-positivity": {
+        "variant_type": "fine_tuned",
+        "fine_tuned_dimension": "positivity",
+        "file_path": "jana-almughamis/siaq-mistral-positivity",
+    },
+    "aya-positivity": {
+        "variant_type": "fine_tuned",
+        "fine_tuned_dimension": "positivity",
+        "file_path": "jana-almughamis/siaq-aya-positivity",
     },
 }
 
@@ -364,7 +384,7 @@ def save_round(conversation_id, round_id, uid, first, second, prompt, count, rep
 #--------------------------------generate response from the model-----------------------
 def generate_response(model_id, prompt, history):
     # Each custom fine-tuned model uses its own private Hugging Face Endpoint.
-    # Both endpoints implement: inputs + history + parameters -> generated_text.
+    # Fine-tuned endpoints implement: inputs + history + parameters -> generated_text.
     fine_tuned_endpoints = {
         model_ids["mistral-appropriateness"]: (
             "MISTRAL_FT_ENDPOINT_URL", MISTRAL_FT_ENDPOINT_URL, JANA_HF_TOKEN
@@ -376,6 +396,14 @@ def generate_response(model_id, prompt, history):
         model_ids["aya-sociocultural"]: (
             "AYA_SOCIOCULTURAL_ENDPOINT_URL", AYA_SOCIOCULTURAL_ENDPOINT_URL,
             JANA_HF_TOKEN or os.environ["HF_TOKEN"]
+        ),
+        model_ids["mistral-positivity"]: (
+            "MISTRAL_POSITIVITY_ENDPOINT_URL", MISTRAL_POSITIVITY_ENDPOINT_URL,
+            JANA_HF_TOKEN
+        ),
+        model_ids["aya-positivity"]: (
+            "AYA_POSITIVITY_ENDPOINT_URL", AYA_POSITIVITY_ENDPOINT_URL,
+            JANA_HF_TOKEN
         ),
     }
     if model_id in fine_tuned_endpoints:
@@ -397,6 +425,8 @@ def generate_response(model_id, prompt, history):
         )
         if response.is_error:
             print(f"Fine-tuned endpoint error: HTTP {response.status_code}")
+            print(f"Model: {model_id}")
+            print(response.text)
             if response.status_code == 503:
                 detail = "The fine-tuned endpoint is not ready. Check its status and resume it if paused."
                 status = 503
