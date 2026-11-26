@@ -3072,14 +3072,15 @@ async function apiFetch(path, body, expectedUid) {
           return;
         }
       
-        // Frontend IDs are mapped to Hugging Face and OpenRouter models in the backend.
+        // Frontend IDs are mapped to model providers in the backend.
         const configurations = [
       { id: 'aya-baseline', name: 'Tiny Aya Global', configuration: 'Original' },
-      { id: 'mistral-baseline', name: 'Ministral 3 8B', configuration: 'Original' },
+      { id: 'mistral-7b-v03-baseline', name: 'Mistral 7B Instruct v0.3', configuration: 'Original' },
       { id: 'mistral-appropriateness', name: 'Mistral 7B', configuration: 'Fine-tuned — Appropriateness' },
       { id: 'mistral-sociocultural', name: 'Mistral 7B', configuration: 'Fine-tuned — Socio-Cultural' },
-      { id: 'aya-sociocultural', name: 'Tiny Aya', configuration: 'Fine-tuned — Socio-Cultural' },
       { id: 'mistral-positivity', name: 'Mistral 7B', configuration: 'Fine-tuned — Positivity' },
+      { id: 'aya-appropriateness', name: 'Tiny Aya Global', configuration: 'Fine-tuned — Appropriateness' },
+      { id: 'aya-sociocultural', name: 'Tiny Aya Global', configuration: 'Fine-tuned — Socio-Cultural' },
       { id: 'aya-positivity', name: 'Tiny Aya Global', configuration: 'Fine-tuned — Positivity' }
     ];
         const find = id => workspace.querySelector('#' + id);
@@ -3220,8 +3221,9 @@ async function apiFetch(path, body, expectedUid) {
           selectors.forEach(select => { select.disabled = busy; });
           prompt.disabled = busy;
           const limitReached = promptTotal >= promptLimit;
-          question.disabled = busy || limitReached || Boolean(savedEvaluation);
-          send.disabled = busy || Boolean(savedEvaluation) || limitReached || !session || !question.value.trim() || question.value.length > 2000;
+          const archived = session?.models.some(model => model.archived);
+          question.disabled = archived || busy || limitReached || Boolean(savedEvaluation);
+          send.disabled = archived || busy || Boolean(savedEvaluation) || limitReached || !session || !question.value.trim() || question.value.length > 2000;
           find('conversationPromptCount').textContent = `${promptTotal} / ${promptLimit} prompts`;
           limitNotice.hidden = !limitReached;
           edit.disabled = busy || Boolean(savedEvaluation);
@@ -3304,7 +3306,9 @@ async function apiFetch(path, body, expectedUid) {
               clearPending();
               return;
             }
-            const selected = [models.get(data.model1), models.get(data.model2)];
+            const selected = [data.model1, data.model2].map(id => id === 'mistral-baseline'
+              ? { id, name: 'Ministral 3 8B', configuration: 'Original (archived)', archived: true }
+              : models.get(id));
             if (!data.turns.length) {
               remember(activeKey, null);
               return;
