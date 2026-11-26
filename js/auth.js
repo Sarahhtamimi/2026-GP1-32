@@ -1,5 +1,6 @@
 
 import { auth, db } from "./firebase.js";
+import { meetsPasswordRequirements } from "./password-policy.js";
 
 import {
   createUserWithEmailAndPassword,
@@ -211,13 +212,6 @@ if (signupForm) {
 
       // Password Validation
 
-      const hasLetter =
-        /[A-Za-z]/.test(password);
-
-      const hasNumber =
-        /[0-9]/.test(password);
-
-
       if (!password) {
 
         showFieldError(
@@ -227,11 +221,7 @@ if (signupForm) {
 
         hasError = true;
 
-      } else if (
-        password.length < 8 ||
-        !hasLetter ||
-        !hasNumber
-      ) {
+      } else if (!meetsPasswordRequirements(password)) {
 
         showFieldError(
           passwordInput,
