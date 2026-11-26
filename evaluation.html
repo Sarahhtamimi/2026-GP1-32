@@ -3397,17 +3397,17 @@ async function apiFetch(path, body, expectedUid) {
           answerLabel.textContent = 'MODEL RESPONSE';
           const answerText = document.createElement('div');
           answerText.className = 'model-response';
-          applyMessageDirection(answerText, response);
-          // Parse Markdown, then sanitize the HTML before displaying it.
+          const displayResponse = response.replace(/^\s*ASSISTANT:\s*/i, '');
+          applyMessageDirection(answerText, displayResponse);          // Parse Markdown, then sanitize the HTML before displaying it.
           // Fall back to plain text if the formatting libraries cannot load.
           if (window.marked && window.DOMPurify) {
-            answerText.innerHTML = DOMPurify.sanitize(marked.parse(response), {
+            answerText.innerHTML = DOMPurify.sanitize(marked.parse(displayResponse), {
               USE_PROFILES: { html: true },
               FORBID_TAGS: ['img', 'video', 'audio', 'iframe', 'form', 'input', 'button', 'style'],
               FORBID_ATTR: ['style']
             });
           } else {
-            answerText.textContent = response;
+            answerText.textContent = displayResponse;
           }
           answer.append(answerLabel, answerText);
           turn.append(user, answer);
