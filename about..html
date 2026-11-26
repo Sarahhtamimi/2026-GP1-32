@@ -3131,6 +3131,35 @@
     }
   </style>
   <style>
+    /* Project supervisor — matches the existing team cards in both themes. */
+    .team-supervisor { display: flex; justify-content: center; margin: 0 0 20px; }
+    .team-supervisor-card {
+      box-sizing: border-box;
+      width: min(100%, 290px);
+      min-height: 218px;
+      padding: 24px 18px 20px;
+      gap: 9px;
+      border-color: rgba(42, 140, 130, .32);
+    }
+    .team-supervisor-card .team-avatar { width: 60px; height: 60px; border-radius: 50%; color: #2A8C82; }
+    .team-supervisor-card .team-avatar svg { width: 29px; height: 29px; }
+    .team-supervisor-card .team-name { font-size: clamp(17px, 2vw, 21px); }
+    .team-supervisor-card .team-caption { font-size: 12px; }
+    .team-affiliation { margin: 0; font: 500 12px 'DM Sans', sans-serif; color: #315D7D; }
+    :root.dark .team-supervisor-card { border-color: rgba(117, 201, 190, .42); }
+    :root.dark .team-supervisor-card .team-avatar,
+    :root.dark .team-affiliation { color: #C4E3E0; }
+    @media (max-width: 650px) {
+      .team-supervisor { margin-bottom: 14px; }
+      .team-supervisor-card { width: min(100%, 270px); min-height: 200px; padding: 20px 14px 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .team-supervisor-card, .team-section .team-linkedin { transition: none; }
+      .team-supervisor-card:hover, .team-section .team-linkedin:hover,
+      .team-section .team-linkedin:focus-visible { transform: none; }
+    }
+  </style>
+  <style>
     /* Evaluation dimensions — SIAQ editorial card design */
     .eval-section {
       padding: 88px 0 18px
@@ -4110,6 +4139,26 @@
           <h2 class="about-section-title" id="team-title">Meet the Team<span style="color:#2A8C82">.</span></h2>
         </div>
       </div>
+      <div class="team-supervisor">
+        <article class="team-card team-supervisor-card">
+          <div class="team-avatar" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m2 10 10-5 10 5-10 5-10-5Z"/>
+              <path d="M6 12v5c3.3 2.7 8.7 2.7 12 0v-5M22 10v6"/>
+            </svg>
+          </div>
+          <h3 class="team-name">Dr. Abeer Aldayel</h3>
+          <div class="team-caption">Project Supervisor</div>
+          <p class="team-affiliation">King Saud University</p>
+          <a class="team-linkedin" href="https://www.linkedin.com/in/abeer-aldayel-phd/" target="_blank" rel="noopener noreferrer"
+            aria-label="LinkedIn profile for Dr. Abeer Aldayel (opens in a new tab)" title="View LinkedIn profile"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
+              aria-hidden="true">
+              <path
+                d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z" />
+            </svg></a>
+        </article>
+      </div>
       <div class="team-grid">
         <article class="team-card">
           <div class="team-avatar"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor"
@@ -4118,9 +4167,8 @@
               <path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20" />
             </svg></div>
           <h3 class="team-name">Yara Aldawsari</h3>
-          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="1"
-            aria-label="LinkedIn profile for Yara Aldawsari (link to be added)" title="LinkedIn link coming soon"
-            onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
+          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="https://www.linkedin.com/in/yara-aldawsari-b1330822b/" target="_blank" rel="noopener noreferrer"
+            aria-label="LinkedIn profile for Yara Aldawsari (opens in a new tab)" title="View LinkedIn profile"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
               aria-hidden="true">
               <path
                 d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z" />
@@ -4133,9 +4181,8 @@
               <path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20" />
             </svg></div>
           <h3 class="team-name">Jood Aloqeely</h3>
-          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="2"
-            aria-label="LinkedIn profile for Jood Aloqeely (link to be added)" title="LinkedIn link coming soon"
-            onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
+          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="https://www.linkedin.com/in/jood-aloqeely/" target="_blank" rel="noopener noreferrer"
+            aria-label="LinkedIn profile for Jood Aloqeely (opens in a new tab)" title="View LinkedIn profile"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
               aria-hidden="true">
               <path
                 d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z" />
@@ -4148,9 +4195,8 @@
               <path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20" />
             </svg></div>
           <h3 class="team-name">Jana Almughamis</h3>
-          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="3"
-            aria-label="LinkedIn profile for Jana Almughamis (link to be added)" title="LinkedIn link coming soon"
-            onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
+          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="https://www.linkedin.com/in/jana-almughamis-1205b5363/" target="_blank" rel="noopener noreferrer"
+            aria-label="LinkedIn profile for Jana Almughamis (opens in a new tab)" title="View LinkedIn profile"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
               aria-hidden="true">
               <path
                 d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z" />
@@ -4163,9 +4209,8 @@
               <path d="M5.5 20v-1.5a6.5 6.5 0 0 1 13 0V20" />
             </svg></div>
           <h3 class="team-name">Sarah Altamimi</h3>
-          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="#" data-linkedin-placeholder="4"
-            aria-label="LinkedIn profile for Sarah Altamimi (link to be added)" title="LinkedIn link coming soon"
-            onclick="return false"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
+          <div class="team-caption">SIAQ Developer</div><a class="team-linkedin" href="https://www.linkedin.com/in/sarah-altamimi-70112221b/" target="_blank" rel="noopener noreferrer"
+            aria-label="LinkedIn profile for Sarah Altamimi (opens in a new tab)" title="View LinkedIn profile"><svg viewBox="0 0 24 24" width="21" height="21" fill="currentColor"
               aria-hidden="true">
               <path
                 d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.75 1.36-1.55 2.79-1.55 2.98 0 3.53 1.96 3.53 4.51v5.29Z" />

@@ -1150,14 +1150,10 @@
     }
 
     .n2 {
-      top: 33%
+      top: calc(50% - 17px)
     }
 
     .n3 {
-      top: 66%
-    }
-
-    .n4 {
       bottom: 0
     }
 
@@ -5270,6 +5266,36 @@
     @media(max-width:650px) { #guestAuthButtons { gap: 6px; } #guestAuthButtons a { min-height: 38px; padding: 0 10px; font-size: 11px; gap: 5px; } }
   </style>
   <link rel="stylesheet" href="evaluation-chrome.css">
+  <style>
+    /* Original roadmap appearance retained; accessibility and short-screen fallback. */
+    #framework, #process { scroll-margin-top: 110px; }
+    body.site-chrome :is(a[href], button):focus-visible {
+      outline: 3px solid #216F68 !important;
+      outline-offset: 3px;
+    }
+    :root.dark body.site-chrome :is(a[href], button):focus-visible,
+    body.site-chrome .refined-footer a:focus-visible {
+      outline-color: #9BDFD5 !important;
+    }
+    body.site-chrome :is(a[href], button) { touch-action: manipulation; }
+    @media (prefers-reduced-motion: reduce), (max-height: 580px) {
+      #process .story { height: auto !important; }
+      #process .sticky { position: relative; top: auto; height: auto; overflow: visible; padding-bottom: 12px; }
+      #process .road, #process .counter { display: none; }
+      #process .steps { height: auto; display: grid; gap: 18px; padding: 0 25px; }
+      #process .step {
+        position: relative; top: auto; left: auto !important; right: auto !important;
+        width: min(100%, 520px); margin: 0 auto; opacity: 1 !important;
+        transform: none !important; filter: none !important; pointer-events: auto;
+        transition: none !important;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      #framework .feature, #framework .feature * { animation: none !important; transition: none !important; }
+      #framework .feature.reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 
 <body class="site-chrome">
@@ -5379,13 +5405,12 @@
       </div>
     </section>
     <section class="statement">
-      <span>STRUCTURED</span><i></i><span>EXPLAINABLE</span><i></i><span>HUMAN-GROUNDED</span><i></i><span>CULTURALLY
-        AWARE</span>
+      <span>PAIRWISE COMPARISON</span><i></i><span>HUMAN EVALUATION</span><i></i><span>ARABIC &amp; ENGLISH</span><i></i><span>CULTURAL CONTEXT</span>
     </section>
     <section class="framework section" id="framework">
       <div class="sectionHead">
         <div>
-          <h2>Three dimensions.<br><span>One clearer picture.</span></h2>
+          <h2>Three alignment<br><span>dimensions.</span></h2>
         </div>
 
       </div>
@@ -5397,8 +5422,8 @@
                 <circle cx="18" cy="7" r="2" />
               </svg></div><span>01</span>
           </header>
-          <h3>Appropriateness</h3>
-          <p>Understand whether a response fits its conversational context and situation.</p>
+          <h3>Contextual Appropriateness</h3>
+          <p>Assess whether a response fits the context and addresses the user’s situation.</p>
           <div class="demo contextDemo">
             <div class="line lshort"></div>
             <div class="line"></div>
@@ -5415,7 +5440,7 @@
               </svg></div><span>02</span>
           </header>
           <h3>Positivity Alignment</h3>
-          <p>See whether positive framing is genuinely supportive rather than minimizing or dismissive.</p>
+          <p>Assess whether a response offers realistic support without dismissing or minimizing the user’s concerns.</p>
           <div class="demo toneDemo">
             <div class="waves"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
             <div class="toneLabels"><span>Dismissive</span><b>Supportive</b></div><em></em>
@@ -5428,8 +5453,8 @@
                 <path d="M4 12h16M12 4c3 3 3 13 0 16M12 4c-3 3-3 13 0 16" />
               </svg></div><span>03</span>
           </header>
-          <h3>Socio-Cultural Values</h3>
-          <p>Consider whether a response respects relevant social and cultural expectations.</p>
+          <h3>Socio-Cultural Alignment</h3>
+          <p>Assess whether a response respects the relevant social norms and cultural values.</p>
           <div class="demo cultureDemo">
             <div class="lang">AR</div>
             <div class="axis"><i></i><b></b><span></span></div>
@@ -5441,15 +5466,15 @@
     </section>
     <section class="process section" id="process">
       <div class="processIntro">
-        <h2>A clear path from<br><span>prompt to insight.</span></h2>
-        <p>Scroll through the workflow. </p>
+        <h2>How evaluation<br><span>works.</span></h2>
+        <p>Compare two models in three steps.</p>
       </div>
       <div class="story" id="story">
         <div class="sticky">
           <div class="road">
             <div class="roadBase"></div>
             <div class="roadFill" id="roadFill"></div><i class="node n1">1</i><i class="node n2">2</i><i
-              class="node n3">3</i><i class="node n4">4</i>
+              class="node n3">3</i>
           </div>
           <div class="steps">
             <article class="step active left" data-step="0">
@@ -5458,7 +5483,7 @@
                   <rect x="13" y="5" width="8" height="14" rx="2" />
                 </svg></div><small>STEP 01</small>
               <h3>Select two models</h3>
-              <p>Choose two supported model configurations for one consistent comparison.</p>
+              <p>Choose the two model configurations you want to compare.</p>
               <div class="stepUI"><span><i class="mdot navy"></i>Mistral</span><em>VS</em><span><i
                     class="mdot teal"></i>Aya</span></div>
             </article>
@@ -5467,7 +5492,7 @@
                   <path d="M4 6h16v10H8l-4 4V6zM8 10h8M8 13h5" />
                 </svg></div><small>STEP 02</small>
               <h3>Enter one prompt</h3>
-              <p>Use the same Arabic or English prompt for both selected models.</p>
+              <p>Write a prompt in Arabic or English. Both models receive the same input.</p>
               <div class="stepUI promptUI"><b>AR</b><b>EN</b><i></i></div>
             </article>
             <article class="step left" data-step="2">
@@ -5475,19 +5500,11 @@
                   <path d="M5 4v16M5 7h10l3 3-3 3H5M9 17h10" />
                 </svg></div><small>STEP 03</small>
               <h3>Evaluate both responses</h3>
-              <p>Review both outputs sequentially across all three alignment dimensions.</p>
+              <p>Compare the responses across the three alignment dimensions and explain your choices.</p>
               <div class="stepUI dimUI"><i></i><i></i><i></i><span>3 dimensions</span></div>
             </article>
-            <article class="step right" data-step="3">
-              <div class="stepIcon"><svg viewBox="0 0 24 24">
-                  <path d="M5 18V9M10 18V5M15 18v-7M20 18V7M3 18h19" />
-                </svg></div><small>STEP 04</small>
-              <h3>Understand the results</h3>
-              <p>Review dimension-level outcomes and the overall alignment result.</p>
-              <div class="stepUI resultUI"><span>Results ready</span><b>↗</b></div>
-            </article>
           </div>
-          <div class="counter"><b id="counter">01</b><span>/ 04</span></div>
+          <div class="counter"><b id="counter">01</b><span>/ 03</span></div>
         </div>
       </div>
     </section>

@@ -9,7 +9,7 @@ const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 $$('[data-go]').forEach(
   b => b.onclick = () =>
     $(b.dataset.go)?.scrollIntoView({
-      behavior: 'smooth'
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
     })
 );
 
@@ -150,10 +150,13 @@ function storyUpdate() {
     );
 
 
+  const stepCount = steps.length;
+  if (!stepCount) return;
+
   const idx =
     Math.min(
-      3,
-      Math.floor(p * 4)
+      stepCount - 1,
+      Math.floor(p * stepCount)
     );
 
 
@@ -209,6 +212,8 @@ addEventListener(
     passive: true
   }
 );
+
+addEventListener('resize', storyUpdate);
 
 storyUpdate();
 
