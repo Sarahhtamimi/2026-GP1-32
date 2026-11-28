@@ -403,30 +403,30 @@ def generate_response(model_id, prompt, history):
             json=payload, timeout=180.0,
         )
         if response.is_error:
-            print(f"Fine-tuned endpoint error: HTTP {response.status_code}")
+            print(f"Model endpoint error: HTTP {response.status_code}")
             print(f"Model: {model_id}")
             print(response.text)
             if response.status_code == 503:
-                detail = "The fine-tuned endpoint is not ready. Check its status and resume it if paused."
+                detail = "The model endpoint is not ready. Check its status and resume it if paused."
                 status = 503
             elif response.status_code in (401, 403):
-                detail = "Check the HF token and its access to the private fine-tuned endpoint."
+                detail = "Check the HF token and its access to the private model endpoint."
                 status = 502
             elif response.status_code == 429:
-                detail = "The fine-tuned endpoint is busy. Please try again later."
+                detail = "The model endpoint is busy. Please try again later."
                 status = 503
             else:
-                detail = "The fine-tuned endpoint rejected the request. Check its logs, including the conversation token limit."
+                detail = "The model endpoint rejected the request. Check its logs, including the conversation token limit."
                 status = 502
             raise HTTPException(status_code=status, detail=detail)
 
         try:
             result = response.json()
         except ValueError:
-            raise HTTPException(status_code=502, detail="The fine-tuned endpoint returned invalid JSON.")
+            raise HTTPException(status_code=502, detail="The model endpoint returned invalid JSON.")
         answer = result.get("generated_text") if isinstance(result, dict) else None
         if not isinstance(answer, str) or not answer.strip():
-            raise HTTPException(status_code=502, detail="The fine-tuned endpoint returned no valid answer.")
+            raise HTTPException(status_code=502, detail="The model endpoint returned no valid answer.")
         return answer.strip()
 
     if not COHERE_API_KEY:
